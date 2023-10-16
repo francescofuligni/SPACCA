@@ -29,11 +29,11 @@ public class CreateTournamentController implements Initializable  {
 	private BOTDIFF[] Diff= {BOTDIFF.FACILE,BOTDIFF.DIFFICILE};
 	private GAMEMODE[] Mode= {GAMEMODE.CHIVINCEREGNA, GAMEMODE.LASTMANSTANDING};
 	
-	protected int PlayerNumber =4;
-	private  String [] Giocatori = new String[PlayerNumber];
+	protected final int PlayerNumber =4;
+	private  Player[] Giocatori = new Player[PlayerNumber];
 	protected GAMEMODE ChosenMode;
 	protected BOTDIFF ChosenDifficulty;
-	int contaUmani=0;
+	private int contaUmani=0;
 	
     @FXML
     private Button AddPlayerButton;
@@ -55,52 +55,58 @@ public class CreateTournamentController implements Initializable  {
     private Button Create;
     
     @FXML
-    void AddPlayer() {
+    public void AddPlayer(ActionEvent e) {
     	
     	Player giocatore = new Player();
     	giocatore.setUsername(SpazioUser.getText());
-    	boolean alreadyPlaying = true;
+    	
+    	boolean alreadyPlaying = false;
     	//controlla che lo user non sia gia in partita
-    	int i=0;
+    	
+    	
     	if(contaUmani==0) {
-    		alreadyPlaying = false;
-			Giocatori[contaUmani]=giocatore.getUsername();
+			Giocatori[0]=new Player (giocatore.getUsername(),30,0);
+			SpazioUser.setText(null);
+			contaUmani++;
 		}
     	else {
-    	while(contaUmani<PlayerNumber && i<=contaUmani) {
+    		if(contaUmani<PlayerNumber) {
+    			for(int i=0; i<contaUmani ; i++) {
     		
-    		if(giocatore.getUsername().equals(Giocatori[i])) {  
+    				if(giocatore.getUsername().equals(Giocatori[i].getUsername())) {  
     			
-    			alreadyPlaying = true;
-    			Alert AddPlayerError = new Alert(AlertType.ERROR);
-    			AddPlayerError.setTitle("ERRORE!");
-    			AddPlayerError.setContentText("Giocatore con stesso Username gia presente!");
-    			AddPlayerError.showAndWait();
+    					alreadyPlaying = true;
+    					Alert AddPlayerError = new Alert(AlertType.ERROR);
+    					AddPlayerError.setTitle("ERRORE!");
+    					AddPlayerError.setContentText("Giocatore con stesso Username gia presente!");
+    					AddPlayerError.showAndWait();
     			
-    			break; 
-    		}
-    		else {
-    			i++;
-    		}
-    	}
-    }
-    	if(alreadyPlaying==false)
-    	while(contaUmani<PlayerNumber) {
-    		if(Giocatori[contaUmani] == null ) {
-    				Giocatori[contaUmani] = giocatore.getUsername();
+    					break; 
+    				}
+    			}
+    		    
+    		if(alreadyPlaying==false ) {
+    				Giocatori[contaUmani] = new Player (giocatore.getUsername(),30,0);
+    				SpazioUser.setText(null);
     				contaUmani++;
     			}
-    		else {
-    				contaUmani++;
     		}
+    		else {
+    			Alert AddPlayerError = new Alert(AlertType.ERROR);
+    			AddPlayerError.setTitle("ERRORE!");
+    			AddPlayerError.setContentText("MASSIMO DI GIOCATORI INSERITI!");
+    			AddPlayerError.showAndWait();
+    			}
+    		}
+    	
+    		
     	}
     		
-    }
     	
     
 
     @FXML
-    void returnToCreateGame(ActionEvent event) throws IOException {
+    public void returnToCreateGame(ActionEvent event) throws IOException {
     	stage = (Stage)(ReturnToCreateGameButton.getScene().getWindow());
 		  //IMPORTANTE RICORDA IL ../ nell'URL DEL FXML
 		  FXMLLoader Loader=new FXMLLoader(CreateGameController.class.getResource("../Admin/CreateGame.fxml"));
