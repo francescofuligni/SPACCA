@@ -10,7 +10,6 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.MainMenu.CreditiController">
    <children>
       <ImageView fitHeight="400.0" fitWidth="600.0" pickOnBounds="true">
@@ -19,9 +18,9 @@
          </image>
       </ImageView>
       <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#332000" height="200.0" layoutX="183.0" layoutY="86.0" stroke="WHITE" strokeType="INSIDE" width="233.0" />
-      <Label layoutX="260.0" layoutY="94.0" text="CREDITI" textFill="WHITE">
+      <Label layoutX="225.0" layoutY="95.0" text="CREDITI" textFill="WHITE">
          <font>
-            <Font name="Bodoni MT Condensed" size="36.0" />
+            <Font name="Bodoni MT" size="36.0" />
          </font>
       </Label>
       <Text fill="WHITE" layoutX="234.0" layoutY="250.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Zanolli Roberto">
