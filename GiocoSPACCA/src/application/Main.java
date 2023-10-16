@@ -20,6 +20,7 @@ public class Main extends Application {
 			 FXMLLoader loader = new FXMLLoader(getClass().getResource("MainMenu/MainMenu.fxml"));
 	         AnchorPane rootLayout = (AnchorPane) loader.load();
 	        primaryStage.setTitle("S.P.A.C.C.A. the GAME");
+	        primaryStage.setResizable(false);
 	        primaryStage.setScene(new Scene (rootLayout));
 			primaryStage.show();
 			
