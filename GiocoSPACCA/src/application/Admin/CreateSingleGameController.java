@@ -17,7 +17,7 @@ import javafx.stage.Stage;
 
 public class CreateSingleGameController implements Initializable {
 	
-	private Integer[] MaxPlayer= {1,2,3,4};
+	private Integer[] MaxPlayer= {2,3,4};
 	private String[] Diff= {"Facile","Difficile"};
 	
 	private Stage stage;
