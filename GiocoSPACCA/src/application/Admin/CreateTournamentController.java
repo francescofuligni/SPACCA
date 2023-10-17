@@ -17,6 +17,7 @@ import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.TextField;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.paint.Color;
+import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
 public class CreateTournamentController implements Initializable  {
@@ -34,6 +35,9 @@ public class CreateTournamentController implements Initializable  {
 	protected GAMEMODE ChosenMode;
 	protected BOTDIFF ChosenDifficulty;
 	private int contaUmani=0;
+	
+	 @FXML
+	private Text BotNumber;
 	
     @FXML
     private Button AddPlayerButton;
@@ -56,7 +60,7 @@ public class CreateTournamentController implements Initializable  {
     
     @FXML
     public void AddPlayer(ActionEvent e) {
-    	
+    	if(SpazioUser.getText()!="" && SpazioUser.getText()!=" " && SpazioUser.getText()!=null) {
     	Player giocatore = new Player();
     	giocatore.setUsername(SpazioUser.getText());
     	
@@ -68,6 +72,7 @@ public class CreateTournamentController implements Initializable  {
 			Giocatori[0]=new Player (giocatore.getUsername(),30,0);
 			SpazioUser.setText(null);
 			contaUmani++;
+			BotNumber.setText("--- " + (PlayerNumber - contaUmani) + " ---");
 		}
     	else {
     		if(contaUmani<PlayerNumber) {
@@ -89,6 +94,7 @@ public class CreateTournamentController implements Initializable  {
     				Giocatori[contaUmani] = new Player (giocatore.getUsername(),30,0);
     				SpazioUser.setText(null);
     				contaUmani++;
+    				BotNumber.setText("--- " + (PlayerNumber- contaUmani) + " ---");
     			}
     		}
     		else {
@@ -99,8 +105,8 @@ public class CreateTournamentController implements Initializable  {
     			}
     		}
     	
-    		
     	}
+    }
     		
     	
     
@@ -120,6 +126,7 @@ public class CreateTournamentController implements Initializable  {
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		SceltaDifficoltaBot.getItems().addAll(Diff);
 		ModalitàTorneo.getItems().addAll(Mode);
+		BotNumber.setText("--- " + (PlayerNumber - contaUmani) + " ---");
 	}
     
 

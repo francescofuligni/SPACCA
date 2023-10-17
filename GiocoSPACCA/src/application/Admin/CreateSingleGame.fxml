@@ -62,12 +62,6 @@
             </RadialGradient>
          </fill>
       </Rectangle>
-      <ChoiceBox fx:id="SceltaNumeroGiocatori" layoutX="319.0" layoutY="197.0" prefWidth="150.0" />
-      <Text fill="WHITE" layoutX="197.0" layoutY="205.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Numero Giocatori (max 4)" textAlignment="CENTER" wrappingWidth="123.7320556640625">
-         <font>
-            <Font name="System Bold" size="13.0" />
-         </font>
-      </Text>
       <Rectangle arcHeight="5.0" arcWidth="5.0" height="52.0" layoutX="187.0" layoutY="248.0" stroke="WHITE" strokeLineCap="ROUND" strokeType="INSIDE" width="294.0">
          <fill>
             <RadialGradient centerX="0.5" centerY="0.5" radius="0.5">
@@ -137,5 +131,23 @@
             <InnerShadow />
          </effect>
       </Button>
+      <Button fx:id="Create" layoutX="263.0" layoutY="459.0" mnemonicParsing="false" onAction="#create" prefHeight="52.0" prefWidth="141.0" text="Crea Partita">
+         <effect>
+            <InnerShadow />
+         </effect>
+         <font>
+            <Font name="Bodoni MT" size="18.0" />
+         </font>
+      </Button>
+      <Text fill="WHITE" layoutX="201.0" layoutY="214.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Numero Bot:" wrappingWidth="123.7320556640625">
+         <font>
+            <Font name="System Bold" size="13.0" />
+         </font>
+      </Text>
+      <Text fx:id="BotNumber" fill="WHITE" layoutX="332.0" layoutY="217.0" strokeType="OUTSIDE" strokeWidth="0.0" text="NUMBER" textAlignment="CENTER" wrappingWidth="123.7320556640625">
+         <font>
+            <Font name="Bodoni MT" size="24.0" />
+         </font>
+      </Text>
    </children>
 </AnchorPane>
