@@ -25,7 +25,7 @@ public class CreateGameController {
     public void CreateSingleGame(ActionEvent event) throws IOException {
     	stage = (Stage)(CreateSingleGameButton.getScene().getWindow());
 		  //IMPORTANTE RICORDA IL ../ nell'URL DEL FXML
-		  FXMLLoader Loader=new FXMLLoader(CreateSingleGameController.class.getResource("../Admin/CreateSingleGame.fxml"));
+		  FXMLLoader Loader=new FXMLLoader(SelectPlayerNumberSGController.class.getResource("../Admin/SelectPlayerNumberSG.fxml"));
 		  root = (Parent) Loader.load();
 		  scene = new Scene(root);
 		  stage.setScene(scene);
