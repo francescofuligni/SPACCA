@@ -28,7 +28,7 @@
                   <Font name="Bodoni MT" size="30.0" />
                </font>
             </Label>
-            <TextField fx:id="NomeAdmin" prefHeight="26.0" prefWidth="237.0" promptText="Nome Amministratore">
+            <TextField fx:id="AdminName" prefHeight="26.0" prefWidth="237.0" promptText="Nome Amministratore">
                <font>
                   <Font name="Georgia" size="14.0" />
                </font>

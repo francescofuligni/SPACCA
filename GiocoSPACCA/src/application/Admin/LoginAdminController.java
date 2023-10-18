@@ -25,7 +25,7 @@ public class LoginAdminController {
 	 	@FXML
 	    private Button ReturnToMainMenuButton;
 		@FXML
-		private TextField NomeAdmin;
+		private TextField AdminName;
 		@FXML
 		private PasswordField AdminPassword;
 		@FXML 
@@ -34,7 +34,7 @@ public class LoginAdminController {
 		private Text LoginStatusText;
 		
 		public void Login() throws IOException{
-			if(NomeAdmin.getText().equals("admin")&&
+			if(AdminName.getText().equals("admin")&&
 				AdminPassword.getText().equals("admin1234")) {
 					
 				//Se le credenziali sono giuste entra in Create game

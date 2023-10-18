@@ -30,11 +30,11 @@ public class CreateSingleGameController implements Initializable {
 	private Scene scene;
 	private Parent root;
 	
-	private Integer contaUmani=0;
+	private Integer HumanCounter=0;
 	private final Integer MAX = SelectPlayerNumberSGController.PlayerNumber;
 	private BOTDIFF[] Diff= {BOTDIFF.FACILE,BOTDIFF.DIFFICILE};
+	private  ArrayList<Player> Giocatori = new ArrayList<Player>();
 	
-	private  ArrayList<Player> Giocatori = new ArrayList();
     @FXML
     private Button AddPlayerButton;
     
@@ -43,11 +43,11 @@ public class CreateSingleGameController implements Initializable {
 
     
     @FXML
-    private ChoiceBox<BOTDIFF> SceltaDifficoltaBot;
+    private ChoiceBox<BOTDIFF> ChooseDifficulty;
 
 
     @FXML
-    private TextField SpazioUser;
+    private TextField UserNamespace;
 
     @FXML
     private Button ReturnToCreateGameButton;
@@ -57,23 +57,23 @@ public class CreateSingleGameController implements Initializable {
     
     @FXML
     public void AddPlayer(ActionEvent event) {
-    	if(SpazioUser.getText()!="" && SpazioUser.getText()!=" " && SpazioUser.getText()!=null) {
+    	if( UserNamespace.getText()!="" && UserNamespace.getText()!=" " && UserNamespace.getText()!=null) {
     	Player giocatore = new Player();
-    	giocatore.setUsername(SpazioUser.getText());
+    	giocatore.setUsername(UserNamespace.getText());
     	
     	boolean alreadyPlaying = false;
     	//controlla che lo user non sia gia in partita
     	
     	
-    	if(contaUmani==0) {
+    	if(HumanCounter==0) {
 			Giocatori.add(new Player (giocatore.getUsername(),30,0));
-			SpazioUser.setText(null);
-			contaUmani++;
-			BotNumber.setText("--- " + (MAX.intValue() - contaUmani) + " ---");
+			UserNamespace.setText(null);
+			HumanCounter++;
+			BotNumber.setText("--- " + (MAX.intValue() - HumanCounter) + " ---");
 		}
     	else {
-    		if(contaUmani<MAX) {
-    			for(int i=0; i<contaUmani ; i++) {
+    		if(HumanCounter<MAX) {
+    			for(int i=0; i<HumanCounter ; i++) {
     		
     				if(giocatore.getUsername().equals(Giocatori.get(i).getUsername())) {  
     			
@@ -89,9 +89,9 @@ public class CreateSingleGameController implements Initializable {
     		    
     		if(alreadyPlaying==false ) {
     			Giocatori.add(new Player (giocatore.getUsername(),30,0));
-    				SpazioUser.setText(null);
-    				contaUmani++;
-    				BotNumber.setText("--- " + (MAX.intValue() - contaUmani) + " ---");
+    			UserNamespace.setText(null);
+    				HumanCounter++;
+    				BotNumber.setText("--- " + (MAX.intValue() - HumanCounter) + " ---");
     				
     			}
     		}
@@ -120,7 +120,7 @@ public class CreateSingleGameController implements Initializable {
 
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
-		SceltaDifficoltaBot.getItems().addAll(Diff);
+		ChooseDifficulty.getItems().addAll(Diff);
 		BotNumber.setText("--- " +MAX + " ---");
 		
 		
@@ -134,7 +134,7 @@ public class CreateSingleGameController implements Initializable {
 	    			Code= Code + (int)Math.random()*10;
 	    		}
 	    		
-	    		new SingleGame(MAX,SceltaDifficoltaBot.getValue(),Giocatori,Code);
+	    		new SingleGame(MAX,ChooseDifficulty.getValue(),Giocatori,Code);
 	    		
 	    		
 	    		
