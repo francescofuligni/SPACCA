@@ -23,11 +23,17 @@ public class MainMenuController {
 	 
 	 @FXML
 	    private Button CreateGameButton;
-	
+	 
+	 /*		METODO ENTER GAME--> richiede línserimento del codice partita precedentemente creato da admin e permette JOIN
+	  * 	METODO SWITCHTOCREDITS --> rimanda a scena con crediti
+	  * 	METODO SWITCHTOADMINLOGIN --> permette il Login dell'admin
+	  * */
 	 @FXML
 	public void EnterGame() {
 	 } 
 	 
+	 
+	
 	 @FXML
 	   public void switchToCredits(ActionEvent event) throws IOException {
 		 stage = (Stage)(CreateGameButton.getScene().getWindow());

@@ -22,21 +22,21 @@
             <Font name="Bodoni MT" size="30.0" />
          </font>
       </Text>
-      <Button fx:id="PlayButton" alignment="CENTER" contentDisplay="CENTER" layoutX="274.0" layoutY="164.0" mnemonicParsing="false" onAction="#EnterGame" prefHeight="26.0" prefWidth="93.0" text="Gioca!" textAlignment="CENTER">
+      <Button fx:id="PlayButton" alignment="CENTER" contentDisplay="CENTER" layoutX="266.0" layoutY="164.0" mnemonicParsing="false" onAction="#EnterGame" prefHeight="26.0" prefWidth="109.0" text="Gioca!" textAlignment="CENTER">
          <font>
             <Font name="Bodoni MT" size="13.0" />
          </font>
          <effect>
             <InnerShadow />
          </effect></Button>
-      <Button fx:id="CreateGameButton" alignment="CENTER" contentDisplay="CENTER" layoutX="273.0" layoutY="200.0" mnemonicParsing="false" onAction="#switchToAdminLogin" prefHeight="26.0" prefWidth="94.0" text="Crea Partita" textAlignment="CENTER">
+      <Button fx:id="CreateGameButton" alignment="CENTER" contentDisplay="CENTER" layoutX="265.0" layoutY="200.0" mnemonicParsing="false" onAction="#switchToAdminLogin" prefHeight="26.0" prefWidth="109.0" text="Login Admin" textAlignment="CENTER">
          <font>
             <Font name="Bodoni MT" size="13.0" />
          </font>
          <effect>
             <InnerShadow />
          </effect></Button>
-      <Button fx:id="CreditiButton" alignment="CENTER" contentDisplay="CENTER" layoutX="273.0" layoutY="236.0" mnemonicParsing="false" onAction="#switchToCredits" prefHeight="26.0" prefWidth="94.0" text="Crediti" textAlignment="CENTER">
+      <Button fx:id="CreditiButton" alignment="CENTER" contentDisplay="CENTER" layoutX="266.0" layoutY="235.0" mnemonicParsing="false" onAction="#switchToCredits" prefHeight="26.0" prefWidth="109.0" text="Crediti" textAlignment="CENTER">
          <font>
             <Font name="Bodoni MT" size="13.0" />
          </font>
