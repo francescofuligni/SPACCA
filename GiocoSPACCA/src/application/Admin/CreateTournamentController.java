@@ -31,10 +31,10 @@ public class CreateTournamentController implements Initializable  {
 	private GAMEMODE[] Mode= {GAMEMODE.CHIVINCEREGNA, GAMEMODE.LASTMANSTANDING};
 	
 	protected final int PlayerNumber =4;
-	private  Player[] Giocatori = new Player[PlayerNumber];
+	private  Player[] Players = new Player[PlayerNumber];
 	protected GAMEMODE ChosenMode;
 	protected BOTDIFF ChosenDifficulty;
-	private int contaUmani=0;
+	private int HumanCounter=0;
 	
 	 @FXML
 	private Text BotNumber;
@@ -49,7 +49,7 @@ public class CreateTournamentController implements Initializable  {
     private Button ReturnToCreateGameButton;
 
     @FXML
-    private ChoiceBox<BOTDIFF> SceltaDifficoltaBot;
+    private ChoiceBox<BOTDIFF> ChooseDifficulty;
 
 
     @FXML
@@ -68,17 +68,17 @@ public class CreateTournamentController implements Initializable  {
     	//controlla che lo user non sia gia in partita
     	
     	
-    	if(contaUmani==0) {
-			Giocatori[0]=new Player (giocatore.getUsername(),30,0);
+    	if(HumanCounter==0) {
+    		Players[0]=new Player (giocatore.getUsername(),30,0);
 			SpazioUser.setText(null);
-			contaUmani++;
-			BotNumber.setText("--- " + (PlayerNumber - contaUmani) + " ---");
+			HumanCounter++;
+			BotNumber.setText("--- " + (PlayerNumber - HumanCounter) + " ---");
 		}
     	else {
-    		if(contaUmani<PlayerNumber) {
-    			for(int i=0; i<contaUmani ; i++) {
+    		if(HumanCounter<PlayerNumber) {
+    			for(int i=0; i<HumanCounter ; i++) {
     		
-    				if(giocatore.getUsername().equals(Giocatori[i].getUsername())) {  
+    				if(giocatore.getUsername().equals(Players[i].getUsername())) {  
     			
     					alreadyPlaying = true;
     					Alert AddPlayerError = new Alert(AlertType.ERROR);
@@ -91,10 +91,10 @@ public class CreateTournamentController implements Initializable  {
     			}
     		    
     		if(alreadyPlaying==false ) {
-    				Giocatori[contaUmani] = new Player (giocatore.getUsername(),30,0);
+    			Players[HumanCounter] = new Player (giocatore.getUsername(),30,0);
     				SpazioUser.setText(null);
-    				contaUmani++;
-    				BotNumber.setText("--- " + (PlayerNumber- contaUmani) + " ---");
+    				HumanCounter++;
+    				BotNumber.setText("--- " + (PlayerNumber- HumanCounter) + " ---");
     			}
     		}
     		else {
@@ -124,9 +124,9 @@ public class CreateTournamentController implements Initializable  {
     
     @Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
-		SceltaDifficoltaBot.getItems().addAll(Diff);
+    	ChooseDifficulty.getItems().addAll(Diff);
 		ModalitàTorneo.getItems().addAll(Mode);
-		BotNumber.setText("--- " + (PlayerNumber - contaUmani) + " ---");
+		BotNumber.setText("--- " + (PlayerNumber - HumanCounter) + " ---");
 	}
     
 
@@ -140,7 +140,7 @@ public class CreateTournamentController implements Initializable  {
     			Code= Code + (int)Math.random()*10;
     		}
     		
-    		TournamentOBJ NuovoTorneo = new TournamentOBJ(ModalitàTorneo.getValue(),SceltaDifficoltaBot.getValue(),Giocatori,Code);
+    		TournamentOBJ NuovoTorneo = new TournamentOBJ(ModalitàTorneo.getValue(),ChooseDifficulty.getValue(),Players,Code);
     		
     		
     		
