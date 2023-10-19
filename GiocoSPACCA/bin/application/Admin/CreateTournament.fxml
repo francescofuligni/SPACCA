@@ -85,7 +85,7 @@
             </RadialGradient>
          </fill>
       </Rectangle>
-      <ChoiceBox fx:id="SceltaDifficoltaBot" layoutX="319.0" layoutY="285.0" prefWidth="150.0" />
+      <ChoiceBox fx:id="ChooseDifficulty" layoutX="319.0" layoutY="285.0" prefWidth="150.0" />
       <Text fill="WHITE" layoutX="202.0" layoutY="302.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Difficoltà Bot" wrappingWidth="113.33203125">
          <font>
             <Font name="System Bold" size="13.0" />
@@ -154,7 +154,7 @@
             </RadialGradient>
          </fill>
       </Rectangle>
-      <ChoiceBox fx:id="ModalitàTorneo" layoutX="319.0" layoutY="354.0" prefWidth="150.0" />
+      <ChoiceBox fx:id="TournamentMode" layoutX="319.0" layoutY="354.0" prefWidth="150.0" />
       <Text fill="WHITE" layoutX="202.0" layoutY="371.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Modalità Torneo" wrappingWidth="113.33203125">
          <font>
             <Font name="System Bold" size="13.0" />
