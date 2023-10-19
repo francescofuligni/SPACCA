@@ -43,7 +43,7 @@ public class CreateTournamentController implements Initializable  {
     private Button AddPlayerButton;
 
     @FXML
-    private ChoiceBox<GAMEMODE> ModalitàTorneo;
+    private ChoiceBox<GAMEMODE> TournamentMode;
 
     @FXML
     private Button ReturnToCreateGameButton;
@@ -125,7 +125,7 @@ public class CreateTournamentController implements Initializable  {
     @Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
     	ChooseDifficulty.getItems().addAll(Diff);
-		ModalitàTorneo.getItems().addAll(Mode);
+    	TournamentMode.getItems().addAll(Mode);
 		BotNumber.setText("--- " + (PlayerNumber - HumanCounter) + " ---");
 	}
     
@@ -140,7 +140,7 @@ public class CreateTournamentController implements Initializable  {
     			Code= Code + (int)Math.random()*10;
     		}
     		
-    		TournamentOBJ NuovoTorneo = new TournamentOBJ(ModalitàTorneo.getValue(),ChooseDifficulty.getValue(),Players,Code);
+    		TournamentOBJ NuovoTorneo = new TournamentOBJ(TournamentMode.getValue(),ChooseDifficulty.getValue(),Players,Code);
     		
     		
     		
