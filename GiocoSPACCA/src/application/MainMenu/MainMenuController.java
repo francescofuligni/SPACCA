@@ -19,24 +19,25 @@ public class MainMenuController {
 	 private Parent root;
 	 
 	 @FXML
-	    private Button CreditiButton;
-	 
+	    private Button playButton;
 	 @FXML
-	    private Button CreateGameButton;
+	    private Button creditiButton;
+	 @FXML
+	    private Button createGameButton;
 	 
 	 /*		METODO ENTER GAME--> richiede línserimento del codice partita precedentemente creato da admin e permette JOIN
 	  * 	METODO SWITCHTOCREDITS --> rimanda a scena con crediti
 	  * 	METODO SWITCHTOADMINLOGIN --> permette il Login dell'admin
 	  * */
 	 @FXML
-	public void EnterGame() {
+	public void enterGame() {
 	 } 
 	 
 	 
 	
 	 @FXML
 	   public void switchToCredits(ActionEvent event) throws IOException {
-		 stage = (Stage)(CreateGameButton.getScene().getWindow());
+		 stage = (Stage)(createGameButton.getScene().getWindow());
 		  //IMPORTANTE RICORDA IL ../ nell'URL DEL FXML
 		  FXMLLoader Loader=new FXMLLoader(MainMenuController.class.getResource("Crediti.fxml"));
 		  root = (Parent) Loader.load();
@@ -49,7 +50,7 @@ public class MainMenuController {
 	@FXML 
 	public void switchToAdminLogin(ActionEvent event) throws Exception {
 		
-		  stage = (Stage)(CreateGameButton.getScene().getWindow());
+		  stage = (Stage)(createGameButton.getScene().getWindow());
 		  //IMPORTANTE RICORDA IL ../ nell'URL DEL FXML
 		  FXMLLoader Loader=new FXMLLoader(MainMenuController.class.getResource("../Admin/LoginAdmin.fxml"));
 		  root = (Parent) Loader.load();
