@@ -38,7 +38,7 @@
             <Font name="Bodoni MT" size="20.0" />
          </font>
       </Text>
-      <Button fx:id="ReturnToMainMenuButton" layoutX="258.0" layoutY="286.0" mnemonicParsing="false" onAction="#returnToMainMenu" text=" Indietro ">
+      <Button fx:id="returnToMainMenuButton" layoutX="258.0" layoutY="286.0" mnemonicParsing="false" onAction="#returnToMainMenu" text=" Indietro ">
          <font>
             <Font name="Bodoni MT" size="17.0" />
          </font>

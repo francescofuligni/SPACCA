@@ -1,17 +1,12 @@
 package application.Admin;
 
 import java.io.IOException;
-import java.net.URL;
-import java.util.ResourceBundle;
-
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.scene.control.ChoiceBox;
 import javafx.stage.Stage;
 
 public class SelectPlayerNumberSGController {
@@ -19,20 +14,20 @@ public class SelectPlayerNumberSGController {
 	private Scene scene;
 	private Parent root;
 	
-	public static int PlayerNumber;
+	public static int playerNumber;
 	
 	@FXML
-    private Button Button2;
+    private Button button2;
 
     @FXML
-    private Button Button3;
+    private Button button3;
 
     @FXML
-    private Button Button4;
+    private Button button4;
     @FXML
     void set2Players(ActionEvent event) throws IOException {
-    	PlayerNumber=2;
-    	stage = (Stage)(Button2.getScene().getWindow());
+    	playerNumber=2;
+    	stage = (Stage)(button2.getScene().getWindow());
 		  //IMPORTANTE RICORDA IL ../ nell'URL DEL FXML
 		  FXMLLoader Loader=new FXMLLoader(CreateSingleGameController.class.getResource("../Admin/CreateSingleGame.fxml"));
 		  root = (Parent) Loader.load();
@@ -43,8 +38,8 @@ public class SelectPlayerNumberSGController {
 
     @FXML
     void set3Players(ActionEvent event) throws IOException {
-    	PlayerNumber=3;
-    	stage = (Stage)(Button3.getScene().getWindow());
+    	playerNumber=3;
+    	stage = (Stage)(button3.getScene().getWindow());
 		  //IMPORTANTE RICORDA IL ../ nell'URL DEL FXML
 		  FXMLLoader Loader=new FXMLLoader(CreateSingleGameController.class.getResource("../Admin/CreateSingleGame.fxml"));
 		  root = (Parent) Loader.load();
@@ -55,8 +50,8 @@ public class SelectPlayerNumberSGController {
 
     @FXML
     void set4Players(ActionEvent event) throws IOException {
-    	PlayerNumber=4;
-    	stage = (Stage)(Button4.getScene().getWindow());
+    	playerNumber=4;
+    	stage = (Stage)(button4.getScene().getWindow());
 		  //IMPORTANTE RICORDA IL ../ nell'URL DEL FXML
 		  FXMLLoader Loader=new FXMLLoader(CreateSingleGameController.class.getResource("../Admin/CreateSingleGame.fxml"));
 		  root = (Parent) Loader.load();

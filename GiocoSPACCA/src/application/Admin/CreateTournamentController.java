@@ -16,7 +16,6 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.TextField;
 import javafx.scene.control.Alert.AlertType;
-import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
@@ -27,81 +26,81 @@ public class CreateTournamentController implements Initializable  {
 	private Scene scene;
 	private Parent root;
 	
-	private BOTDIFF[] Diff= {BOTDIFF.FACILE,BOTDIFF.DIFFICILE};
-	private GAMEMODE[] Mode= {GAMEMODE.CHIVINCEREGNA, GAMEMODE.LASTMANSTANDING};
+	private BOTDIFF[] diff= {BOTDIFF.FACILE,BOTDIFF.DIFFICILE};
+	private GAMEMODE[] mode= {GAMEMODE.CHIVINCEREGNA, GAMEMODE.LASTMANSTANDING};
 	
-	protected final int PlayerNumber =4;
-	private  Player[] Players = new Player[PlayerNumber];
-	protected GAMEMODE ChosenMode;
-	protected BOTDIFF ChosenDifficulty;
-	private int HumanCounter=0;
+	protected final int playerNumber =4;
+	private  Player[] players = new Player[playerNumber];
+	protected GAMEMODE chosenMode;
+	protected BOTDIFF chosenDifficulty;
+	private int humanCounter=0;
 	
 	 @FXML
-	private Text BotNumber;
+	private Text botNumber;
 	
     @FXML
-    private Button AddPlayerButton;
+    private Button addPlayerButton;
 
     @FXML
-    private ChoiceBox<GAMEMODE> TournamentMode;
+    private ChoiceBox<GAMEMODE> tournamentMode;
 
     @FXML
-    private Button ReturnToCreateGameButton;
+    private Button returnToCreateGameButton;
 
     @FXML
-    private ChoiceBox<BOTDIFF> ChooseDifficulty;
+    private ChoiceBox<BOTDIFF> chooseDifficulty;
 
 
     @FXML
-    private TextField SpazioUser;
+    private TextField userNamespace;
     
     @FXML
-    private Button Create;
+    private Button create;
     
     @FXML
-    public void AddPlayer(ActionEvent e) {
-    	if(SpazioUser.getText()!="" && SpazioUser.getText()!=" " && SpazioUser.getText()!=null) {
+    public void addPlayer(ActionEvent e) {
+    	if(userNamespace.getText()!="" && userNamespace.getText()!=" " && userNamespace.getText()!=null) {
     	Player giocatore = new Player();
-    	giocatore.setUsername(SpazioUser.getText());
+    	giocatore.setUsername(userNamespace.getText());
     	
     	boolean alreadyPlaying = false;
     	//controlla che lo user non sia gia in partita
     	
     	
-    	if(HumanCounter==0) {
-    		Players[0]=new Player (giocatore.getUsername(),30,0);
-			SpazioUser.setText(null);
-			HumanCounter++;
-			BotNumber.setText("--- " + (PlayerNumber - HumanCounter) + " ---");
+    	if(humanCounter==0) {
+    		players[0]=new Player (giocatore.getUsername(),30,0);
+			userNamespace.setText(null);
+			humanCounter++;
+			botNumber.setText("--- " + (playerNumber - humanCounter) + " ---");
 		}
     	else {
-    		if(HumanCounter<PlayerNumber) {
-    			for(int i=0; i<HumanCounter ; i++) {
+    		if(humanCounter<playerNumber) {
+    			for(int i=0; i<humanCounter ; i++) {
     		
-    				if(giocatore.getUsername().equals(Players[i].getUsername())) {  
+    				if(giocatore.getUsername().equals(players[i].getUsername())) {  
     			
     					alreadyPlaying = true;
-    					Alert AddPlayerError = new Alert(AlertType.ERROR);
-    					AddPlayerError.setTitle("ERRORE!");
-    					AddPlayerError.setContentText("Giocatore con stesso Username gia presente!");
-    					AddPlayerError.showAndWait();
+    					Alert addPlayerError = new Alert(AlertType.ERROR);
+    					addPlayerError.setTitle("ERRORE!");
+    					addPlayerError.setContentText("Giocatore con stesso Username gia presente!");
+    					addPlayerError.showAndWait();
     			
     					break; 
     				}
     			}
     		    
     		if(alreadyPlaying==false ) {
-    			Players[HumanCounter] = new Player (giocatore.getUsername(),30,0);
-    				SpazioUser.setText(null);
-    				HumanCounter++;
-    				BotNumber.setText("--- " + (PlayerNumber- HumanCounter) + " ---");
+    			players[humanCounter] = new Player (giocatore.getUsername(),30,0);
+    				userNamespace.setText(null);
+    				humanCounter++;
+    				botNumber.setText("--- " + (playerNumber- humanCounter) + " ---");
     			}
     		}
     		else {
-    			Alert AddPlayerError = new Alert(AlertType.ERROR);
-    			AddPlayerError.setTitle("ERRORE!");
-    			AddPlayerError.setContentText("MASSIMO DI GIOCATORI INSERITI!");
-    			AddPlayerError.showAndWait();
+    			Alert addPlayerError = new Alert(AlertType.ERROR);
+    			addPlayerError.setTitle("ERRORE!");
+    			addPlayerError.setContentText("MASSIMO DI GIOCATORI INSERITI!");
+    			addPlayerError.showAndWait();
     			}
     		}
     	
@@ -113,7 +112,7 @@ public class CreateTournamentController implements Initializable  {
 
     @FXML
     public void returnToCreateGame(ActionEvent event) throws IOException {
-    	stage = (Stage)(ReturnToCreateGameButton.getScene().getWindow());
+    	stage = (Stage)(returnToCreateGameButton.getScene().getWindow());
 		  //IMPORTANTE RICORDA IL ../ nell'URL DEL FXML
 		  FXMLLoader Loader=new FXMLLoader(CreateGameController.class.getResource("../Admin/CreateGame.fxml"));
 		  root = (Parent) Loader.load();
@@ -124,9 +123,9 @@ public class CreateTournamentController implements Initializable  {
     
     @Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
-    	ChooseDifficulty.getItems().addAll(Diff);
-    	TournamentMode.getItems().addAll(Mode);
-		BotNumber.setText("--- " + (PlayerNumber - HumanCounter) + " ---");
+    	chooseDifficulty.getItems().addAll(diff);
+    	tournamentMode.getItems().addAll(mode);
+		botNumber.setText("--- " + (playerNumber - humanCounter) + " ---");
 	}
     
 
@@ -140,7 +139,7 @@ public class CreateTournamentController implements Initializable  {
     			Code= Code + (int)Math.random()*10;
     		}
     		
-    		TournamentOBJ NuovoTorneo = new TournamentOBJ(TournamentMode.getValue(),ChooseDifficulty.getValue(),Players,Code);
+    		TournamentOBJ NuovoTorneo = new TournamentOBJ(tournamentMode.getValue(),chooseDifficulty.getValue(),players,Code);
     		
     		
     		

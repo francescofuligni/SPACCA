@@ -17,11 +17,11 @@ public class CreditiController {
 	private Parent root;
 
     @FXML
-    private Button ReturnToMainMenuButton;
+    private Button returnToMainMenuButton;
 
     @FXML
      public void returnToMainMenu(ActionEvent event) throws IOException {
-    	stage = (Stage)(ReturnToMainMenuButton.getScene().getWindow());
+    	stage = (Stage)(returnToMainMenuButton.getScene().getWindow());
 		  //IMPORTANTE RICORDA IL ../ nell'URL DEL FXML
 		  FXMLLoader Loader=new FXMLLoader(MainMenuController.class.getResource("MainMenu.fxml"));
 		  root = (Parent) Loader.load();
