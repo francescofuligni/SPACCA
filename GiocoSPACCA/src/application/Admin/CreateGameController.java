@@ -16,14 +16,14 @@ public class CreateGameController {
 	private Parent root;
 	
     @FXML
-    private Button CreateSingleGameButton;
+    private Button createSingleGameButton;
 
     @FXML
-    private Button CreateTournamentButton;
+    private Button createTournamentButton;
 
     @FXML
-    public void CreateSingleGame(ActionEvent event) throws IOException {
-    	stage = (Stage)(CreateSingleGameButton.getScene().getWindow());
+    public void createSingleGame(ActionEvent event) throws IOException {
+    	stage = (Stage)(createSingleGameButton.getScene().getWindow());
 		  //IMPORTANTE RICORDA IL ../ nell'URL DEL FXML
 		  FXMLLoader Loader=new FXMLLoader(SelectPlayerNumberSGController.class.getResource("../Admin/SelectPlayerNumberSG.fxml"));
 		  root = (Parent) Loader.load();
@@ -34,8 +34,8 @@ public class CreateGameController {
 
 
 	@FXML
-    public void CreateTournament(ActionEvent event) throws IOException {
-		stage = (Stage)(CreateTournamentButton.getScene().getWindow());
+    public void createTournament(ActionEvent event) throws IOException {
+		stage = (Stage)(createTournamentButton.getScene().getWindow());
 		  //IMPORTANTE RICORDA IL ../ nell'URL DEL FXML
 		  FXMLLoader Loader=new FXMLLoader(CreateTournamentController.class.getResource("../Admin/CreateTournament.fxml"));
 		  root = (Parent) Loader.load();

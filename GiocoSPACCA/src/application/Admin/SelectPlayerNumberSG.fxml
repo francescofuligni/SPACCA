@@ -64,17 +64,17 @@
             <Font name="System Bold" size="13.0" />
          </font>
       </Text>
-      <Button fx:id="Button2" layoutX="350.0" layoutY="197.0" mnemonicParsing="false" onAction="#set2Players" prefHeight="24.0" prefWidth="92.0" text="2 giocatori">
+      <Button fx:id="button2" layoutX="350.0" layoutY="197.0" mnemonicParsing="false" onAction="#set2Players" prefHeight="24.0" prefWidth="92.0" text="2 giocatori">
          <font>
             <Font name="Bodoni MT" size="12.0" />
          </font>
       </Button>
-      <Button fx:id="Button3" layoutX="350.0" layoutY="226.0" mnemonicParsing="false" onAction="#set3Players" prefHeight="24.0" prefWidth="92.0" text="3 giocatori">
+      <Button fx:id="button3" layoutX="350.0" layoutY="226.0" mnemonicParsing="false" onAction="#set3Players" prefHeight="24.0" prefWidth="92.0" text="3 giocatori">
          <font>
             <Font name="Bodoni MT" size="12.0" />
          </font>
       </Button>
-      <Button fx:id="Button4" layoutX="350.0" layoutY="256.0" mnemonicParsing="false" onAction="#set4Players" prefHeight="24.0" prefWidth="92.0" text="4 giocatori">
+      <Button fx:id="button4" layoutX="350.0" layoutY="256.0" mnemonicParsing="false" onAction="#set4Players" prefHeight="24.0" prefWidth="92.0" text="4 giocatori">
          <font>
             <Font name="Bodoni MT" size="12.0" />
          </font>

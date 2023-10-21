@@ -28,19 +28,19 @@
                   <Font name="Bodoni MT" size="30.0" />
                </font>
             </Label>
-            <TextField fx:id="AdminName" prefHeight="26.0" prefWidth="237.0" promptText="Nome Amministratore">
+            <TextField fx:id="adminName" prefHeight="26.0" prefWidth="237.0" promptText="Nome Amministratore">
                <font>
                   <Font name="Georgia" size="14.0" />
                </font>
             </TextField>
-            <PasswordField fx:id="AdminPassword" prefHeight="26.0" prefWidth="178.0" promptText="Password">
+            <PasswordField fx:id="adminPassword" prefHeight="26.0" prefWidth="178.0" promptText="Password">
                <font>
                   <Font name="Georgia" size="14.0" />
                </font>
             </PasswordField>
          </children>
       </VBox>
-      <Button fx:id="ConfirmLogin" layoutX="276.0" layoutY="247.0" mnemonicParsing="false" onAction="#Login" prefHeight="26.0" prefWidth="62.0" text="Login">
+      <Button fx:id="confirmLogin" layoutX="276.0" layoutY="247.0" mnemonicParsing="false" onAction="#login" prefHeight="26.0" prefWidth="62.0" text="Login">
          <font>
             <Font name="Bodoni MT" size="13.0" />
          </font></Button>
@@ -49,7 +49,7 @@
             <Font name="System Bold" size="12.0" />
          </font>
       </Text>
-      <Button fx:id="ReturnToMainMenuButton" layoutX="496.0" layoutY="353.0" mnemonicParsing="false" onAction="#returnToMainMenu" text=" Indietro ">
+      <Button fx:id="returnToMainMenuButton" layoutX="496.0" layoutY="353.0" mnemonicParsing="false" onAction="#returnToMainMenu" text=" Indietro ">
          <font>
             <Font name="Bodoni MT" size="17.0" />
          </font>

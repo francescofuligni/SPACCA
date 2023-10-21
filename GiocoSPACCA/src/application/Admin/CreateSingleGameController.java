@@ -30,76 +30,79 @@ public class CreateSingleGameController implements Initializable {
 	private Scene scene;
 	private Parent root;
 	
-	private Integer HumanCounter=0;
-	private final Integer MAX = SelectPlayerNumberSGController.PlayerNumber;
-	private BOTDIFF[] Diff= {BOTDIFF.FACILE,BOTDIFF.DIFFICILE};
-	private  ArrayList<Player> Giocatori = new ArrayList<Player>();
+	private Integer humanCounter=0;
+	private final Integer MAX = SelectPlayerNumberSGController.playerNumber;
+	private BOTDIFF[] diff= {BOTDIFF.FACILE,BOTDIFF.DIFFICILE};
+	private  ArrayList<Player> players = new ArrayList<Player>();
+	
+	
 	
     @FXML
-    private Button AddPlayerButton;
+    private Button addPlayerButton;
     
     @FXML
-    private Text BotNumber;
+    private Text botNumber;
 
     
     @FXML
-    private ChoiceBox<BOTDIFF> ChooseDifficulty;
+    private ChoiceBox<BOTDIFF> chooseDifficulty;
 
 
     @FXML
-    private TextField UserNamespace;
+    private TextField userNamespace;
 
     @FXML
-    private Button ReturnToCreateGameButton;
+    private Button returnToCreateGameButton;
     
     @FXML
-    private Button Create;
+    private Button create;
     
     @FXML
-    public void AddPlayer(ActionEvent event) {
-    	if( UserNamespace.getText()!="" && UserNamespace.getText()!=" " && UserNamespace.getText()!=null) {
+    public void addPlayer(ActionEvent event) {
+    	
+    	if( userNamespace.getText()!="" && userNamespace.getText()!=" " && userNamespace.getText()!=null) {
     	Player giocatore = new Player();
-    	giocatore.setUsername(UserNamespace.getText());
+    	giocatore.setUsername(userNamespace.getText());
     	
     	boolean alreadyPlaying = false;
     	//controlla che lo user non sia gia in partita
     	
     	
-    	if(HumanCounter==0) {
-			Giocatori.add(new Player (giocatore.getUsername(),30,0));
-			UserNamespace.setText(null);
-			HumanCounter++;
-			BotNumber.setText("--- " + (MAX.intValue() - HumanCounter) + " ---");
+    	if(humanCounter==0) {
+			players.add(new Player (giocatore.getUsername(),30,0));
+			userNamespace.setText(null);
+			humanCounter++;
+			botNumber.setText("--- " + (MAX.intValue() - humanCounter) + " ---");
 		}
     	else {
-    		if(HumanCounter<MAX) {
-    			for(int i=0; i<HumanCounter ; i++) {
+    		if(humanCounter<MAX) {
+    			for(int i=0; i<humanCounter ; i++) {
     		
-    				if(giocatore.getUsername().equals(Giocatori.get(i).getUsername())) {  
+    				if(giocatore.getUsername().equals(players.get(i).getUsername())) {  
     			
     					alreadyPlaying = true;
-    					Alert AddPlayerError = new Alert(AlertType.ERROR);
-    					AddPlayerError.setTitle("ERRORE!");
-    					AddPlayerError.setContentText("Giocatore con stesso Username gia presente!");
-    					AddPlayerError.showAndWait();
+    					Alert addPlayerError = new Alert(AlertType.ERROR);
+    					addPlayerError.setTitle("ERRORE!");
+    					addPlayerError.setContentText("Giocatore con stesso Username gia presente!");
+    					addPlayerError.showAndWait();
     			
     					break; 
     				}
     			}
     		    
     		if(alreadyPlaying==false ) {
-    			Giocatori.add(new Player (giocatore.getUsername(),30,0));
-    			UserNamespace.setText(null);
-    				HumanCounter++;
-    				BotNumber.setText("--- " + (MAX.intValue() - HumanCounter) + " ---");
+    			players.add(new Player (giocatore.getUsername(),30,0));
+    			userNamespace.setText(null);
+    				humanCounter++;
+    				botNumber.setText("--- " + (MAX.intValue() - humanCounter) + " ---");
     				
     			}
     		}
     		else {
-    			Alert AddPlayerError = new Alert(AlertType.ERROR);
-    			AddPlayerError.setTitle("ERRORE!");
-    			AddPlayerError.setContentText("MASSIMO DI GIOCATORI INSERITI!");
-    			AddPlayerError.showAndWait();
+    			Alert addPlayerError = new Alert(AlertType.ERROR);
+    			addPlayerError.setTitle("ERRORE!");
+    			addPlayerError.setContentText("MASSIMO DI GIOCATORI INSERITI!");
+    			addPlayerError.showAndWait();
     			}
     		}
     	
@@ -108,7 +111,7 @@ public class CreateSingleGameController implements Initializable {
     
     @FXML
     void returnToCreateGame(ActionEvent event) throws IOException {
-    	stage = (Stage)(ReturnToCreateGameButton.getScene().getWindow());
+    	stage = (Stage)(returnToCreateGameButton.getScene().getWindow());
 		  //IMPORTANTE RICORDA IL ../ nell'URL DEL FXML
 		  FXMLLoader Loader=new FXMLLoader(CreateGameController.class.getResource("../Admin/CreateGame.fxml"));
 		  root = (Parent) Loader.load();
@@ -120,8 +123,8 @@ public class CreateSingleGameController implements Initializable {
 
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
-		ChooseDifficulty.getItems().addAll(Diff);
-		BotNumber.setText("--- " +MAX + " ---");
+		chooseDifficulty.getItems().addAll(diff);
+		botNumber.setText("--- " +MAX + " ---");
 		
 		
 	}
@@ -134,7 +137,7 @@ public class CreateSingleGameController implements Initializable {
 	    			Code= Code + (int)Math.random()*10;
 	    		}
 	    		
-	    		new SingleGame(MAX,ChooseDifficulty.getValue(),Giocatori,Code);
+	    		new SingleGame(MAX,chooseDifficulty.getValue(),players,Code);
 	    		
 	    		
 	    		
