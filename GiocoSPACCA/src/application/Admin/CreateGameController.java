@@ -20,6 +20,9 @@ public class CreateGameController {
 
     @FXML
     private Button CreateTournamentButton;
+    
+    @FXML
+    private Button createPlayerButton;
 
     @FXML
     public void CreateSingleGame(ActionEvent event) throws IOException {
@@ -43,5 +46,15 @@ public class CreateGameController {
 		  stage.setScene(scene);
 		  stage.show();
     }
-
+	
+	
+	@FXML
+	public void createPlayer(ActionEvent e) throws IOException {
+		stage = (Stage)(CreateTournamentButton.getScene().getWindow());
+		  FXMLLoader Loader = new FXMLLoader(CreatePlayerController.class.getResource("../Admin/CreatePlayer.fxml"));
+		  root = (Parent) Loader.load();
+		  scene = new Scene(root);
+		  stage.setScene(scene);
+		  stage.show();
+	}
 }
