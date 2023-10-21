@@ -12,7 +12,6 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="435.0" prefWidth="479.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.Admin.CreateGameController">
    <children>
       <ImageView fitHeight="435.0" fitWidth="485.0" pickOnBounds="true" preserveRatio="true">
@@ -43,12 +42,12 @@
             <Font name="Bodoni MT" size="20.0" />
          </font>
       </Text>
-      <Button fx:id="CreateTournamentButton" layoutX="194.0" layoutY="240.0" mnemonicParsing="false" onAction="#CreateTournament" prefHeight="26.0" prefWidth="92.0" text="Torneo">
+      <Button fx:id="createTournamentButton" layoutX="194.0" layoutY="240.0" mnemonicParsing="false" onAction="#createTournament" prefHeight="26.0" prefWidth="92.0" text="Torneo">
          <effect>
             <InnerShadow />
          </effect>
       </Button>
-      <Button fx:id="CreateSingleGameButton" layoutX="196.0" layoutY="192.0" mnemonicParsing="false" onAction="#CreateSingleGame" text="Partita singola">
+      <Button fx:id="createSingleGameButton" layoutX="196.0" layoutY="192.0" mnemonicParsing="false" onAction="#createSingleGame" text="Partita singola">
          <effect>
             <InnerShadow />
          </effect>

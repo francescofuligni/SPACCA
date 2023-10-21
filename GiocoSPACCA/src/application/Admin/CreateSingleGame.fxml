@@ -80,7 +80,7 @@
             </RadialGradient>
          </fill>
       </Rectangle>
-      <ChoiceBox fx:id="ChooseDifficulty" layoutX="319.0" layoutY="261.0" prefWidth="150.0" />
+      <ChoiceBox fx:id="chooseDifficulty" layoutX="319.0" layoutY="261.0" prefWidth="150.0" />
       <Text fill="WHITE" layoutX="197.0" layoutY="278.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Difficoltà Bot" wrappingWidth="123.7320556640625">
          <font>
             <Font name="System Bold" size="13.0" />
@@ -109,13 +109,13 @@
             <Font name="System Bold" size="12.0" />
          </font>
       </Text>
-      <TextField fx:id="UserNamespace" layoutX="319.0" layoutY="333.0" prefHeight="26.0" prefWidth="174.0" />
+      <TextField fx:id="userNamespace" layoutX="319.0" layoutY="333.0" prefHeight="26.0" prefWidth="174.0" />
       <Text fill="WHITE" layoutX="164.0" layoutY="352.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Aggiungi giocatore" textAlignment="CENTER" wrappingWidth="150.39999999999986">
          <font>
             <Font name="System Bold" size="14.0" />
          </font>
       </Text>
-      <Button fx:id="AddPlayerButton" layoutX="360.0" layoutY="371.0" mnemonicParsing="false" onAction="#AddPlayer" prefHeight="26.0" prefWidth="92.0" text="Aggiungi">
+      <Button fx:id="addPlayerButton" layoutX="360.0" layoutY="371.0" mnemonicParsing="false" onAction="#addPlayer" prefHeight="26.0" prefWidth="92.0" text="Aggiungi">
          <effect>
             <InnerShadow />
          </effect>
@@ -123,7 +123,7 @@
             <Font name="Bodoni MT" size="13.0" />
          </font>
       </Button>
-      <Button fx:id="ReturnToCreateGameButton" layoutX="564.0" layoutY="553.0" mnemonicParsing="false" onAction="#returnToCreateGame" text=" Indietro ">
+      <Button fx:id="returnToCreateGameButton" layoutX="564.0" layoutY="553.0" mnemonicParsing="false" onAction="#returnToCreateGame" text=" Indietro ">
          <font>
             <Font name="Bodoni MT" size="17.0" />
          </font>
@@ -131,7 +131,7 @@
             <InnerShadow />
          </effect>
       </Button>
-      <Button fx:id="Create" layoutX="263.0" layoutY="459.0" mnemonicParsing="false" onAction="#create" prefHeight="52.0" prefWidth="141.0" text="Crea Partita">
+      <Button fx:id="create" layoutX="263.0" layoutY="459.0" mnemonicParsing="false" onAction="#create" prefHeight="52.0" prefWidth="141.0" text="Crea Partita">
          <effect>
             <InnerShadow />
          </effect>
@@ -144,7 +144,7 @@
             <Font name="System Bold" size="13.0" />
          </font>
       </Text>
-      <Text fx:id="BotNumber" fill="WHITE" layoutX="332.0" layoutY="217.0" strokeType="OUTSIDE" strokeWidth="0.0" text="NUMBER" textAlignment="CENTER" wrappingWidth="123.7320556640625">
+      <Text fx:id="botNumber" fill="WHITE" layoutX="332.0" layoutY="217.0" strokeType="OUTSIDE" strokeWidth="0.0" text="NUMBER" textAlignment="CENTER" wrappingWidth="123.7320556640625">
          <font>
             <Font name="Bodoni MT" size="24.0" />
          </font>
