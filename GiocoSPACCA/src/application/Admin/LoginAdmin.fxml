@@ -44,7 +44,7 @@
          <font>
             <Font name="Bodoni MT" size="13.0" />
          </font></Button>
-      <Text fx:id="LoginStatusText" fill="WHITE" fontSmoothingType="LCD" layoutX="180.0" layoutY="237.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Inserire Nome Utente e Password" textAlignment="CENTER" wrappingWidth="254.4000000000001">
+      <Text fx:id="loginStatusText" fill="WHITE" fontSmoothingType="LCD" layoutX="180.0" layoutY="237.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Inserire Nome Utente e Password" textAlignment="CENTER" wrappingWidth="254.4000000000001">
          <font>
             <Font name="System Bold" size="12.0" />
          </font>

@@ -110,7 +110,7 @@ public class CreateSingleGameController implements Initializable {
     }
     
     @FXML
-    void returnToCreateGame(ActionEvent event) throws IOException {
+    public void returnToCreateGame(ActionEvent event) throws IOException {
     	stage = (Stage)(returnToCreateGameButton.getScene().getWindow());
 		  //IMPORTANTE RICORDA IL ../ nell'URL DEL FXML
 		  FXMLLoader Loader=new FXMLLoader(CreateGameController.class.getResource("../Admin/CreateGame.fxml"));
@@ -130,7 +130,7 @@ public class CreateSingleGameController implements Initializable {
 	}
 	
 	 @FXML
-	    void create(ActionEvent event) {	    	
+	public void create(ActionEvent event) {	    	
 	    		
 	    		String Code="";
 	    		for(int i=0;i<7;i++) {
