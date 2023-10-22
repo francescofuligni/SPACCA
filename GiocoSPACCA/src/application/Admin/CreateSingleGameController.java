@@ -123,10 +123,16 @@ public class CreateSingleGameController implements Initializable {
 
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
+
 		chooseDifficulty.getItems().addAll(diff);
 		botNumber.setText("--- " +MAX + " ---");
-		
-		
+
+		chooseDifficulty.getItems().addAll(diff);
+		botNumber.setText("--- " + MAX + " ---");
+
+		chooseDifficulty.getItems().addAll(diff);
+		botNumber.setText("--- " +MAX + " ---");
+
 	}
 	
 	 @FXML
