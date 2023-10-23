@@ -39,7 +39,7 @@ public class Player {
 	
 	public void memorize() {
 		
-		Path pathToFile = Paths.get("src/application/Informazioni_Partite/PLAYERS_REGISTER.txt");
+		Path pathToFile = Paths.get("src/application/Informazioni_Partite/PLAYERS_REGISTER.csv");
 			File f=new File(pathToFile.toString());
 			if(!f.exists())
 	        try {
