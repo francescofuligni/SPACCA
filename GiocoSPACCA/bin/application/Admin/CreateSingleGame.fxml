@@ -4,6 +4,9 @@
 <?import javafx.scene.control.ChoiceBox?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.effect.InnerShadow?>
+<?import javafx.scene.effect.Light.Distant?>
+<?import javafx.scene.effect.Lighting?>
+<?import javafx.scene.effect.Shadow?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -20,6 +23,16 @@
          <image>
             <Image url="@../../../Images/Stendardo.png" />
          </image>
+         <effect>
+            <Lighting diffuseConstant="0.45">
+               <bumpInput>
+                  <Shadow />
+               </bumpInput>
+               <light>
+                  <Light.Distant />
+               </light>
+            </Lighting>
+         </effect>
       </ImageView>
       <Rectangle arcHeight="5.0" arcWidth="5.0" height="74.0" layoutX="187.0" layoutY="67.0" stroke="WHITE" strokeLineCap="ROUND" strokeType="INSIDE" width="294.0">
          <fill>

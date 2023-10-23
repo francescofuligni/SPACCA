@@ -127,12 +127,6 @@ public class CreateSingleGameController implements Initializable {
 		chooseDifficulty.getItems().addAll(diff);
 		botNumber.setText("--- " +MAX + " ---");
 
-		chooseDifficulty.getItems().addAll(diff);
-		botNumber.setText("--- " + MAX + " ---");
-
-		chooseDifficulty.getItems().addAll(diff);
-		botNumber.setText("--- " +MAX + " ---");
-
 	}
 	
 	 @FXML

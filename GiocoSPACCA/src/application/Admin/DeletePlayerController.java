@@ -49,7 +49,7 @@ public class DeletePlayerController {
 	public void deletePlayer(ActionEvent event) throws IOException {
     	String username = usernameField.getText();
     	
-    	if(username==null || username.trim()=="") {				// controllare
+    	if(username==null || username.trim().equals("")) {				
 			Alert alert = new Alert(AlertType.ERROR);
 			alert.setTitle("Errore");
 			alert.setHeaderText("Errore nell'eliminazione del giocatore");
