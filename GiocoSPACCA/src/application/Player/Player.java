@@ -1,26 +1,48 @@
 package application.Player;
 
 public class Player {
-	private String Username;
-	protected int LifePoints;
-	protected int CurrentScore;
+	private String username;
+	protected int lifePoints;			// perché non private?
+	protected int currentScore;			// perché non private?
 	
-	public Player(String Username,int LifePoints,int CurrentScore) {
-		this.Username=Username;
-		this.LifePoints=LifePoints;
-		this.CurrentScore=CurrentScore;
+	public Player(String username,int lifePoints,int currentScore) {			// costruttore 1
+		this.username=username;
+		this.lifePoints=lifePoints;
+		this.currentScore=currentScore;
 		
 	}
-	public Player() {
-		this.Username="";
-		this.LifePoints=0;
-		this.CurrentScore=0;
+	public Player() {						// costruttore 2
+		this.username="";
+		this.lifePoints=0;
+		this.currentScore=0;
 		
 	}
+	public Player(String username) {		// costruttore 3
+		this.username=username;
+		this.lifePoints=0;
+		this.currentScore=0;
+		
+	}
+	
 	public String getUsername() {
-		return Username;
+		return username;
 	}
+	
 	public void setUsername(String username) {
-		this.Username = username;
+		this.username = username;
+	}
+	
+	public void setLifePoints(int x) {
+		this.lifePoints = x;
+	}
+	public int getLifePoints() {
+		return this.lifePoints;
+	}
+	
+	public void setCurrentScore(int x) {
+		this.currentScore = x;
+	}
+	public int getCurrentScore() {
+		return currentScore;
 	}
 }

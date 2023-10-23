@@ -43,17 +43,26 @@
          </font>
       </Text>
       <Button fx:id="createTournamentButton" layoutX="183.0" layoutY="240.0" mnemonicParsing="false" onAction="#createTournament" prefHeight="26.0" prefWidth="127.0" text="Torneo">
+         <font>
+            <Font name="Bodoni MT" size="13.0" />
+         </font>
          <effect>
             <InnerShadow />
          </effect>
       </Button>
       <Button fx:id="createSingleGameButton" layoutX="183.0" layoutY="192.0" mnemonicParsing="false" onAction="#createSingleGame" prefHeight="26.0" prefWidth="127.0" text="Partita singola">
+         <font>
+            <Font name="Bodoni MT" size="13.0" />
+         </font>
          <effect>
             <InnerShadow />
          </effect>
       </Button>
       <Button fx:id="managePlayersButton" layoutX="183.0" layoutY="294.0" mnemonicParsing="false" onAction="#managePlayers" prefHeight="26.0" prefWidth="127.0" text="Gestisci giocatori">
-      	 <effect>
+         <font>
+            <Font name="Bodoni MT" size="13.0" />
+         </font>
+         <effect>
             <InnerShadow />
          </effect>
       </Button>

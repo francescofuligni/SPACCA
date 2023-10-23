@@ -37,22 +37,31 @@
             </RadialGradient>
          </fill>
       </Rectangle>
-      <Text fill="WHITE" layoutX="156.0" layoutY="102.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Gestisci giocatori">
+      <Text fill="WHITE" layoutX="171.0" layoutY="100.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Gestisci giocatori">
          <font>
-            <Font name="Bodoni MT" size="24.0" />
+            <Font name="Bodoni MT" size="20.0" />
          </font>
       </Text>
-      <Button fx:id="deletePlayerButton" layoutX="183.0" layoutY="240.0" mnemonicParsing="false" onAction="#deletePlayer" prefHeight="26.0" prefWidth="127.0" text="Elimina giocatore">
+      <Button fx:id="backButton" layoutX="187.0" layoutY="362.0" mnemonicParsing="false" onAction="#back" prefHeight="29.0" prefWidth="116.0" text="Indietro">
+         <font>
+            <Font name="Bodoni MT" size="13.0" />
+         </font>
          <effect>
             <InnerShadow />
          </effect>
       </Button>
-      <Button fx:id="newPlayerButton" layoutX="183.0" layoutY="192.0" mnemonicParsing="false" onAction="#newPlayer" prefHeight="26.0" prefWidth="127.0" text="Aggiungi giocatore">
+      <Button fx:id="newPlayerButton" layoutX="184.0" layoutY="202.0" mnemonicParsing="false" onAction="#newPlayer" prefHeight="29.0" prefWidth="116.0" text="Crea giocatori">
+         <font>
+            <Font name="Bodoni MT" size="13.0" />
+         </font>
          <effect>
             <InnerShadow />
          </effect>
       </Button>
-      <Button fx:id="backButton" layoutX="183.0" layoutY="365.0" mnemonicParsing="false" onAction="#back" prefHeight="26.0" prefWidth="127.0" text="Indietro">
+      <Button fx:id="deletePlayerButton" layoutX="185.0" layoutY="255.0" mnemonicParsing="false" onAction="#deletePlayer" prefHeight="29.0" prefWidth="116.0" text="Elimina giocatori">
+         <font>
+            <Font name="Bodoni MT" size="13.0" />
+         </font>
          <effect>
             <InnerShadow />
          </effect>

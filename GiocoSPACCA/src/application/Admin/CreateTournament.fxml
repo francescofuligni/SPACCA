@@ -39,7 +39,7 @@
             </RadialGradient>
          </fill>
       </Rectangle>
-      <Text fill="WHITE" layoutX="195.0" layoutY="93.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Configura TORNEO" textAlignment="CENTER" wrappingWidth="277.66131591796875">
+      <Text fill="WHITE" layoutX="195.0" layoutY="93.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Crea TORNEO" textAlignment="CENTER" wrappingWidth="277.66131591796875">
          <font>
             <Font name="Bodoni MT" size="20.0" />
          </font>

@@ -37,8 +37,8 @@ public class PlayersManagerController {
     }
 	
 	@FXML
-	public void newPlayer(ActionEvent event) throws IOException {		// to do
-    	stage = (Stage)(backButton.getScene().getWindow());
+	public void newPlayer(ActionEvent event) throws IOException {
+    	stage = (Stage)(newPlayerButton.getScene().getWindow());
 		  //IMPORTANTE RICORDA IL ../ nell'URL DEL FXML
 		  FXMLLoader Loader = new FXMLLoader(CreatePlayerController.class.getResource("../Admin/CreatePlayer.fxml"));
 		  root = (Parent) Loader.load();
@@ -48,8 +48,8 @@ public class PlayersManagerController {
     }
 	
 	@FXML
-	public void deletePlayer(ActionEvent event) throws IOException {	// to do
-    	stage = (Stage)(backButton.getScene().getWindow());
+	public void deletePlayer(ActionEvent event) throws IOException {
+    	stage = (Stage)(deletePlayerButton.getScene().getWindow());
 		  //IMPORTANTE RICORDA IL ../ nell'URL DEL FXML
 		  FXMLLoader Loader = new FXMLLoader(DeletePlayerController.class.getResource("../Admin/DeletePlayer.fxml"));
 		  root = (Parent) Loader.load();

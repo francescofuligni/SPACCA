@@ -19,26 +19,29 @@ import javafx.stage.Stage;
 
 public class LoginAdminController {
 	
+	public final String adminPassword = "admin1234";
+	public final String adminName = "admin";
+	
 	private Stage stage;
-	 private Scene scene;
-	 private Parent root;
+	private Scene scene;
+	private Parent root;
 	 	@FXML
 	    private Button returnToMainMenuButton;
 		@FXML
-		private TextField adminName;
+		private TextField adminNameField;
 		@FXML
-		private PasswordField adminPassword;
+		private PasswordField adminPasswordField;
 		@FXML 
 		private Button confirmLogin;
 		@FXML 
 		private Text loginStatusText;
 		
 		public void login() throws IOException{
-			if(adminName.getText().equals("admin")&&
-				adminPassword.getText().equals("admin1234")) {
+			if(adminNameField.getText().equals(adminName) &&
+				adminPasswordField.getText().equals(adminPassword)) {
 					
 				//Se le credenziali sono giuste entra in Create game
-				 stage = (Stage)(confirmLogin.getScene().getWindow());
+				stage = (Stage)(confirmLogin.getScene().getWindow());
 				  //IMPORTANTE RICORDA IL ../ nell'URL DEL FXML
 				  FXMLLoader Loader=new FXMLLoader(CreateGameController.class.getResource("../Admin/CreateGame.fxml"));
 				  root = (Parent) Loader.load();
@@ -51,9 +54,9 @@ public class LoginAdminController {
 			else {
 				Alert loginError = new Alert(AlertType.ERROR);
 				loginError.setTitle("ERRORE!");
-				loginError.setContentText("NomeAdmin o Password errati, riprovare.");
+				loginError.setContentText("Nome Admin o Password errati, riprovare.");
 				loginError.showAndWait();
-				loginStatusText.setText("Password o User errati, riprovare");
+				loginStatusText.setText("Nome Admin o Password errati, riprovare");
 				loginStatusText.setFill(Color.RED);
 				
 			}

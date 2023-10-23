@@ -39,7 +39,7 @@
             </RadialGradient>
          </fill>
       </Rectangle>
-      <Text fill="WHITE" layoutX="197.0" layoutY="111.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Configura PARTITA SINGOLA">
+      <Text fill="WHITE" layoutX="220.0" layoutY="111.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Crea PARTITA SINGOLA">
          <font>
             <Font name="Bodoni MT" size="20.0" />
          </font>
