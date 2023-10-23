@@ -67,8 +67,7 @@ public class CreatePlayerController {
 			
 			if(alert.showAndWait().get() == ButtonType.OK) {
 				Player player = new Player(username.trim());
-				
-				// memorizzare giocatore "player"
+				player.memorize();
 				
 				message.setTextFill(Color.GREEN);
 				message.setText("Giocatore \"" + username.trim() + "\" aggiunto correttamente");
