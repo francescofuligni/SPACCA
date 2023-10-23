@@ -12,7 +12,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="435.0" prefWidth="479.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.Admin.CreateGameController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="435.0" prefWidth="479.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.Admin.PlayersManagerController">
    <children>
       <ImageView fitHeight="435.0" fitWidth="485.0" pickOnBounds="true" preserveRatio="true">
          <image>
@@ -37,12 +37,12 @@
             </RadialGradient>
          </fill>
       </Rectangle>
-      <Text fill="WHITE" layoutX="214.0" layoutY="101.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Menù">
+      <Text fill="WHITE" layoutX="171.0" layoutY="100.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Gestisci giocatori">
          <font>
-            <Font name="Bodoni MT" size="24.0" />
+            <Font name="Bodoni MT" size="20.0" />
          </font>
       </Text>
-      <Button fx:id="createTournamentButton" layoutX="183.0" layoutY="240.0" mnemonicParsing="false" onAction="#createTournament" prefHeight="26.0" prefWidth="127.0" text="Torneo">
+      <Button fx:id="backButton" layoutX="187.0" layoutY="362.0" mnemonicParsing="false" onAction="#back" prefHeight="29.0" prefWidth="116.0" text="Indietro">
          <font>
             <Font name="Bodoni MT" size="13.0" />
          </font>
@@ -50,7 +50,7 @@
             <InnerShadow />
          </effect>
       </Button>
-      <Button fx:id="createSingleGameButton" layoutX="183.0" layoutY="192.0" mnemonicParsing="false" onAction="#createSingleGame" prefHeight="26.0" prefWidth="127.0" text="Partita singola">
+      <Button fx:id="newPlayerButton" layoutX="184.0" layoutY="202.0" mnemonicParsing="false" onAction="#newPlayer" prefHeight="29.0" prefWidth="116.0" text="Crea giocatori">
          <font>
             <Font name="Bodoni MT" size="13.0" />
          </font>
@@ -58,7 +58,7 @@
             <InnerShadow />
          </effect>
       </Button>
-      <Button fx:id="managePlayersButton" layoutX="183.0" layoutY="294.0" mnemonicParsing="false" onAction="#managePlayers" prefHeight="26.0" prefWidth="127.0" text="Gestisci giocatori">
+      <Button fx:id="deletePlayerButton" layoutX="185.0" layoutY="255.0" mnemonicParsing="false" onAction="#deletePlayer" prefHeight="29.0" prefWidth="116.0" text="Elimina giocatori">
          <font>
             <Font name="Bodoni MT" size="13.0" />
          </font>

@@ -23,17 +23,17 @@
       <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#332000" height="42.0" layoutX="180.0" layoutY="123.0" stroke="WHITE" strokeType="INSIDE" width="254.0" />
       <VBox layoutX="179.0" layoutY="123.0" prefHeight="87.0" prefWidth="254.0">
          <children>
-            <Label prefHeight="32.0" prefWidth="254.0" text="   LOGIN ADMIN" textAlignment="CENTER" textFill="WHITE" textOverrun="CENTER_ELLIPSIS">
+            <Label alignment="CENTER" prefHeight="32.0" prefWidth="254.0" text="Login admin" textAlignment="CENTER" textFill="WHITE" textOverrun="CENTER_ELLIPSIS">
                <font>
                   <Font name="Bodoni MT" size="30.0" />
                </font>
             </Label>
-            <TextField fx:id="adminName" prefHeight="26.0" prefWidth="237.0" promptText="Nome Amministratore">
+            <TextField fx:id="adminNameField" prefHeight="26.0" prefWidth="237.0" promptText="Nome amministratore">
                <font>
                   <Font name="Georgia" size="14.0" />
                </font>
             </TextField>
-            <PasswordField fx:id="adminPassword" prefHeight="26.0" prefWidth="178.0" promptText="Password">
+            <PasswordField fx:id="adminPasswordField" prefHeight="26.0" prefWidth="178.0" promptText="Password">
                <font>
                   <Font name="Georgia" size="14.0" />
                </font>
@@ -43,10 +43,14 @@
       <Button fx:id="confirmLogin" layoutX="276.0" layoutY="247.0" mnemonicParsing="false" onAction="#login" prefHeight="26.0" prefWidth="62.0" text="Login">
          <font>
             <Font name="Bodoni MT" size="13.0" />
-         </font></Button>
-      <Text fx:id="LoginStatusText" fill="WHITE" fontSmoothingType="LCD" layoutX="180.0" layoutY="237.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Inserire Nome Utente e Password" textAlignment="CENTER" wrappingWidth="254.4000000000001">
+         </font>
+         <effect>
+            <InnerShadow />
+         </effect>
+      </Button>
+      <Text fx:id="loginStatusText" fill="WHITE" fontSmoothingType="LCD" layoutX="180.0" layoutY="229.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Inserire nome utente e password" textAlignment="CENTER" wrappingWidth="254.4000000000001">
          <font>
-            <Font name="System Bold" size="12.0" />
+            <Font name="Bodoni MT" size="13.0" />
          </font>
       </Text>
       <Button fx:id="returnToMainMenuButton" layoutX="496.0" layoutY="353.0" mnemonicParsing="false" onAction="#returnToMainMenu" text=" Indietro ">
