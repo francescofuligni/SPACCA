@@ -44,7 +44,7 @@
       </Text>
       <Button fx:id="backButton" layoutX="239.0" layoutY="457.0" mnemonicParsing="false" onAction="#back" prefHeight="50.0" prefWidth="200.0" text="Indietro">
          <font>
-            <Font name="Bodoni MT" size="26.0" />
+            <Font name="Bodoni MT" size="20.0" />
          </font>
          <effect>
             <InnerShadow />
@@ -52,15 +52,15 @@
       </Button>
       <Button fx:id="newPlayerButton" layoutX="239.0" layoutY="205.0" mnemonicParsing="false" onAction="#newPlayer" prefHeight="50.0" prefWidth="200.0" text="Crea giocatori">
          <font>
-            <Font name="Bodoni MT" size="26.0" />
+            <Font name="Bodoni MT" size="20.0" />
          </font>
          <effect>
             <InnerShadow />
          </effect>
       </Button>
-      <Button fx:id="deletePlayerButton" layoutX="239.0" layoutY="275.0" mnemonicParsing="false" onAction="#deletePlayer" prefHeight="50.0" prefWidth="200.0" text="Elimina giocatori">
+      <Button fx:id="deletePlayerButton" layoutX="239.0" layoutY="275.0" mnemonicParsing="false" onAction="#deletePlayer" prefHeight="51.0" prefWidth="200.0" text="Elimina giocatori">
          <font>
-            <Font name="Bodoni MT" size="26.0" />
+            <Font name="Bodoni MT" size="20.0" />
          </font>
          <effect>
             <InnerShadow />
