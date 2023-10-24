@@ -9,36 +9,36 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.MainMenu.MainMenuController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.MainMenu.MainMenuController">
    <children>
-      <ImageView fitHeight="400.0" fitWidth="600.0" pickOnBounds="true">
+      <ImageView fitHeight="800.0" fitWidth="1200.0" pickOnBounds="true">
          <image>
             <Image url="@../../../Images/castle.png" />
          </image>
       </ImageView>
-      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#332000" height="200.0" layoutX="219.0" layoutY="100.0" stroke="BLACK" strokeType="INSIDE" width="200.0" />
-      <Text fill="WHITE" layoutX="230.0" layoutY="138.0" strokeType="OUTSIDE" strokeWidth="0.0" text="S.P.A.C.C.A." textAlignment="CENTER" wrappingWidth="180.5367431640625">
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#332000" height="400.0" layoutX="400.0" layoutY="200.0" stroke="WHITE" strokeLineJoin="ROUND" strokeType="INSIDE" strokeWidth="3.0" width="400.0" />
+      <Text fill="WHITE" fontSmoothingType="LCD" layoutX="470.0" layoutY="291.0" strokeLineCap="ROUND" strokeLineJoin="ROUND" strokeType="OUTSIDE" strokeWidth="0.0" text="S.P.A.C.C.A." textAlignment="CENTER" wrappingWidth="260.5367431640625">
          <font>
-            <Font name="Bodoni MT" size="30.0" />
+            <Font name="Bodoni MT" size="50.0" />
          </font>
       </Text>
-      <Button fx:id="playButton" alignment="CENTER" contentDisplay="CENTER" layoutX="266.0" layoutY="164.0" mnemonicParsing="false" onAction="#enterGame" prefHeight="26.0" prefWidth="109.0" text="Gioca!" textAlignment="CENTER">
+      <Button fx:id="playButton" alignment="CENTER" contentDisplay="CENTER" layoutX="500.0" layoutY="340.0" mnemonicParsing="false" onAction="#enterGame" prefHeight="60.0" prefWidth="200.0" text="Gioca!" textAlignment="CENTER">
          <font>
-            <Font name="Bodoni MT" size="13.0" />
+            <Font name="Bodoni MT" size="26.0" />
          </font>
          <effect>
             <InnerShadow />
          </effect></Button>
-      <Button fx:id="createGameButton" alignment="CENTER" contentDisplay="CENTER" layoutX="265.0" layoutY="200.0" mnemonicParsing="false" onAction="#switchToAdminLogin" prefHeight="26.0" prefWidth="109.0" text="Login Admin" textAlignment="CENTER">
+      <Button fx:id="createGameButton" alignment="CENTER" contentDisplay="CENTER" layoutX="500.0" layoutY="423.0" mnemonicParsing="false" onAction="#switchToAdminLogin" prefHeight="60.0" prefWidth="200.0" text="Login Admin" textAlignment="CENTER">
          <font>
-            <Font name="Bodoni MT" size="13.0" />
+            <Font name="Bodoni MT" size="26.0" />
          </font>
          <effect>
             <InnerShadow />
          </effect></Button>
-      <Button fx:id="creditiButton" alignment="CENTER" contentDisplay="CENTER" layoutX="266.0" layoutY="235.0" mnemonicParsing="false" onAction="#switchToCredits" prefHeight="26.0" prefWidth="109.0" text="Crediti" textAlignment="CENTER">
+      <Button fx:id="creditiButton" alignment="CENTER" contentDisplay="CENTER" layoutX="500.0" layoutY="503.0" mnemonicParsing="false" onAction="#switchToCredits" prefHeight="60.0" prefWidth="200.0" text="Crediti" textAlignment="CENTER">
          <font>
-            <Font name="Bodoni MT" size="13.0" />
+            <Font name="Bodoni MT" size="26.0" />
          </font>
          <effect>
             <InnerShadow />

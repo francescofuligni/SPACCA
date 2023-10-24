@@ -60,15 +60,15 @@ public class CreateTournamentController implements Initializable  {
     @FXML
     public void addPlayer(ActionEvent e) {
     	if(userNamespace.getText()!="" && userNamespace.getText()!=" " && userNamespace.getText()!=null) {
-    	Player giocatore = new Player();
-    	giocatore.setUsername(userNamespace.getText());
+    	Player giocatore = new Player(userNamespace.getText());
+    	
     	
     	boolean alreadyPlaying = false;
     	//controlla che lo user non sia gia in partita
     	
     	
     	if(humanCounter==0) {
-    		players[0]=new Player (giocatore.getUsername(),30,0);
+    		players[0]=new Player (giocatore.getUsername());
 			userNamespace.setText(null);
 			humanCounter++;
 			botNumber.setText("--- " + (playerNumber - humanCounter) + " ---");
@@ -90,7 +90,7 @@ public class CreateTournamentController implements Initializable  {
     			}
     		    
     		if(alreadyPlaying==false ) {
-    			players[humanCounter] = new Player (giocatore.getUsername(),30,0);
+    			players[humanCounter] = new Player (giocatore.getUsername());
     				userNamespace.setText(null);
     				humanCounter++;
     				botNumber.setText("--- " + (playerNumber- humanCounter) + " ---");

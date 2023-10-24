@@ -61,15 +61,15 @@ public class CreateSingleGameController implements Initializable {
     public void addPlayer(ActionEvent event) {
     	
     	if( userNamespace.getText()!="" && userNamespace.getText()!=" " && userNamespace.getText()!=null) {
-    	Player giocatore = new Player();
-    	giocatore.setUsername(userNamespace.getText());
+    	Player giocatore = new Player(userNamespace.getText());
+    	
     	
     	boolean alreadyPlaying = false;
     	//controlla che lo user non sia gia in partita
     	
     	
     	if(humanCounter==0) {
-			players.add(new Player (giocatore.getUsername(),30,0));
+			players.add(new Player (giocatore.getUsername() ) );
 			userNamespace.setText(null);
 			humanCounter++;
 			botNumber.setText("--- " + (MAX.intValue() - humanCounter) + " ---");
@@ -91,7 +91,7 @@ public class CreateSingleGameController implements Initializable {
     			}
     		    
     		if(alreadyPlaying==false ) {
-    			players.add(new Player (giocatore.getUsername(),30,0));
+    			players.add(new Player (giocatore.getUsername()));
     			userNamespace.setText(null);
     				humanCounter++;
     				botNumber.setText("--- " + (MAX.intValue() - humanCounter) + " ---");
@@ -123,12 +123,6 @@ public class CreateSingleGameController implements Initializable {
 
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
-
-		chooseDifficulty.getItems().addAll(diff);
-		botNumber.setText("--- " +MAX + " ---");
-
-		chooseDifficulty.getItems().addAll(diff);
-		botNumber.setText("--- " + MAX + " ---");
 
 		chooseDifficulty.getItems().addAll(diff);
 		botNumber.setText("--- " +MAX + " ---");
