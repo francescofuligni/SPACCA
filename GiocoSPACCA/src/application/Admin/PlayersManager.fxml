@@ -12,14 +12,14 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="435.0" prefWidth="479.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.Admin.PlayersManagerController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="668.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.Admin.PlayersManagerController">
    <children>
-      <ImageView fitHeight="435.0" fitWidth="485.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="600.0" fitWidth="668.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../../../Images/Stendardo.png" />
          </image>
       </ImageView>
-      <Rectangle arcHeight="5.0" arcWidth="5.0" height="54.0" layoutX="142.0" layoutY="67.0" stroke="WHITE" strokeLineCap="ROUND" strokeType="INSIDE" width="200.0">
+      <Rectangle arcHeight="5.0" arcWidth="5.0" height="70.0" layoutY="73.0" stroke="WHITE" strokeLineCap="ROUND" strokeType="INSIDE" width="300.0" x="189.0">
          <fill>
             <RadialGradient centerX="0.5" centerY="0.5" radius="0.5">
                <stops>
@@ -37,30 +37,30 @@
             </RadialGradient>
          </fill>
       </Rectangle>
-      <Text fill="WHITE" layoutX="171.0" layoutY="100.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Gestisci giocatori">
+      <Text fill="WHITE" layoutX="16.0" layoutY="119.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Gestisci giocatori" x="189.0">
+         <font>
+            <Font name="Bodoni MT" size="36.0" />
+         </font>
+      </Text>
+      <Button fx:id="backButton" layoutX="239.0" layoutY="457.0" mnemonicParsing="false" onAction="#back" prefHeight="50.0" prefWidth="200.0" text="Indietro">
          <font>
             <Font name="Bodoni MT" size="20.0" />
          </font>
-      </Text>
-      <Button fx:id="backButton" layoutX="187.0" layoutY="362.0" mnemonicParsing="false" onAction="#back" prefHeight="29.0" prefWidth="116.0" text="Indietro">
+         <effect>
+            <InnerShadow />
+         </effect>
+      </Button>
+      <Button fx:id="newPlayerButton" layoutX="239.0" layoutY="205.0" mnemonicParsing="false" onAction="#newPlayer" prefHeight="50.0" prefWidth="200.0" text="Crea giocatori">
          <font>
-            <Font name="Bodoni MT" size="13.0" />
+            <Font name="Bodoni MT" size="20.0" />
          </font>
          <effect>
             <InnerShadow />
          </effect>
       </Button>
-      <Button fx:id="newPlayerButton" layoutX="184.0" layoutY="202.0" mnemonicParsing="false" onAction="#newPlayer" prefHeight="29.0" prefWidth="116.0" text="Crea giocatori">
+      <Button fx:id="deletePlayerButton" layoutX="239.0" layoutY="275.0" mnemonicParsing="false" onAction="#deletePlayer" prefHeight="51.0" prefWidth="200.0" text="Elimina giocatori">
          <font>
-            <Font name="Bodoni MT" size="13.0" />
-         </font>
-         <effect>
-            <InnerShadow />
-         </effect>
-      </Button>
-      <Button fx:id="deletePlayerButton" layoutX="185.0" layoutY="255.0" mnemonicParsing="false" onAction="#deletePlayer" prefHeight="29.0" prefWidth="116.0" text="Elimina giocatori">
-         <font>
-            <Font name="Bodoni MT" size="13.0" />
+            <Font name="Bodoni MT" size="20.0" />
          </font>
          <effect>
             <InnerShadow />

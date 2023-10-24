@@ -16,11 +16,11 @@
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="435.0" prefWidth="484.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.Admin.CreatePlayerController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="668.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.Admin.CreatePlayerController">
    <children>
-      <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="435.0" prefWidth="479.0">
+      <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="668.0">
          <children>
-            <ImageView fitHeight="435.0" fitWidth="485.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fitHeight="600.0" fitWidth="668.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../../../Images/Stendardo.png" />
                </image>
@@ -35,7 +35,7 @@
                   </Lighting>
                </effect>
             </ImageView>
-            <Rectangle arcHeight="5.0" arcWidth="5.0" height="54.0" layoutX="142.0" layoutY="67.0" stroke="WHITE" strokeLineCap="ROUND" strokeType="INSIDE" width="200.0">
+            <Rectangle arcHeight="5.0" arcWidth="5.0" height="80.0" layoutX="189.0" layoutY="155.0" stroke="WHITE" strokeLineCap="ROUND" strokeType="INSIDE" width="300.0">
                <fill>
                   <RadialGradient centerX="0.5" centerY="0.5" radius="0.5">
                      <stops>
@@ -53,34 +53,34 @@
                   </RadialGradient>
                </fill>
             </Rectangle>
-            <Label alignment="CENTER" layoutX="151.0" layoutY="82.0" prefHeight="17.0" prefWidth="184.0" text="Crea nuovo giocatore" textFill="WHITE">
+            <Label alignment="CENTER" layoutX="193.0" layoutY="176.0" prefHeight="35.0" prefWidth="283.0" text="Crea nuovo giocatore" textFill="WHITE">
                <font>
-                  <Font name="Bodoni MT" size="20.0" />
+                  <Font name="Bodoni MT" size="30.0" />
                </font>
             </Label>
-            <TextField fx:id="usernameField" layoutX="160.0" layoutY="192.0" promptText="Nome utente">
+            <TextField fx:id="usernameField" layoutX="189.0" layoutY="235.0" prefHeight="51.0" prefWidth="300.0" promptText="Nome utente">
                <font>
-                  <Font name="Bodoni MT" size="13.0" />
+                  <Font name="Bodoni MT" size="26.0" />
                </font></TextField>
-            <Button fx:id="createButton" layoutX="201.0" layoutY="276.0" mnemonicParsing="false" onAction="#createPlayer" prefHeight="34.0" prefWidth="83.0" text="Crea">
+            <Button fx:id="createButton" layoutX="259.0" layoutY="368.0" mnemonicParsing="false" onAction="#createPlayer" prefHeight="60.0" prefWidth="150.0" text="Crea">
                <font>
-                  <Font name="Bodoni MT" size="18.0" />
+                  <Font name="Bodoni MT" size="30.0" />
                </font>
                <effect>
                   <InnerShadow />
          	   </effect>
             </Button>
-            <Button fx:id="endButton" layoutX="202.0" layoutY="369.0" mnemonicParsing="false" onAction="#returnToCreateGame" prefHeight="26.0" prefWidth="83.0" text="Fine">
+            <Button fx:id="endButton" layoutX="284.0" layoutY="456.0" mnemonicParsing="false" onAction="#returnToCreateGame" prefHeight="40.0" prefWidth="100.0" text="Fine">
                <font>
-                  <Font name="Bodoni MT" size="13.0" />
+                  <Font name="Bodoni MT" size="23.0" />
                </font>
                <effect>
                   <InnerShadow />
                </effect>
             </Button>
-            <Label fx:id="message" alignment="CENTER" layoutY="225.0" prefHeight="17.0" prefWidth="479.0" text="Inserire nome del giocatore da creare" textFill="WHITE">
+            <Label fx:id="message" alignment="CENTER" layoutX="94.0" layoutY="300.0" prefHeight="17.0" prefWidth="480.0" text="Inserire nome del giocatore da creare" textFill="WHITE">
                <font>
-                  <Font name="Bodoni MT" size="13.0" />
+                  <Font name="Bodoni MT" size="26.0" />
                </font></Label>
          </children>
       </AnchorPane>
