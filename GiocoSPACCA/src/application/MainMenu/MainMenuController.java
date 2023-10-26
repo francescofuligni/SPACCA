@@ -40,7 +40,7 @@ public class MainMenuController {
 	   public void switchToCredits(ActionEvent event) throws IOException {
 		 stage = (Stage)(createGameButton.getScene().getWindow());
 		  //IMPORTANTE RICORDA IL ../ nell'URL DEL FXML
-		  FXMLLoader Loader=new FXMLLoader(MainMenuController.class.getResource("Crediti.fxml"));
+		  FXMLLoader Loader=new FXMLLoader(MainMenuController.class.getResource("../MainMenu/Crediti.fxml"));
 		  root = (Parent) Loader.load();
 		  scene = new Scene(root);
 		  stage.setScene(scene);
