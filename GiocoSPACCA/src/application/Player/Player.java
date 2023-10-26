@@ -3,12 +3,15 @@ package application.Player;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.nio.file.FileAlreadyExistsException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.Scanner;
+import java.util.StringTokenizer;
 
 public class Player {
 	
@@ -54,12 +57,89 @@ public class Player {
 			
 	        FileWriter fw = new FileWriter(f.getAbsolutePath(),true);
 	       
-			fw.write(this.username + "," + this.status+ "," +this.lifePoints+ "," +this.currentScore+ "," +this.totalScore+ "," + "\n");
+			fw.write(this.username + "," + this.status+ "," +this.lifePoints+ "," +this.currentScore+ "," +this.totalScore + "\n");
 			fw.flush();
 			fw.close();
 			
 			
 		} catch (IOException e) {
+			
+			e.printStackTrace();
+		}
+		
+		
+	}
+	
+	public boolean exists() throws FileNotFoundException {
+		
+		Path pathToFile = Paths.get("GiocoSPACCA/Informazioni_Partite/PLAYERS_REGISTER.csv");
+		File f=new File(pathToFile.toString());
+		boolean exists=false;
+		
+		if(!f.exists())
+        try {
+            Files.createDirectories(pathToFile.getParent());
+            Files.createFile(pathToFile);
+        } 
+        catch( IOException e ) {
+            System.out.println(e);
+        }
+			
+		
+			Scanner scan = new Scanner(f);
+		
+			
+			while(scan.hasNextLine() ) {
+				
+				String[] tokens = scan.nextLine().split(",");
+				if(tokens[0].equals(this.username)) {
+					exists=true;
+				}
+			}
+			scan.close();
+			
+			return exists;
+		
+		
+	}
+	
+	
+	public void forget() {
+		Path pathToFile = Paths.get("GiocoSPACCA/Informazioni_Partite/PLAYERS_REGISTER.csv");
+		File f=new File(pathToFile.toString());
+		
+		if(!f.exists())
+        try {
+            Files.createDirectories(pathToFile.getParent());
+            Files.createFile(pathToFile);
+        } 
+        catch( IOException e ) {
+            System.out.println(e);
+        }
+		
+		try {
+			
+			Scanner scan = new Scanner(f);
+			scan.reset();
+			String memory="";
+			
+			while(scan.hasNextLine() ) {
+				String riga=scan.nextLine();//NEXTLINE MANDA AVANTI LO SCANNER OGNI VOLTA CHE VIENE CHIAMATA ANCHE PER I CONTROLLI
+				
+				String[] tokens = riga.split(",");
+				if(!tokens[0].equals(this.username)) {
+					memory=memory+riga + "\n";
+				}
+			}
+			
+				scan.close();	
+				
+				FileWriter fw = new FileWriter(f,false);
+				fw.write(memory);
+				fw.close();
+			
+			
+		} catch(IOException e) {
 			
 			e.printStackTrace();
 		}

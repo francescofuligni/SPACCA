@@ -47,6 +47,7 @@ public class DeletePlayerController {
 	
 	@FXML
 	public void deletePlayer(ActionEvent event) throws IOException {
+		
     	String username = usernameField.getText();
     	
     	if(username==null || username.trim().equals("")) {				
@@ -57,26 +58,39 @@ public class DeletePlayerController {
 			alert.showAndWait();
 			message.setTextFill(Color.RED);
 			message.setText("Giocatore non trovato");
-		// }  else if() {
-			// se il giocatore non esiste mostra messaggio di errore (controllo tra i giocatori salvati)
 			
-		} else {
-			Alert alert = new Alert(AlertType.CONFIRMATION);
-			alert.setTitle("Elimina giocatore");
-			alert.setHeaderText("Stai eliminando un giocatore");
-			alert.setContentText("Sei sicuro di voler eliminare il giocatore \"" + username.trim() + "\"?");
-			
-			if(alert.showAndWait().get() == ButtonType.OK) {
-				
-				// eliminare giocatore "player"
-				
-				message.setTextFill(Color.GREEN);
-				message.setText("Giocatore \"" + username.trim() + "\" eliminato correttamente");
-			} else {
+		 }  else{
+			 Player toDelete=new Player(username.trim());
+			 
+			 
+			 
+			 if(toDelete.exists()) {
+				 Alert alert = new Alert(AlertType.CONFIRMATION);
+					alert.setTitle("Elimina giocatore");
+					alert.setHeaderText("Stai eliminando un giocatore");
+					alert.setContentText("Sei sicuro di voler eliminare il giocatore \"" + username.trim() + "\"?");
+					
+					if(alert.showAndWait().get() == ButtonType.OK) {
+						toDelete.forget();
+						
+						message.setTextFill(Color.GREEN);
+						message.setText("Giocatore \"" + username.trim() + "\" eliminato correttamente");
+					}else{
+						
+						message.setTextFill(Color.RED);
+						message.setText("Giocatore non eliminato");
+					}
+				}else {
+				Alert alert = new Alert(AlertType.ERROR);
+				alert.setTitle("Errore");
+				alert.setHeaderText("Errore nell'eliminazione del giocatore");
+				alert.setContentText("Non esistono giocatori con questo nome");
+				alert.showAndWait();
 				message.setTextFill(Color.RED);
-				message.setText("Giocatore non eliminato");
-			}
-		}
-		usernameField.setText(null);
+				message.setText("Giocatore non trovato");
+		} 
+		
     }
+    	usernameField.setText(null);
+	}
 }
