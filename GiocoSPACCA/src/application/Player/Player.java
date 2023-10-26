@@ -3,12 +3,14 @@ package application.Player;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.nio.file.FileAlreadyExistsException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.Scanner;
 
 public class Player {
 	
@@ -60,6 +62,67 @@ public class Player {
 			
 			
 		} catch (IOException e) {
+			
+			e.printStackTrace();
+		}
+		
+		
+	}
+	
+	public boolean exists() {
+		Path pathToFile = Paths.get("GiocoSPACCA/Informazioni_Partite/PLAYERS_REGISTER.csv");
+		File f=new File(pathToFile.toString());
+		boolean exists=false;
+		if(!f.exists())
+        try {
+            Files.createDirectories(pathToFile.getParent());
+            Files.createFile(pathToFile);
+        } 
+        catch( IOException e ) {
+            System.out.println(e);
+        }
+			
+			Scanner scan = new Scanner(f.getAbsolutePath());
+			while(scan.hasNextLine() ) {
+				if(scan.next()==username) {
+					exists=true;
+				}
+			}
+			
+			return exists;
+		
+		
+	}
+	
+	
+	public void forget() {
+		Path pathToFile = Paths.get("GiocoSPACCA/Informazioni_Partite/PLAYERS_REGISTER.csv");
+		File f=new File(pathToFile.toString());
+		if(!f.exists())
+        try {
+            Files.createDirectories(pathToFile.getParent());
+            Files.createFile(pathToFile);
+        } 
+        catch( IOException e ) {
+            System.out.println(e);
+        }
+        	
+		try {
+			
+			Scanner scan = new Scanner(f.getAbsolutePath());
+			FileWriter fw = new FileWriter(f.getAbsolutePath(),false);
+			String memory="";
+			
+			while(scan.hasNextLine() ) {
+				if(scan.next()!=username) {
+					memory+=scan.nextLine() +"\n";
+				}
+			}
+				fw.write(memory);
+				fw.close();
+				scan.close();
+			
+		} catch(IOException e) {
 			
 			e.printStackTrace();
 		}
