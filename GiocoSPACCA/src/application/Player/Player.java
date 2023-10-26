@@ -11,6 +11,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Scanner;
+import java.util.StringTokenizer;
 
 public class Player {
 	
@@ -56,7 +57,7 @@ public class Player {
 			
 	        FileWriter fw = new FileWriter(f.getAbsolutePath(),true);
 	       
-			fw.write(this.username + "," + this.status+ "," +this.lifePoints+ "," +this.currentScore+ "," +this.totalScore+ "," + "\n");
+			fw.write(this.username + "," + this.status+ "," +this.lifePoints+ "," +this.currentScore+ "," +this.totalScore + "\n");
 			fw.flush();
 			fw.close();
 			
@@ -69,10 +70,12 @@ public class Player {
 		
 	}
 	
-	public boolean exists() {
+	public boolean exists() throws FileNotFoundException {
+		
 		Path pathToFile = Paths.get("GiocoSPACCA/Informazioni_Partite/PLAYERS_REGISTER.csv");
 		File f=new File(pathToFile.toString());
 		boolean exists=false;
+		
 		if(!f.exists())
         try {
             Files.createDirectories(pathToFile.getParent());
@@ -82,12 +85,18 @@ public class Player {
             System.out.println(e);
         }
 			
-			Scanner scan = new Scanner(f.getAbsolutePath());
+		
+			Scanner scan = new Scanner(f);
+		
+			
 			while(scan.hasNextLine() ) {
-				if(scan.next()==username) {
+				
+				String[] tokens = scan.nextLine().split(",");
+				if(tokens[0].equals(this.username)) {
 					exists=true;
 				}
 			}
+			scan.close();
 			
 			return exists;
 		
@@ -98,6 +107,7 @@ public class Player {
 	public void forget() {
 		Path pathToFile = Paths.get("GiocoSPACCA/Informazioni_Partite/PLAYERS_REGISTER.csv");
 		File f=new File(pathToFile.toString());
+		
 		if(!f.exists())
         try {
             Files.createDirectories(pathToFile.getParent());
@@ -106,21 +116,28 @@ public class Player {
         catch( IOException e ) {
             System.out.println(e);
         }
-        	
+		
 		try {
 			
-			Scanner scan = new Scanner(f.getAbsolutePath());
-			FileWriter fw = new FileWriter(f.getAbsolutePath(),false);
+			Scanner scan = new Scanner(f);
+			scan.reset();
 			String memory="";
 			
 			while(scan.hasNextLine() ) {
-				if(scan.next()!=username) {
-					memory+=scan.nextLine() +"\n";
+				String riga=scan.nextLine();//NEXTLINE MANDA AVANTI LO SCANNER OGNI VOLTA CHE VIENE CHIAMATA ANCHE PER I CONTROLLI
+				
+				String[] tokens = riga.split(",");
+				if(!tokens[0].equals(this.username)) {
+					memory=memory+riga + "\n";
 				}
 			}
+			
+				scan.close();	
+				
+				FileWriter fw = new FileWriter(f,false);
 				fw.write(memory);
 				fw.close();
-				scan.close();
+			
 			
 		} catch(IOException e) {
 			
