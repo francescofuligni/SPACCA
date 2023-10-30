@@ -25,6 +25,8 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.text.Text;
 import javafx.scene.control.Alert.AlertType;
+import javafx.scene.input.MouseEvent;
+import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
 public class CreateSingleGameController implements Initializable {
@@ -58,6 +60,9 @@ public class CreateSingleGameController implements Initializable {
     
     @FXML
     private Button play;
+    
+    @FXML
+    private Label undoSelection;
     
     
     @FXML
@@ -112,12 +117,16 @@ public class CreateSingleGameController implements Initializable {
 		}	
 	}
 	
-    public void playerSelection(ActionEvent event) {
+    private void playerSelection(ActionEvent event) {
+    	Player player = playersChoiceBox.getValue();
+    	
     	if(playersCounter<maxPlayers) {
-    		addSelectedPlayer(playersChoiceBox.getValue());
-			selectedPlayersLabel.setText(selectedPlayersLabel.getText() + " '" + playersChoiceBox.getValue().getUsername() + "' ");
+			selectedPlayers[playersCounter] = player;
+			playersCounter++;
+
+			selectedPlayersLabel.setText(selectedPlayersLabel.getText() + " '" + player.getUsername() + "' ");
 			botNumber.setText(" --  " + (maxPlayers - playersCounter) + "  -- ");
-			playersChoiceBox.getItems().remove(playersChoiceBox.getValue());
+			playersChoiceBox.getItems().remove(player);
     	} else {
     		Alert selectionAlert = new Alert(AlertType.ERROR);
     		selectionAlert.setTitle("ERRORE!");
@@ -126,16 +135,34 @@ public class CreateSingleGameController implements Initializable {
     	}
     }
     
-    private void addSelectedPlayer(Player p) {
-    	for(int i=0; i<maxPlayers; i++) {
-    		if(selectedPlayers[i] == null) {
-    			selectedPlayers[i] = p;
-    		}
+    
+    @FXML
+    public void undoAction(MouseEvent event) {
+    	if(playersCounter>0) {
+    		playersCounter--;
+        	playersChoiceBox.getItems().add(selectedPlayers[playersCounter]);
+        	selectedPlayers[playersCounter]=null;
+        	
+        	String message = "";
+        	for(int i=0; i<playersCounter; i++) {
+        		message += (" '" + selectedPlayers[i] + "'");
+        	}
+        	selectedPlayersLabel.setText(message);
     	}
-    	playersCounter++;
+    }
+    
+    @FXML
+    public void setColorGrey(MouseEvent event) {
+    	undoSelection.setTextFill(Color.GREY);
+    }
+    
+    @FXML
+    public void setColorWhite(MouseEvent event) {
+    	undoSelection.setTextFill(Color.WHITE);
     }
 	
 	
+    
 	@FXML
 	public void play(ActionEvent event) {		// INCOMPLETO
 	    		

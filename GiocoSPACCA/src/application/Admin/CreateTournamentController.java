@@ -1,5 +1,6 @@
 package application.Admin;
 
+
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
@@ -22,6 +23,8 @@ import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
+import javafx.scene.input.MouseEvent;
+import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
@@ -70,6 +73,9 @@ public class CreateTournamentController implements Initializable  {
    
     @FXML
     private Button play;
+    
+    @FXML
+    private Label undoSelection;
     
 
     @FXML
@@ -124,9 +130,12 @@ public class CreateTournamentController implements Initializable  {
 		}	
     }
     
-    public void playerSelection(ActionEvent event) {
+    private void playerSelection(ActionEvent event) {
+    	
     	if(playersCounter<maxPlayers) {
-    		addSelectedPlayer(playersChoiceBox.getValue());
+			selectedPlayers[playersCounter] = playersChoiceBox.getValue();
+			playersCounter++;
+
 			selectedPlayersLabel.setText(selectedPlayersLabel.getText() + " '" + playersChoiceBox.getValue().getUsername() + "' ");
 			botNumber.setText(" --  " + (maxPlayers - playersCounter) + "  -- ");
 			playersChoiceBox.getItems().remove(playersChoiceBox.getValue());
@@ -138,14 +147,34 @@ public class CreateTournamentController implements Initializable  {
     	}
     }
     
-    private void addSelectedPlayer(Player p) {
-    	for(int i=0; i<maxPlayers; i++)
-    		if(selectedPlayers[i] == null)
-    			selectedPlayers[i] = p;
-    	playersCounter++;
+    
+    @FXML
+    public void undoAction(MouseEvent event) {
+    	if(playersCounter>0) {
+    		playersCounter--;
+        	playersChoiceBox.getItems().add(selectedPlayers[playersCounter]);
+        	selectedPlayers[playersCounter]=null;
+        	
+        	String message = "";
+        	for(int i=0; i<playersCounter; i++) {
+        		message += (" '" + selectedPlayers[i] + "'");
+        	}
+        	selectedPlayersLabel.setText(message);
+    	}
+    }
+    
+    @FXML
+    public void setColorGrey(MouseEvent event) {
+    	undoSelection.setTextFill(Color.GREY);
+    }
+    
+    @FXML
+    public void setColorWhite(MouseEvent event) {
+    	undoSelection.setTextFill(Color.WHITE);
     }
     
 
+    
     @FXML
     void play(ActionEvent event) {		// INCOMPLETO
     	

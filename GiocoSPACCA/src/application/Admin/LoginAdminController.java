@@ -54,9 +54,9 @@ public class LoginAdminController {
 			else {
 				Alert loginError = new Alert(AlertType.ERROR);
 				loginError.setTitle("ERRORE!");
-				loginError.setContentText("Nome admin o password errati: RIPROVARE.");
+				loginError.setContentText("Nome admin o password errati: riprovare.");
 				loginError.showAndWait();
-				loginStatusText.setText("Nome admin o password errati: RIPROVARE.");
+				loginStatusText.setText("Nome admin o password errati: riprovare");
 				loginStatusText.setFill(Color.RED);
 				
 			}

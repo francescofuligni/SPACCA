@@ -73,7 +73,7 @@
             </RadialGradient>
          </fill>
       </Rectangle>
-      <Text fill="WHITE" layoutX="144.0" layoutY="266.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Numero Giocatori" textAlignment="CENTER" wrappingWidth="212.7320556640625">
+      <Text fill="WHITE" layoutX="144.0" layoutY="266.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Numero giocatori" textAlignment="CENTER" wrappingWidth="212.7320556640625">
          <font>
             <Font name="Bodoni MT" size="24.0" />
          </font>
@@ -106,6 +106,9 @@
          <font>
             <Font name="Bodoni MT" size="17.0" />
          </font>
+         <effect>
+            <InnerShadow />
+         </effect>
       </Button>
    </children>
 </AnchorPane>
