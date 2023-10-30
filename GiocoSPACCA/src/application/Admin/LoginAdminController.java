@@ -19,8 +19,8 @@ import javafx.stage.Stage;
 
 public class LoginAdminController {
 	
-	public final String adminPassword = "admin1234";
-	public final String adminName = "admin";
+	public final static String adminPassword = "admin1234";
+	public final static String adminName = "admin";
 	
 	private Stage stage;
 	private Scene scene;
@@ -54,9 +54,9 @@ public class LoginAdminController {
 			else {
 				Alert loginError = new Alert(AlertType.ERROR);
 				loginError.setTitle("ERRORE!");
-				loginError.setContentText("Nome Admin o Password errati, riprovare.");
+				loginError.setContentText("Nome admin o password errati: RIPROVARE.");
 				loginError.showAndWait();
-				loginStatusText.setText("Nome Admin o Password errati, riprovare");
+				loginStatusText.setText("Nome admin o password errati: RIPROVARE.");
 				loginStatusText.setFill(Color.RED);
 				
 			}

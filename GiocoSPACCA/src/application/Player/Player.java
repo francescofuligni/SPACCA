@@ -21,7 +21,7 @@ public class Player {
 	private int currentScore;	
 	private int totalScore;
 	// costruttore 1
-	public Player(String username, boolean status ,int lifePoints,int currentScore) {		
+	public Player(String username, boolean status ,int lifePoints,int currentScore, int totalScore) {		
 		this.status=status;
 		this.username=username;
 		this.lifePoints=lifePoints;
@@ -86,21 +86,17 @@ public class Player {
         }
 			
 		
-			Scanner scan = new Scanner(f);
-		
-			
-			while(scan.hasNextLine() ) {
+		Scanner scan = new Scanner(f);	
+		while(scan.hasNextLine() ) {
 				
-				String[] tokens = scan.nextLine().split(",");
-				if(tokens[0].equals(this.username)) {
-					exists=true;
-				}
+			String[] tokens = scan.nextLine().split(",");
+			if(tokens[0].equals(this.username)) {
+				exists=true;
 			}
-			scan.close();
+		}
+		scan.close();
 			
-			return exists;
-		
-		
+		return exists;
 	}
 	
 	
@@ -124,19 +120,19 @@ public class Player {
 			String memory="";
 			
 			while(scan.hasNextLine() ) {
-				String riga=scan.nextLine();//NEXTLINE MANDA AVANTI LO SCANNER OGNI VOLTA CHE VIENE CHIAMATA ANCHE PER I CONTROLLI
+				String line=scan.nextLine();			// NEXTLINE MANDA AVANTI LO SCANNER OGNI VOLTA CHE VIENE CHIAMATA ANCHE PER I CONTROLLI
 				
-				String[] tokens = riga.split(",");
+				String[] tokens = line.split(",");
 				if(!tokens[0].equals(this.username)) {
-					memory=memory+riga + "\n";
+					memory=memory+line + "\n";
 				}
 			}
 			
-				scan.close();	
+			scan.close();	
 				
-				FileWriter fw = new FileWriter(f,false);
-				fw.write(memory);
-				fw.close();
+			FileWriter fw = new FileWriter(f,false);
+			fw.write(memory);
+			fw.close();
 			
 			
 		} catch(IOException e) {
@@ -178,5 +174,10 @@ public class Player {
 	
 	public int getCurrentScore() {
 		return currentScore;
+	}
+	
+	// metodo toString
+	public String toString() {
+		return username;
 	}
 }
