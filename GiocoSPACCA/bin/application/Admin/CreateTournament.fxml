@@ -175,7 +175,7 @@
       <ChoiceBox fx:id="playersChoiceBox" layoutX="376.0" layoutY="400.0" prefHeight="26.0" prefWidth="124.0" />
       <Label alignment="CENTER" layoutX="246.0" layoutY="446.0" prefHeight="17.0" prefWidth="161.0" text="Giocatori scelti:" textAlignment="CENTER" textFill="WHITE" />
       <Label fx:id="selectedPlayersLabel" alignment="CENTER" layoutY="463.0" prefHeight="17.0" prefWidth="668.0" textAlignment="CENTER" textFill="WHITE" />
-      <Label fx:id="undoSelection" layoutX="535.0" layoutY="406.0" onMouseClicked="#undoAction" text="Annulla" textFill="WHITE">
+      <Label fx:id="undoSelection" layoutX="535.0" layoutY="406.0" onMouseClicked="#undoAction" onMousePressed="#setColorGrey" onMouseReleased="#setColorWhite" text="Annulla" textFill="WHITE">
          <font>
             <Font name="System Bold" size="13.0" />
          </font>

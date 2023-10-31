@@ -126,6 +126,10 @@ public class CreateTournamentController implements Initializable  {
 			scan.close();	
 			
 		} catch(IOException e) {
+			Alert alert = new Alert(AlertType.INFORMATION);
+			alert.setTitle("ATTENZIONE");
+			alert.setHeaderText("Non è stato ancora salvato alcun giocatore");
+			alert.setContentText("Sarà solamente possibile creare un torneo tra Bot");
 			e.printStackTrace();
 		}	
     }

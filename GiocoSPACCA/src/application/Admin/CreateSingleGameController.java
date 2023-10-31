@@ -89,7 +89,7 @@ public class CreateSingleGameController implements Initializable {
 	
 	 
 	private void getPlayersFromFile() {			// popola l'ArrayList allPlayers con i giocatori memorizzati su file
-	    Path pathToFile = Paths.get("GiocoSPACCA/Informazioni_Partite/PLAYERS_REGISTER.csv");
+		Path pathToFile = Paths.get("GiocoSPACCA/Informazioni_Partite/PLAYERS_REGISTER.csv");
 		File f=new File(pathToFile.toString());
 			
 		try {
@@ -113,6 +113,10 @@ public class CreateSingleGameController implements Initializable {
 			scan.close();	
 			
 		} catch(IOException e) {
+			Alert alert = new Alert(AlertType.INFORMATION);
+			alert.setTitle("ATTENZIONE");
+			alert.setHeaderText("Non è stato ancora salvato alcun giocatore");
+			alert.setContentText("Sarà solamente possibile creare una partita tra Bot");
 			e.printStackTrace();
 		}	
 	}
