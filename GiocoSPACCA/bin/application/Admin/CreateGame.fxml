@@ -66,5 +66,13 @@
             <InnerShadow />
          </effect>
       </Button>
+      <Button fx:id="logoutButton" layoutX="592.0" layoutY="560.0" mnemonicParsing="false" onAction="#logout" text="Logout">
+         <font>
+            <Font name="Bodoni MT" size="14.0" />
+         </font>
+         <effect>
+            <InnerShadow />
+         </effect>
+      </Button>
    </children>
 </AnchorPane>
