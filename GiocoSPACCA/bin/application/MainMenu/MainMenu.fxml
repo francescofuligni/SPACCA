@@ -17,28 +17,28 @@
          </image>
       </ImageView>
       <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#332000" height="400.0" layoutX="400.0" layoutY="200.0" stroke="WHITE" strokeLineJoin="ROUND" strokeType="INSIDE" strokeWidth="3.0" width="400.0" />
-      <Text fill="WHITE" fontSmoothingType="LCD" layoutX="470.0" layoutY="291.0" strokeLineCap="ROUND" strokeLineJoin="ROUND" strokeType="OUTSIDE" strokeWidth="0.0" text="S.P.A.C.C.A." textAlignment="CENTER" wrappingWidth="260.5367431640625">
+      <Text fill="WHITE" fontSmoothingType="LCD" layoutX="463.0" layoutY="296.0" strokeLineCap="ROUND" strokeLineJoin="ROUND" strokeType="OUTSIDE" strokeWidth="0.0" text="S.P.A.C.C.A." textAlignment="CENTER" wrappingWidth="275.5367431640625">
          <font>
             <Font name="Bodoni MT" size="50.0" />
          </font>
       </Text>
-      <Button fx:id="playButton" alignment="CENTER" contentDisplay="CENTER" layoutX="500.0" layoutY="340.0" mnemonicParsing="false" onAction="#enterGame" prefHeight="60.0" prefWidth="200.0" text="Gioca!" textAlignment="CENTER">
+      <Button fx:id="playButton" alignment="CENTER" contentDisplay="CENTER" layoutX="500.0" layoutY="340.0" mnemonicParsing="false" onAction="#enterGame" prefHeight="60.0" prefWidth="200.0" text="GIOCA!" textAlignment="CENTER">
          <font>
             <Font name="Bodoni MT" size="26.0" />
          </font>
          <effect>
             <InnerShadow />
          </effect></Button>
-      <Button fx:id="createGameButton" alignment="CENTER" contentDisplay="CENTER" layoutX="500.0" layoutY="423.0" mnemonicParsing="false" onAction="#switchToAdminLogin" prefHeight="60.0" prefWidth="200.0" text="Login Admin" textAlignment="CENTER">
+      <Button fx:id="createGameButton" alignment="CENTER" contentDisplay="CENTER" layoutX="500.0" layoutY="422.0" mnemonicParsing="false" onAction="#switchToAdminLogin" prefHeight="60.0" prefWidth="200.0" text="Login Admin" textAlignment="CENTER">
          <font>
             <Font name="Bodoni MT" size="26.0" />
          </font>
          <effect>
             <InnerShadow />
          </effect></Button>
-      <Button fx:id="creditiButton" alignment="CENTER" contentDisplay="CENTER" layoutX="500.0" layoutY="503.0" mnemonicParsing="false" onAction="#switchToCredits" prefHeight="60.0" prefWidth="200.0" text="Crediti" textAlignment="CENTER">
+      <Button fx:id="creditiButton" alignment="CENTER" contentDisplay="CENTER" layoutX="538.0" layoutY="505.0" mnemonicParsing="false" onAction="#switchToCredits" prefHeight="0.0" prefWidth="125.0" text="Crediti" textAlignment="CENTER">
          <font>
-            <Font name="Bodoni MT" size="26.0" />
+            <Font name="Bodoni MT" size="18.0" />
          </font>
          <effect>
             <InnerShadow />

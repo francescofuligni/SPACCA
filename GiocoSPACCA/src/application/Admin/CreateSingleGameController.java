@@ -22,7 +22,6 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
 import javafx.scene.text.Text;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.input.MouseEvent;
@@ -96,7 +95,7 @@ public class CreateSingleGameController implements Initializable {
 			Scanner scan = new Scanner(f);
 			scan.reset();
 				
-			while(scan.hasNextLine() ) {
+			while(scan.hasNextLine() ) {				// aggiunge i giocatori all'arraylist allPlayers
 				String line=scan.nextLine();
 				String[] tokens = line.split(",");
 				
@@ -115,7 +114,7 @@ public class CreateSingleGameController implements Initializable {
 		} catch(IOException e) {
 			Alert alert = new Alert(AlertType.INFORMATION);
 			alert.setTitle("ATTENZIONE");
-			alert.setHeaderText("Non è stato ancora salvato alcun giocatore");
+			alert.setHeaderText("Non è stato ancora creato alcun giocatore");
 			alert.setContentText("Sarà solamente possibile creare una partita tra Bot");
 			e.printStackTrace();
 		}	
@@ -124,18 +123,19 @@ public class CreateSingleGameController implements Initializable {
     private void playerSelection(ActionEvent event) {
     	Player player = playersChoiceBox.getValue();
     	
-    	if(playersCounter<maxPlayers) {
-			selectedPlayers[playersCounter] = player;
+    	if(playersCounter >= maxPlayers && playersChoiceBox.getItems().size()!=0){
+    		Alert selectionAlert = new Alert(AlertType.ERROR);
+    		selectionAlert.setTitle("ERRORE!");
+    		selectionAlert.setContentText("Numero massimo di giocatori inseribili raggiunto");
+    		selectionAlert.showAndWait();
+    	}
+    	if(playersCounter < maxPlayers){
+    		selectedPlayers[playersCounter] = player;
 			playersCounter++;
 
 			selectedPlayersLabel.setText(selectedPlayersLabel.getText() + " '" + player.getUsername() + "' ");
 			botNumber.setText(" --  " + (maxPlayers - playersCounter) + "  -- ");
 			playersChoiceBox.getItems().remove(player);
-    	} else {
-    		Alert selectionAlert = new Alert(AlertType.ERROR);
-    		selectionAlert.setTitle("ERRORE!");
-    		selectionAlert.setContentText("Numero massimo di giocatori inseribili raggiunto");
-    		selectionAlert.showAndWait();
     	}
     }
     

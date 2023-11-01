@@ -45,13 +45,6 @@ public class CreateTournamentController implements Initializable  {
 	
 	private Player[] selectedPlayers = new Player[maxPlayers];
 	private ArrayList<Player> allPlayers = new ArrayList<>();
-
-	
-    //@FXML
-    //private Button addPlayerButton;
-	
-	//@FXML
-	//private TextField userNamespace;
 	
 	@FXML
 	private Text botNumber;
@@ -109,7 +102,7 @@ public class CreateTournamentController implements Initializable  {
 			Scanner scan = new Scanner(f);
 			scan.reset();
 			
-			while(scan.hasNextLine() ) {
+			while(scan.hasNextLine() ) {				// aggiunge i giocatori all'arraylist allPlayers
 				String line=scan.nextLine();
 				String[] tokens = line.split(",");
 				
@@ -128,26 +121,28 @@ public class CreateTournamentController implements Initializable  {
 		} catch(IOException e) {
 			Alert alert = new Alert(AlertType.INFORMATION);
 			alert.setTitle("ATTENZIONE");
-			alert.setHeaderText("Non è stato ancora salvato alcun giocatore");
+			alert.setHeaderText("Non è stato ancora creato alcun giocatore");
 			alert.setContentText("Sarà solamente possibile creare un torneo tra Bot");
 			e.printStackTrace();
 		}	
     }
     
     private void playerSelection(ActionEvent event) {
+    	Player player = playersChoiceBox.getValue();
     	
-    	if(playersCounter<maxPlayers) {
-			selectedPlayers[playersCounter] = playersChoiceBox.getValue();
-			playersCounter++;
-
-			selectedPlayersLabel.setText(selectedPlayersLabel.getText() + " '" + playersChoiceBox.getValue().getUsername() + "' ");
-			botNumber.setText(" --  " + (maxPlayers - playersCounter) + "  -- ");
-			playersChoiceBox.getItems().remove(playersChoiceBox.getValue());
-    	} else {
+    	if(playersCounter >= maxPlayers && playersChoiceBox.getItems().size()!=0){
     		Alert selectionAlert = new Alert(AlertType.ERROR);
     		selectionAlert.setTitle("ERRORE!");
     		selectionAlert.setContentText("Numero massimo di giocatori inseribili raggiunto");
     		selectionAlert.showAndWait();
+    	}
+    	if(playersCounter < maxPlayers){
+    		selectedPlayers[playersCounter] = player;
+			playersCounter++;
+
+			selectedPlayersLabel.setText(selectedPlayersLabel.getText() + " '" + player.getUsername() + "' ");
+			botNumber.setText(" --  " + (maxPlayers - playersCounter) + "  -- ");
+			playersChoiceBox.getItems().remove(player);
     	}
     }
     
@@ -187,7 +182,7 @@ public class CreateTournamentController implements Initializable  {
     		code = code + (int)Math.random()*10;					// TO-DO: controllare che il codice generato non sia già presente
     	}
     		
-    	TournamentOBJ NuovoTorneo = new TournamentOBJ(tournamentMode.getValue(),chooseDifficulty.getValue(),selectedPlayers,code);
+    	new TournamentOBJ(tournamentMode.getValue(),chooseDifficulty.getValue(),selectedPlayers,code);
     	
     	
     	
