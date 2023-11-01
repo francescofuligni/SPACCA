@@ -159,6 +159,7 @@ public class CreateTournamentController implements Initializable  {
         		message += (" '" + selectedPlayers[i] + "'");
         	}
         	selectedPlayersLabel.setText(message);
+        	botNumber.setText(" --  " + (maxPlayers - playersCounter) + "  -- ");
     	}
     }
     

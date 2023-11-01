@@ -152,6 +152,7 @@ public class CreateSingleGameController implements Initializable {
         		message += (" '" + selectedPlayers[i] + "'");
         	}
         	selectedPlayersLabel.setText(message);
+        	botNumber.setText(" --  " + (maxPlayers - playersCounter) + "  -- ");
     	}
     }
     

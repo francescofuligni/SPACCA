@@ -2,7 +2,6 @@ package application.SingleGame;
 
 
 import application.Admin.BOTDIFF;
-import application.Admin.CreateSingleGameController;
 import application.Player.Player;
 
 public class SingleGame {
