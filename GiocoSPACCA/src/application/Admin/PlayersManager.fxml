@@ -37,30 +37,30 @@
             </RadialGradient>
          </fill>
       </Rectangle>
-      <Text fill="WHITE" layoutX="16.0" layoutY="119.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Gestisci giocatori" x="189.0">
+      <Text fill="WHITE" layoutX="22.0" layoutY="119.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Gestisci giocatori" x="189.0">
          <font>
             <Font name="Bodoni MT" size="36.0" />
          </font>
       </Text>
-      <Button fx:id="backButton" layoutX="239.0" layoutY="457.0" mnemonicParsing="false" onAction="#back" prefHeight="50.0" prefWidth="200.0" text="Indietro">
+      <Button fx:id="backButton" layoutX="233.0" layoutY="456.0" mnemonicParsing="false" onAction="#back" prefHeight="50.0" prefWidth="213.0" text="Indietro">
          <font>
-            <Font name="Bodoni MT" size="20.0" />
+            <Font name="Bodoni MT" size="24.0" />
          </font>
          <effect>
             <InnerShadow />
          </effect>
       </Button>
-      <Button fx:id="newPlayerButton" layoutX="239.0" layoutY="205.0" mnemonicParsing="false" onAction="#newPlayer" prefHeight="50.0" prefWidth="200.0" text="Crea giocatori">
+      <Button fx:id="newPlayerButton" layoutX="233.0" layoutY="204.0" mnemonicParsing="false" onAction="#newPlayer" prefHeight="50.0" prefWidth="213.0" text="Crea giocatori">
          <font>
-            <Font name="Bodoni MT" size="20.0" />
+            <Font name="Bodoni MT" size="24.0" />
          </font>
          <effect>
             <InnerShadow />
          </effect>
       </Button>
-      <Button fx:id="deletePlayerButton" layoutX="239.0" layoutY="275.0" mnemonicParsing="false" onAction="#deletePlayer" prefHeight="51.0" prefWidth="200.0" text="Elimina giocatori">
+      <Button fx:id="deletePlayerButton" layoutX="233.0" layoutY="275.0" mnemonicParsing="false" onAction="#deletePlayer" prefHeight="51.0" prefWidth="213.0" text="Elimina giocatori">
          <font>
-            <Font name="Bodoni MT" size="20.0" />
+            <Font name="Bodoni MT" size="24.0" />
          </font>
          <effect>
             <InnerShadow />

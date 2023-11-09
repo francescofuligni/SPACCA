@@ -18,7 +18,7 @@ public class Main extends Application {
 	public void start(Stage primaryStage) throws Exception {
 		try {
 			
-			/*Utilizza Main.class e recupera le risorse 
+			 /*Utilizza Main.class e recupera le risorse 
 			 * dalla cartella direttamente (non mettere 
 			 * tutto il percorso ma solo quelli successivi ad application)
 			 */
@@ -34,8 +34,7 @@ public class Main extends Application {
 	        primaryStage.setFullScreen(false);
 			primaryStage.show();
 			
-			
-			
+
 		} catch(Exception e) {
 			e.printStackTrace();
 		}

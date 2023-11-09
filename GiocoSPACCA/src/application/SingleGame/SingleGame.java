@@ -1,21 +1,20 @@
 package application.SingleGame;
 
-import java.util.ArrayList;
 
 import application.Admin.BOTDIFF;
 import application.Player.Player;
 
 public class SingleGame {
-	protected int PlayerNumber;
-	protected BOTDIFF Difficulty;
-	protected ArrayList<Player> Players;
-	protected String Codice;
+	protected int playersNumber;
+	protected BOTDIFF difficulty;
+	protected Player[] players;
+	protected String code;
 	
-	public SingleGame (int PlayerNumber,BOTDIFF Difficulty,ArrayList<Player> Players, String Codice) {
-		this.PlayerNumber=PlayerNumber;
-		this.Difficulty=Difficulty;
-		this.Players=Players;
-		this.Codice=Codice;
+	public SingleGame (int playersNumber, BOTDIFF difficulty,Player[] players, String code) {
+		this.difficulty=difficulty;
+		this.players=players;
+		this.code=code;
+		this.playersNumber = playersNumber;
 		
 	}
 }
