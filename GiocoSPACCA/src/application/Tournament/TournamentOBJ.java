@@ -4,16 +4,16 @@ import application.Admin.GAMEMODE;
 import application.Player.Player;
 
 public class TournamentOBJ {
-	protected GAMEMODE Mode;
-	protected BOTDIFF Difficulty;
-	protected Player[] Giocatori;
-	protected String Codice;
+	protected GAMEMODE mode;
+	protected BOTDIFF difficulty;
+	protected Player[] players;
+	protected String code;
 	
-	public TournamentOBJ (GAMEMODE Mode,BOTDIFF Difficulty,Player[] Giocatori, String Codice) {
-		this.Mode=Mode;
-		this.Difficulty=Difficulty;
-		this.Giocatori=Giocatori;
-		this.Codice=Codice;
+	public TournamentOBJ (GAMEMODE mode,BOTDIFF difficulty,Player[] players, String code) {
+		this.mode=mode;
+		this.difficulty=difficulty;
+		this.players=players;
+		this.code=code;
 		
 	}
 }

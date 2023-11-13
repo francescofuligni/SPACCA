@@ -44,7 +44,7 @@
       </Text>
       <Button fx:id="createTournamentButton" layoutX="219.0" layoutY="275.0" mnemonicParsing="false" onAction="#createTournament" prefHeight="50.0" prefWidth="230.0" text="Torneo" textAlignment="CENTER">
          <font>
-            <Font name="Bodoni MT" size="26.0" />
+            <Font name="Bodoni MT" size="24.0" />
          </font>
          <effect>
             <InnerShadow />
@@ -52,7 +52,7 @@
       </Button>
       <Button fx:id="createSingleGameButton" layoutX="219.0" layoutY="182.0" mnemonicParsing="false" onAction="#createSingleGame" prefHeight="50.0" prefWidth="230.0" text="Partita singola" textAlignment="CENTER">
          <font>
-            <Font name="Bodoni MT" size="26.0" />
+            <Font name="Bodoni MT" size="24.0" />
          </font>
          <effect>
             <InnerShadow />
@@ -60,7 +60,15 @@
       </Button>
       <Button fx:id="managePlayersButton" layoutX="218.0" layoutY="366.0" mnemonicParsing="false" onAction="#managePlayers" prefHeight="50.0" prefWidth="230.0" text="Gestisci giocatori" textAlignment="CENTER">
          <font>
-            <Font name="Bodoni MT" size="26.0" />
+            <Font name="Bodoni MT" size="24.0" />
+         </font>
+         <effect>
+            <InnerShadow />
+         </effect>
+      </Button>
+      <Button fx:id="logoutButton" layoutX="592.0" layoutY="560.0" mnemonicParsing="false" onAction="#logout" text="Logout">
+         <font>
+            <Font name="Bodoni MT" size="14.0" />
          </font>
          <effect>
             <InnerShadow />

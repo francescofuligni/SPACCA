@@ -2,7 +2,7 @@
 
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ChoiceBox?>
-<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.Label?>
 <?import javafx.scene.effect.InnerShadow?>
 <?import javafx.scene.effect.Light.Distant?>
 <?import javafx.scene.effect.Lighting?>
@@ -34,7 +34,7 @@
             </Lighting>
          </effect>
       </ImageView>
-      <Rectangle arcHeight="5.0" arcWidth="5.0" height="74.0" layoutX="187.0" layoutY="67.0" stroke="WHITE" strokeLineCap="ROUND" strokeType="INSIDE" width="294.0">
+      <Rectangle arcHeight="5.0" arcWidth="5.0" height="74.0" layoutX="151.0" layoutY="67.0" stroke="WHITE" strokeLineCap="ROUND" strokeType="INSIDE" width="368.0">
          <fill>
             <RadialGradient centerX="0.5" centerY="0.5" radius="0.5">
                <stops>
@@ -52,9 +52,9 @@
             </RadialGradient>
          </fill>
       </Rectangle>
-      <Text fill="WHITE" layoutX="220.0" layoutY="111.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Crea PARTITA SINGOLA">
+      <Text fill="WHITE" layoutX="197.0" layoutY="111.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Crea PARTITA SINGOLA">
          <font>
-            <Font name="Bodoni MT" size="20.0" />
+            <Font name="Bodoni MT" size="24.0" />
          </font>
       </Text>
       <Rectangle arcHeight="5.0" arcWidth="5.0" height="52.0" layoutX="187.0" layoutY="184.0" stroke="WHITE" strokeLineCap="ROUND" strokeType="INSIDE" width="294.0">
@@ -93,13 +93,13 @@
             </RadialGradient>
          </fill>
       </Rectangle>
-      <ChoiceBox fx:id="chooseDifficulty" layoutX="319.0" layoutY="261.0" prefWidth="150.0" />
-      <Text fill="WHITE" layoutX="197.0" layoutY="278.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Difficoltà Bot" wrappingWidth="123.7320556640625">
+      <ChoiceBox fx:id="chooseDifficulty" layoutX="345.0" layoutY="261.0" prefHeight="26.0" prefWidth="124.0" />
+      <Text fill="WHITE" layoutX="197.0" layoutY="279.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Difficoltà Bot" textAlignment="CENTER" wrappingWidth="123.7320556640625">
          <font>
-            <Font name="Bodoni MT" size="20.0" />
+            <Font name="Bodoni MT" size="18.0" />
          </font>
       </Text>
-      <Rectangle arcHeight="5.0" arcWidth="5.0" height="90.0" layoutX="150.0" layoutY="316.0" stroke="WHITE" strokeLineCap="ROUND" strokeType="INSIDE" width="368.0">
+      <Rectangle arcHeight="5.0" arcWidth="5.0" height="52.0" layoutX="187.0" layoutY="323.0" stroke="WHITE" strokeLineCap="ROUND" strokeType="INSIDE" width="294.0">
          <fill>
             <RadialGradient centerX="0.5" centerY="0.5" radius="0.5">
                <stops>
@@ -117,25 +117,11 @@
             </RadialGradient>
          </fill>
       </Rectangle>
-      <Text fill="WHITE" layoutX="164.0" layoutY="368.0" strokeType="OUTSIDE" strokeWidth="0.0" text="(inserire username e confermare)" textAlignment="CENTER" wrappingWidth="150.39999999999986">
+      <Text fill="WHITE" layoutX="201.0" layoutY="353.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Scegli giocatori" textAlignment="CENTER" wrappingWidth="123.7320556640625">
          <font>
-            <Font name="System Bold" size="12.0" />
+            <Font name="Bodoni MT" size="18.0" />
          </font>
       </Text>
-      <TextField fx:id="userNamespace" layoutX="329.0" layoutY="334.0" prefHeight="26.0" prefWidth="174.0" />
-      <Text fill="WHITE" layoutX="157.0" layoutY="353.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Aggiungi giocatore" textAlignment="CENTER" wrappingWidth="163.39999999999986">
-         <font>
-            <Font name="Bodoni MT" size="20.0" />
-         </font>
-      </Text>
-      <Button fx:id="addPlayerButton" layoutX="370.0" layoutY="369.0" mnemonicParsing="false" onAction="#addPlayer" prefHeight="26.0" prefWidth="92.0" text="Aggiungi">
-         <effect>
-            <InnerShadow />
-         </effect>
-         <font>
-            <Font name="Bodoni MT" size="16.0" />
-         </font>
-      </Button>
       <Button fx:id="returnToCreateGameButton" layoutX="564.0" layoutY="553.0" mnemonicParsing="false" onAction="#returnToCreateGame" text=" Indietro ">
          <font>
             <Font name="Bodoni MT" size="17.0" />
@@ -144,7 +130,7 @@
             <InnerShadow />
          </effect>
       </Button>
-      <Button fx:id="create" layoutX="253.0" layoutY="460.0" mnemonicParsing="false" onAction="#create" prefHeight="52.0" prefWidth="163.0" text="Crea Partita">
+      <Button fx:id="play" layoutX="253.0" layoutY="460.0" mnemonicParsing="false" onAction="#play" prefHeight="52.0" prefWidth="163.0" text="GIOCA!">
          <effect>
             <InnerShadow />
          </effect>
@@ -152,15 +138,29 @@
             <Font name="Bodoni MT" size="20.0" />
          </font>
       </Button>
-      <Text fill="WHITE" layoutX="201.0" layoutY="214.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Numero Bot:" wrappingWidth="123.7320556640625">
+      <Text fill="WHITE" layoutX="201.0" layoutY="215.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Numero Bot" textAlignment="CENTER" wrappingWidth="123.7320556640625">
          <font>
-            <Font name="Bodoni MT" size="20.0" />
+            <Font name="Bodoni MT" size="18.0" />
          </font>
       </Text>
       <Text fx:id="botNumber" fill="WHITE" layoutX="332.0" layoutY="217.0" strokeType="OUTSIDE" strokeWidth="0.0" text="NUMBER" textAlignment="CENTER" wrappingWidth="123.7320556640625">
          <font>
-            <Font name="Bodoni MT" size="24.0" />
+            <Font name="Bodoni MT" size="20.0" />
          </font>
       </Text>
+      <ChoiceBox fx:id="playersChoiceBox" layoutX="345.0" layoutY="334.0" prefHeight="26.0" prefWidth="124.0" />
+      <Label layoutX="279.0" layoutY="382.0" text="Giocatori selezionati:" textFill="WHITE">
+         <font>
+            <Font size="14.0" />
+         </font></Label>
+      <Label fx:id="selectedPlayersLabel" alignment="CENTER" layoutX="1.0" layoutY="399.0" prefHeight="17.0" prefWidth="668.0" textAlignment="CENTER" textFill="WHITE">
+         <font>
+            <Font size="14.0" />
+         </font></Label>
+      <Label fx:id="undoSelection" layoutX="499.0" layoutY="341.0" onMouseClicked="#undoAction" onMousePressed="#setColorGrey" onMouseReleased="#setColorWhite" text="Annulla" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="13.0" />
+         </font>
+      </Label>
    </children>
 </AnchorPane>

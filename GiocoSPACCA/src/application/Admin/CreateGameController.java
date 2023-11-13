@@ -1,6 +1,8 @@
 package application.Admin;
 
 import java.io.IOException;
+
+import application.MainMenu.MainMenuController;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -23,6 +25,9 @@ public class CreateGameController {
     
     @FXML
     private Button managePlayersButton;
+    
+    @FXML
+    private Button logoutButton;
 
     @FXML
     public void createSingleGame(ActionEvent event) throws IOException {
@@ -52,6 +57,17 @@ public class CreateGameController {
 		stage = (Stage)(managePlayersButton.getScene().getWindow());
 		  //IMPORTANTE RICORDA IL ../ nell'URL DEL FXML
 		  FXMLLoader Loader=new FXMLLoader(PlayersManagerController.class.getResource("../Admin/PlayersManager.fxml"));
+		  root = (Parent) Loader.load();
+		  scene = new Scene(root);
+		  stage.setScene(scene);
+		  stage.show();
+    }
+	
+	@FXML
+	public void logout(ActionEvent event) throws IOException {
+    	stage = (Stage)(logoutButton.getScene().getWindow());
+		  //IMPORTANTE RICORDA IL ../ nell'URL DEL FXML
+    	  FXMLLoader Loader=new FXMLLoader(MainMenuController.class.getResource("MainMenu.fxml"));
 		  root = (Parent) Loader.load();
 		  scene = new Scene(root);
 		  stage.setScene(scene);
