@@ -4,6 +4,7 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ListView?>
 <?import javafx.scene.control.ProgressBar?>
+<?import javafx.scene.effect.InnerShadow?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -51,7 +52,10 @@
             </Pane>
          </children>
       </HBox>
-      <ProgressBar fx:id="lifeBar" layoutX="342.0" layoutY="485.0" prefHeight="18.0" prefWidth="246.0" progress="0.69" />
+      <ProgressBar fx:id="lifeBar" layoutX="342.0" layoutY="485.0" prefHeight="18.0" prefWidth="246.0" progress="0.69">
+         <effect>
+            <InnerShadow />
+         </effect></ProgressBar>
       <Label fx:id="lifePoints" layoutX="609.0" layoutY="480.0" text="21 PS" textAlignment="CENTER" textFill="WHITE">
          <font>
             <Font name="Britannic Bold" size="20.0" />
@@ -61,6 +65,17 @@
          <font>
             <Font name="Britannic Bold" size="17.0" />
          </font>
+         <effect>
+            <InnerShadow />
+         </effect>
+      </Button>
+      <Button layoutX="1116.0" layoutY="93.0" mnemonicParsing="false" prefHeight="32.0" prefWidth="127.0" text="Regole">
+         <font>
+            <Font name="Britannic Bold" size="17.0" />
+         </font>
+         <effect>
+            <InnerShadow />
+         </effect>
       </Button>
    </children>
 </AnchorPane>

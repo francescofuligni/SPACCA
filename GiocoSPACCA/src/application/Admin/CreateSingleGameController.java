@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 import application.Player.Player;
+import application.SingleGame.Board2PlayersController;
 import application.SingleGame.SingleGame;
 
 import javafx.event.ActionEvent;
@@ -56,6 +57,7 @@ public class CreateSingleGameController implements Initializable {
     
     @FXML
     private Button create;
+    
     
     @FXML
     public void addPlayer(ActionEvent event) {
@@ -109,6 +111,8 @@ public class CreateSingleGameController implements Initializable {
     }
     }
     
+    
+    
     @FXML
     public void returnToCreateGame(ActionEvent event) throws IOException {
     	stage = (Stage)(returnToCreateGameButton.getScene().getWindow());
@@ -119,8 +123,8 @@ public class CreateSingleGameController implements Initializable {
 		  stage.setScene(scene);
 		  stage.show();
     }
-
-
+    
+   
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
 
@@ -143,6 +147,4 @@ public class CreateSingleGameController implements Initializable {
 	    		
 	    		
 	    }
-
-
 }

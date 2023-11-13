@@ -4,6 +4,7 @@ import application.Player.Player;
 
 public abstract class Card {
 
+
 	private int code;
 	
 	public Card(int c) {
@@ -11,4 +12,5 @@ public abstract class Card {
 	}
 	
 	public abstract void effect(Player p);
+	
 }

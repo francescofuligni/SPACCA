@@ -4,6 +4,7 @@ import application.Player.Player;
 
 public class Ammutinamento extends Card{
 
+
 	public Ammutinamento(int c) {
 		super(c);
 	}
@@ -12,4 +13,5 @@ public class Ammutinamento extends Card{
 	public void effect(Player p) {
 	 //
 	}
+
 }
