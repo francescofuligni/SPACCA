@@ -2,7 +2,7 @@ package application.Card;
 
 import application.Player.Player;
 
-public class NormalCard extends Card { //ABSTRACT PERCHE DOBBIAMO DIFFERENZIARE LE CARTE NORMALI DA QUELLE SPECIALI
+public class NormalCard extends Card { 
 	private int damage;
 
 	public NormalCard(int damage, int code) { 

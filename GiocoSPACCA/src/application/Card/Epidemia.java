@@ -10,7 +10,7 @@ package application.Card;
 		
 		@Override
 		public void effect(Player p) {
-		 //
+		 
 		}
 	}
 

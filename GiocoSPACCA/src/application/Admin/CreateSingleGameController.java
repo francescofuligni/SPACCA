@@ -5,7 +5,7 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 
-import application.Player.Player;
+import application.Player.*;
 import application.SingleGame.Board2PlayersController;
 import application.SingleGame.SingleGame;
 
@@ -35,6 +35,7 @@ public class CreateSingleGameController implements Initializable {
 	private final Integer MAX = SelectPlayerNumberSGController.playerNumber;
 	private BOTDIFF[] diff= {BOTDIFF.FACILE,BOTDIFF.DIFFICILE};
 	private  ArrayList<Player> players = new ArrayList<Player>();
+	private PlayerList list;
 	
 	
 	
@@ -141,10 +142,17 @@ public class CreateSingleGameController implements Initializable {
 	    			Code= Code + (int)Math.random()*10;
 	    		}
 	    		
-	    		new SingleGame(MAX,chooseDifficulty.getValue(),players,Code);
+	    	if(players.size()==2) 
+	    		 list = new PlayerList(players.get(0),players.get(1));
+	    	else if(players.size()==3)
+	    		list = new PlayerList(players.get(0),players.get(1),players.get(2));
+	    	else
+	    		list=new PlayerList(players.get(0),players.get(1),players.get(2), players.get(3));
+	    	
 	    		
+	    	
 	    		
-	    		
-	    		
+	    		new SingleGame(MAX,chooseDifficulty.getValue(),list,Code);
+	
 	    }
 }

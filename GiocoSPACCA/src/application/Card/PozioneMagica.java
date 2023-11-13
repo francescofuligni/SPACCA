@@ -4,12 +4,14 @@ import application.Player.Player;
 
 public class PozioneMagica extends Card{
 
+	private boolean flag = false;
+	
 	public PozioneMagica(int c) {
 		super(c);
 	}
 	
 	@Override
 	public void effect(Player p) {
-	 //
+	 
 	}
 }

@@ -4,18 +4,19 @@ import java.util.ArrayList;
 
 import application.Admin.BOTDIFF;
 import application.Player.Player;
+import application.Player.PlayerList;
 
 public class SingleGame {
 	protected int PlayerNumber;
 	protected BOTDIFF Difficulty;
-	protected ArrayList<Player> Players;
-	protected String Codice;
+	protected PlayerList players;
+	protected String codice;
 	
-	public SingleGame (int PlayerNumber,BOTDIFF Difficulty,ArrayList<Player> Players, String Codice) {
+	public SingleGame (int PlayerNumber,BOTDIFF Difficulty,PlayerList players, String codice) {
 		this.PlayerNumber=PlayerNumber;
 		this.Difficulty=Difficulty;
-		this.Players=Players;
-		this.Codice=Codice;
+		this.players=players;
+		this.codice=codice;
 		
 	}
 	

@@ -11,7 +11,7 @@ public class Ammutinamento extends Card{
 	
 	@Override
 	public void effect(Player p) {
-	 //
+	 p.setLifePoints(p.getLifePoints() - 5);  //nella classe in cui sarà chiamato questo metodo il paramentro sarò CurrentPlayer
 	}
 
 }
