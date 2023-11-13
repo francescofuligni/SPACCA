@@ -134,7 +134,7 @@ public class CreateTournamentController implements Initializable  {
     	
     	
     		
-    		String Code="";
+    		String Code="T";
     		for(int i=0;i<7;i++) {
     			Code= Code + (int)Math.random()*10;
     		}

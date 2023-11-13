@@ -137,7 +137,7 @@ public class CreateSingleGameController implements Initializable {
 	 @FXML
 	public void create(ActionEvent event) {	    	
 	    		
-	    		String Code="";
+	    		String Code="S";
 	    		for(int i=0;i<7;i++) {
 	    			Code= Code + (int)Math.random()*10;
 	    		}
