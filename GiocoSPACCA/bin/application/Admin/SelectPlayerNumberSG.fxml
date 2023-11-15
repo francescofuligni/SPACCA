@@ -50,7 +50,7 @@
             </RadialGradient>
          </fill>
       </Rectangle>
-      <Text fill="WHITE" layoutX="197.0" layoutY="111.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Configura PARTITA SINGOLA">
+      <Text fill="WHITE" layoutX="200.0" layoutY="112.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Configura PARTITA SINGOLA">
          <font>
             <Font name="Bodoni MT" size="20.0" />
          </font>
@@ -73,7 +73,7 @@
             </RadialGradient>
          </fill>
       </Rectangle>
-      <Text fill="WHITE" layoutX="144.0" layoutY="266.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Numero Giocatori" textAlignment="CENTER" wrappingWidth="212.7320556640625">
+      <Text fill="WHITE" layoutX="144.0" layoutY="266.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Numero giocatori" textAlignment="CENTER" wrappingWidth="212.7320556640625">
          <font>
             <Font name="Bodoni MT" size="24.0" />
          </font>
@@ -97,6 +97,14 @@
       <Button fx:id="button4" layoutX="436.0" layoutY="291.0" mnemonicParsing="false" onAction="#set4Players" prefHeight="24.0" prefWidth="120.0" text="4 giocatori">
          <font>
             <Font name="Bodoni MT" size="16.0" />
+         </font>
+         <effect>
+            <InnerShadow />
+         </effect>
+      </Button>
+      <Button fx:id="returnToCreateGameButton" layoutX="564.0" layoutY="553.0" mnemonicParsing="false" onAction="#returnToCreateGame" text="Indietro">
+         <font>
+            <Font name="Bodoni MT" size="17.0" />
          </font>
          <effect>
             <InnerShadow />

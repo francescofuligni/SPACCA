@@ -10,6 +10,7 @@ import java.util.ResourceBundle;
 import java.util.Scanner;
 
 import application.Player.Player;
+import application.Player.PlayerList;
 import application.SingleGame.SingleGame;
 
 import javafx.event.ActionEvent;
@@ -41,6 +42,7 @@ public class CreateSingleGameController implements Initializable {
 	
 	private Player[] selectedPlayers = new Player[maxPlayers];
 	private ArrayList<Player> allPlayers = new ArrayList<>();
+	private PlayerList players;
 	
 	@FXML
 	private ChoiceBox<Player> playersChoiceBox;
@@ -175,8 +177,18 @@ public class CreateSingleGameController implements Initializable {
 	    for(int i=0;i<5;i++) {
 	    	code = code + (int)Math.random()*10;				// TO-DO: controllare che il codice generato non sia già presente
 	    }
+	    
+	    
+	    // di seguito creo la struttura dati apposita per la turnazione, si veda la classe per le specifiche
+	    if(selectedPlayers.length == 2)
+	    	players = new PlayerList(selectedPlayers[0],selectedPlayers[1]);
+	    else if(selectedPlayers.length == 3)
+	    	players = new PlayerList(selectedPlayers[0],selectedPlayers[1],selectedPlayers[2]);
+	    else 
+	    	players = new PlayerList(selectedPlayers[0],selectedPlayers[1],selectedPlayers[2],selectedPlayers[3]);
 	    		
-	    new SingleGame(maxPlayers, chooseDifficulty.getValue(),selectedPlayers,code);
+	    		
+	    new SingleGame(maxPlayers, chooseDifficulty.getValue(),players,code);
 	    
 	    
 	    

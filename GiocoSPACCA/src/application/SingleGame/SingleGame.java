@@ -3,14 +3,15 @@ package application.SingleGame;
 
 import application.Admin.BOTDIFF;
 import application.Player.Player;
+import application.Player.PlayerList;
 
 public class SingleGame {
 	protected int playersNumber;
 	protected BOTDIFF difficulty;
-	protected Player[] players;
+	protected PlayerList players;
 	protected String code;
 	
-	public SingleGame (int playersNumber, BOTDIFF difficulty,Player[] players, String code) {
+	public SingleGame (int playersNumber, BOTDIFF difficulty,PlayerList players, String code) {
 		this.difficulty=difficulty;
 		this.players=players;
 		this.code=code;
