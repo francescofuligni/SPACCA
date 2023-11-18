@@ -107,5 +107,7 @@ public class PlayerList {
 	
 	}
 	
+	//VANNO AGGIUNTE FUNZINALITA' DINAMICHE PER RENDERLA FRUIBILE IN GAME
+	
 	
 }
