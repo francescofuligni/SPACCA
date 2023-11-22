@@ -2,16 +2,16 @@ package application.Card;
 
 import application.Player.Player;
 
-public class PozioneMagica extends Card{
+public class SpecialCard extends Card{
 
 	private boolean flag = false;
 	
-	public PozioneMagica(int c) {
-		super(c);
+	public SpecialCard(int code) {
+		super(code);
 	}
 	
 	@Override
 	public void effect(Player p) {
-	 
+		
 	}
 }
