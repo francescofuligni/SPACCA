@@ -16,25 +16,18 @@ import java.util.StringTokenizer;
 public class Player {
 	
 	private String username;
-	private boolean status; 
-	private int lifePoints;			
-	private int currentScore;	
+
 	private int totalScore;
 	// costruttore 1
-	public Player(String username, boolean status ,int lifePoints,int currentScore, int totalScore) {		
-		this.status=status;
+	public Player(String username,int totalScore) {		
+		
 		this.username=username;
-		this.lifePoints=lifePoints;
-		this.currentScore=currentScore;
 		this.totalScore=totalScore;
 		
 	}
 	// costruttore 2
 	public Player(String username) {		
 		this.username=username;
-		this.status=false;
-		this.lifePoints=0;
-		this.currentScore=0;
 		this.totalScore=0;
 		
 	}
@@ -57,7 +50,7 @@ public class Player {
 			
 	        FileWriter fw = new FileWriter(f.getAbsolutePath(),true);
 	       
-			fw.write(this.username + "," + this.status+ "," +this.lifePoints+ "," +this.currentScore+ "," +this.totalScore + "\n");
+			fw.write(this.username + "," +this.totalScore + "\n");
 			fw.flush();
 			fw.close();
 			
@@ -151,29 +144,6 @@ public class Player {
 	
 	public void setUsername(String username) {
 		this.username = username;
-	}
-	
-	public boolean getStatus() {
-		return status;
-	}
-	
-	public void setStatus(boolean status) {
-		this.status=status;
-	}
-	
-	public void setLifePoints(int x) {
-		this.lifePoints = x;
-	}
-	public int getLifePoints() {
-		return this.lifePoints;
-	}
-	
-	public void setCurrentScore(int x) {
-		this.currentScore = x;
-	}
-	
-	public int getCurrentScore() {
-		return currentScore;
 	}
 	
 	// metodo toString
