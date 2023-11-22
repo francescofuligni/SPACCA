@@ -50,11 +50,11 @@ public class CreatePlayerController {
 	public void createPlayer(ActionEvent event) throws IOException {
 		String username = usernameField.getText();
 		
-		if(username==null || username.trim().equals("")) {			// controllare
+		if(username==null || username.trim().equals("") || username.trim().toUpperCase().equals("ADMINISTRATOR")) {			// controllare
 			Alert alert = new Alert(AlertType.ERROR);
 			alert.setTitle("Errore");
 			alert.setHeaderText("Errore nella creazione del giocatore");
-			alert.setContentText("Non è possibile creare un giocatore con nome vuoto");
+			alert.setContentText("Non è possibile creare un giocatore con questo nome");
 			alert.showAndWait();
 			message.setTextFill(Color.RED);
 			message.setText("Giocatore non aggiunto");
@@ -67,10 +67,22 @@ public class CreatePlayerController {
 			
 			if(alert.showAndWait().get() == ButtonType.OK) {
 				Player player = new Player(username.trim());
-				player.memorize();
-				
+				if(player.exists()) {
+					Alert alert2 = new Alert(AlertType.ERROR);
+					alert2.setTitle("Errore");
+					alert2.setHeaderText("Errore nella creazione del giocatore");
+					alert2.setContentText("Giocatore con lo stesso nome gia esistente");
+					alert2.showAndWait();
+					message.setTextFill(Color.RED);
+					message.setText("Giocatore non aggiunto");
+				}else {player.memorize();
 				message.setTextFill(Color.GREEN);
 				message.setText("Giocatore \"" + username.trim() + "\" aggiunto correttamente");
+				}
+				
+				
+				
+				
 			} else {
 				message.setTextFill(Color.RED);
 				message.setText("Giocatore non aggiunto");

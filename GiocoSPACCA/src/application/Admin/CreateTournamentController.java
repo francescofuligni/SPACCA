@@ -107,12 +107,9 @@ public class CreateTournamentController implements Initializable  {
 				String[] tokens = line.split(",");
 				
 				String username = tokens[0];
-				boolean status = Boolean.parseBoolean(tokens[1]);
-				int lifePoints = Integer.parseInt(tokens[2]);
-				int currentScore = Integer.parseInt(tokens[3]);
-				int totalScore = Integer.parseInt(tokens[4]);
+				int totalScore = Integer.parseInt(tokens[1]);
 				
-				Player p = new Player(username, status, lifePoints, currentScore, totalScore);
+				Player p = new Player(username,totalScore);
 				allPlayers.add(p);
 			}
 			
