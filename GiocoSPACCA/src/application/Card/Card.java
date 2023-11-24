@@ -7,8 +7,8 @@ public abstract class Card {
 
 	private int code;
 	
-	public Card(int c) {
-		this.code = c;
+	public Card(int code) {
+		this.code = code;
 	}
 	
 	public abstract void effect(Player p);

@@ -58,6 +58,14 @@ public class DeletePlayerController {
 			alert.showAndWait();
 			message.setTextFill(Color.RED);
 			message.setText("Giocatore non trovato");
+    	}	else if(username.trim().toUpperCase().equals("ADMINISTRATOR")) {
+    		Alert alert = new Alert(AlertType.ERROR);
+			alert.setTitle("Errore");
+			alert.setHeaderText("Errore nell'eliminazione del giocatore");
+			alert.setContentText("Non puoi rimuovere accunt amministratore");
+			alert.showAndWait();
+			message.setTextFill(Color.RED);
+			message.setText("Giocatore non eliminato");
 			
 		 }  else{
 			 Player toDelete=new Player(username.trim());
@@ -84,7 +92,6 @@ public class DeletePlayerController {
 				Alert alert = new Alert(AlertType.ERROR);
 				alert.setTitle("Errore");
 				alert.setHeaderText("Errore nell'eliminazione del giocatore");
-				alert.setContentText("Non esistono giocatori con questo nome");
 				alert.showAndWait();
 				message.setTextFill(Color.RED);
 				message.setText("Giocatore non trovato");
