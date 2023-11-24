@@ -8,11 +8,8 @@ import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 import java.util.Scanner;
-
-import application.Player.Player;
-import application.Player.PlayerList;
+import application.Player.*;
 import application.SingleGame.SingleGame;
-
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -170,19 +167,23 @@ public class CreateSingleGameController implements Initializable {
     
 	@FXML
 	public void play(ActionEvent event) {		// INCOMPLETO
-	    		
-	    String code = "S";										// magari aggiungere una lettera 'S' davanti per distinguere il codice del torneo da quello della partita singola? (facilita la ricerca)
+	    
+	    String code = "S";
 	    for(int i=0;i<5;i++) {
-	    	code = code + (int)Math.random()*10;				// TO-DO: controllare che il codice generato non sia già presente
+	    	code = code + (int)Math.random()*10;
+	    	// TO-DO: controllare che il codice generato non sia già presente
 	    }
 	    
 	    for(int i=0; i<maxPlayers; i++) {
 	    	// riempire con bot gli spazi vuoti
 	    }
 	    
-	    // inizializzare playerlist
+	    players = new PlayerList(new PlayerInGame(selectedPlayers[0]));
+	    for(int i=1; i<maxPlayers; i++) {
+	    	
+	    }
 	    		
-	    //new SingleGame(maxPlayers, chooseDifficulty.getValue(),players,code);
+	    new SingleGame(maxPlayers, chooseDifficulty.getValue(), players, code);
 	    
 	}
 }
