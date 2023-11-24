@@ -23,7 +23,7 @@ public class Board2PlayersController {
 	private ImageView card1, card2, card3, card4, card5;
 	
 	@FXML
-	private Button saveAndExit;
+	private Button saveAndExit,infoPartita;
 	
 	@FXML
 	private ProgressBar lifeBar;
