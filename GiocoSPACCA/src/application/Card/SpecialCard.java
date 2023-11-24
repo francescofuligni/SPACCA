@@ -1,8 +1,8 @@
 package application.Card;
 
-import application.Player.Player;
+import application.Player.*;
 
-public class SpecialCard extends Card{
+public class SpecialCard extends Card {
 
 	private boolean flag = false;
 	
@@ -10,8 +10,16 @@ public class SpecialCard extends Card{
 		super(code);
 	}
 	
+	// getters e setters
+	public boolean getFlag() {
+		return flag;
+	}
+	public void setFlag(boolean flag) {
+		this.flag = flag;
+	}
+
 	@Override
-	public void effect(Player p) {
+	public void effect(PlayerInGame p) {
 		
 	}
 }

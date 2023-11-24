@@ -16,19 +16,19 @@ import java.util.StringTokenizer;
 public class Player {
 	
 	private String username;
-
-	private int totalScore;
+	private int score;
+	
 	// costruttore 1
-	public Player(String username,int totalScore) {		
+	public Player(String username, int totalScore) {		
 		
 		this.username=username;
-		this.totalScore=totalScore;
+		this.score=totalScore;
 		
 	}
 	// costruttore 2
 	public Player(String username) {		
 		this.username=username;
-		this.totalScore=0;
+		this.score=0;
 		
 	}
 	
@@ -50,7 +50,7 @@ public class Player {
 			
 	        FileWriter fw = new FileWriter(f.getAbsolutePath(),true);
 	       
-			fw.write(this.username + "," +this.totalScore + "\n");
+			fw.write(this.username + "," +this.score + "\n");
 			fw.flush();
 			fw.close();
 			
@@ -136,18 +136,23 @@ public class Player {
 		
 	}
 	
-	
-	//getter e setter per ogni attributo
+	//getters e setters
 	public String getUsername() {
 		return username;
 	}
-	
 	public void setUsername(String username) {
 		this.username = username;
 	}
 	
+	public int getScore() {
+		return score;
+	}
+	public void setScore(int score) {
+		this.score = score;
+	}
+	
 	// metodo toString
 	public String toString() {
-		return username;
+		return score + "\t" + username;			// per stampare il tabellone finale
 	}
 }

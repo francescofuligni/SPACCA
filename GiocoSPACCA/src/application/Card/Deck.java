@@ -5,7 +5,7 @@ import java.util.Random;
 public class Deck {
 	
 	public static final int SIZE = 22;
-	public Card[] cards = new Card[SIZE];		// mazzo infinito, salviamo solo i tipi di carte diverse
+	public Card[] cards = new Card[SIZE];		// mazzo infinito, salviamo solo i tipi di carte (22) diverse
 	
 	public Deck() {
 		for(int i=0; i<SIZE; i++) {
@@ -24,5 +24,5 @@ public class Deck {
 		return card;
 	}
 	
-	// non serve mescolare il mazzo: le carte vengono estratte casualmente dal mazzo infinito
+	// non serve mescolare il mazzo: le carte vengono estratte casualmente dal mazzo
 }
