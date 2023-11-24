@@ -153,6 +153,6 @@ public class Player {
 	
 	// metodo toString
 	public String toString() {
-		return score + "\t" + username;			// per stampare il tabellone finale
+		return username;
 	}
 }

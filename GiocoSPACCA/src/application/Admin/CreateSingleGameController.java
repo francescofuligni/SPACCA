@@ -176,19 +176,13 @@ public class CreateSingleGameController implements Initializable {
 	    	code = code + (int)Math.random()*10;				// TO-DO: controllare che il codice generato non sia già presente
 	    }
 	    
+	    for(int i=0; i<maxPlayers; i++) {
+	    	// riempire con bot gli spazi vuoti
+	    }
 	    
-	    // di seguito creo la struttura dati apposita per la turnazione, si veda la classe per le specifiche
-	    if(selectedPlayers.length == 2)
-	    	players = new PlayerList(selectedPlayers[0],selectedPlayers[1]);
-	    else if(selectedPlayers.length == 3)
-	    	players = new PlayerList(selectedPlayers[0],selectedPlayers[1],selectedPlayers[2]);
-	    else 
-	    	players = new PlayerList(selectedPlayers[0],selectedPlayers[1],selectedPlayers[2],selectedPlayers[3]);
+	    // inizializzare playerlist
 	    		
-	    		
-	    new SingleGame(maxPlayers, chooseDifficulty.getValue(),players,code);
-	    
-	    
+	    //new SingleGame(maxPlayers, chooseDifficulty.getValue(),players,code);
 	    
 	}
 }

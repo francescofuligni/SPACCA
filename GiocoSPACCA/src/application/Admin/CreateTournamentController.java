@@ -35,7 +35,7 @@ public class CreateTournamentController implements Initializable  {
 	private Parent root;
 	
 	private BOTDIFF[] diff= {BOTDIFF.FACILE,BOTDIFF.DIFFICILE};
-	private GAMEMODE[] mode= {GAMEMODE.CHIVINCEREGNA, GAMEMODE.LASTMANSTANDING};
+	private GAMEMODE[] mode= {GAMEMODE.SEMPLICE, GAMEMODE.LASTMANSTANDING};
 	
 	protected final static int maxPlayers = 4;			// numero massimo di giocatori
 	
