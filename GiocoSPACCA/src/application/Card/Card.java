@@ -1,10 +1,8 @@
 package application.Card;
 
-import application.Player.Player;
-import application.Player.PlayerInGame;
+import application.Player.*;
 
 public abstract class Card {
-
 
 	private int code;
 	
@@ -12,6 +10,10 @@ public abstract class Card {
 		this.code = code;
 	}
 	
+	public int getCode() {
+		return code;
+	}
+
 	public abstract void effect(PlayerInGame p);
 	
 }
