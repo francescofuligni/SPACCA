@@ -175,16 +175,14 @@ public class CreateTournamentController implements Initializable  {
     @FXML
     void play(ActionEvent event) {		// INCOMPLETO
     	
-    	String code = "T";
+    	String code = "T";											// magari aggiungere una lettera 'T' davanti per distinguere il codice del torneo da quello della partita singola? (facilita la ricerca)
     	for(int i=0;i<5;i++) {
-    		code = code + (int)Math.random()*10;
-			// TO-DO: controllare che il codice generato non sia già presente
+    		code = code + (int)Math.random()*10;					// TO-DO: controllare che il codice generato non sia già presente
     	}
-    	
-    	for(int i=0; i<maxPlayers; i++) {
-	    	// riempire con bot gli spazi vuoti
-	    }
-    	
+    		
     	new TournamentOBJ(tournamentMode.getValue(),chooseDifficulty.getValue(),selectedPlayers,code);
+    	
+    	
+    	
     }
 }

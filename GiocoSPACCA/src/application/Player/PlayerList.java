@@ -1,5 +1,7 @@
 package application.Player;
 
+import java.util.ArrayList;
+
 public class PlayerList {
 
 	private class Node {
@@ -41,20 +43,24 @@ public class PlayerList {
 	}
 	
 	public void add(PlayerInGame player) {			// aggiunge il giocatore in fondo alla lista
+		
 		Node current = head;
 		while(current.getNext()!=head) {
 			current = current.getNext();
 		}
+		
 		Node newNode = new Node(current, player, head);
 		current.setNext(newNode);
 		head.setPrevious(newNode);
 	}
 	
 	public void remove(PlayerInGame player) {		// rimuove un giocatore specifico
+		
 		Node current = head;
 		while(!current.getPlayer().equals(player)) {		// CICLA ALL'INFINITO SE player NON E' NELLA LISTA
 			current = current.getNext();
 		}
+		
 		current.getPrevious().setNext(current.getNext());
 		current.getNext().setPrevious(current.getPrevious());	
 	}
