@@ -16,7 +16,7 @@
             <Image url="@../../../Images/castle.png" />
          </image>
       </ImageView>
-      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#332000" height="400.0" layoutX="400.0" layoutY="200.0" stroke="WHITE" strokeLineJoin="ROUND" strokeType="INSIDE" strokeWidth="3.0" width="400.0" />
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#681313" height="449.0" layoutX="400.0" layoutY="200.0" stroke="WHITE" strokeLineJoin="ROUND" strokeType="INSIDE" strokeWidth="3.0" width="400.0" />
       <Text fill="WHITE" fontSmoothingType="LCD" layoutX="463.0" layoutY="296.0" strokeLineCap="ROUND" strokeLineJoin="ROUND" strokeType="OUTSIDE" strokeWidth="0.0" text="S.P.A.C.C.A." textAlignment="CENTER" wrappingWidth="275.5367431640625">
          <font>
             <Font name="Bodoni MT" size="50.0" />
@@ -36,12 +36,20 @@
          <effect>
             <InnerShadow />
          </effect></Button>
-      <Button fx:id="creditiButton" alignment="CENTER" contentDisplay="CENTER" layoutX="538.0" layoutY="505.0" mnemonicParsing="false" onAction="#switchToCredits" prefHeight="0.0" prefWidth="125.0" text="Crediti" textAlignment="CENTER">
+      <Button fx:id="creditiButton" alignment="CENTER" contentDisplay="CENTER" layoutX="538.0" layoutY="589.0" mnemonicParsing="false" onAction="#switchToCredits" prefHeight="0.0" prefWidth="125.0" text="Crediti" textAlignment="CENTER">
          <font>
             <Font name="Bodoni MT" size="18.0" />
          </font>
          <effect>
             <InnerShadow />
          </effect></Button>
+      <Button fx:id="rulesButton" layoutX="500.0" layoutY="504.0" minWidth="-Infinity" mnemonicParsing="false" onAction="#switchToRules" prefHeight="60.0" prefWidth="200.0" text="Regole">
+         <font>
+            <Font name="Bodoni MT" size="26.0" />
+         </font>
+         <effect>
+            <InnerShadow />
+         </effect>
+      </Button>
    </children>
 </AnchorPane>
