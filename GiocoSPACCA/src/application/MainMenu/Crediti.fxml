@@ -17,7 +17,12 @@
             <Image url="@../../../Images/castle.png" />
          </image>
       </ImageView>
-      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#332000" height="400.0" layoutX="400.0" layoutY="200.0" stroke="WHITE" strokeLineJoin="ROUND" strokeType="INSIDE" strokeWidth="3.0" width="400.0" />
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#281100" height="400.0" layoutX="400.0" layoutY="200.0" stroke="WHITE" strokeLineJoin="ROUND" strokeType="INSIDE" strokeWidth="3.0" width="400.0" />
+      <ImageView fitHeight="400.0" fitWidth="400.0" layoutX="400.0" layoutY="204.0" opacity="0.2" pickOnBounds="true">
+         <image>
+            <Image url="@../../../Images/woodtexture.jpg" />
+         </image>
+      </ImageView>
       <Label layoutX="481.0" layoutY="233.0" text="CREDITI" textAlignment="CENTER" textFill="WHITE">
          <font>
             <Font name="Bodoni MT" size="55.0" />
