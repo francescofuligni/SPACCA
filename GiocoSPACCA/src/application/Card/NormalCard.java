@@ -1,6 +1,7 @@
 package application.Card;
 
 import application.Player.Player;
+import application.Player.PlayerInGame;
 
 public class NormalCard extends Card { 
 	private int damage;
@@ -15,8 +16,8 @@ public class NormalCard extends Card {
 		return this.damage;
 	}
 
-	@Override
-	public void effect(Player p) {
+	
+	public void effect(PlayerInGame p) {
 		p.setLifePoints(p.getLifePoints() - damage); 
 	
 	}

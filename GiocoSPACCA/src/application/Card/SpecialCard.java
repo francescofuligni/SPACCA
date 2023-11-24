@@ -1,6 +1,7 @@
 package application.Card;
 
 import application.Player.Player;
+import application.Player.PlayerInGame;
 
 public class SpecialCard extends Card{
 
@@ -11,7 +12,7 @@ public class SpecialCard extends Card{
 	}
 	
 	@Override
-	public void effect(Player p) {
+	public void effect(PlayerInGame p) {
 		
 	}
 }

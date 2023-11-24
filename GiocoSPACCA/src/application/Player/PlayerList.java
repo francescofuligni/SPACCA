@@ -6,45 +6,45 @@ public class PlayerList {
 
 	private class Node {
 
-		private Player current;
-		private Player next;
-		private Player previous;
+		private PlayerInGame current;
+		private PlayerInGame next;
+		private PlayerInGame previous;
 		
-		public Node(Player pre, Player cur, Player next) {
+		public Node(PlayerInGame pre, PlayerInGame cur, PlayerInGame next) {
 			this.previous = pre;
 			this.current = cur;
 			this.next = next;
 		}
 		
-		public Node(Player cur, Player next) { //nel caso di due giocatori
+		public Node(PlayerInGame cur, PlayerInGame next) { //nel caso di due giocatori
 			this.current = cur;
 			this.next = next;
 		}
 		
-		public Player getPrevious() {
+		public PlayerInGame getPrevious() {
 			return this.previous;
 		}
 		
-		public Player getCurrent() {
+		public PlayerInGame getCurrent() {
 			return this.current;
 		}
 		
-		public Player getNext() {
+		public PlayerInGame getNext() {
 			return this.next;
 		}
 		
-		public void setPrevius(Player p) {
+		public void setPrevius(PlayerInGame p) {
 			this.previous = p;
 		}
 		
-		public void setNext(Player p) {
+		public void setNext(PlayerInGame p) {
 			this.next=p;
 		}
 	}
 
 	private ArrayList<Node> list;
 	
-	public PlayerList(Player p1, Player p2) {
+	public PlayerList(PlayerInGame p1, PlayerInGame p2) {
 		Node n1 = new Node(p1,p2);
 		Node n2 = new Node(p2,p1);
 		this.list = new ArrayList<Node>(2);
@@ -54,7 +54,7 @@ public class PlayerList {
 		
 	}
 	
-	public PlayerList(Player p1, Player p2, Player p3) {
+	public PlayerList(PlayerInGame p1, PlayerInGame p2, PlayerInGame p3) {
 		Node n1 = new Node(p3,p1,p2);
 		Node n2 = new Node(p1,p2,p3);
 		Node n3 = new Node(p2,p3,p1);
@@ -64,7 +64,7 @@ public class PlayerList {
 		this.list.add(n3);
 	}
 	
-	public PlayerList(Player p1, Player p2, Player p3,Player p4) {
+	public PlayerList(PlayerInGame p1, PlayerInGame p2, PlayerInGame p3,PlayerInGame p4) {
 		Node n1 = new Node(p4,p1,p2);
 		Node n2 = new Node(p1,p2,p3);
 		Node n3 = new Node(p2,p3,p4);
@@ -86,7 +86,7 @@ public class PlayerList {
 	}
 	
 	
-	public PlayerList removePlayer(Player p) {
+	public PlayerList removePlayer(PlayerInGame p) {
 	
 		PlayerList players;
 		
