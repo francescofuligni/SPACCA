@@ -9,8 +9,7 @@ import java.util.ArrayList;
 import java.util.ResourceBundle;
 import java.util.Scanner;
 
-import application.Player.Player;
-import application.Player.PlayerList;
+import application.Player.*;
 import application.SingleGame.SingleGame;
 
 import javafx.event.ActionEvent;
@@ -35,12 +34,12 @@ public class CreateSingleGameController implements Initializable {
 	private Scene scene;
 	private Parent root;
 	
-	public final int maxPlayers = SelectPlayerNumberSGController.playerNumber;				// NON può essere static
+	public final int MAXPLAYERS = SelectPlayerNumberSGController.playerNumber;				// NON può essere static
 	
 	private Integer playersCounter=0;
 	private BOTDIFF[] diff= {BOTDIFF.FACILE,BOTDIFF.DIFFICILE};
 	
-	private Player[] selectedPlayers = new Player[maxPlayers];
+	private Player[] selectedPlayers = new Player[MAXPLAYERS];
 	private ArrayList<Player> allPlayers = new ArrayList<>();
 	private PlayerList players;
 	
@@ -81,7 +80,7 @@ public class CreateSingleGameController implements Initializable {
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		chooseDifficulty.getItems().addAll(diff);
-		botNumber.setText(" --  " + maxPlayers + "  -- ");
+		botNumber.setText(" --  " + MAXPLAYERS + "  -- ");
 		
 		getPlayersFromFile();
 		playersChoiceBox.getItems().addAll(allPlayers);
@@ -123,18 +122,18 @@ public class CreateSingleGameController implements Initializable {
     private void playerSelection(ActionEvent event) {
     	Player player = playersChoiceBox.getValue();
     	
-    	if(playersCounter >= maxPlayers && playersChoiceBox.getItems().size()!=0){
+    	if(playersCounter >= MAXPLAYERS && playersChoiceBox.getItems().size()!=0){
     		Alert selectionAlert = new Alert(AlertType.ERROR);
     		selectionAlert.setTitle("ERRORE!");
     		selectionAlert.setContentText("Numero massimo di giocatori inseribili raggiunto");
     		selectionAlert.showAndWait();
     	}
-    	if(playersCounter < maxPlayers){
+    	if(playersCounter < MAXPLAYERS){
     		selectedPlayers[playersCounter] = player;
 			playersCounter++;
 
 			selectedPlayersLabel.setText(selectedPlayersLabel.getText() + " '" + player.getUsername() + "' ");
-			botNumber.setText(" --  " + (maxPlayers - playersCounter) + "  -- ");
+			botNumber.setText(" --  " + (MAXPLAYERS - playersCounter) + "  -- ");
 			playersChoiceBox.getItems().remove(player);
     	}
     }
@@ -152,7 +151,7 @@ public class CreateSingleGameController implements Initializable {
         		message += (" '" + selectedPlayers[i] + "'");
         	}
         	selectedPlayersLabel.setText(message);
-        	botNumber.setText(" --  " + (maxPlayers - playersCounter) + "  -- ");
+        	botNumber.setText(" --  " + (MAXPLAYERS - playersCounter) + "  -- ");
     	}
     }
     
@@ -170,19 +169,27 @@ public class CreateSingleGameController implements Initializable {
     
 	@FXML
 	public void play(ActionEvent event) {		// INCOMPLETO
-	    		
-	    String code = "S";										// magari aggiungere una lettera 'S' davanti per distinguere il codice del torneo da quello della partita singola? (facilita la ricerca)
+	    
+		
+		// CONTROLLO DA IMPLEMENTARE: PRIMA DI PREMERE 'GIOCA', BISOGNA AVER SELEZIONATO UNA DIFFICOLTA' PER I BOT
+		
+		
+	    String code = "S";
 	    for(int i=0;i<5;i++) {
-	    	code = code + (int)Math.random()*10;				// TO-DO: controllare che il codice generato non sia già presente
+	    	code = code + (int)Math.random()*10;
+			// TO-DO: controllare che il codice generato non sia già presente
 	    }
 	    
-	    for(int i=0; i<maxPlayers; i++) {
-	    	// riempire con bot gli spazi vuoti
+	    for(int i=0; i<MAXPLAYERS; i++) {
+	    	// riempire con BOT gli spazi vuoti
 	    }
 	    
-	    // inizializzare playerlist
+	    players = new PlayerList(new PlayerInGame(selectedPlayers[0]));
+	    for(int i=1; i<MAXPLAYERS; i++) {
+	    	players.add(new PlayerInGame(selectedPlayers[i]));
+	    }
 	    		
-	    //new SingleGame(maxPlayers, chooseDifficulty.getValue(),players,code);
+	    new SingleGame(MAXPLAYERS, chooseDifficulty.getValue(), players, code);
 	    
 	}
 }

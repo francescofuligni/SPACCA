@@ -11,6 +11,8 @@ import java.util.ResourceBundle;
 import java.util.Scanner;
 
 import application.Player.Player;
+import application.Player.PlayerInGame;
+import application.Player.PlayerList;
 import application.Tournament.TournamentOBJ;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -37,14 +39,15 @@ public class CreateTournamentController implements Initializable  {
 	private BOTDIFF[] diff= {BOTDIFF.FACILE,BOTDIFF.DIFFICILE};
 	private GAMEMODE[] mode= {GAMEMODE.SEMPLICE, GAMEMODE.LASTMANSTANDING};
 	
-	protected final static int maxPlayers = 4;			// numero massimo di giocatori
+	protected final static int MAXPLAYERS = 4;			// numero massimo di giocatori
 	
 	protected GAMEMODE chosenMode;
 	protected BOTDIFF chosenDifficulty;
 	private int playersCounter=0;
 	
-	private Player[] selectedPlayers = new Player[maxPlayers];
+	private Player[] selectedPlayers = new Player[MAXPLAYERS];
 	private ArrayList<Player> allPlayers = new ArrayList<>();
+	private PlayerList players;
 	
 	@FXML
 	private Text botNumber;
@@ -86,7 +89,7 @@ public class CreateTournamentController implements Initializable  {
 	public void initialize(URL arg0, ResourceBundle arg1) {
     	chooseDifficulty.getItems().addAll(diff);
     	tournamentMode.getItems().addAll(mode);
-		botNumber.setText(" --  " + (maxPlayers - playersCounter) + "  -- ");
+		botNumber.setText(" --  " + (MAXPLAYERS - playersCounter) + "  -- ");
 		
 		getPlayersFromFile();
 		playersChoiceBox.getItems().addAll(allPlayers);
@@ -127,18 +130,18 @@ public class CreateTournamentController implements Initializable  {
     private void playerSelection(ActionEvent event) {
     	Player player = playersChoiceBox.getValue();
     	
-    	if(playersCounter >= maxPlayers && playersChoiceBox.getItems().size()!=0){
+    	if(playersCounter >= MAXPLAYERS && playersChoiceBox.getItems().size()!=0){
     		Alert selectionAlert = new Alert(AlertType.ERROR);
     		selectionAlert.setTitle("ERRORE!");
     		selectionAlert.setContentText("Numero massimo di giocatori inseribili raggiunto");
     		selectionAlert.showAndWait();
     	}
-    	if(playersCounter < maxPlayers){
+    	if(playersCounter < MAXPLAYERS){
     		selectedPlayers[playersCounter] = player;
 			playersCounter++;
 
 			selectedPlayersLabel.setText(selectedPlayersLabel.getText() + " '" + player.getUsername() + "' ");
-			botNumber.setText(" --  " + (maxPlayers - playersCounter) + "  -- ");
+			botNumber.setText(" --  " + (MAXPLAYERS - playersCounter) + "  -- ");
 			playersChoiceBox.getItems().remove(player);
     	}
     }
@@ -156,7 +159,7 @@ public class CreateTournamentController implements Initializable  {
         		message += (" '" + selectedPlayers[i] + "'");
         	}
         	selectedPlayersLabel.setText(message);
-        	botNumber.setText(" --  " + (maxPlayers - playersCounter) + "  -- ");
+        	botNumber.setText(" --  " + (MAXPLAYERS - playersCounter) + "  -- ");
     	}
     }
     
@@ -175,14 +178,25 @@ public class CreateTournamentController implements Initializable  {
     @FXML
     void play(ActionEvent event) {		// INCOMPLETO
     	
-    	String code = "T";											// magari aggiungere una lettera 'T' davanti per distinguere il codice del torneo da quello della partita singola? (facilita la ricerca)
+    	
+    	// CONTROLLO DA IMPLEMENTARE: PRIMA DI PREMERE 'GIOCA', BISOGNA AVER SELEZIONATO UNA DIFFICOLTA' PER I BOT E UNA MODALITA' DI TORNEO
+    	
+    	
+    	String code = "T";
     	for(int i=0;i<5;i++) {
-    		code = code + (int)Math.random()*10;					// TO-DO: controllare che il codice generato non sia già presente
+    		code = code + (int)Math.random()*10;
+			// TO-DO: controllare che il codice generato non sia già presente
     	}
+    	
+    	for(int i=0; i<MAXPLAYERS; i++) {
+	    	// riempire con BOT gli spazi vuoti
+	    }
+	    
+    	players = new PlayerList(new PlayerInGame(selectedPlayers[0]));
+	    for(int i=1; i<MAXPLAYERS; i++) {
+	    	players.add(new PlayerInGame(selectedPlayers[i]));
+	    }
     		
-    	new TournamentOBJ(tournamentMode.getValue(),chooseDifficulty.getValue(),selectedPlayers,code);
-    	
-    	
-    	
+    	new TournamentOBJ(tournamentMode.getValue(), chooseDifficulty.getValue(), players, code);
     }
 }

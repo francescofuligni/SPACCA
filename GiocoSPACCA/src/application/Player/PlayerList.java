@@ -1,10 +1,8 @@
 package application.Player;
 
-import java.util.ArrayList;
-
 public class PlayerList {
 
-	private class Node {
+	private class Node {		// classe privata
 
 		private Node previous;
 		private PlayerInGame player;
@@ -26,7 +24,7 @@ public class PlayerList {
 		public PlayerInGame getPlayer() {
 			return player;
 		}
-		// il set player non serve
+		// il setPlayer non serve
 		
 		public Node getNext() {
 			return next;
@@ -60,7 +58,6 @@ public class PlayerList {
 		while(!current.getPlayer().equals(player)) {		// CICLA ALL'INFINITO SE player NON E' NELLA LISTA
 			current = current.getNext();
 		}
-		
 		current.getPrevious().setNext(current.getNext());
 		current.getNext().setPrevious(current.getPrevious());	
 	}
