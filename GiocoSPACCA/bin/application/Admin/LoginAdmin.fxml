@@ -4,6 +4,7 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.PasswordField?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.effect.DropShadow?>
 <?import javafx.scene.effect.InnerShadow?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
@@ -29,6 +30,11 @@
          </effect>
       </Button>
       <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#332000" height="100.0" layoutX="370.0" layoutY="169.0" stroke="WHITE" strokeType="INSIDE" width="515.0" />
+      <ImageView fitHeight="90.0" fitWidth="515.0" layoutX="370.0" layoutY="169.0" opacity="0.2" pickOnBounds="true">
+         <image>
+            <Image url="@../../../Images/woodtexture.jpg" />
+         </image>
+      </ImageView>
       <VBox layoutX="369.0" layoutY="259.0" prefHeight="154.0" prefWidth="489.0">
          <children>
             <TextField fx:id="adminNameField" prefHeight="26.0" prefWidth="237.0" promptText="Nome amministratore">
@@ -56,10 +62,13 @@
             <InnerShadow />
          </effect>
       </Button>
-      <Label alignment="CENTER" layoutX="438.0" layoutY="176.0" prefHeight="74.0" prefWidth="390.0" text="Login admin" textFill="WHITE" textOverrun="CENTER_ELLIPSIS">
+      <Label alignment="CENTER" layoutX="384.0" layoutY="176.0" prefHeight="74.0" prefWidth="494.0" text="LOGIN ADMIN" textFill="WHITE" textOverrun="CENTER_ELLIPSIS">
          <font>
             <Font name="Bodoni MT" size="60.0" />
          </font>
+         <effect>
+            <DropShadow />
+         </effect>
       </Label>
    </children>
 </AnchorPane>
