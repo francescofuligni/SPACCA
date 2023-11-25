@@ -27,15 +27,7 @@
                <content>
                   <AnchorPane prefHeight="200.0" prefWidth="200.0">
                      <children>
-                        <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#0000007c" height="711.0" layoutX="40.0" layoutY="30.0" stroke="#ffffff8c" strokeType="INSIDE" width="1120.0" />
-                        <Label layoutX="427.0" layoutY="93.0" text="REGOLE GENERALI" textFill="WHITE">
-                           <font>
-                              <Font name="Bodoni MT" size="35.0" />
-                           </font>
-                           <effect>
-                              <DropShadow />
-                           </effect>
-                        </Label>
+                        <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#0000007c" height="650.0" layoutX="40.0" layoutY="30.0" stroke="#ffffff8c" strokeType="INSIDE" width="1120.0" />
                         <Text fill="WHITE" layoutX="218.0" layoutY="225.0" strokeType="OUTSIDE" strokeWidth="0.0" text="SPACCA è un gioco di carte che permette partite da 2 a 4 giocatori. Qualora non fossero presenti abbastanza giocatori verranno aggiunti BOT, disponibili in due diverse difficoltà. " wrappingWidth="763.9970703125">
                            <font>
                               <Font name="Bodoni MT" size="22.0" />
@@ -61,6 +53,14 @@
                               <Font name="Bodoni MT" size="22.0" />
                            </font>
                         </Text>
+                        <Label layoutX="427.0" layoutY="80.0" text="REGOLE GENERALI" textFill="WHITE">
+                           <font>
+                              <Font name="Bodoni MT" size="35.0" />
+                           </font>
+                           <effect>
+                              <DropShadow height="130.0" radius="64.5" spread="0.9" width="130.0" />
+                           </effect>
+                        </Label>
                      </children>
                   </AnchorPane>
                </content>
@@ -69,13 +69,13 @@
               <content>
                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                      <children>
-                        <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#0000007c" height="711.0" layoutX="40.0" layoutY="30.0" stroke="#ffffff8c" strokeType="INSIDE" width="1120.0" />
-                        <Label layoutX="417.0" layoutY="91.0" text="MODALITA' DI GIOCO" textFill="WHITE">
+                        <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#0000007c" height="650.0" layoutX="40.0" layoutY="30.0" stroke="#ffffff8c" strokeType="INSIDE" width="1120.0" />
+                        <Label layoutX="417.0" layoutY="80.0" text="MODALITA' DI GIOCO" textFill="WHITE">
                            <font>
                               <Font name="Bodoni MT" size="35.0" />
                            </font>
                            <effect>
-                              <DropShadow />
+                              <DropShadow height="130.0" radius="64.5" spread="0.9" width="130.0" />
                            </effect>
                         </Label>
                         <Text fill="WHITE" layoutX="228.0" layoutY="235.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Le modalità di gioco sono 2: &quot;Partita singola&quot; e &quot;Torneo&quot; di quest'ultima esistono 2 tipologie diverse.." wrappingWidth="763.9970703125">
@@ -106,16 +106,16 @@
                <content>
                   <AnchorPane prefHeight="200.0" prefWidth="1200.0">
                      <children>
-                        <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#0000007c" height="711.0" layoutX="40.0" layoutY="30.0" stroke="#ffffff8c" strokeType="INSIDE" width="1120.0" />
-                        <Label layoutX="530.0" layoutY="81.0" text="FIGURE" textFill="WHITE">
+                        <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#0000007c" height="650.0" layoutX="40.0" layoutY="30.0" stroke="#ffffff8c" strokeType="INSIDE" width="1120.0" />
+                        <Label layoutX="530.0" layoutY="80.0" text="FIGURE" textFill="WHITE">
                            <font>
                               <Font name="Bodoni MT" size="36.0" />
                            </font>
                            <effect>
-                              <DropShadow />
+                              <DropShadow height="130.0" radius="64.5" spread="0.9" width="130.0" />
                            </effect>
                         </Label>
-                        <TabPane layoutX="150.0" layoutY="115.0" prefHeight="570.0" prefWidth="351.0" tabClosingPolicy="UNAVAILABLE">
+                        <TabPane layoutX="150.0" layoutY="110.0" prefHeight="570.0" prefWidth="351.0" tabClosingPolicy="UNAVAILABLE">
                           <tabs>
                             <Tab text="Danno">
                               <content>
@@ -168,18 +168,18 @@
               <content>
                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                      <children>
-                        <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#0000007c" height="711.0" layoutX="40.0" layoutY="30.0" stroke="#ffffff8c" strokeType="INSIDE" width="1120.0" />
+                        <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#0000007c" height="650.0" layoutX="40.0" layoutY="30.0" stroke="#ffffff8c" strokeType="INSIDE" width="1120.0" />
                         <ImageView fitHeight="560.0" fitWidth="910.0" layoutX="150.0" layoutY="140.0" pickOnBounds="true" preserveRatio="true">
                            <image>
                               <Image url="@../../../Images/Cards/13.png" />
                            </image>
                         </ImageView>
-                        <Label layoutX="493.0" layoutY="85.0" text="IMPREVISTI" textFill="WHITE">
+                        <Label layoutX="493.0" layoutY="80.0" text="IMPREVISTI" textFill="WHITE">
                            <font>
                               <Font name="Bodoni MT" size="35.0" />
                            </font>
                            <effect>
-                              <DropShadow />
+                              <DropShadow height="130.0" radius="64.5" spread="0.9" width="130.0" />
                            </effect>
                         </Label>
                         <Text fill="WHITE" layoutX="597.0" layoutY="280.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Gli imprevisti sono riconoscibili da uno sfondo in ossidiana con un titolo avvolto da un aura viola." wrappingWidth="468.9970703125">
@@ -200,18 +200,18 @@
               <content>
                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                      <children>
-                        <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#0000007c" height="711.0" layoutX="40.0" layoutY="30.0" stroke="#ffffff8c" strokeType="INSIDE" width="1120.0" />
+                        <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#0000007c" height="650.0" layoutX="40.0" layoutY="30.0" stroke="#ffffff8c" strokeType="INSIDE" width="1120.0" />
                         <ImageView fitHeight="560.0" fitWidth="910.0" layoutX="150.0" layoutY="140.0" pickOnBounds="true" preserveRatio="true">
                            <image>
                               <Image url="@../../../Images/Cards/14.png" />
                            </image>
                         </ImageView>
-                        <Label layoutX="467.0" layoutY="86.0" text="OPPORTUNITA'" textFill="WHITE">
+                        <Label layoutX="467.0" layoutY="80.0" text="OPPORTUNITA'" textFill="WHITE">
                            <font>
                               <Font name="Bodoni MT" size="35.0" />
                            </font>
                            <effect>
-                              <DropShadow />
+                              <DropShadow height="130.0" radius="64.5" spread="0.9" width="130.0" />
                            </effect>
                         </Label>
                         <Text fill="WHITE" layoutX="607.0" layoutY="290.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Le Opportunità sono riconoscibili da uno sfondo in ossidiana con un titolo avvolto da un aura verde." wrappingWidth="468.9970703125">
