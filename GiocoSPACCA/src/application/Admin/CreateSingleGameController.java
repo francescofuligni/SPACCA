@@ -180,8 +180,17 @@ public class CreateSingleGameController implements Initializable {
 			// TO-DO: controllare che il codice generato non sia già presente
 	    }
 	    
+	    int botCounter = 0;
 	    for(int i=0; i<MAXPLAYERS; i++) {
-	    	// riempire con BOT gli spazi vuoti
+	    	if(selectedPlayers[i]==null) {
+	    		if(chooseDifficulty.getValue().equals(BOTDIFF.FACILE)) {
+	    			botCounter++;
+	    			selectedPlayers[i] = new EasyBot("BOT " + botCounter);			// si potrebbero scrivere su file dei nomi di persona da attribuire casualmente ai bot
+	    		} else {
+	    			botCounter++;
+	    			selectedPlayers[i] = new HardBot("BOT " + botCounter);
+	    		}
+	    	}
 	    }
 	    
 	    players = new PlayerList(new PlayerInGame(selectedPlayers[0]));
