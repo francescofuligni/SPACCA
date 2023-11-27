@@ -3,7 +3,7 @@ package application.Player;
 import java.util.Collection;
 import application.Card.*;
 
-public class HardBot extends PlayerInGame implements Bot{
+public class HardBot extends PlayerInGame implements IBot{
 	
 	public HardBot(String botName) {
 		super(botName);
