@@ -1,17 +1,13 @@
 package application.Player;
 
-import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.nio.file.FileAlreadyExistsException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Scanner;
-import java.util.StringTokenizer;
 
 public class Player {
 	
@@ -153,6 +149,6 @@ public class Player {
 	
 	// metodo toString
 	public String toString() {
-		return score + "\t" + username;			// per stampare il tabellone finale
+		return username;
 	}
 }

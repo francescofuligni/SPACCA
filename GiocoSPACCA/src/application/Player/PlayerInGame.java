@@ -3,11 +3,15 @@ package application.Player;
 public class PlayerInGame extends Player {
 	
 	private int lifePoints;
-	// private int currentScore;						// non necessario
 	
-	public PlayerInGame(String username, int totalScore, int lifePoints) {
+	public PlayerInGame(String username, int totalScore) {
 		super(username, totalScore);
-		this.lifePoints = lifePoints;
+		this.lifePoints = 30;
+	}
+	
+	public PlayerInGame(Player p) {
+		super(p.getUsername(), p.getScore());
+		this.lifePoints = 30;
 	}
 	
 	// getters e setters
