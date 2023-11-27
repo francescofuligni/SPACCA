@@ -15,17 +15,14 @@ public class Player {
 	private int score;
 	
 	// costruttore 1
-	public Player(String username, int totalScore) {		
-		
+	public Player(String username, int totalScore) {
 		this.username=username;
 		this.score=totalScore;
-		
 	}
 	// costruttore 2
 	public Player(String username) {		
 		this.username=username;
 		this.score=0;
-		
 	}
 	
 	
