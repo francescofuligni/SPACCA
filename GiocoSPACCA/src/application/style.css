@@ -6,6 +6,16 @@
 	-fx-focus-color: -fx-secondary-color;
 }
 
+/*bottoni*/
+.button{
+	-fx-background-color: -fx-secondary-color;
+	-fx-text-fill: white;
+	
+}
+
+
+
+/*tabpane*/
 .tab-header-area .tab-header-background {
  	-fx-background-color: -fx-primary-color;
 }
