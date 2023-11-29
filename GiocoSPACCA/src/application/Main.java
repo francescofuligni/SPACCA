@@ -2,6 +2,8 @@ package application;
 	
 
 
+import java.io.File;
+
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.stage.Stage;
@@ -23,8 +25,8 @@ public class Main extends Application {
 			 * tutto il percorso ma solo quelli successivi ad application)
 			 */
 			
-			 FXMLLoader loader = new FXMLLoader(getClass().getResource("MainMenu/MainMenu.fxml"));
-	         AnchorPane rootLayout = (AnchorPane) loader.load();
+			FXMLLoader loader = new FXMLLoader(getClass().getResource("MainMenu/MainMenu.fxml"));
+	        AnchorPane rootLayout = (AnchorPane) loader.load();
 	        primaryStage.setTitle("S.P.A.C.C.A. the GAME");
 	        primaryStage.setResizable(false);
 	        primaryStage.setScene(new Scene (rootLayout));
@@ -34,7 +36,6 @@ public class Main extends Application {
 	        primaryStage.setFullScreen(false);
 			primaryStage.show();
 			
-
 		} catch(Exception e) {
 			e.printStackTrace();
 		}

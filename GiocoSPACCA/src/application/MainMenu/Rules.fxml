@@ -14,14 +14,15 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.MainMenu.RulesController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1200.0" stylesheets="@../style.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.MainMenu.RulesController">
+
    <children>
       <ImageView fitHeight="800.0" fitWidth="1200.0" pickOnBounds="true">
          <image>
             <Image url="@../../../Images/forest.png" />
          </image>
       </ImageView>
-      <TabPane prefHeight="723.0" prefWidth="1200.0" tabClosingPolicy="UNAVAILABLE">
+      <TabPane prefHeight="723.0" prefWidth="1200.0" stylesheets="@../style.css" tabClosingPolicy="UNAVAILABLE">
         <tabs>
           <Tab text="Regole Generali">
                <content>
@@ -203,7 +204,7 @@
                         <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#0000007c" height="650.0" layoutX="40.0" layoutY="30.0" stroke="#ffffff8c" strokeType="INSIDE" width="1120.0" />
                         <ImageView fitHeight="560.0" fitWidth="910.0" layoutX="150.0" layoutY="140.0" pickOnBounds="true" preserveRatio="true">
                            <image>
-                              <Image url="@../../../Images/Cards/14.png" />
+                              <Image url="@../../../Images/Cards/16.png" />
                            </image>
                         </ImageView>
                         <Label layoutX="467.0" layoutY="80.0" text="OPPORTUNITA'" textFill="WHITE">
