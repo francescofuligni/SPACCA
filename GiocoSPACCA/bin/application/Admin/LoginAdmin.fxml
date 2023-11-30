@@ -14,11 +14,17 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.Admin.LoginAdminController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1200.0" stylesheets="@../style.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.Admin.LoginAdminController">
    <children>
       <ImageView fitHeight="800.0" fitWidth="1200.0" pickOnBounds="true" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <image>
             <Image url="@../../../Images/castle.png" />
+         </image>
+      </ImageView>
+      <Rectangle arcHeight="20.0" arcWidth="20.0" fill="#464141" height="186.0" layoutX="369.0" layoutY="175.0" stroke="BLACK" strokeLineJoin="ROUND" strokeType="INSIDE" strokeWidth="2.0" width="518.0" />
+      <ImageView fitHeight="186.0" fitWidth="518.0" layoutX="369.0" layoutY="175.0" opacity="0.2" pickOnBounds="true">
+         <image>
+            <Image url="@../../../Images/stonetexture.jpg" />
          </image>
       </ImageView>
       <Button fx:id="returnToMainMenuButton" layoutX="1001.0" layoutY="709.0" mnemonicParsing="false" onAction="#returnToMainMenu" text=" Indietro ">
@@ -29,12 +35,6 @@
             <InnerShadow />
          </effect>
       </Button>
-      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#332000" height="100.0" layoutX="370.0" layoutY="169.0" stroke="WHITE" strokeType="INSIDE" width="515.0" />
-      <ImageView fitHeight="90.0" fitWidth="515.0" layoutX="370.0" layoutY="169.0" opacity="0.2" pickOnBounds="true">
-         <image>
-            <Image url="@../../../Images/woodtexture.jpg" />
-         </image>
-      </ImageView>
       <VBox layoutX="369.0" layoutY="259.0" prefHeight="154.0" prefWidth="489.0">
          <children>
             <TextField fx:id="adminNameField" prefHeight="26.0" prefWidth="237.0" promptText="Nome amministratore">
@@ -62,7 +62,7 @@
             <InnerShadow />
          </effect>
       </Button>
-      <Label alignment="CENTER" layoutX="384.0" layoutY="176.0" prefHeight="74.0" prefWidth="494.0" text="LOGIN ADMIN" textFill="WHITE" textOverrun="CENTER_ELLIPSIS">
+      <Label alignment="CENTER" layoutX="381.0" layoutY="175.0" prefHeight="74.0" prefWidth="494.0" text="LOGIN ADMIN" textAlignment="CENTER" textFill="WHITE" textOverrun="CENTER_ELLIPSIS">
          <font>
             <Font name="Bodoni MT" size="60.0" />
          </font>

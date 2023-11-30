@@ -8,13 +8,17 @@
 
 /*bottoni*/
 .button{
-	-fx-background-color: -fx-secondary-color;
-	-fx-text-fill: white;
-	
-	
-}
+	  -fx-background-color: lightgray;
+	  -fx-text-fill:-fx-secondary-color; 	 
+	 -fx-background-radius: 15;
 
-
+  }
+  
+  .button:hover{
+	  -fx-background-color: -fx-secondary-color;
+	  -fx-text-fill:white; 	 
+	-fx-background-radius: 15;
+  }
 
 /*tabpane*/
 .tab-header-area .tab-header-background {
