@@ -100,7 +100,7 @@ public class CreateTournamentController implements Initializable  {
     
     
     private void getPlayersFromFile() {			// popola l'ArrayList allPlayers con i giocatori memorizzati su file
-    	Path pathToFile = Paths.get("GiocoSPACCA/Informazioni_Partite/PLAYERS_REGISTER.csv");
+    	Path pathToFile = Paths.get("./GiocoSPACCA/Informazioni_Partite/PLAYERS_REGISTER.csv");
 		File f=new File(pathToFile.toString());
 		
 		try {
@@ -179,35 +179,43 @@ public class CreateTournamentController implements Initializable  {
     
     @FXML
     void play(ActionEvent event) {		// INCOMPLETO
-    	
+    	if(chooseDifficulty.getValue()==null||tournamentMode.getValue()==null) {
+	    	Alert selectionAlert = new Alert(AlertType.ERROR);
+    		selectionAlert.setTitle("ERRORE!");
+    		selectionAlert.setContentText("SELEZIONARE DIFFICOLTA' BOT e/o MODALITA' TORNEO");
+    		selectionAlert.showAndWait();
+	    	
+	    	
+	    }
     	
     	// CONTROLLO DA IMPLEMENTARE: PRIMA DI PREMERE 'GIOCA', BISOGNA AVER SELEZIONATO UNA DIFFICOLTA' PER I BOT E UNA MODALITA' DI TORNEO
     	
-    	
-    	String code = "T";
-    	for(int i=0;i<5;i++) {
-    		code = code + (int)Math.random()*10;
-			// TO-DO: controllare che il codice generato non sia già presente
-    	}
-    	
-    	int botCounter = 0;
-	    for(int i=0; i<MAXPLAYERS; i++) {
-	    	if(selectedPlayers[i]==null) {
-	    		if(chooseDifficulty.getValue().equals(BOTDIFF.FACILE)) {
-	    			botCounter++;
-	    			selectedPlayers[i] = new EasyBot("BOT " + botCounter);				// si potrebbero scrivere su file dei nomi di persona da attribuire casualmente ai bot
-	    		} else {
-	    			botCounter++;
-	    			selectedPlayers[i] = new HardBot("BOT " + botCounter);
-	    		}
+    	else {
+	    	String code = "T";
+	    	for(int i=0;i<5;i++) {
+	    		code = code + (int)Math.random()*10;
+				// TO-DO: controllare che il codice generato non sia già presente
 	    	}
+	    	
+	    	int botCounter = 0;
+		    for(int i=0; i<MAXPLAYERS; i++) {
+		    	if(selectedPlayers[i]==null) {
+		    		if(chooseDifficulty.getValue().equals(BOTDIFF.FACILE)) {
+		    			botCounter++;
+		    			selectedPlayers[i] = new EasyBot("BOT " + botCounter);				// si potrebbero scrivere su file dei nomi di persona da attribuire casualmente ai bot
+		    		} else {
+		    			botCounter++;
+		    			selectedPlayers[i] = new HardBot("BOT " + botCounter);
+		    		}
+		    	}
+		    }
+		    
+	    	players = new PlayerList(new PlayerInGame(selectedPlayers[0]));
+		    for(int i=1; i<MAXPLAYERS; i++) {
+		    	players.add(new PlayerInGame(selectedPlayers[i]));
+		    }
+	    		
+	    	new TournamentOBJ(tournamentMode.getValue(), chooseDifficulty.getValue(), players, code);
 	    }
-	    
-    	players = new PlayerList(new PlayerInGame(selectedPlayers[0]));
-	    for(int i=1; i<MAXPLAYERS; i++) {
-	    	players.add(new PlayerInGame(selectedPlayers[i]));
-	    }
-    		
-    	new TournamentOBJ(tournamentMode.getValue(), chooseDifficulty.getValue(), players, code);
     }
 }

@@ -16,7 +16,7 @@ public class NormalCard extends Card {
 
 	@Override
 	public void effect(PlayerInGame p) {
-		p.setLifePoints(p.getLifePoints() - damage);
+		p.setHealthPoints(p.getHealthPoints() - damage);
 	}
 	
 }
