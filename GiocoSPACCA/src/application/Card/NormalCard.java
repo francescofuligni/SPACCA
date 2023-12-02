@@ -8,7 +8,6 @@ public class NormalCard extends Card {
 	public NormalCard(int damage, int code) { 
 		super(code);
 		this.damage = damage;
-	
 	}
 	
 	public int getDamage() {
