@@ -98,7 +98,7 @@ public class CreateTournamentController implements Initializable  {
     
     
     private void getPlayersFromFile() {			// popola l'ArrayList allPlayers con i giocatori memorizzati su file
-    	Path pathToFile = Paths.get("Informazioni_Partite/PLAYERS_REGISTER.csv");
+    	Path pathToFile = Paths.get("GiocoSPACCA/Informazioni_Partite/PLAYERS_REGISTER.csv");
 		File f=new File(pathToFile.toString());
 		
 		try {
