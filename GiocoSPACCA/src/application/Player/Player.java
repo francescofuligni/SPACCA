@@ -28,7 +28,7 @@ public class Player {
 	
 	public void memorize() {
 		
-		Path pathToFile = Paths.get("Informazioni_Partite/PLAYERS_REGISTER.csv");
+		Path pathToFile = Paths.get("./GiocoSPACCA/Informazioni_Partite/PLAYERS_REGISTER.csv");
 			File f=new File(pathToFile.toString());
 			if(!f.exists())
 	        try {
@@ -58,7 +58,7 @@ public class Player {
 	
 	public boolean exists() throws FileNotFoundException {
 		
-		Path pathToFile = Paths.get("Informazioni_Partite/PLAYERS_REGISTER.csv");
+		Path pathToFile = Paths.get("./GiocoSPACCA/Informazioni_Partite/PLAYERS_REGISTER.csv");
 		File f=new File(pathToFile.toString());
 		boolean exists=false;
 		
@@ -87,7 +87,7 @@ public class Player {
 	
 	
 	public void forget() {
-		Path pathToFile = Paths.get("Informazioni_Partite/PLAYERS_REGISTER.csv");
+		Path pathToFile = Paths.get("./GiocoSPACCA/Informazioni_Partite/PLAYERS_REGISTER.csv");
 		File f=new File(pathToFile.toString());
 		
 		if(!f.exists())
