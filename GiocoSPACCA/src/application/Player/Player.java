@@ -144,7 +144,7 @@ public class Player {
 		this.score = score;
 	}
 	
-	// metodo toString
+	@Override
 	public String toString() {
 		return username;
 	}

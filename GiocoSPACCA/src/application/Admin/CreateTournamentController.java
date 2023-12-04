@@ -179,18 +179,14 @@ public class CreateTournamentController implements Initializable  {
     
     @FXML
     void play(ActionEvent event) {		// INCOMPLETO
+    	
     	if(chooseDifficulty.getValue()==null||tournamentMode.getValue()==null) {
 	    	Alert selectionAlert = new Alert(AlertType.ERROR);
     		selectionAlert.setTitle("ERRORE!");
     		selectionAlert.setContentText("SELEZIONARE DIFFICOLTA' BOT e/o MODALITA' TORNEO");
     		selectionAlert.showAndWait();
 	    	
-	    	
-	    }
-    	
-    	// CONTROLLO DA IMPLEMENTARE: PRIMA DI PREMERE 'GIOCA', BISOGNA AVER SELEZIONATO UNA DIFFICOLTA' PER I BOT E UNA MODALITA' DI TORNEO
-    	
-    	else {
+	    } else {
 	    	String code = "T";
 	    	for(int i=0;i<5;i++) {
 	    		code = code + (int)Math.random()*10;

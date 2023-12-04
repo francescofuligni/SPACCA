@@ -32,18 +32,25 @@ public class PlayerList {
 		public void setNext(Node next) {
 			this.next = next;
 		}
+		
+		@Override
+		public String toString() {
+			return player.toString();
+		}
 	}
 	
 	private Node head;
 	
 	public PlayerList(PlayerInGame player) {
 		this.head = new Node(null, player, null);
+		this.head.setNext(head);
+		this.head.setPrevious(head);
 	}
 	
 	public void add(PlayerInGame player) {			// aggiunge il giocatore in fondo alla lista
 		
 		Node current = head;
-		while(current.getNext()!=head) {
+		while(!current.getNext().equals(head)) {
 			current = current.getNext();
 		}
 		
@@ -60,5 +67,16 @@ public class PlayerList {
 		}
 		current.getPrevious().setNext(current.getNext());
 		current.getNext().setPrevious(current.getPrevious());	
+	}
+	
+	@Override
+	public String toString() {
+		String s = "";
+		Node current = head;
+		while(s=="" || !current.equals(head)) {
+			s+=(current+"\n");
+			current = current.getNext();
+		}
+		return s;
 	}
 }

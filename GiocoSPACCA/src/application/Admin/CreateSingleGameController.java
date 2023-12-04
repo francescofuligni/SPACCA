@@ -174,13 +174,8 @@ public class CreateSingleGameController implements Initializable {
     		selectionAlert.setTitle("ERRORE!");
     		selectionAlert.setContentText("SELEZIONARE DIFFICOLTA' BOT");
     		selectionAlert.showAndWait();
-	    	
-	    	
-	    }
-		
-		// CONTROLLO DA IMPLEMENTARE: PRIMA DI PREMERE 'GIOCA', BISOGNA AVER SELEZIONATO UNA DIFFICOLTA' PER I BOT
-		
-	    else {
+    		
+	    } else {
 		    String code = "S";
 		    for(int i=0;i<5;i++) {
 		    	code = code + (int)Math.random()*10;
@@ -206,8 +201,7 @@ public class CreateSingleGameController implements Initializable {
 		    }
 		    		
 		    new SingleGame(MAXPLAYERS, chooseDifficulty.getValue(), players, code);
+		    System.out.println(players);
 	    }
-	    
-	    
 	}
 }
