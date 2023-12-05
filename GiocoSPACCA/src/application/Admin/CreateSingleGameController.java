@@ -6,6 +6,7 @@ import java.net.URL;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
+import java.util.Random;
 import java.util.ResourceBundle;
 import java.util.Scanner;
 
@@ -168,7 +169,7 @@ public class CreateSingleGameController implements Initializable {
 	
     
 	@FXML
-	public void play(ActionEvent event) {		// INCOMPLETO
+	public void play(ActionEvent event) throws IOException {
 	    if(chooseDifficulty.getValue()==null) {
 	    	Alert selectionAlert = new Alert(AlertType.ERROR);
     		selectionAlert.setTitle("ERRORE!");
@@ -178,9 +179,15 @@ public class CreateSingleGameController implements Initializable {
 	    } else {
 		    String code = "S";
 		    for(int i=0;i<5;i++) {
-		    	code = code + (int)Math.random()*10;
-				// TO-DO: controllare che il codice generato non sia già presente
+		    	Random rand = new Random();
+		    	code = code + rand.nextInt(10);
 		    }
+		    
+		    Path pathToFile = Paths.get("./GiocoSPACCA/Informazioni_Partite/" + code + ".csv");
+			File f=new File(pathToFile.toString());
+			f.createNewFile();
+			
+			// TO-DO: controllare che il codice generato non sia già presente -> generare errore o chiedere se si vuole sovrascrivere il vecchio file
 		    
 		    int botCounter = 0;
 		    for(int i=0; i<MAXPLAYERS; i++) {
@@ -201,7 +208,6 @@ public class CreateSingleGameController implements Initializable {
 		    }
 		    		
 		    new SingleGame(MAXPLAYERS, chooseDifficulty.getValue(), players, code);
-		    System.out.println(players);
 	    }
 	}
 }
