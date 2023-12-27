@@ -37,7 +37,7 @@ public class MainMenuController {
 	 } 
 	 
 	 @FXML
-	    void switchToRules(ActionEvent event) throws IOException {
+	    void switchToRules(ActionEvent event) throws IOException {	   
 		 stage = (Stage)(createGameButton.getScene().getWindow());
 		  //IMPORTANTE RICORDA IL ../ nell'URL DEL FXML
 		  FXMLLoader Loader=new FXMLLoader(MainMenuController.class.getResource("../MainMenu/Rules.fxml"));

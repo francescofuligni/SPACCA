@@ -15,23 +15,20 @@ public class Player {
 	private int score;
 	
 	// costruttore 1
-	public Player(String username, int totalScore) {		
-		
+	public Player(String username, int totalScore) {
 		this.username=username;
 		this.score=totalScore;
-		
 	}
 	// costruttore 2
 	public Player(String username) {		
 		this.username=username;
 		this.score=0;
-		
 	}
 	
 	
 	public void memorize() {
 		
-		Path pathToFile = Paths.get("GiocoSPACCA/Informazioni_Partite/PLAYERS_REGISTER.csv");
+		Path pathToFile = Paths.get("./GiocoSPACCA/Informazioni_Partite/PLAYERS_REGISTER.csv");
 			File f=new File(pathToFile.toString());
 			if(!f.exists())
 	        try {
@@ -61,7 +58,7 @@ public class Player {
 	
 	public boolean exists() throws FileNotFoundException {
 		
-		Path pathToFile = Paths.get("GiocoSPACCA/Informazioni_Partite/PLAYERS_REGISTER.csv");
+		Path pathToFile = Paths.get("./GiocoSPACCA/Informazioni_Partite/PLAYERS_REGISTER.csv");
 		File f=new File(pathToFile.toString());
 		boolean exists=false;
 		
@@ -90,7 +87,7 @@ public class Player {
 	
 	
 	public void forget() {
-		Path pathToFile = Paths.get("GiocoSPACCA/Informazioni_Partite/PLAYERS_REGISTER.csv");
+		Path pathToFile = Paths.get("./GiocoSPACCA/Informazioni_Partite/PLAYERS_REGISTER.csv");
 		File f=new File(pathToFile.toString());
 		
 		if(!f.exists())
@@ -147,7 +144,7 @@ public class Player {
 		this.score = score;
 	}
 	
-	// metodo toString
+	@Override
 	public String toString() {
 		return username;
 	}

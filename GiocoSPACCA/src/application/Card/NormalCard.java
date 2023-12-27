@@ -8,7 +8,6 @@ public class NormalCard extends Card {
 	public NormalCard(int damage, int code) { 
 		super(code);
 		this.damage = damage;
-	
 	}
 	
 	public int getDamage() {
@@ -17,7 +16,7 @@ public class NormalCard extends Card {
 
 	@Override
 	public void effect(PlayerInGame p) {
-		p.setLifePoints(p.getLifePoints() - damage);
+		p.setHealthPoints(p.getHealthPoints() - damage);
 	}
 	
 }
