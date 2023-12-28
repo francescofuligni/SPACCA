@@ -42,7 +42,7 @@ public class CreateSingleGameController implements Initializable {
 	
 	private Player[] selectedPlayers = new Player[MAXPLAYERS];
 	private ArrayList<Player> allPlayers = new ArrayList<>();
-	private PlayerList players;
+	private ArrayList<PlayerInGame> playersInGame = new ArrayList<>();
 	
 	@FXML
 	private ChoiceBox<Player> playersChoiceBox;
@@ -202,12 +202,11 @@ public class CreateSingleGameController implements Initializable {
 		    	}
 		    }
 		    
-		    players = new PlayerList(new PlayerInGame(selectedPlayers[0]));
 		    for(int i=1; i<MAXPLAYERS; i++) {
-		    	players.add(new PlayerInGame(selectedPlayers[i]));
+		    	playersInGame.add(new PlayerInGame(selectedPlayers[i]));
 		    }
 		    		
-		    new SingleGame(MAXPLAYERS, chooseDifficulty.getValue(), players, code);
+		    new SingleGame(MAXPLAYERS, chooseDifficulty.getValue(), playersInGame, code);
 	    }
 	}
 }
