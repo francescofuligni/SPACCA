@@ -130,7 +130,7 @@
             <InnerShadow />
          </effect>
       </Button>
-      <Button fx:id="play" layoutX="253.0" layoutY="460.0" mnemonicParsing="false" onAction="#play" prefHeight="52.0" prefWidth="163.0" text="GIOCA!">
+      <Button fx:id="play" layoutX="253.0" layoutY="460.0" mnemonicParsing="false" onAction="#play" prefHeight="52.0" prefWidth="163.0" text="CREA">
          <effect>
             <InnerShadow />
          </effect>

@@ -212,11 +212,29 @@ public class CreateTournamentController implements Initializable  {
 		    	}
 		    }
 		    
+		    Alert codeInfo = new Alert(AlertType.INFORMATION);
+		    codeInfo.setTitle("CODICE GENERATO");
+		    codeInfo.setContentText("Codice della partita creata");
+		    codeInfo.setHeaderText(code);
+		    codeInfo.showAndWait();
+		    
 		    for(int i=1; i<MAXPLAYERS; i++) {
 		    	playersInGame.add(new PlayerInGame(selectedPlayers[i]));
 		    }
-	    		
+		    
 	    	new TournamentOBJ(tournamentMode.getValue(), chooseDifficulty.getValue(), playersInGame, code);
+	    	
+	    	returnToHome();
 	    }
+    }
+    
+    public void returnToHome() throws IOException {
+    	stage = (Stage)(returnToCreateGameButton.getScene().getWindow());
+		  //IMPORTANTE RICORDA IL ../ nell'URL DEL FXML
+		  FXMLLoader Loader=new FXMLLoader(CreateGameController.class.getResource("../MainMenu/MainMenu.fxml"));
+		  root = (Parent) Loader.load();
+		  scene = new Scene(root);
+		  stage.setScene(scene);
+		  stage.show();
     }
 }
