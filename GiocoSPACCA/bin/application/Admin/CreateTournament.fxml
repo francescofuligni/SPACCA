@@ -136,7 +136,7 @@
             <Font name="Bodoni MT" size="18.0" />
          </font>
       </Text>
-      <Button fx:id="play" layoutX="264.0" layoutY="527.0" mnemonicParsing="false" onAction="#play" prefHeight="52.0" prefWidth="141.0" text="GIOCA!">
+      <Button fx:id="play" layoutX="264.0" layoutY="527.0" mnemonicParsing="false" onAction="#play" prefHeight="52.0" prefWidth="141.0" text="CREA">
          <effect>
             <InnerShadow />
          </effect>

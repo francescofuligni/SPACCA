@@ -1,7 +1,7 @@
 package application.Admin;
 
-import java.io.IOException;
 
+import java.io.IOException;
 import application.MainMenu.MainMenuController;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -47,25 +47,24 @@ public class LoginAdminController {
 				  root = (Parent) Loader.load();
 				  scene = new Scene(root);
 				  stage.setScene(scene);
-				  stage.show();
-				
-				
+				  stage.show();	
 			}
+			
 			else {
 				Alert loginError = new Alert(AlertType.ERROR);
 				loginError.setTitle("ERRORE!");
 				loginError.setContentText("Nome admin o password errati: riprovare.");
-				loginError.showAndWait();
 				loginStatusText.setText("Nome admin o password errati: riprovare");
 				loginStatusText.setFill(Color.RED);
+				loginError.showAndWait();
 				
-			}
-			
+				adminNameField.clear();
+				adminPasswordField.clear();
+			}	
 		}
-		
 
 	    @FXML
-	    void returnToMainMenu(ActionEvent event) throws IOException {
+	    public void returnToMainMenu(ActionEvent event) throws IOException {
 	    	stage = (Stage)(returnToMainMenuButton.getScene().getWindow());
 			  //IMPORTANTE RICORDA IL ../ nell'URL DEL FXML
 			  FXMLLoader Loader=new FXMLLoader(MainMenuController.class.getResource("MainMenu.fxml"));
@@ -74,5 +73,4 @@ public class LoginAdminController {
 			  stage.setScene(scene);
 			  stage.show();
 	    }
-
 }
