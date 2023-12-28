@@ -15,7 +15,6 @@ import application.Player.EasyBot;
 import application.Player.HardBot;
 import application.Player.Player;
 import application.Player.PlayerInGame;
-import application.Player.PlayerList;
 import application.Tournament.TournamentOBJ;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -50,7 +49,7 @@ public class CreateTournamentController implements Initializable  {
 	
 	private Player[] selectedPlayers = new Player[MAXPLAYERS];
 	private ArrayList<Player> allPlayers = new ArrayList<>();
-	private PlayerList players;
+	private ArrayList<PlayerInGame> playersInGame = new ArrayList<>();
 	
 	@FXML
 	private Text botNumber;
@@ -200,12 +199,12 @@ public class CreateTournamentController implements Initializable  {
 			
 			// TO-DO: controllare che il codice generato non sia già presente -> generare errore o chiedere se si vuole sovrascrivere il vecchio file
 		    
-	    	int botCounter = 0;
+			int botCounter = 0;
 		    for(int i=0; i<MAXPLAYERS; i++) {
 		    	if(selectedPlayers[i]==null) {
 		    		if(chooseDifficulty.getValue().equals(BOTDIFF.FACILE)) {
 		    			botCounter++;
-		    			selectedPlayers[i] = new EasyBot("BOT " + botCounter);				// si potrebbero scrivere su file dei nomi di persona da attribuire casualmente ai bot
+		    			selectedPlayers[i] = new EasyBot("BOT " + botCounter);			// si potrebbero scrivere su file dei nomi di persona da attribuire casualmente ai bot
 		    		} else {
 		    			botCounter++;
 		    			selectedPlayers[i] = new HardBot("BOT " + botCounter);
@@ -213,12 +212,11 @@ public class CreateTournamentController implements Initializable  {
 		    	}
 		    }
 		    
-	    	players = new PlayerList(new PlayerInGame(selectedPlayers[0]));
 		    for(int i=1; i<MAXPLAYERS; i++) {
-		    	players.add(new PlayerInGame(selectedPlayers[i]));
+		    	playersInGame.add(new PlayerInGame(selectedPlayers[i]));
 		    }
 	    		
-	    	new TournamentOBJ(tournamentMode.getValue(), chooseDifficulty.getValue(), players, code);
+	    	new TournamentOBJ(tournamentMode.getValue(), chooseDifficulty.getValue(), playersInGame, code);
 	    }
     }
 }
