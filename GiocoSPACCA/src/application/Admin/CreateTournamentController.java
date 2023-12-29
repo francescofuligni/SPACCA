@@ -2,11 +2,13 @@ package application.Admin;
 
 
 import java.io.File;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.net.URL;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.Random;
 import java.util.ResourceBundle;
 import java.util.Scanner;
@@ -187,40 +189,29 @@ public class CreateTournamentController implements Initializable  {
     		selectionAlert.showAndWait();
 	    	
 	    } else {
-	    	String code = "T";
-	    	for(int i=0;i<5;i++) {
-	    		Random rand = new Random();
-		    	code = code + rand.nextInt(10);
-	    	}
-	    	
-	    	Path pathToFile = Paths.get("./GiocoSPACCA/Informazioni_Partite/" + code + ".csv");
-			File f=new File(pathToFile.toString());
-			f.createNewFile();
-			
-			// TO-DO: controllare che il codice generato non sia già presente -> generare errore o chiedere se si vuole sovrascrivere il vecchio file
+	    	File f;
+	    	String code;
+
+		    do {
+		    	code = "T";
+			    for(int i=0;i<5;i++) {						// genera il codice partita
+			    	Random rand = new Random();
+			    	code = code + rand.nextInt(10);
+			    }
+			    Path pathToFile = Paths.get("./GiocoSPACCA/Informazioni_Partite/" + code + ".csv");
+				f=new File(pathToFile.toString());
+		    } while(f.exists());							// se esiste già un file con lo stesso codice, genera un codice diverso
+		    f.createNewFile();								// crea il file per il codice generato
 		    
-			int botCounter = 0;
-		    for(int i=0; i<MAXPLAYERS; i++) {
-		    	if(selectedPlayers[i]==null) {
-		    		if(chooseDifficulty.getValue().equals(BOTDIFF.FACILE)) {
-		    			botCounter++;
-		    			selectedPlayers[i] = new EasyBot("BOT " + botCounter);			// si potrebbero scrivere su file dei nomi di persona da attribuire casualmente ai bot
-		    		} else {
-		    			botCounter++;
-		    			selectedPlayers[i] = new HardBot("BOT " + botCounter);
-		    		}
-		    	}
-		    }
 		    
-		    Alert codeInfo = new Alert(AlertType.INFORMATION);
+		    fillPlayersInGame();							// popola l'ArrayList playersInGame
+		    fillGameFile(f); 								// popola il file della partita
+		    
+		    Alert codeInfo = new Alert(AlertType.INFORMATION);					// mostra il codice generato
 		    codeInfo.setTitle("CODICE GENERATO");
 		    codeInfo.setContentText("Codice della partita creata");
 		    codeInfo.setHeaderText(code);
 		    codeInfo.showAndWait();
-		    
-		    for(int i=1; i<MAXPLAYERS; i++) {
-		    	playersInGame.add(new PlayerInGame(selectedPlayers[i]));
-		    }
 		    
 	    	new TournamentOBJ(tournamentMode.getValue(), chooseDifficulty.getValue(), playersInGame, code);
 	    	
@@ -237,4 +228,40 @@ public class CreateTournamentController implements Initializable  {
 		  stage.setScene(scene);
 		  stage.show();
     }
+    
+    private void fillPlayersInGame() {
+		int botCounter = 0;
+	    for(int i=0; i<MAXPLAYERS; i++) {											// inserisce i bot nei giocatori della partita
+	    	if(selectedPlayers[i]==null) {
+	    		if(chooseDifficulty.getValue().equals(BOTDIFF.FACILE)) {
+	    			botCounter++;
+	    			selectedPlayers[i] = new EasyBot("BOT" + botCounter);
+	    		} else {
+	    			botCounter++;
+	    			selectedPlayers[i] = new HardBot("BOT" + botCounter);
+	    		}
+	    	}
+	    }
+	    
+	    for(int i=0; i<MAXPLAYERS; i++) {											// converte ogni giocatore selezionato in PlayerInGame
+	    	playersInGame.add(new PlayerInGame(selectedPlayers[i]));
+	    }
+	}
+	
+	
+	private void fillGameFile(File f) {
+		try {
+	        FileWriter fw = new FileWriter(f.getAbsolutePath(),true);
+	        Iterator<PlayerInGame> iter = playersInGame.iterator();
+	        
+	        fw.write(tournamentMode.getValue() + "," + chooseDifficulty.getValue() + "\n");
+			while(iter.hasNext())
+				fw.write(iter.next() + "\n");
+			
+			fw.flush();
+			fw.close();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
 }

@@ -75,13 +75,11 @@ public class CreatePlayerController {
 					alert2.showAndWait();
 					message.setTextFill(Color.RED);
 					message.setText("Giocatore non aggiunto");
-				}else {player.memorize();
-				message.setTextFill(Color.GREEN);
-				message.setText("Giocatore \"" + username.trim() + "\" aggiunto correttamente");
+				} else {
+					player.memorize();
+					message.setTextFill(Color.GREEN);
+					message.setText("Giocatore \"" + username.trim() + "\" aggiunto correttamente");
 				}
-				
-				
-				
 				
 			} else {
 				message.setTextFill(Color.RED);

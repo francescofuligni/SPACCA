@@ -1,16 +1,22 @@
 package application.Player;
 
-import java.util.Collection;
+import application.Admin.BOTDIFF;
 import application.Card.Card;
 
 public class EasyBot extends PlayerInGame implements IBot {
+	
+	private final BOTDIFF difficulty = BOTDIFF.FACILE;
 	
 	public EasyBot(String botName) {
 		super(botName);
 	}
 	
-	public Card play(Collection<Card> hand) {			// il bot in difficoltà facile gioca sempre la prima carta che ha in mano
-		Card[] cards = (Card[])hand.toArray();
-		return cards[0];
+	@Override
+	public Card playCard() {			// il bot in difficoltà facile gioca sempre la prima carta che ha in mano
+		return hand[0];
+	}
+
+	public BOTDIFF getDifficulty() {
+		return difficulty;
 	}
 }
