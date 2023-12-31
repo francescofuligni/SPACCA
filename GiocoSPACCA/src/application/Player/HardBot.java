@@ -16,18 +16,18 @@ public class HardBot extends PlayerInGame implements IBot{
 		
 		boolean flag = true;
 		int imax = 0;
-		for(int i=0; i<hand.length; i++) {
-			if(hand[i] instanceof SpecialCard) {
-				return hand[i];
+		for(int i=0; i<hand.size(); i++) {
+			if(hand.get(i) instanceof SpecialCard) {
+				return hand.get(i);
 			} else if(flag) {
 				imax = i;
 				flag = false;
-			} else if(Math.abs(((NormalCard)hand[imax]).getDamage())<Math.abs(((NormalCard)hand[i]).getDamage())) {
+			} else if(Math.abs(((NormalCard)hand.get(imax)).getDamage())<Math.abs(((NormalCard)hand.get(i)).getDamage())) {
 				imax = i;
 			}
 		}
 		
-		return hand[imax];
+		return hand.get(imax);
 	}
 
 	public BOTDIFF getDifficulty() {

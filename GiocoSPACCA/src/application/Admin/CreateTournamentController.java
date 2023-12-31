@@ -17,7 +17,6 @@ import application.Player.EasyBot;
 import application.Player.HardBot;
 import application.Player.Player;
 import application.Player.PlayerInGame;
-import application.Tournament.TournamentOBJ;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -76,7 +75,7 @@ public class CreateTournamentController implements Initializable  {
     
     @FXML
     private Label undoSelection;
-    
+
 
     @FXML
     public void returnToCreateGame(ActionEvent event) throws IOException {
@@ -212,8 +211,6 @@ public class CreateTournamentController implements Initializable  {
 		    codeInfo.setContentText("Codice della partita creata");
 		    codeInfo.setHeaderText(code);
 		    codeInfo.showAndWait();
-		    
-	    	new TournamentOBJ(tournamentMode.getValue(), chooseDifficulty.getValue(), playersInGame, code);
 	    	
 	    	returnToHome();
 	    }
