@@ -1,25 +1,26 @@
 package application.Player;
 
+import java.util.ArrayList;
 import application.Card.*;
 
 public class PlayerInGame extends Player {
 	
 	private int healthPoints;
-	protected Card[] hand;				// scope protected per permetterne la visibilità nelle sottoclassi EasyBot e HardBot
+	protected ArrayList<Card> hand;				// scope protected per permetterne la visibilità nelle sottoclassi EasyBot e HardBot
 	
 	public PlayerInGame(String username) {
 		super(username);
 		this.healthPoints = 30;
-		hand = new Card[5];
+		hand = new ArrayList<>();
 	}
 	public PlayerInGame(Player p) {
 		super(p.getUsername(), p.getScore());
 		this.healthPoints = 30;
-		hand = new Card[5];
+		hand = new ArrayList<>();
 	}
 	
 	public Card playCard(int pos) {
-		return hand[pos];
+		return hand.get(pos);
 	}
 	
 	// getters e setters
@@ -30,19 +31,19 @@ public class PlayerInGame extends Player {
 		this.healthPoints = lifePoints;
 	}
 	
-	public Card[] getHand() {
+	public ArrayList<Card> getHand() {
 		return hand;
 	}
-	public void setHand(Card[] hand) {
+	public void setHand(ArrayList<Card> hand) {
 		this.hand = hand;
 	}
 	
 	@Override
 	public String toString() {
 		String s = super.toString() + "," + healthPoints;
-		for(int i=0; i<hand.length; i++) {
-			if(hand[i]!=null) {
-				s+=("," + hand[i]);
+		for(int i=0; i<hand.size(); i++) {
+			if(hand.get(i)!=null) {
+				s+=("," + hand.get(i));
 			}
 		}
 		return s;

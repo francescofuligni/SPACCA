@@ -11,10 +11,7 @@ import java.util.Iterator;
 import java.util.Random;
 import java.util.ResourceBundle;
 import java.util.Scanner;
-
 import application.Player.*;
-import application.SingleGame.SingleGame;
-
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -90,7 +87,7 @@ public class CreateSingleGameController implements Initializable {
 		playersChoiceBox.setOnAction(this::playerSelection);
 	}
 	
-	 
+	
 	private void getPlayersFromFile() {			// popola l'ArrayList allPlayers con i giocatori memorizzati su file
 		Path pathToFile = Paths.get("./GiocoSPACCA/Informazioni_Partite/PLAYERS_REGISTER.csv");
 		File f=new File(pathToFile.toString());
@@ -201,7 +198,6 @@ public class CreateSingleGameController implements Initializable {
 		    codeInfo.setHeaderText(code);
 		    codeInfo.showAndWait();
 
-		    new SingleGame(MAXPLAYERS, chooseDifficulty.getValue(), playersInGame, code);
 		    returnToHome();
 	    }
 	}

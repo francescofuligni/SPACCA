@@ -1,7 +1,6 @@
 package application.SingleGame;
 
 import java.io.IOException;
-
 import application.Admin.SelectPlayerNumberSGController;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;

@@ -1,5 +1,7 @@
 package application.Player;
 
+import java.util.Random;
+
 import application.Admin.BOTDIFF;
 import application.Card.Card;
 
@@ -12,8 +14,9 @@ public class EasyBot extends PlayerInGame implements IBot {
 	}
 	
 	@Override
-	public Card playCard() {			// il bot in difficoltà facile gioca sempre la prima carta che ha in mano
-		return hand[0];
+	public Card playCard() {					// il bot in difficoltà facile gioca casualmente una carta
+		Random rand = new Random();
+		return hand.get(rand.nextInt(5));
 	}
 
 	public BOTDIFF getDifficulty() {
