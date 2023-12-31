@@ -5,7 +5,7 @@ import application.Card.*;
 public class PlayerInGame extends Player {
 	
 	private int healthPoints;
-	private Card[] hand;
+	protected Card[] hand;				// scope protected per permetterne la visibilità nelle sottoclassi EasyBot e HardBot
 	
 	public PlayerInGame(String username) {
 		super(username);
@@ -16,6 +16,10 @@ public class PlayerInGame extends Player {
 		super(p.getUsername(), p.getScore());
 		this.healthPoints = 30;
 		hand = new Card[5];
+	}
+	
+	public Card playCard(int pos) {
+		return hand[pos];
 	}
 	
 	// getters e setters
@@ -31,5 +35,16 @@ public class PlayerInGame extends Player {
 	}
 	public void setHand(Card[] hand) {
 		this.hand = hand;
+	}
+	
+	@Override
+	public String toString() {
+		String s = super.toString() + "," + healthPoints;
+		for(int i=0; i<hand.length; i++) {
+			if(hand[i]!=null) {
+				s+=("," + hand[i]);
+			}
+		}
+		return s;
 	}
 }

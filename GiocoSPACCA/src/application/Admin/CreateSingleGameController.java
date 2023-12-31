@@ -1,11 +1,13 @@
 package application.Admin;
 
 import java.io.File;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.net.URL;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.Random;
 import java.util.ResourceBundle;
 import java.util.Scanner;
@@ -165,48 +167,90 @@ public class CreateSingleGameController implements Initializable {
     public void setColorWhite(MouseEvent event) {
     	undoSelection.setTextFill(Color.WHITE);
     }
-	
-	
     
 	@FXML
 	public void play(ActionEvent event) throws IOException {
-	    if(chooseDifficulty.getValue()==null) {
+	    if(chooseDifficulty.getValue()==null) {						// non crea la partita se non è stata inserita una difficoltà per i bot
 	    	Alert selectionAlert = new Alert(AlertType.ERROR);
     		selectionAlert.setTitle("ERRORE!");
     		selectionAlert.setContentText("SELEZIONARE DIFFICOLTA' BOT");
     		selectionAlert.showAndWait();
     		
 	    } else {
-		    String code = "S";
-		    for(int i=0;i<5;i++) {
-		    	Random rand = new Random();
-		    	code = code + rand.nextInt(10);
-		    }
+	    	File f;
+	    	String code;
+
+		    do {
+		    	code = "S";
+			    for(int i=0;i<5;i++) {						// genera il codice partita
+			    	Random rand = new Random();
+			    	code = code + rand.nextInt(10);
+			    }
+			    Path pathToFile = Paths.get("./GiocoSPACCA/Informazioni_Partite/" + code + ".csv");
+				f=new File(pathToFile.toString());
+		    } while(f.exists());							// se esiste già un file con lo stesso codice, genera un codice diverso
+		    f.createNewFile();								// crea il file per il codice generato
 		    
-		    Path pathToFile = Paths.get("./GiocoSPACCA/Informazioni_Partite/" + code + ".csv");
-			File f=new File(pathToFile.toString());
-			f.createNewFile();
-			
-			// TO-DO: controllare che il codice generato non sia già presente -> generare errore o chiedere se si vuole sovrascrivere il vecchio file
 		    
-		    int botCounter = 0;
-		    for(int i=0; i<MAXPLAYERS; i++) {
-		    	if(selectedPlayers[i]==null) {
-		    		if(chooseDifficulty.getValue().equals(BOTDIFF.FACILE)) {
-		    			botCounter++;
-		    			selectedPlayers[i] = new EasyBot("BOT " + botCounter);			// si potrebbero scrivere su file dei nomi di persona da attribuire casualmente ai bot
-		    		} else {
-		    			botCounter++;
-		    			selectedPlayers[i] = new HardBot("BOT " + botCounter);
-		    		}
-		    	}
-		    }
+		    fillPlayersInGame();							// popola l'ArrayList playersInGame
+		    fillGameFile(f); 								// popola il file della partita
 		    
-		    for(int i=1; i<MAXPLAYERS; i++) {
-		    	playersInGame.add(new PlayerInGame(selectedPlayers[i]));
-		    }
-		    		
+		    Alert codeInfo = new Alert(AlertType.INFORMATION);					// mostra il codice generato
+		    codeInfo.setTitle("CODICE GENERATO");
+		    codeInfo.setContentText("Codice della partita creata");
+		    codeInfo.setHeaderText(code);
+		    codeInfo.showAndWait();
+
 		    new SingleGame(MAXPLAYERS, chooseDifficulty.getValue(), playersInGame, code);
+		    returnToHome();
 	    }
+	}
+
+
+	public void returnToHome() throws IOException {
+    	stage = (Stage)(returnToCreateGameButton.getScene().getWindow());
+		  //IMPORTANTE RICORDA IL ../ nell'URL DEL FXML
+		  FXMLLoader Loader=new FXMLLoader(CreateGameController.class.getResource("../MainMenu/MainMenu.fxml"));
+		  root = (Parent) Loader.load();
+		  scene = new Scene(root);
+		  stage.setScene(scene);
+		  stage.show();
+    }
+	
+	
+	private void fillPlayersInGame() {
+		int botCounter = 0;
+	    for(int i=0; i<MAXPLAYERS; i++) {											// inserisce i bot nei giocatori della partita
+	    	if(selectedPlayers[i]==null) {
+	    		if(chooseDifficulty.getValue().equals(BOTDIFF.FACILE)) {
+	    			botCounter++;
+	    			selectedPlayers[i] = new EasyBot("BOT" + botCounter);
+	    		} else {
+	    			botCounter++;
+	    			selectedPlayers[i] = new HardBot("BOT" + botCounter);
+	    		}
+	    	}
+	    }
+	    
+	    for(int i=0; i<MAXPLAYERS; i++) {											// converte ogni giocatore selezionato in PlayerInGame
+	    	playersInGame.add(new PlayerInGame(selectedPlayers[i]));
+	    }
+	}
+	
+	
+	private void fillGameFile(File f) {
+		try {
+	        FileWriter fw = new FileWriter(f.getAbsolutePath(),true);
+	        Iterator<PlayerInGame> iter = playersInGame.iterator();
+	        
+	        fw.write("SingleGame," + chooseDifficulty.getValue() + "\n");
+			while(iter.hasNext())
+				fw.write(iter.next() + "\n");
+			
+			fw.flush();
+			fw.close();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
 }
