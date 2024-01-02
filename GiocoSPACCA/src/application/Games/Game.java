@@ -19,9 +19,13 @@ public abstract class Game {
 	protected Scanner scan;
 	private File game;
 	
-	public Game(File game) throws FileNotFoundException {
+	public Game(File game) {
 		this.game = game;
-		scan = new Scanner(this.game);
+		try {
+			scan = new Scanner(this.game);
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		}
 		scan.reset();
 		
 		if(scan.hasNextLine()) {

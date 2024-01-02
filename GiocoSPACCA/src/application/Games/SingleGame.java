@@ -1,7 +1,6 @@
 package application.Games;
 
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.Random;
 
@@ -10,7 +9,7 @@ import application.Player.PlayerInGame;
 
 public class SingleGame extends Game{
 	
-	public SingleGame(File game) throws FileNotFoundException {
+	public SingleGame(File game) {
 		super(game);
 		int botCounter=1;
 		
