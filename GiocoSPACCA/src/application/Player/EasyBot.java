@@ -10,6 +10,9 @@ public class EasyBot extends PlayerInGame implements IBot {
 	public EasyBot(String botName) {
 		super(botName);
 	}
+	public EasyBot(String botName, int healthPoints) {
+		super(botName, healthPoints);
+	}
 	
 	@Override
 	public Card playCard() {			// il bot in difficoltà facile gioca sempre la prima carta che ha in mano
