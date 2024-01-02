@@ -25,6 +25,8 @@ public class InsertCodeController {
 	private Scene scene;
 	private Parent root;
 	
+	public static File file;
+	
     @FXML
     private TextField codeField;
 
@@ -38,13 +40,25 @@ public class InsertCodeController {
     private Button returnToMainMenuButton;
 
     @FXML
-    void enterGame(ActionEvent event) {
+    void enterGame(ActionEvent event) throws IOException {
     	
-    	 Path pathToFile = Paths.get("./GiocoSPACCA/Informazioni_Partite/" + codeField.getText().trim().toUpperCase() + ".csv");
-    	 File f=new File(pathToFile.toString());
+    	Path pathToFile = Paths.get("./GiocoSPACCA/Informazioni_Partite/" + codeField.getText().trim().toUpperCase() + ".csv");
+    	File f=new File(pathToFile.toString());
     	 
-    	 if(f.exists()) {
+    	if(f.exists()) {
     		 //se il codice esiste dobbiamo cambiare schermata all'fxml della board e caricarla con i dati di quella partita
+    
+    		 file=new File(pathToFile.toString());
+    		 
+	    	stage = (Stage)(returnToMainMenuButton.getScene().getWindow());
+	    	//IMPORTANTE RICORDA IL ../ nell'URL DEL FXML
+	    	FXMLLoader Loader=new FXMLLoader(CreateGameController.class.getResource("../Play/Board.fxml"));
+	    	root = (Parent) Loader.load();
+	    	scene = new Scene(root);
+	    	stage.setScene(scene);
+	    	stage.show();
+    		 
+    		
     	 }
     	 else {
     		Alert selectionAlert = new Alert(AlertType.ERROR);
