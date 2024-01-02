@@ -1,4 +1,4 @@
- package application.Admin;
+package application.Admin;
 
 import java.io.IOException;
 
