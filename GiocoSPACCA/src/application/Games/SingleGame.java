@@ -1,6 +1,7 @@
 package application.Games;
 
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.Random;
 
@@ -9,7 +10,7 @@ import application.Player.PlayerInGame;
 
 public class SingleGame extends Game{
 	
-	public SingleGame(File game) {
+	public SingleGame(File game)  {
 		super(game);
 		int botCounter=1;
 		
@@ -38,6 +39,7 @@ public class SingleGame extends Game{
 		shuffle();
 		Random rand = new Random();
 		this.turn = rand.nextInt(players.size());
+		System.out.println(turn);
 	}
 	
 	public void removePlayer() {

@@ -20,10 +20,12 @@ public abstract class Game {
 	private File game;
 	
 	public Game(File game) {
+	
 		this.game = game;
 		try {
 			scan = new Scanner(this.game);
 		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		scan.reset();
