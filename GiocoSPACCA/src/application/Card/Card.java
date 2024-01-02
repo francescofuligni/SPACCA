@@ -1,6 +1,6 @@
 package application.Card;
 
-import application.Player.*;
+import application.Games.Game;
 import javafx.scene.image.Image;
 
 public abstract class Card {
@@ -19,6 +19,9 @@ public abstract class Card {
 	public Image getPicture() {
 		return pic;
 	}
-	public abstract void effect(PlayerInGame p);
+	public String toString() {
+		return ""+code;
+	}
+	public abstract void effect(Game g);
 	
 }
