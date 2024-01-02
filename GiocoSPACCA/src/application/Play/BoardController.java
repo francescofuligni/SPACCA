@@ -26,7 +26,7 @@ public class BoardController implements Initializable{
 	private Label currentPlayer, nextPlayer, lifePoints;
 	
 	@FXML
-	private ImageView card1, card2, card3, card4, card5, card6;
+	private ImageView[] hand;
 	
 	@FXML
 	private Button saveAndExit;
@@ -41,9 +41,11 @@ public class BoardController implements Initializable{
 	
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
+		
 		currentPlayer.setText(current.getUsername());
 		nextPlayer.setText(next.getUsername());
 		lifePoints.setText(""+current.getHealthPoints());
+		
 		
 	}
 	
