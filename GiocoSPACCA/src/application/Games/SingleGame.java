@@ -10,7 +10,7 @@ import application.Player.PlayerInGame;
 
 public class SingleGame extends Game{
 	
-	public SingleGame(File game) throws FileNotFoundException {
+	public SingleGame(File game)  {
 		super(game);
 		int botCounter=1;
 		
@@ -39,6 +39,7 @@ public class SingleGame extends Game{
 		shuffle();
 		Random rand = new Random();
 		this.turn = rand.nextInt(players.size());
+		System.out.println(turn);
 	}
 	
 	public void removePlayer() {
