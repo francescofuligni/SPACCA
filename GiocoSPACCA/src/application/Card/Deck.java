@@ -4,15 +4,16 @@ import java.util.Random;
 
 public class Deck {
 	
-	public static final int SIZE = 22;
+	public static final int SIZE = 20;
 	public Card[] cards = new Card[SIZE];		// mazzo infinito, salviamo solo i tipi di carte (22) diverse
 	
 	public Deck() {
 		for(int i=0; i<SIZE; i++) {
-			if(i<11) {
-				// carte normali
+			if(i<10) {
+				
+			 cards[i]=new NormalCard(i+1);
 			} else {
-				// carte speciali
+				 cards[i]=new SpecialCard(i+1);
 			}
 		}
 	}

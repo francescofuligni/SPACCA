@@ -1,19 +1,24 @@
 package application.Card;
 
 import application.Player.*;
+import javafx.scene.image.Image;
 
 public abstract class Card {
 
 	private int code;
+	private Image pic;
 	
 	public Card(int code) {
 		this.code = code;
+		this.pic= new Image("file:Images/Cards/"+code+".png");
 	}
 	
 	public int getCode() {
 		return code;
 	}
-
+	public Image getPicture() {
+		return pic;
+	}
 	public abstract void effect(PlayerInGame p);
 	
 }
