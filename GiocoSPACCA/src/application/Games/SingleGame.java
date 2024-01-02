@@ -39,7 +39,7 @@ public class SingleGame extends Game{
 		shuffle();
 		Random rand = new Random();
 		this.turn = rand.nextInt(players.size());
-		System.out.println(turn);
+		
 	}
 	
 	public void removePlayer() {
