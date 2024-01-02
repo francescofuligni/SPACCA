@@ -1,6 +1,8 @@
 package application.Player;
 
 import java.util.ArrayList;
+import java.util.Collection;
+
 import application.Card.*;
 
 public class PlayerInGame extends Player {
@@ -11,16 +13,24 @@ public class PlayerInGame extends Player {
 	public PlayerInGame(String username) {
 		super(username);
 		this.healthPoints = 30;
-		hand = new ArrayList<>();
+		this.hand = new ArrayList<>();
 	}
 	public PlayerInGame(Player p) {
 		super(p.getUsername(), p.getScore());
 		this.healthPoints = 30;
-		hand = new ArrayList<>();
+		this.hand = new ArrayList<>();
+	}
+	public PlayerInGame(String username, int healthPoints) {
+		super(username);
+		this.healthPoints = healthPoints;
+		this.hand = new ArrayList<>();
 	}
 	
-	public Card playCard(int pos) {
-		return hand.get(pos);
+	public Card playCard(int i) {
+		return hand.remove(i);
+	}
+	public void addCard(Card c) {
+		hand.add(c);
 	}
 	
 	// getters e setters
@@ -34,8 +44,8 @@ public class PlayerInGame extends Player {
 	public ArrayList<Card> getHand() {
 		return hand;
 	}
-	public void setHand(ArrayList<Card> hand) {
-		this.hand = hand;
+	public void setHand(Collection<Card> hand) {
+		this.hand = (ArrayList<Card>)hand;
 	}
 	
 	@Override

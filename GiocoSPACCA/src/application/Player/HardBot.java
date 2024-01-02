@@ -10,6 +10,9 @@ public class HardBot extends PlayerInGame implements IBot{
 	public HardBot(String botName) {
 		super(botName);
 	}
+	public HardBot(String botName, int healthPoints) {
+		super(botName, healthPoints);
+	}
 	
 	@Override
 	public Card playCard() {
