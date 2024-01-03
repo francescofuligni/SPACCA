@@ -40,11 +40,9 @@ public class SingleGame extends Game{
 		scan.close();
 		
 		giveCards();
-		
 		Collections.shuffle(players);				// metodo built-in per mescolare una collection
-		
 		Random rand = new Random();
-		this.turn = rand.nextInt(players.size());	// seleziona randomicamente il primo giocatore
+		this.turn = rand.nextInt(players.size());
 	}
 	
 	public void removePlayer() {
@@ -55,7 +53,7 @@ public class SingleGame extends Game{
 	@Override
 	public void save() {
 		try {
-	        FileWriter fw = new FileWriter(gameFile.getAbsolutePath());			// sovrascrive il file
+	        FileWriter fw = new FileWriter(game.getAbsolutePath(),true);
 	        Iterator<PlayerInGame> iter = players.iterator();
 	        
 	        fw.write("SingleGame," + difficulty + "\n");

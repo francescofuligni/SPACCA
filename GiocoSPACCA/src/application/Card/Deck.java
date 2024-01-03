@@ -10,7 +10,8 @@ public class Deck {
 	public Deck() {
 		for(int i=0; i<SIZE; i++) {
 			if(i<10) {
-				cards[i]=new NormalCard(i+1);
+				
+			 cards[i]=new NormalCard(i+1);
 			} else {
 				 cards[i]=new SpecialCard(i+1);
 			}
