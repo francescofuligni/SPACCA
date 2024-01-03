@@ -8,7 +8,7 @@ import application.Player.PlayerInGame;
 
 public class SpecialCard extends Card {
 	
-	private boolean imprevisto;
+	private boolean imprevisto;			// variabile booleana per sapere se la carta deve essere giocata automaticamente
 	
 	public SpecialCard(int code) {
 		super(code);
