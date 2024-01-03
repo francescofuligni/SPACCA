@@ -41,8 +41,7 @@ public class SingleGame extends Game{
 		
 		giveCards();
 		
-		Collections.shuffle(players);				// metodo built-in per mescolare una collection
-		
+		// TODO SALVARE IL TURNO QUANDO SI CHIUDE LA PARTITA
 		Random rand = new Random();
 		this.turn = rand.nextInt(players.size());	// seleziona randomicamente il primo giocatore
 	}

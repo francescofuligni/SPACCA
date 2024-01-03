@@ -3,6 +3,7 @@ package application.Games;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Iterator;
 import java.util.Scanner;
 
@@ -82,7 +83,7 @@ public abstract class Game {
 	
 	abstract public void save();	 				// salvataggio della partita su file --> diverso a seconda della modalità
 	
-	protected void giveCards() {					// distribuisce le carte ai giocatori se non ne hanno già in mano
+	protected void giveCards() {					// distribuisce le carte ai giocatori se non ne hanno già in mano (se è una nuova partita)
 		if(currentPlayer().getHand().size() == 0) { 
 			for(PlayerInGame p : players) {
 				ArrayList<Card> hand = new ArrayList<>();
@@ -90,6 +91,7 @@ public abstract class Game {
 					hand.add(deck.pick());
 				p.setHand(hand);
 			}
+			Collections.shuffle(players);			// metodo built-in per mescolare una collection (rimescola i giocatori solo se è una nuova partita)
 		}
 	}
 	
