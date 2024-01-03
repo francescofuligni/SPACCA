@@ -22,7 +22,7 @@ public class Deck {
 		return cards[rand.nextInt(SIZE)];
 	}
 	
-	public Card getCard(int i) {						// non serve mescolare il mazzo: le carte vengono estratte casualmente dal mazzo
-		return cards[i];
+	public Card getCard(int code) {						// non serve mescolare il mazzo: le carte vengono estratte casualmente dal mazzo
+		return cards[code-1];
 	}
 }
