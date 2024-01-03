@@ -16,13 +16,13 @@ public abstract class Game {
 	protected ArrayList<PlayerInGame> players;
 	protected int turn;
 	protected Scanner scan;
-	protected File game;
-	public Deck deck;
+	protected File gameFile;
+	public Deck deck;			// scope public per i metodi effect delle carte
 	
 	public Game(File game) {
-		this.game = game;
+		this.gameFile = game;
 		try {
-			scan = new Scanner(this.game);
+			scan = new Scanner(this.gameFile);
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
 		}
@@ -50,7 +50,6 @@ public abstract class Game {
 		return players;
 	}
 	
-	
 	public PlayerInGame currentPlayer() {
 		return players.get(turn);
 	}
@@ -62,17 +61,12 @@ public abstract class Game {
 			return players.get(turn+1);
 	}
 	
-	public Card pick() {
-		return deck.pick();
-	}
-	
 	public void nextTurn() {
 		if(turn+1==players.size())
 			turn=0;
 		else
 			turn++;
 	}
-	
 	
 	public String toString() {
 		String s="";
@@ -84,12 +78,12 @@ public abstract class Game {
 	}
 	
 	
-	abstract public void removePlayer();		// eliminazione di un giocatore --> diverso a seconda della modalità
+	abstract public void removePlayer();			// eliminazione di un giocatore --> diverso a seconda della modalità
 	
-	abstract public void save(); 				// salvataggio della partita su file --> diverso a seconda della modalità
+	abstract public void save();	 				// salvataggio della partita su file --> diverso a seconda della modalità
 	
-	protected void giveCards() {
-		if(currentPlayer().getHand()==null) { 
+	protected void giveCards() {					// distribuisce le carte ai giocatori se non ne hanno già in mano
+		if(currentPlayer().getHand().size() == 0) { 
 			for(PlayerInGame p : players) {
 				ArrayList<Card> hand = new ArrayList<>();
 				for(int i=0; i<4; i++)
