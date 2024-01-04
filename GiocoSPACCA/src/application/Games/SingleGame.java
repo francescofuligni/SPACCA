@@ -51,11 +51,8 @@ public class SingleGame extends Game{
 	        FileWriter fw = new FileWriter(gameFile.getAbsolutePath());			// sovrascrive il file
 	        Iterator<PlayerInGame> iter = players.iterator();
 	        
-<<<<<<< HEAD
-	        fw.write("SingleGame," + difficulty + "," + this.turn + "\n");
-=======
 	        fw.write("SingleGame," + difficulty + "," +  turn + "\n");
->>>>>>> main
+
 			while(iter.hasNext())
 				fw.write(iter.next() + "\n");
 			
