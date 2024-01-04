@@ -1,5 +1,6 @@
 package application.Play;
 
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 
 import java.io.IOException;
@@ -18,6 +19,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
 import javafx.scene.control.ProgressBar;
 import javafx.stage.Stage;
@@ -36,7 +38,7 @@ public class BoardController implements Initializable{
 	private Button saveAndExit;
 	
 	@FXML
-	private ListView<ImageView> hand;
+	private ListView<String> hand;
 	
 	@FXML
 	private ProgressBar healthBar;
@@ -57,10 +59,30 @@ public class BoardController implements Initializable{
 		healthBar.setProgress(current.getHealthPoints()/current.MAXHP);
 		
 		ArrayList<Card> cards = current.getHand();
-		ImageView[] iv = new ImageView[cards.size()];
+		String[] iv = new String[cards.size()];
+		
 		for(int i=0; i<cards.size(); i++)
-			iv[i] = new ImageView(cards.get(i).getPicture());
+			iv[i] = new String(cards.get(i).getPicture().getUrl());
+		
 		hand.getItems().addAll(iv);
+		
+		 hand.setCellFactory(param -> new ListCell<>() {
+	            private ImageView imageView = new ImageView();
+
+	            @Override
+	            protected void updateItem(String url, boolean empty) {
+	                super.updateItem(url, empty);
+	                if (empty) {
+	                    setText(null);
+	                    setGraphic(null);
+	                } else {
+	                    Image image = new Image(url);
+	                    imageView.setImage(image);
+	                    setGraphic(imageView);
+	                }
+	            }
+	        });
+
 	}
 	
 	
