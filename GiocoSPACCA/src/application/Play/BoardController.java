@@ -57,10 +57,15 @@ public class BoardController implements Initializable{
 		healthBar.setProgress(current.getHealthPoints()/current.MAXHP);
 		
 		ArrayList<Card> cards = current.getHand();
-		ImageView[] iv = new ImageView[cards.size()];
-		for(int i=0; i<cards.size(); i++)
-			iv[i] = new ImageView(cards.get(i).getPicture());
-		hand.getItems().addAll(iv);
+		ArrayList<ImageView> images = new ArrayList<>();
+		for(Card c : cards) {
+			ImageView iv = new ImageView();
+			iv.setImage(c.getPicture());
+			iv.setFitWidth(130);
+			iv.setPreserveRatio(true);
+			images.add(iv);
+		}
+		hand.getItems().addAll(images);
 	}
 	
 	
