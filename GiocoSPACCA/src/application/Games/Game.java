@@ -32,14 +32,15 @@ public abstract class Game {
 		if(scan.hasNextLine()) {
 			String line=scan.nextLine();
 			String[] tokens = line.split(",");
+			turn=Integer.parseInt(tokens[2]);
 			if(tokens[1]=="FACILE")
 				difficulty = BOTDIFF.FACILE;
 			else
 				difficulty = BOTDIFF.DIFFICILE;
 		}
-		
 		this.players=new ArrayList<PlayerInGame>();
 		this.deck=new Deck();
+		
 	}
 	
 	

@@ -33,8 +33,16 @@ public class MainMenuController {
 	  * */
 	 
 	 @FXML
-	public void enterGame() {
-	 } 
+		 public void enterGame() throws IOException {
+			 stage = (Stage)(createGameButton.getScene().getWindow());
+			  //IMPORTANTE RICORDA IL ../ nell'URL DEL FXML
+			  FXMLLoader Loader=new FXMLLoader(MainMenuController.class.getResource("../Play/InsertCode.fxml"));
+			  root = (Parent) Loader.load();
+			  scene = new Scene(root);
+			  stage.setScene(scene);
+			  stage.show();
+		 } 
+	
 	 
 	 @FXML
 	    void switchToRules(ActionEvent event) throws IOException {	   
