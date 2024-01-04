@@ -4,9 +4,7 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.Iterator;
-import java.util.Random;
 
 import application.Card.Card;
 import application.Player.PlayerInGame;
@@ -39,11 +37,7 @@ public class SingleGame extends Game{
 		}
 		scan.close();
 		
-		giveCards();
-		
-		// TODO SALVARE IL TURNO QUANDO SI CHIUDE LA PARTITA
-		Random rand = new Random();
-		this.turn = rand.nextInt(players.size());	// seleziona randomicamente il primo giocatore
+		newGame();
 	}
 	
 	public void removePlayer() {
@@ -57,7 +51,7 @@ public class SingleGame extends Game{
 	        FileWriter fw = new FileWriter(gameFile.getAbsolutePath());			// sovrascrive il file
 	        Iterator<PlayerInGame> iter = players.iterator();
 	        
-	        fw.write("SingleGame," + difficulty + "\n");
+	        fw.write("SingleGame," + difficulty + "," +  turn + "\n");
 			while(iter.hasNext())
 				fw.write(iter.next() + "\n");
 			
