@@ -240,7 +240,7 @@ public class CreateSingleGameController implements Initializable {
 	        FileWriter fw = new FileWriter(f.getAbsolutePath(),true);
 	        Iterator<PlayerInGame> iter = playersInGame.iterator();
 	        
-	        fw.write("SingleGame," + chooseDifficulty.getValue() +"," + 0 + "\n");
+	        fw.write("SingleGame," + chooseDifficulty.getValue() +",0 \n");
 			while(iter.hasNext())
 				fw.write(iter.next() + "\n");
 			
