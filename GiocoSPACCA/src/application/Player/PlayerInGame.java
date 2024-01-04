@@ -9,15 +9,16 @@ public class PlayerInGame extends Player {
 	
 	private int healthPoints;
 	protected ArrayList<Card> hand;				// scope protected per permetterne la visibilità nelle sottoclassi EasyBot e HardBot
+	public final int MAXHP = 30;				// valore massimo di punti salute
 	
 	public PlayerInGame(String username) {
 		super(username);
-		this.healthPoints = 30;
+		this.healthPoints = MAXHP;
 		this.hand = new ArrayList<>();
 	}
 	public PlayerInGame(Player p) {
 		super(p.getUsername(), p.getScore());
-		this.healthPoints = 30;
+		this.healthPoints = MAXHP;
 		this.hand = new ArrayList<>();
 	}
 	public PlayerInGame(String username, int healthPoints) {
@@ -33,12 +34,16 @@ public class PlayerInGame extends Player {
 		hand.add(c);
 	}
 	
+	
 	// getters e setters
 	public int getHealthPoints() {
 		return healthPoints;
 	}
-	public void setHealthPoints(int lifePoints) {
-		this.healthPoints = lifePoints;
+	public void setHealthPoints(int hp) {
+		if(hp>MAXHP)
+			this.healthPoints = MAXHP;
+		else
+			this.healthPoints = hp;
 	}
 	
 	public ArrayList<Card> getHand() {

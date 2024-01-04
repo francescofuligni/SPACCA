@@ -1,8 +1,11 @@
 package application.Games;
 
 import java.io.File;
-import java.io.FileNotFoundException;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Iterator;
 import java.util.Random;
 
 import application.Card.Card;
@@ -28,7 +31,7 @@ public class SingleGame extends Game{
 			
 			ArrayList<Card> hand = new ArrayList<>();
 			for(int i=2; i<tokens.length; i++) {
-				hand.add(deck[Integer.parseInt(tokens[i])]);				// dipende da come chiamiamo le carte
+				hand.add(deck.getCard(Integer.parseInt(tokens[i])));
 			}
 			p.setHand(hand);
 			
@@ -36,14 +39,32 @@ public class SingleGame extends Game{
 		}
 		scan.close();
 		
-		shuffle();
-		Random rand = new Random();
-		this.turn = rand.nextInt(players.size());
+		giveCards();
 		
+		// TODO SALVARE IL TURNO QUANDO SI CHIUDE LA PARTITA
+		Random rand = new Random();
+		this.turn = rand.nextInt(players.size());	// seleziona randomicamente il primo giocatore
 	}
 	
 	public void removePlayer() {
 		players.remove(turn);
 		turn--;
+	}
+
+	@Override
+	public void save() {
+		try {
+	        FileWriter fw = new FileWriter(gameFile.getAbsolutePath());			// sovrascrive il file
+	        Iterator<PlayerInGame> iter = players.iterator();
+	        
+	        fw.write("SingleGame," + difficulty + "\n");
+			while(iter.hasNext())
+				fw.write(iter.next() + "\n");
+			
+			fw.flush();
+			fw.close();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
 }
