@@ -5,6 +5,7 @@ import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Iterator;
+import java.util.Random;
 import java.util.Scanner;
 
 import application.Admin.BOTDIFF;
@@ -37,6 +38,7 @@ public abstract class Game {
 				difficulty = BOTDIFF.FACILE;
 			else
 				difficulty = BOTDIFF.DIFFICILE;
+			this.turn=Integer.parseInt(tokens[2]);
 		}
 		this.players=new ArrayList<PlayerInGame>();
 		this.deck=new Deck();
@@ -84,7 +86,7 @@ public abstract class Game {
 	
 	abstract public void save();	 				// salvataggio della partita su file --> diverso a seconda della modalità
 	
-	protected void giveCards() {					// distribuisce le carte ai giocatori se non ne hanno già in mano (se è una nuova partita)
+	protected void newGame() {					// distribuisce le carte ai giocatori se non ne hanno già in mano (se è una nuova partita)
 		if(currentPlayer().getHand().size() == 0) { 
 			for(PlayerInGame p : players) {
 				ArrayList<Card> hand = new ArrayList<>();
@@ -93,6 +95,8 @@ public abstract class Game {
 				p.setHand(hand);
 			}
 			Collections.shuffle(players);			// metodo built-in per mescolare una collection (rimescola i giocatori solo se è una nuova partita)
+			Random rand = new Random();
+			turn = rand.nextInt(players.size());	// assegna turno iniziale casualmente (solo se è una nuova partita)
 		}
 	}
 	
