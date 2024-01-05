@@ -100,9 +100,7 @@ public abstract class Game {
 				}
 				p.setHand(hand);
 			}
-			Collections.shuffle(players);			// metodo built-in per mescolare una collection (rimescola i giocatori solo se è una nuova partita)
-			Random rand = new Random();
-			turn = rand.nextInt(players.size());	// assegna turno iniziale casualmente (solo se è una nuova partita)
+		
 		}
 	}
 	
