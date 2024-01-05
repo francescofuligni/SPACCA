@@ -3,7 +3,9 @@ package application.Games;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Iterator;
+import java.util.Random;
 import java.util.Scanner;
 
 import application.Admin.BOTDIFF;
@@ -98,6 +100,7 @@ public abstract class Game {
 				}
 				p.setHand(hand);
 			}
+		
 		}
 	}
 	

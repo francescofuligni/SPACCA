@@ -238,9 +238,8 @@ public class CreateSingleGameController implements Initializable {
 		try {
 	        FileWriter fw = new FileWriter(f.getAbsolutePath(),true);
 	        Iterator<PlayerInGame> iter = playersInGame.iterator();
-	        
-	        Random rand = new Random();
-	        fw.write("SingleGame," + chooseDifficulty.getValue() + "," + rand.nextInt(playersInGame.size()) + "\n");
+	        Random rand=new Random();
+	        fw.write("SingleGame," + chooseDifficulty.getValue() + ","+rand.nextInt(playersInGame.size())+"\n");
 			while(iter.hasNext())
 				fw.write(iter.next() + "\n");
 			

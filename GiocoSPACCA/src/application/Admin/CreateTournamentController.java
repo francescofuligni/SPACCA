@@ -250,9 +250,8 @@ public class CreateTournamentController implements Initializable  {
 		try {
 	        FileWriter fw = new FileWriter(f.getAbsolutePath(),true);
 	        Iterator<PlayerInGame> iter = playersInGame.iterator();
-	        
-	        Random rand = new Random();
-	        fw.write(tournamentMode.getValue() + "," + chooseDifficulty.getValue() + "," + rand.nextInt(playersInGame.size()) + "\n");
+	        Random rand=new Random();
+	        fw.write(tournamentMode.getValue() + "," + chooseDifficulty.getValue() + ","+ rand.nextInt(playersInGame.size())+ "\n");
 			while(iter.hasNext())
 				fw.write(iter.next() + "\n");
 			
