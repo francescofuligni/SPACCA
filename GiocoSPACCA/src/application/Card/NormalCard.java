@@ -23,6 +23,7 @@ public class NormalCard extends Card {
 	public void effect(Game g) {
 		PlayerInGame current = g.currentPlayer();
 		PlayerInGame next = g.nextPlayer();
+		
 		if(damage>0)
 			next.setHealthPoints(next.getHealthPoints() - damage);
 		else
