@@ -74,7 +74,7 @@
             <Font name="Britannic Bold" size="20.0" />
          </font>
       </Label>
-      <Button fx:id="playCardButton" layoutX="1024.0" layoutY="391.0" mnemonicParsing="false" onAction="#playCard" prefHeight="57.0" prefWidth="183.0" text="USA CARTA">
+      <Button fx:id="playCardButton" layoutX="1005.0" layoutY="391.0" mnemonicParsing="false" onAction="#playCard" prefHeight="57.0" prefWidth="218.0" text="GIOCA CARTA">
          <font>
             <Font name="Times New Roman Bold" size="24.0" />
          </font>
@@ -82,5 +82,10 @@
             <InnerShadow />
          </effect>
       </Button>
+      <Label fx:id="infoLabel" alignment="CENTER" contentDisplay="CENTER" layoutY="315.0" prefHeight="57.0" prefWidth="1280.0" textAlignment="CENTER" textFill="WHITE">
+         <font>
+            <Font name="Times New Roman Bold" size="24.0" />
+         </font>
+      </Label>
    </children>
 </AnchorPane>

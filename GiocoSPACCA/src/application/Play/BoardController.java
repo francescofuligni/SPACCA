@@ -1,6 +1,7 @@
 package application.Play;
 
 import javafx.scene.image.ImageView;
+import javafx.scene.paint.Color;
 
 import java.io.IOException;
 import java.net.URL;
@@ -36,9 +37,10 @@ public class BoardController implements Initializable{
 	private Parent root;
 	private ArrayList<ImageView> images;
 	private ArrayList<Card> cards;
+	private boolean isDead;
 	
 	@FXML
-	private Label currentPlayer, nextPlayer, healthPoints;
+	private Label currentPlayer, nextPlayer, healthPoints, infoLabel;
 
 	@FXML
 	private Button saveAndExitButton;
@@ -62,10 +64,21 @@ public class BoardController implements Initializable{
 		
 		currentPlayer.setText(current.getUsername());
 		nextPlayer.setText(next.getUsername());
-		healthPoints.setText("" + current.getHealthPoints());
 		
 		healthBar.setStyle("-fx-accent: red;");							// healthBar rossa
-		healthBar.setProgress(current.getHealthPoints()/current.MAXHP);
+		
+		if(current.getHealthPoints()<=0) {
+			isDead = true;
+			healthPoints.setText("" + 0);
+			healthBar.setProgress(0.0);
+			playCardButton.setText("ABBANDONA");
+			infoLabel.setTextFill(Color.RED);
+			infoLabel.setText("Sei stato eliminato: clicca su ABBANDONA per uscire dalla partita");
+		} else {
+			isDead = false;
+			healthPoints.setText("" + current.getHealthPoints());
+			healthBar.setProgress((double)current.getHealthPoints()/current.MAXHP);
+		}
 		
 		cards = current.getHand();
 		images = new ArrayList<>();
@@ -88,30 +101,35 @@ public class BoardController implements Initializable{
 	
 	@FXML
 	public void playCard(ActionEvent e) throws IOException {
-		
-		if(selectedImage == null) {
-			Alert noCardSelected = new Alert(AlertType.ERROR);
-			noCardSelected.setTitle("ERRORE!");
-			noCardSelected.setHeaderText("ERRORE: SELEZIONA UNA CARTA");
-			noCardSelected.setContentText("Prima di giocare devi selezionare una carta");
-			noCardSelected.showAndWait();
+		if(!isDead) {
+			if(selectedImage == null) {
+				Alert noCardSelected = new Alert(AlertType.ERROR);
+				noCardSelected.setTitle("ERRORE!");
+				noCardSelected.setHeaderText("ERRORE: SELEZIONA UNA CARTA");
+				noCardSelected.setContentText("Prima di giocare devi selezionare una carta");
+				noCardSelected.showAndWait();
+			} else {
+				Card c = cards.remove(images.indexOf(selectedImage));
+				c.effect(game);
+				nextPlayerBoard();
+			}
 		} else {
-			Card c = cards.remove(images.indexOf(selectedImage));
-			c.effect(game);
-			game.nextTurn();
-			
-			game.save();
-			stage = (Stage)(playCardButton.getScene().getWindow());
-			  //IMPORTANTE RICORDA IL ../ nell'URL DEL FXML
-			  FXMLLoader Loader=new FXMLLoader(BoardController.class.getResource("Board.fxml"));
-			  root = (Parent) Loader.load();
-			  scene = new Scene(root);
-			  stage.setScene(scene);
-			  stage.show();
+			game.removePlayer();
+			nextPlayerBoard();
 		}
 	}
 	
-	
+	private void nextPlayerBoard() throws IOException {
+		game.nextTurn();
+		game.save();
+		stage = (Stage)(playCardButton.getScene().getWindow());
+		  //IMPORTANTE RICORDA IL ../ nell'URL DEL FXML
+		  FXMLLoader Loader=new FXMLLoader(BoardController.class.getResource("Board.fxml"));
+		  root = (Parent) Loader.load();
+		  scene = new Scene(root);
+		  stage.setScene(scene);
+		  stage.show();
+	}
 	
 	@FXML
 	public void saveAndExit(ActionEvent e) throws IOException {
