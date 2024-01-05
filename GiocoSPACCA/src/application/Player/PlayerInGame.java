@@ -40,8 +40,8 @@ public class PlayerInGame extends Player {
 		return healthPoints;
 	}
 	public void setHealthPoints(int hp) {
-		if(hp>MAXHP)
-			this.healthPoints = MAXHP;
+		if(hp>MAXHP+5)
+			this.healthPoints = MAXHP+5;
 		else
 			this.healthPoints = hp;
 	}

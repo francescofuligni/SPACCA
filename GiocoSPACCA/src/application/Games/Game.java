@@ -66,6 +66,7 @@ public abstract class Game {
 	}
 	
 	public void nextTurn() {
+		currentPlayer().addCard(deck.pick());
 		if(turn+1==players.size())
 			turn=0;
 		else

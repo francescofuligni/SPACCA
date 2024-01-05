@@ -38,6 +38,7 @@ public class InsertCodeController {
 
     @FXML
     private Button returnToMainMenuButton;
+    
 
     @FXML
     void enterGame(ActionEvent event) throws IOException {
