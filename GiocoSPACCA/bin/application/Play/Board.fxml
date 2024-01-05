@@ -19,31 +19,31 @@
             <Image url="@../../../Images/Board.png" />
          </image>
       </ImageView>
-      <HBox layoutY="520.0" prefHeight="200.0" prefWidth="1280.0">
+      <HBox layoutY="459.0" prefHeight="261.0" prefWidth="1280.0">
          <children>
-            <Pane prefHeight="200.0" prefWidth="340.0">
+            <Pane prefHeight="222.0" prefWidth="315.0">
                <children>
-                  <Label alignment="CENTER" contentDisplay="CENTER" layoutY="38.0" prefHeight="19.0" prefWidth="340.0" text="Sta giocando: " textAlignment="CENTER" textFill="#ebebeb">
+                  <Label alignment="CENTER" contentDisplay="CENTER" layoutY="92.0" prefHeight="19.0" prefWidth="340.0" text="Sta giocando: " textAlignment="CENTER" textFill="#ebebeb">
                      <font>
                         <Font name="Britannic Bold" size="19.0" />
                      </font>
                   </Label>
-                  <Label fx:id="currentPlayer" alignment="CENTER" layoutY="86.0" prefHeight="28.0" prefWidth="340.0" text="........" textFill="WHITE">
+                  <Label fx:id="currentPlayer" alignment="CENTER" layoutY="140.0" prefHeight="28.0" prefWidth="340.0" text="........" textFill="WHITE">
                      <font>
                         <Font size="24.0" />
                      </font>
                   </Label>
                </children>
             </Pane>
-            <ListView fx:id="hand" orientation="HORIZONTAL" prefHeight="100.0" prefWidth="600.0" />
+            <ListView fx:id="hand" orientation="HORIZONTAL" prefHeight="232.0" prefWidth="659.0" />
             <Pane prefHeight="200.0" prefWidth="340.0">
                <children>
-                  <Label alignment="CENTER" contentDisplay="CENTER" layoutY="37.0" prefHeight="19.0" prefWidth="340.0" text="Prossimo giocatore:" textAlignment="CENTER" textFill="#ff0000bf">
+                  <Label alignment="CENTER" contentDisplay="CENTER" layoutX="-5.0" layoutY="93.0" prefHeight="19.0" prefWidth="340.0" text="Prossimo giocatore:" textAlignment="CENTER" textFill="#ff0000bf">
                      <font>
                         <Font name="Britannic Bold" size="19.0" />
                      </font>
                   </Label>
-                  <Label fx:id="nextPlayer" alignment="CENTER" layoutY="84.0" prefHeight="28.0" prefWidth="340.0" text="........" textFill="#ff0000be">
+                  <Label fx:id="nextPlayer" alignment="CENTER" layoutX="-5.0" layoutY="140.0" prefHeight="28.0" prefWidth="340.0" text="........" textFill="#ff0000be">
                      <font>
                         <Font size="24.0" />
                      </font>
@@ -52,11 +52,11 @@
             </Pane>
          </children>
       </HBox>
-      <ProgressBar fx:id="healthBar" layoutX="342.0" layoutY="485.0" prefHeight="18.0" prefWidth="246.0" progress="0.0">
+      <ProgressBar fx:id="healthBar" layoutX="344.0" layoutY="430.0" prefHeight="18.0" prefWidth="246.0" progress="0.0">
          <effect>
             <InnerShadow />
          </effect></ProgressBar>
-      <Label fx:id="healthPoints" alignment="CENTER" layoutX="603.0" layoutY="483.0" text="xx " textAlignment="CENTER" textFill="WHITE">
+      <Label fx:id="healthPoints" alignment="CENTER" layoutX="605.0" layoutY="428.0" text="xx " textAlignment="CENTER" textFill="WHITE">
          <font>
             <Font name="Britannic Bold" size="20.0" />
          </font>
@@ -69,7 +69,7 @@
             <InnerShadow />
          </effect>
       </Button>
-      <Label fx:id="hp" alignment="CENTER" layoutX="640.0" layoutY="483.0" text="HP" textAlignment="CENTER" textFill="WHITE">
+      <Label fx:id="hp" alignment="CENTER" layoutX="642.0" layoutY="428.0" text="HP" textAlignment="CENTER" textFill="WHITE">
          <font>
             <Font name="Britannic Bold" size="20.0" />
          </font>
