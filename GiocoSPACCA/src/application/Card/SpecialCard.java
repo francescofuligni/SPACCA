@@ -106,10 +106,10 @@ public class SpecialCard extends Card {
 	private void effect7(Game g) {
 		int damage = 3;
 		for(PlayerInGame p : g.getPlayers()) {
-			p.setHealthPoints(p.getHealthPoints() - damage);
+			p.setHealthPoints(p.getHealthPoints() + damage);
 		}
 		PlayerInGame current = g.currentPlayer();
-		current.setHealthPoints(current.getHealthPoints() - damage);
+		current.setHealthPoints(current.getHealthPoints() + damage);
 	}
 	
 	// veleno maleodorante (opportunità)
