@@ -61,7 +61,7 @@
             <Font name="Britannic Bold" size="20.0" />
          </font>
       </Label>
-      <Button fx:id="saveAndExit" contentDisplay="CENTER" layoutX="1151.0" layoutY="27.0" mnemonicParsing="false" onAction="#save" prefHeight="29.0" prefWidth="94.0" text="Salva ed esci" textAlignment="CENTER">
+      <Button fx:id="saveAndExitButton" contentDisplay="CENTER" layoutX="1151.0" layoutY="27.0" mnemonicParsing="false" onAction="#saveAndExit" prefHeight="29.0" prefWidth="94.0" text="Salva ed esci" textAlignment="CENTER">
          <font>
             <Font name="Times New Roman Bold" size="13.0" />
          </font>

@@ -29,7 +29,8 @@ import javafx.stage.Stage;
 
 
 public class BoardController implements Initializable{
-
+	private ImageView selectedImage;
+	
 	private Stage stage;
 	private Scene scene;
 	private Parent root;
@@ -40,7 +41,7 @@ public class BoardController implements Initializable{
 	private Label currentPlayer, nextPlayer, healthPoints;
 
 	@FXML
-	private Button saveAndExit;
+	private Button saveAndExitButton;
 	
 	@FXML
 	private ListView<ImageView> hand;
@@ -76,40 +77,46 @@ public class BoardController implements Initializable{
 			images.add(iv);
 		}
 		hand.getItems().addAll(images);
-	}
-	
-	@FXML
-	public void playCard(ActionEvent e) {
 		
 		hand.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<ImageView>() {
-
 			@Override
 			public void changed(ObservableValue<? extends ImageView> arg0, ImageView arg1, ImageView arg2) {
-				
-				ImageView selected = hand.getSelectionModel().getSelectedItem();
-				
-				if(selected == null) {
-					Alert noCardSelected = new Alert(AlertType.ERROR);
-					noCardSelected.setTitle("ERRORE!");
-					noCardSelected.setHeaderText("ERRORE: SELEZIONA UNA CARTA");
-					noCardSelected.setContentText("Prima di giocare devi selezionare una carta");
-					noCardSelected.showAndWait();
-				} else {
-					Card c = cards.get(images.indexOf(selected));
-					c.effect(game);
-					game.nextTurn();
-					initialize(null, null);
-				}
+				selectedImage = hand.getSelectionModel().getSelectedItem();
 			}
 		});
 	}
 	
+	@FXML
+	public void playCard(ActionEvent e) throws IOException {
+		
+		if(selectedImage == null) {
+			Alert noCardSelected = new Alert(AlertType.ERROR);
+			noCardSelected.setTitle("ERRORE!");
+			noCardSelected.setHeaderText("ERRORE: SELEZIONA UNA CARTA");
+			noCardSelected.setContentText("Prima di giocare devi selezionare una carta");
+			noCardSelected.showAndWait();
+		} else {
+			Card c = cards.remove(images.indexOf(selectedImage));
+			c.effect(game);
+			game.nextTurn();
+			
+			game.save();
+			stage = (Stage)(playCardButton.getScene().getWindow());
+			  //IMPORTANTE RICORDA IL ../ nell'URL DEL FXML
+			  FXMLLoader Loader=new FXMLLoader(BoardController.class.getResource("Board.fxml"));
+			  root = (Parent) Loader.load();
+			  scene = new Scene(root);
+			  stage.setScene(scene);
+			  stage.show();
+		}
+	}
+	
 	
 	
 	@FXML
-	public void save(ActionEvent e) throws IOException {
+	public void saveAndExit(ActionEvent e) throws IOException {
 		game.save();
-		stage = (Stage)(saveAndExit.getScene().getWindow());
+		stage = (Stage)(saveAndExitButton.getScene().getWindow());
 		  //IMPORTANTE RICORDA IL ../ nell'URL DEL FXML
 		  FXMLLoader Loader=new FXMLLoader(MainMenuController.class.getResource("MainMenu.fxml"));
 		  root = (Parent) Loader.load();
