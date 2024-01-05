@@ -3,9 +3,7 @@ package application.Games;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.Iterator;
-import java.util.Random;
 import java.util.Scanner;
 
 import application.Admin.BOTDIFF;
@@ -59,7 +57,7 @@ public abstract class Game {
 	}
 	
 	public PlayerInGame nextPlayer() {
-		if(turn+1==players.size())
+		if(turn+1>=players.size())
 			return players.get(0);
 		else
 			return players.get(turn+1);
