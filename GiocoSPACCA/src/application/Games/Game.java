@@ -3,9 +3,7 @@ package application.Games;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.Iterator;
-import java.util.Random;
 import java.util.Scanner;
 
 import application.Admin.BOTDIFF;
@@ -100,9 +98,6 @@ public abstract class Game {
 				}
 				p.setHand(hand);
 			}
-			Collections.shuffle(players);			// metodo built-in per mescolare una collection (rimescola i giocatori solo se è una nuova partita)
-			Random rand = new Random();
-			turn = rand.nextInt(players.size());	// assegna turno iniziale casualmente (solo se è una nuova partita)
 		}
 	}
 	
