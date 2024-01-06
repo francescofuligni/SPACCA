@@ -74,7 +74,11 @@ public class BoardController implements Initializable{
 			playCardButton.setText("ABBANDONA");
 			infoLabel.setTextFill(Color.RED);
 			infoLabel.setText("Sei stato eliminato: clicca su ABBANDONA per uscire dalla partita");
-		} else {
+		} else if(current.equals(next)) {
+			playCardButton.setText("FINE");
+			infoLabel.setTextFill(Color.GREEN);
+			infoLabel.setText("HAI VINTO!");
+		} else{
 			isDead = false;
 			healthPoints.setText("" + current.getHealthPoints());
 			healthBar.setProgress((double)current.getHealthPoints()/current.MAXHP);
@@ -101,7 +105,12 @@ public class BoardController implements Initializable{
 	
 	@FXML
 	public void playCard(ActionEvent e) throws IOException {
-		if(!isDead) {
+		if(isDead) {
+			game.removePlayer();
+			nextPlayerBoard();
+		} else if(current.equals(next)) {
+			endGame();
+		} else {
 			if(selectedImage == null) {
 				Alert noCardSelected = new Alert(AlertType.ERROR);
 				noCardSelected.setTitle("ERRORE!");
@@ -111,16 +120,13 @@ public class BoardController implements Initializable{
 			} else {
 				Card c = cards.remove(images.indexOf(selectedImage));
 				c.effect(game);
+				game.nextTurn();
 				nextPlayerBoard();
 			}
-		} else {
-			game.removePlayer();
-			nextPlayerBoard();
 		}
 	}
 	
 	private void nextPlayerBoard() throws IOException {
-		game.nextTurn();
 		game.save();
 		stage = (Stage)(playCardButton.getScene().getWindow());
 		  //IMPORTANTE RICORDA IL ../ nell'URL DEL FXML
@@ -134,6 +140,21 @@ public class BoardController implements Initializable{
 	@FXML
 	public void saveAndExit(ActionEvent e) throws IOException {
 		game.save();
+		stage = (Stage)(saveAndExitButton.getScene().getWindow());
+		  //IMPORTANTE RICORDA IL ../ nell'URL DEL FXML
+		  FXMLLoader Loader=new FXMLLoader(MainMenuController.class.getResource("MainMenu.fxml"));
+		  root = (Parent) Loader.load();
+		  scene = new Scene(root);
+		  stage.setScene(scene);
+		  stage.show();
+	}
+	
+	private void endGame() throws IOException {
+		
+		// TODO: classifica punteggi giocatori
+		current.setScore(current.getScore()+5);			// 5 punti per vittoria
+		
+		game.gameFile.delete();
 		stage = (Stage)(saveAndExitButton.getScene().getWindow());
 		  //IMPORTANTE RICORDA IL ../ nell'URL DEL FXML
 		  FXMLLoader Loader=new FXMLLoader(MainMenuController.class.getResource("MainMenu.fxml"));

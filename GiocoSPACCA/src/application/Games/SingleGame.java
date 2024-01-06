@@ -42,7 +42,10 @@ public class SingleGame extends Game{
 	
 	public void removePlayer() {
 		players.remove(turn);
-		turn--;
+		if(turn-1<0)
+			turn = players.size()-1;
+		else 
+			turn--;
 	}
 
 	@Override
