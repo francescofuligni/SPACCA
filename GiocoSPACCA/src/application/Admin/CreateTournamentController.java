@@ -251,7 +251,7 @@ public class CreateTournamentController implements Initializable  {
 	        FileWriter fw = new FileWriter(f.getAbsolutePath(),true);
 	        Iterator<PlayerInGame> iter = playersInGame.iterator();
 	        Random rand=new Random();
-	        fw.write(tournamentMode.getValue() + "," + chooseDifficulty.getValue() + ","+ rand.nextInt(playersInGame.size())+ "\n");
+	        fw.write(tournamentMode.getValue() + "," + chooseDifficulty.getValue() + ","+ rand.nextInt(playersInGame.size())+ ",0\n"); //quando viene creato il contagiri é 0
 			while(iter.hasNext())
 				fw.write(iter.next() + "\n");
 			

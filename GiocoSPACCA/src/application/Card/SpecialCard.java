@@ -58,6 +58,8 @@ public class SpecialCard extends Card {
 		default:
 			break;
 		}
+			
+		
 	}
 	
 	// principessa eroica

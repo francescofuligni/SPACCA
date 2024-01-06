@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 import application.Card.Card;
+import application.Card.SpecialCard;
 import application.Games.*;
 import application.MainMenu.MainMenuController;
 import application.Player.PlayerInGame;
@@ -35,6 +36,7 @@ public class BoardController implements Initializable{
 	private Stage stage;
 	private Scene scene;
 	private Parent root;
+	
 	private ArrayList<ImageView> images;
 	private ArrayList<Card> cards;
 	private boolean isDead;
@@ -52,6 +54,9 @@ public class BoardController implements Initializable{
 	private ProgressBar healthBar;
 	
 	@FXML
+	private Button infoBoardButton;
+
+	@FXML
     private Button playCardButton;
 
 	private Game game = new SingleGame(InsertCodeController.file);
@@ -65,7 +70,7 @@ public class BoardController implements Initializable{
 		currentPlayer.setText(current.getUsername());
 		nextPlayer.setText(next.getUsername());
 		
-		healthBar.setStyle("-fx-accent: red;");							// healthBar rossa
+		healthBar.setStyle("-fx-accent: green;");							// healthBar rossa
 		
 		if(current.getHealthPoints()<=0) {
 			isDead = true;
@@ -78,6 +83,7 @@ public class BoardController implements Initializable{
 			playCardButton.setText("FINE");
 			infoLabel.setTextFill(Color.GREEN);
 			infoLabel.setText("HAI VINTO!");
+			game.gameFile.delete();
 		} else{
 			isDead = false;
 			healthPoints.setText("" + current.getHealthPoints());
@@ -102,26 +108,48 @@ public class BoardController implements Initializable{
 			}
 		});
 	}
+	 @FXML
+	 public void infoBoardDisplay(ActionEvent event) {
+		
+		 Alert info = new Alert(AlertType.INFORMATION);
+			info.setTitle("Tabellone HP");
+			
+			info.setHeaderText( game.getInfoHP());
+			info.showAndWait();
+	    }
 	
 	@FXML
 	public void playCard(ActionEvent e) throws IOException {
 		if(isDead) {
+			current.setScore(current.getScore()+game.getTurnCounter()/4);			
 			game.removePlayer();
 			nextPlayerBoard();
 		} else if(current.equals(next)) {
 			endGame();
 		} else {
+			
+			
 			if(selectedImage == null) {
 				Alert noCardSelected = new Alert(AlertType.ERROR);
 				noCardSelected.setTitle("ERRORE!");
 				noCardSelected.setHeaderText("ERRORE: SELEZIONA UNA CARTA");
 				noCardSelected.setContentText("Prima di giocare devi selezionare una carta");
 				noCardSelected.showAndWait();
+				
+			}else if(hasImprevisti() && (cards.get(images.indexOf(selectedImage)).getCode()>16 || cards.get(images.indexOf(selectedImage)).getCode()<13) ){
+				
+				Alert playImprevisto = new Alert(AlertType.ERROR);
+				playImprevisto.setTitle("ERRORE!");
+				playImprevisto.setHeaderText("ERRORE: HAI UN IMPREVISTO DA GIOCARE");
+				playImprevisto.setContentText("Se hai un imprevisto sei costretto a giocarlo");
+				playImprevisto.showAndWait();
+				
 			} else {
 				Card c = cards.remove(images.indexOf(selectedImage));
 				c.effect(game);
 				game.nextTurn();
 				nextPlayerBoard();
+			
 			}
 		}
 	}
@@ -149,12 +177,25 @@ public class BoardController implements Initializable{
 		  stage.show();
 	}
 	
+	private boolean hasImprevisti() {
+		
+		for(Card c: cards)
+			if(c.getCode()<=16 && c.getCode()>=13) {
+				infoLabel.setText("Se hai un imprevisto sei costretto a giocarlo");
+				infoLabel.setTextFill(Color.VIOLET);
+				return true;
+				}
+		
+		return false ;
+		
+	}
+	
 	private void endGame() throws IOException {
 		
 		// TODO: classifica punteggi giocatori
-		current.setScore(current.getScore()+5);			// 5 punti per vittoria
+		current.setScore(current.getScore()+10);			// 10 punti per vittoria
 		
-		game.gameFile.delete();
+		
 		stage = (Stage)(saveAndExitButton.getScene().getWindow());
 		  //IMPORTANTE RICORDA IL ../ nell'URL DEL FXML
 		  FXMLLoader Loader=new FXMLLoader(MainMenuController.class.getResource("MainMenu.fxml"));

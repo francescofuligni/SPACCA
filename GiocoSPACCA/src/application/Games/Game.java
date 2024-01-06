@@ -15,7 +15,9 @@ import application.Player.*;
 public abstract class Game {
 	protected BOTDIFF difficulty;
 	protected ArrayList<PlayerInGame> players;
+
 	protected int turn;
+	protected int turnCounter;
 	protected Scanner scan;
 	public File gameFile;
 	public Deck deck;			// scope public per i metodi effect delle carte
@@ -32,18 +34,29 @@ public abstract class Game {
 		if(scan.hasNextLine()) {
 			String line=scan.nextLine();
 			String[] tokens = line.split(",");
-			turn=Integer.parseInt(tokens[2]);
+			
 			if(tokens[1]=="FACILE")
 				difficulty = BOTDIFF.FACILE;
 			else
 				difficulty = BOTDIFF.DIFFICILE;
 			this.turn=Integer.parseInt(tokens[2]);
+			this.turnCounter=Integer.parseInt(tokens[3]);
 		}
 		this.players=new ArrayList<PlayerInGame>();
 		this.deck=new Deck();
 		
 	}
 	
+	protected void deleteDeads(){
+		//controllo per verificare se la carta speciale stia eliminando un giocatore
+		for(int i=0; i<players.size();i++) {
+			if(players.get(i).getHealthPoints()<=0) {
+				players.remove(getPlayers().get(i));
+				i--;
+			}
+		}
+		
+	}
 	
 	public BOTDIFF getDifficulty() {
 		return difficulty;
@@ -65,9 +78,16 @@ public abstract class Game {
 	}
 	
 	public void nextTurn() {
-		currentPlayer().addCard(deck.pick());
-		if(turn+1==players.size())
-			turn=0;
+		Card c;
+		do {
+			c=deck.pick();
+		}while(currentPlayer().getHand().size()==1&&c.getCode()==14);  //non puoi pescare la scomunica se hai solo una carta in mano perché autogiocandosi andresti in negativo
+		
+		currentPlayer().addCard(c);
+		if(turn+1==players.size()) {
+			turnCounter++; //conta i giri completi	
+			turn=0;	
+		}
 		else
 			turn++;
 	}
@@ -82,6 +102,11 @@ public abstract class Game {
 	}
 	
 	
+	public void setPlayers(ArrayList<PlayerInGame> players) {
+		this.players = players;
+	}
+
+
 	abstract public void removePlayer();			// eliminazione di un giocatore --> diverso a seconda della modalità
 	
 	abstract public void save();	 				// salvataggio della partita su file --> diverso a seconda della modalità
@@ -110,5 +135,20 @@ public abstract class Game {
 		else
 			bot = new HardBot(botName, healthPoints);
 		return bot;
+	}
+
+ public int getTurnCounter() {
+		return turnCounter;
+	}
+
+
+	//DA AGGIUNGIERE UN CONTROLLO SUI MORTI GIA RIMOSSI DA PLAYERSINGAME
+	public String getInfoHP() {   //returna una stringa in cui vengono mostrati gli hp dei giocatori in gioco
+		String s="";
+		for	(PlayerInGame p:players) {
+			s+= p.getUsername() + "- HP: "+ p.getHealthPoints() + "\n";
+		}
+		return s;
+		
 	}
 }
