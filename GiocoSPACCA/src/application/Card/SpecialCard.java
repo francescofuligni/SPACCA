@@ -106,11 +106,9 @@ public class SpecialCard extends Card {
 	private void effect7(Game g) {
 		int damage = 3;
 		for(PlayerInGame p : g.getPlayers()) {
-<<<<<<< HEAD
-			p.setHealthPoints(p.getHealthPoints() + damage); //tutti guadagnano tre punti vita, il current ulteriori tre
-=======
+
 			p.setHealthPoints(p.getHealthPoints() + damage);
->>>>>>> main
+
 		}
 		PlayerInGame current = g.currentPlayer();
 		current.setHealthPoints(current.getHealthPoints() + damage);

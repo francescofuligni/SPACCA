@@ -82,7 +82,7 @@
             <InnerShadow />
          </effect>
       </Button>
-      <Label fx:id="infoLabel" alignment="CENTER" contentDisplay="CENTER" layoutY="335.0" prefHeight="37.0" prefWidth="1280.0" textAlignment="CENTER">
+      <Label fx:id="infoLabel" alignment="CENTER" contentDisplay="CENTER" layoutY="315.0" prefHeight="57.0" prefWidth="1280.0" textAlignment="CENTER" textFill="WHITE">
          <font>
             <Font name="Times New Roman Bold" size="24.0" />
          </font>
