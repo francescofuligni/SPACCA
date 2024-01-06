@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.effect.ColorAdjust?>
+<?import javafx.scene.effect.DropShadow?>
+<?import javafx.scene.effect.InnerShadow?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.shape.Rectangle?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1200.0" stylesheets="@../style.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.MainMenu.MainMenuController">
+   <children>
+      <ImageView fitHeight="800.0" fitWidth="1200.0" pickOnBounds="true">
+         <image>
+            <Image url="@../../../Images/castle.png" />
+         </image>
+         <effect>
+            <ColorAdjust brightness="-0.17" />
+         </effect>
+      </ImageView>
+      <Rectangle arcHeight="30.0" arcWidth="30.0" fill="#464141" height="450.0" layoutX="400.0" layoutY="200.0" stroke="BLACK" strokeLineJoin="ROUND" strokeType="INSIDE" strokeWidth="2.0" width="400.0" />
+      <ImageView fitHeight="450.0" fitWidth="400.0" layoutX="400.0" layoutY="200.0" opacity="0.2" pickOnBounds="true">
+         <image>
+            <Image url="@../../../Images/stonetexture.jpg" />
+         </image>
+      </ImageView>
+      <Button fx:id="playButton" alignment="CENTER" contentDisplay="CENTER" layoutX="500.0" layoutY="313.0" mnemonicParsing="false" onAction="#enterGame" prefHeight="60.0" prefWidth="200.0" text="GIOCA!" textAlignment="CENTER">
+         <font>
+            <Font name="Bodoni MT" size="26.0" />
+         </font>
+         <effect>
+            <InnerShadow />
+         </effect></Button>
+      <Button fx:id="createGameButton" alignment="CENTER" contentDisplay="CENTER" layoutX="502.0" layoutY="395.0" mnemonicParsing="false" onAction="#switchToAdminLogin" prefHeight="60.0" prefWidth="200.0" text="Login Admin" textAlignment="CENTER">
+         <font>
+            <Font name="Bodoni MT" size="26.0" />
+         </font>
+         <effect>
+            <InnerShadow />
+         </effect></Button>
+      <Button fx:id="creditiButton" alignment="CENTER" contentDisplay="CENTER" layoutX="500.0" layoutY="563.0" mnemonicParsing="false" onAction="#switchToCredits" prefHeight="60.0" prefWidth="200.0" text="Crediti" textAlignment="CENTER">
+         <font>
+            <Font name="Bodoni MT" size="26.0" />
+         </font>
+         <effect>
+            <InnerShadow />
+         </effect></Button>
+      <Button fx:id="rulesButton" layoutX="502.0" layoutY="479.0" minWidth="-Infinity" mnemonicParsing="false" onAction="#switchToRules" prefHeight="60.0" prefWidth="200.0" text="Regole">
+         <font>
+            <Font name="Bodoni MT" size="26.0" />
+         </font>
+         <effect>
+            <InnerShadow />
+         </effect>
+      </Button>
+      <ImageView fitHeight="237.0" fitWidth="799.0" layoutX="201.0" layoutY="158.0">
+         <image>
+            <Image url="@../../../Images/flagBanner.png" />
+         </image>
+         <effect>
+            <DropShadow />
+         </effect>
+      </ImageView>
+      <ImageView fitHeight="113.0" fitWidth="491.0" layoutX="357.0" layoutY="190.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../../Images/spaccaTEXT.png" />
+         </image>
+         <effect>
+            <DropShadow height="65.48" radius="38.17" width="89.2">
+               <input>
+                  <DropShadow />
+               </input>
+            </DropShadow>
+         </effect>
+      </ImageView>
+   </children>
+</AnchorPane>

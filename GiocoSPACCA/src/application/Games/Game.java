@@ -17,7 +17,7 @@ public abstract class Game {
 	protected ArrayList<PlayerInGame> players;
 	protected int turn;
 	protected Scanner scan;
-	protected File gameFile;
+	public File gameFile;
 	public Deck deck;			// scope public per i metodi effect delle carte
 	
 	public Game(File game) {

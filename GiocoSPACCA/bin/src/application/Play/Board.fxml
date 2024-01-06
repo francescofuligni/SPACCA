@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.ProgressBar?>
+<?import javafx.scene.effect.InnerShadow?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1280.0" stylesheets="@../style.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.Play.BoardController">
+   <children>
+      <ImageView fitHeight="720.0" fitWidth="1280.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../../Images/Board.png" />
+         </image>
+      </ImageView>
+      <HBox layoutY="459.0" prefHeight="261.0" prefWidth="1280.0">
+         <children>
+            <Pane prefHeight="222.0" prefWidth="315.0">
+               <children>
+                  <Label alignment="CENTER" contentDisplay="CENTER" layoutY="92.0" prefHeight="19.0" prefWidth="340.0" text="Sta giocando: " textAlignment="CENTER" textFill="#ebebeb">
+                     <font>
+                        <Font name="Britannic Bold" size="19.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="currentPlayer" alignment="CENTER" layoutY="140.0" prefHeight="28.0" prefWidth="340.0" text="........" textFill="WHITE">
+                     <font>
+                        <Font size="24.0" />
+                     </font>
+                  </Label>
+               </children>
+            </Pane>
+            <ListView fx:id="hand" orientation="HORIZONTAL" prefHeight="232.0" prefWidth="659.0" />
+            <Pane prefHeight="200.0" prefWidth="340.0">
+               <children>
+                  <Label alignment="CENTER" contentDisplay="CENTER" layoutX="-5.0" layoutY="93.0" prefHeight="19.0" prefWidth="340.0" text="Prossimo giocatore:" textAlignment="CENTER" textFill="#ff0000bf">
+                     <font>
+                        <Font name="Britannic Bold" size="19.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="nextPlayer" alignment="CENTER" layoutX="-5.0" layoutY="140.0" prefHeight="28.0" prefWidth="340.0" text="........" textFill="#ff0000be">
+                     <font>
+                        <Font size="24.0" />
+                     </font>
+                  </Label>
+               </children>
+            </Pane>
+         </children>
+      </HBox>
+      <ProgressBar fx:id="healthBar" layoutX="344.0" layoutY="430.0" prefHeight="18.0" prefWidth="246.0" progress="0.0">
+         <effect>
+            <InnerShadow />
+         </effect></ProgressBar>
+      <Label fx:id="healthPoints" alignment="CENTER" layoutX="605.0" layoutY="428.0" text="xx " textAlignment="CENTER" textFill="WHITE">
+         <font>
+            <Font name="Britannic Bold" size="20.0" />
+         </font>
+      </Label>
+      <Button fx:id="saveAndExitButton" contentDisplay="CENTER" layoutX="1151.0" layoutY="27.0" mnemonicParsing="false" onAction="#saveAndExit" prefHeight="29.0" prefWidth="94.0" text="Salva ed esci" textAlignment="CENTER">
+         <font>
+            <Font name="Times New Roman Bold" size="13.0" />
+         </font>
+         <effect>
+            <InnerShadow />
+         </effect>
+      </Button>
+      <Label fx:id="hp" alignment="CENTER" layoutX="642.0" layoutY="428.0" text="HP" textAlignment="CENTER" textFill="WHITE">
+         <font>
+            <Font name="Britannic Bold" size="20.0" />
+         </font>
+      </Label>
+      <Button fx:id="playCardButton" layoutX="1005.0" layoutY="391.0" mnemonicParsing="false" onAction="#playCard" prefHeight="57.0" prefWidth="218.0" text="GIOCA CARTA">
+         <font>
+            <Font name="Times New Roman Bold" size="24.0" />
+         </font>
+         <effect>
+            <InnerShadow />
+         </effect>
+      </Button>
+      <Label fx:id="infoLabel" alignment="CENTER" contentDisplay="CENTER" layoutY="315.0" prefHeight="57.0" prefWidth="1280.0" textAlignment="CENTER" textFill="WHITE">
+         <font>
+            <Font name="Times New Roman Bold" size="24.0" />
+         </font>
+      </Label>
+   </children>
+</AnchorPane>
