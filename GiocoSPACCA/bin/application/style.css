@@ -20,6 +20,18 @@
 	-fx-background-radius: 15;
   }
 
+/*listview */
+
+.list-cell:filled:selected:focused{
+    -fx-background-color: -fx-secondary-color;
+   
+}
+
+
+.list-cell:filled {
+    -fx-cell-hover-color: black;
+}
+
 /*tabpane*/
 .tab-header-area .tab-header-background {
  	-fx-background-color: -fx-primary-color;

@@ -87,5 +87,13 @@
             <Font name="Times New Roman Bold" size="24.0" />
          </font>
       </Label>
+      <Button fx:id="infoBoardButton" layoutX="1151.0" layoutY="78.0" mnemonicParsing="false" onAction="#infoBoardDisplay" prefHeight="29.0" prefWidth="94.0" text="Tabellone">
+         <font>
+            <Font name="Times New Roman Bold" size="13.0" />
+         </font>
+         <effect>
+            <InnerShadow />
+         </effect>
+      </Button>
    </children>
 </AnchorPane>

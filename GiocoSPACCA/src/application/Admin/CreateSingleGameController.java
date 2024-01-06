@@ -241,7 +241,7 @@ public class CreateSingleGameController implements Initializable {
 	        Iterator<PlayerInGame> iter = playersInGame.iterator();
 
 	        Random rand=new Random();
-	        fw.write("SingleGame," + chooseDifficulty.getValue() + ","+rand.nextInt(playersInGame.size())+"\n");
+	        fw.write("SingleGame," + chooseDifficulty.getValue() + ","+rand.nextInt(playersInGame.size())+",0\n"); //quando viene creato il contagiri é 0
 
 			while(iter.hasNext())
 				fw.write(iter.next() + "\n");

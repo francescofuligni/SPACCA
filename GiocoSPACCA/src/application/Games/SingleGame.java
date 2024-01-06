@@ -36,7 +36,6 @@ public class SingleGame extends Game{
 			players.add(p);
 		}
 		scan.close();
-		
 		newGame();
 	}
 	
@@ -50,11 +49,12 @@ public class SingleGame extends Game{
 
 	@Override
 	public void save() {
+	//	deleteDeads(); //NON FUNZIONA LANCIA ECCZIONE
 		try {
 	        FileWriter fw = new FileWriter(gameFile.getAbsolutePath());			// sovrascrive il file
 	        Iterator<PlayerInGame> iter = players.iterator();
 	        
-	        fw.write("SingleGame," + difficulty + "," +  turn + "\n");
+	        fw.write("SingleGame," + difficulty + "," +  turn + ","+ turnCounter +  "\n");
 
 			while(iter.hasNext())
 				fw.write(iter.next() + "\n");
