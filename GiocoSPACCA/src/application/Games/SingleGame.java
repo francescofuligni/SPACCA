@@ -52,6 +52,7 @@ public class SingleGame extends Game{
 	        Iterator<PlayerInGame> iter = players.iterator();
 	        
 	        fw.write("SingleGame," + difficulty + "," +  turn + "\n");
+
 			while(iter.hasNext())
 				fw.write(iter.next() + "\n");
 			

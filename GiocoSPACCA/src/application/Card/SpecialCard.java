@@ -27,24 +27,36 @@ public class SpecialCard extends Card {
 		switch(this.getCode()) {
 		case 11:
 			effect1(g);
+			break;
 		case 12:
 			effect2(g);
+			break;
 		case 13:
 			effect3(g);
+			break;
 		case 14:
 			effect4(g);
+			break;
 		case 15:
 			effect5(g);
+			break;
 		case 16:
 			effect6(g);
+			break;
 		case 17:
 			effect7(g);
+			break;
 		case 18:
 			effect8(g);
+			break;
 		case 19:
 			effect9(g);
+			break;
 		case 20:
 			effect0(g);
+			break;
+		default:
+			break;
 		}
 	}
 	
@@ -71,7 +83,7 @@ public class SpecialCard extends Card {
 		int damage = 5;
 		PlayerInGame current = g.currentPlayer();
 		current.setHealthPoints(current.getHealthPoints() - damage);
-		g.nextTurn();
+		//g.nextTurn();
 	}
 	
 	// scomunica (imprevisto)
@@ -106,7 +118,9 @@ public class SpecialCard extends Card {
 	private void effect7(Game g) {
 		int damage = 3;
 		for(PlayerInGame p : g.getPlayers()) {
+
 			p.setHealthPoints(p.getHealthPoints() + damage);
+
 		}
 		PlayerInGame current = g.currentPlayer();
 		current.setHealthPoints(current.getHealthPoints() + damage);
@@ -122,9 +136,7 @@ public class SpecialCard extends Card {
 	// dono del mercante (opportunità)
 	private void effect9(Game g) {
 		PlayerInGame current = g.currentPlayer();
-		ArrayList<Card> hand = current.getHand();
-		hand.add(g.deck.pick());
-		current.setHand(hand);
+		current.addCard(g.deck.pick());
 	}
 	
 	// rissa selvaggia (opportunità)

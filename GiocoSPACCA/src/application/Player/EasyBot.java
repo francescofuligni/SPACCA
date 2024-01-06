@@ -21,8 +21,10 @@ public class EasyBot extends PlayerInGame implements IBot {
 		Random rand = new Random();
 		return hand.get(rand.nextInt(5));
 	}
-
+	
 	public BOTDIFF getDifficulty() {
 		return difficulty;
 	}
 }
+
+
