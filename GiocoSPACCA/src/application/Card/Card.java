@@ -10,7 +10,7 @@ public abstract class Card {
 	
 	public Card(int code) {
 		this.code = code;
-		this.pic= new Image("file:Images/Cards/"+code+".png");
+		this.pic= new Image(getClass().getResource("/Cards/"+code+".png").toString());
 	}
 	
 	public int getCode() {

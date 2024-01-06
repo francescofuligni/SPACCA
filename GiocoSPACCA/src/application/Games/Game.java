@@ -3,14 +3,13 @@ package application.Games;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.Iterator;
-import java.util.Random;
 import java.util.Scanner;
 
 import application.Admin.BOTDIFF;
 import application.Card.Card;
 import application.Card.Deck;
+import application.Card.SpecialCard;
 import application.Player.*;
 
 public abstract class Game {
@@ -59,13 +58,14 @@ public abstract class Game {
 	}
 	
 	public PlayerInGame nextPlayer() {
-		if(turn+1==players.size())
+		if(turn+1>=players.size())
 			return players.get(0);
 		else
 			return players.get(turn+1);
 	}
 	
 	public void nextTurn() {
+		currentPlayer().addCard(deck.pick());
 		if(turn+1==players.size())
 			turn=0;
 		else
@@ -86,17 +86,20 @@ public abstract class Game {
 	
 	abstract public void save();	 				// salvataggio della partita su file --> diverso a seconda della modalità
 	
-	protected void newGame() {					// distribuisce le carte ai giocatori se non ne hanno già in mano (se è una nuova partita)
+	protected void newGame() {						// distribuisce le carte ai giocatori se non ne hanno già in mano (se è una nuova partita)
 		if(currentPlayer().getHand().size() == 0) { 
 			for(PlayerInGame p : players) {
 				ArrayList<Card> hand = new ArrayList<>();
-				for(int i=0; i<4; i++)
-					hand.add(deck.pick());
+				for(int i=0; i<4; i++) {
+					Card c;
+					do {
+						c = deck.pick();
+					} while(c instanceof SpecialCard && ((SpecialCard)c).isImprevisto());			// un giocatore non può avere imprevisti nella mano iniziale
+					hand.add(c);
+				}
 				p.setHand(hand);
 			}
-			Collections.shuffle(players);			// metodo built-in per mescolare una collection (rimescola i giocatori solo se è una nuova partita)
-			Random rand = new Random();
-			turn = rand.nextInt(players.size());	// assegna turno iniziale casualmente (solo se è una nuova partita)
+		
 		}
 	}
 	
