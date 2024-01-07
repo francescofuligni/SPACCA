@@ -95,7 +95,7 @@ public class BoardController implements Initializable{
 		for(Card c : cards) {
 			ImageView iv = new ImageView();
 			iv.setImage(c.getPicture());
-			iv.setFitWidth(150);
+			iv.setFitWidth(230);
 			iv.setPreserveRatio(true);
 			images.add(iv);
 		}
