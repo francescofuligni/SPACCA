@@ -1,7 +1,6 @@
 package application.Player;
 
 import java.util.ArrayList;
-import java.util.Collection;
 
 import application.Card.*;
 
@@ -9,7 +8,7 @@ public class PlayerInGame extends Player {
 	
 	private int healthPoints;
 	protected ArrayList<Card> hand;				// scope protected per permetterne la visibilità nelle sottoclassi EasyBot e HardBot
-	public final int MAXHP = 30;				// valore massimo di punti salute
+	public final int MAXHP = 20;				// valore massimo di punti salute
 	
 	public PlayerInGame(String username) {
 		super(username);
@@ -31,17 +30,18 @@ public class PlayerInGame extends Player {
 		return hand.remove(i);
 	}
 	public void addCard(Card c) {
-		hand.add(c);
+		hand.add(0,c);
 	}
 	
 	
-	// getters e setters
 	public int getHealthPoints() {
 		return healthPoints;
 	}
 	public void setHealthPoints(int hp) {
 		if(hp>MAXHP+5)
 			this.healthPoints = MAXHP+5;
+		else if(hp<=0)
+			this.healthPoints = 0;
 		else
 			this.healthPoints = hp;
 	}
@@ -49,13 +49,14 @@ public class PlayerInGame extends Player {
 	public ArrayList<Card> getHand() {
 		return hand;
 	}
-	public void setHand(Collection<Card> hand) {
-		this.hand = (ArrayList<Card>)hand;
+	public void setHand(ArrayList<Card> hand) {
+		this.hand = hand;
 	}
 	
 	@Override
 	public String toString() {
-		String s = super.toString() + "," + healthPoints;
+		String s =  super.toString() + "," + healthPoints;
+		
 		for(int i=0; i<hand.size(); i++) {
 			if(hand.get(i)!=null) {
 				s+=("," + hand.get(i));

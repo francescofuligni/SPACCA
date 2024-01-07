@@ -9,15 +9,14 @@ import java.util.Scanner;
 import application.Admin.BOTDIFF;
 import application.Card.Card;
 import application.Card.Deck;
-import application.Card.SpecialCard;
 import application.Player.*;
 
 public abstract class Game {
 	protected BOTDIFF difficulty;
 	protected ArrayList<PlayerInGame> players;
+	protected ArrayList<PlayerInGame> eliminated;
 
 	protected int turn;
-	protected int turnCounter;
 	protected Scanner scan;
 	public File gameFile;
 	public Deck deck;			// scope public per i metodi effect delle carte
@@ -35,35 +34,31 @@ public abstract class Game {
 			String line=scan.nextLine();
 			String[] tokens = line.split(",");
 			
-			if(tokens[1]=="FACILE")
-				difficulty = BOTDIFF.FACILE;
-			else
+			if(tokens[1]=="DIFFICILE")
 				difficulty = BOTDIFF.DIFFICILE;
+			else
+				difficulty = BOTDIFF.FACILE;
 			this.turn=Integer.parseInt(tokens[2]);
-			this.turnCounter=Integer.parseInt(tokens[3]);
 		}
 		this.players=new ArrayList<PlayerInGame>();
-		this.deck=new Deck();
-		
-	}
-	
-	protected void deleteDeads(){
-		//controllo per verificare se la carta speciale stia eliminando un giocatore
-		for(int i=0; i<players.size();i++) {
-			if(players.get(i).getHealthPoints()<=0) {
-				players.remove(getPlayers().get(i));
-				i--;
-			}
-		}
-		
+		this.eliminated=new ArrayList<PlayerInGame>();
+		this.deck=new Deck();	
 	}
 	
 	public BOTDIFF getDifficulty() {
 		return difficulty;
 	}
 	
+	public int getTurn() {
+		return turn;
+	}
+	
 	public ArrayList<PlayerInGame> getPlayers() {
 		return players;
+	}
+	
+	public ArrayList<PlayerInGame> getEliminated() {
+		return eliminated;
 	}
 	
 	public PlayerInGame currentPlayer() {
@@ -85,11 +80,42 @@ public abstract class Game {
 		
 		currentPlayer().addCard(c);
 		if(turn+1==players.size()) {
-			turnCounter++; //conta i giri completi	
 			turn=0;	
 		}
 		else
 			turn++;
+	}
+	
+	public void setPlayers(ArrayList<PlayerInGame> players) {
+		this.players = players;
+	}
+
+	public String printPlayers() {			// restituisce una stringa con i giocatori in partita e i loro HP
+		String s="";
+		for	(PlayerInGame p:players) {
+			if(p.getHealthPoints()>0)
+				s += (p.getUsername() + " ["+ p.getHealthPoints() + "]\n");
+			else 
+				s += (p.getUsername() + " [eliminato]\n");
+		}
+		return s;
+	}
+	
+	public String printEliminated() {		// restituisce una stringa con i giocatori eliminati
+		String s="";
+		for	(PlayerInGame p:eliminated)
+			s += (p.getUsername() + " [eliminato]\n");
+		return s;
+	}
+	
+	public PlayerInGame nextPlayerAlive() {			// restitusce il primo giocatore successivo a currentPlayer ancora in partita (con HP>0)
+		PlayerInGame p = nextPlayer();
+		for(int i=players.indexOf(p)+1; p.getHealthPoints()<=0 && i!=players.indexOf(nextPlayer()); i++) {
+			if(i>=players.size())
+				i=0;
+			p=players.get(i);
+		}
+		return p;
 	}
 	
 	public String toString() {
@@ -100,11 +126,6 @@ public abstract class Game {
 		
 		return s;
 	}
-	
-	
-	public void setPlayers(ArrayList<PlayerInGame> players) {
-		this.players = players;
-	}
 
 
 	abstract public void removePlayer();			// eliminazione di un giocatore --> diverso a seconda della modalità
@@ -112,19 +133,16 @@ public abstract class Game {
 	abstract public void save();	 				// salvataggio della partita su file --> diverso a seconda della modalità
 	
 	protected void newGame() {						// distribuisce le carte ai giocatori se non ne hanno già in mano (se è una nuova partita)
-		if(currentPlayer().getHand().size() == 0) { 
-			for(PlayerInGame p : players) {
-				ArrayList<Card> hand = new ArrayList<>();
-				for(int i=0; i<4; i++) {
-					Card c;
-					do {
-						c = deck.pick();
-					} while(c instanceof SpecialCard && ((SpecialCard)c).isImprevisto());			// un giocatore non può avere imprevisti nella mano iniziale
-					hand.add(c);
-				}
-				p.setHand(hand);
+		for(PlayerInGame p : players) {
+			ArrayList<Card> hand = new ArrayList<>();
+			for(int i=0; i<4; i++) {
+				Card c;
+				do {
+					c = deck.pick();
+				} while(c.getCode()<=16 && c.getCode()>=13);			// un giocatore non può avere imprevisti nella mano iniziale
+				hand.add(c);
 			}
-		
+			p.setHand(hand);
 		}
 	}
 	
@@ -135,20 +153,5 @@ public abstract class Game {
 		else
 			bot = new HardBot(botName, healthPoints);
 		return bot;
-	}
-
- public int getTurnCounter() {
-		return turnCounter;
-	}
-
-
-	//DA AGGIUNGIERE UN CONTROLLO SUI MORTI GIA RIMOSSI DA PLAYERSINGAME
-	public String getInfoHP() {   //returna una stringa in cui vengono mostrati gli hp dei giocatori in gioco
-		String s="";
-		for	(PlayerInGame p:players) {
-			s+= p.getUsername() + "- HP: "+ p.getHealthPoints() + "\n";
-		}
-		return s;
-		
 	}
 }
