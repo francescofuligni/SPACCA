@@ -7,6 +7,7 @@
 	</classpathentry>
 	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/fx21"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/javafx21"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/javaFX21"/>
 	<classpathentry kind="src" path="GiocoSPACCA/src"/>
 	<classpathentry kind="src" path="GiocoSPACCA/Images"/>
 	<classpathentry kind="src" path="GiocoSPACCA/Informazioni_Partite"/>
