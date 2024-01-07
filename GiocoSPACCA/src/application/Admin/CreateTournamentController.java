@@ -181,10 +181,10 @@ public class CreateTournamentController implements Initializable  {
     @FXML
     void play(ActionEvent event) throws IOException {		// INCOMPLETO
     	
-    	if(chooseDifficulty.getValue()==null||tournamentMode.getValue()==null) {
+    	if(((MAXPLAYERS-playersCounter>0) && chooseDifficulty.getValue()==null) || tournamentMode.getValue()==null) {
 	    	Alert selectionAlert = new Alert(AlertType.ERROR);
-    		selectionAlert.setTitle("ERRORE!");
-    		selectionAlert.setContentText("SELEZIONARE DIFFICOLTA' BOT e/o MODALITA' TORNEO");
+    		selectionAlert.setTitle("ERRORE");
+    		selectionAlert.setHeaderText("Selezionare difficoltà bot e/o modalità torneo");
     		selectionAlert.showAndWait();
 	    	
 	    } else {
@@ -251,9 +251,10 @@ public class CreateTournamentController implements Initializable  {
 	        FileWriter fw = new FileWriter(f.getAbsolutePath(),true);
 	        Iterator<PlayerInGame> iter = playersInGame.iterator();
 	        Random rand=new Random();
-	        fw.write(tournamentMode.getValue() + "," + chooseDifficulty.getValue() + ","+ rand.nextInt(playersInGame.size())+ ",0\n"); //quando viene creato il contagiri é 0
+	        
+	        fw.write(tournamentMode.getValue() + "," + chooseDifficulty.getValue() + ","+ rand.nextInt(playersInGame.size())+ "\n");
 			while(iter.hasNext())
-				fw.write(iter.next() + "\n");
+				fw.write("in," + iter.next() + "\n");
 			
 			fw.flush();
 			fw.close();

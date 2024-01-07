@@ -168,10 +168,10 @@ public class CreateSingleGameController implements Initializable {
     
 	@FXML
 	public void play(ActionEvent event) throws IOException {
-	    if(chooseDifficulty.getValue()==null) {						// non crea la partita se non è stata inserita una difficoltà per i bot
+	    if((MAXPLAYERS-playersCounter>0) && chooseDifficulty.getValue()==null) {						// non crea la partita se non è stata inserita una difficoltà per i bot
 	    	Alert selectionAlert = new Alert(AlertType.ERROR);
-    		selectionAlert.setTitle("ERRORE!");
-    		selectionAlert.setContentText("SELEZIONARE DIFFICOLTA' BOT");
+    		selectionAlert.setTitle("ERRORE");
+    		selectionAlert.setHeaderText("Selezionare difficoltà bot");
     		selectionAlert.showAndWait();
     		
 	    } else {
@@ -229,9 +229,8 @@ public class CreateSingleGameController implements Initializable {
 	    	}
 	    }
 	    
-	    for(int i=0; i<MAXPLAYERS; i++) {											// converte ogni giocatore selezionato in PlayerInGame
+	    for(int i=0; i<MAXPLAYERS; i++)											// converte ogni giocatore selezionato in PlayerInGame
 	    	playersInGame.add(new PlayerInGame(selectedPlayers[i]));
-	    }
 	}
 	
 	
@@ -239,12 +238,11 @@ public class CreateSingleGameController implements Initializable {
 		try {
 	        FileWriter fw = new FileWriter(f.getAbsolutePath(),true);
 	        Iterator<PlayerInGame> iter = playersInGame.iterator();
-
 	        Random rand=new Random();
-	        fw.write("SingleGame," + chooseDifficulty.getValue() + ","+rand.nextInt(playersInGame.size())+",0\n"); //quando viene creato il contagiri é 0
-
+	        
+	        fw.write("SingleGame," + chooseDifficulty.getValue() + ","+rand.nextInt(playersInGame.size())+"\n");
 			while(iter.hasNext())
-				fw.write(iter.next() + "\n");
+				fw.write("in," + iter.next() + "\n");
 			
 			fw.flush();
 			fw.close();

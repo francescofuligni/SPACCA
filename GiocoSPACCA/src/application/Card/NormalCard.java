@@ -5,6 +5,8 @@ import application.Player.PlayerInGame;
 
 public class NormalCard extends Card { 
 	private int damage;
+	private PlayerInGame current;
+	private PlayerInGame next;
 
 	public NormalCard(int code) { 
 		super(code);
@@ -12,7 +14,6 @@ public class NormalCard extends Card {
 			damage=code;
 		else   							// figure con danno negativo --> cura a te stesso
 			damage= 5-code ;
-		
 	}
 	
 	public int getDamage() {
@@ -21,8 +22,8 @@ public class NormalCard extends Card {
 
 	@Override
 	public void effect(Game g) {
-		PlayerInGame current = g.currentPlayer();
-		PlayerInGame next = g.nextPlayer();
+		this.current=g.currentPlayer();
+		this.next=g.nextPlayerAlive();
 		
 		if(damage>0)
 			next.setHealthPoints(next.getHealthPoints() - damage);
