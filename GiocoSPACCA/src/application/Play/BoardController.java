@@ -208,6 +208,8 @@ public class BoardController implements Initializable{
 		  scene = new Scene(root);
 		  stage.setScene(scene);
 		  stage.show();
+		  
+		  game.gameFile.delete(); //prima di questo bisogna mostrare il podio
 	}
 	
 	private void finalScores() {
