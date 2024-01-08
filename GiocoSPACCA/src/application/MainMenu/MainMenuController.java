@@ -26,6 +26,8 @@ public class MainMenuController {
 	    private Button createGameButton;
 	 @FXML
 	 	private Button rulesButton;
+	 @FXML
+	    private Button scoreBoardButton;
 	 
 	 /*		METODO ENTER GAME--> richiede línserimento del codice partita precedentemente creato da admin e permette JOIN
 	  * 	METODO SWITCHTOCREDITS --> rimanda a scena con crediti
@@ -68,7 +70,7 @@ public class MainMenuController {
 
 	 
 	@FXML 
-	public void switchToAdminLogin(ActionEvent event) throws Exception {
+	public void switchToAdminLogin(ActionEvent event) throws IOException {
 		
 		  stage = (Stage)(createGameButton.getScene().getWindow());
 		  //IMPORTANTE RICORDA IL ../ nell'URL DEL FXML
@@ -80,5 +82,15 @@ public class MainMenuController {
 		
 		
 	}
+	 @FXML
+	    void switchToScoreBoard(ActionEvent event) throws IOException {
+		 stage = (Stage)(createGameButton.getScene().getWindow());
+		  //IMPORTANTE RICORDA IL ../ nell'URL DEL FXML
+		  FXMLLoader Loader=new FXMLLoader(MainMenuController.class.getResource("../MainMenu/ScoreBoard.fxml"));
+		  root = (Parent) Loader.load();
+		  scene = new Scene(root);
+		  stage.setScene(scene);
+		  stage.show();
+	    }
 	
 }
