@@ -40,7 +40,7 @@
          <effect>
             <InnerShadow />
          </effect></Button>
-      <Button fx:id="creditiButton" alignment="CENTER" contentDisplay="CENTER" layoutX="500.0" layoutY="563.0" mnemonicParsing="false" onAction="#switchToCredits" prefHeight="60.0" prefWidth="200.0" text="Crediti" textAlignment="CENTER">
+      <Button fx:id="creditiButton" alignment="CENTER" contentDisplay="CENTER" layoutX="1040.0" layoutY="705.0" mnemonicParsing="false" onAction="#switchToCredits" prefHeight="29.0" prefWidth="115.0" text="Crediti" textAlignment="CENTER">
          <font>
             <Font name="Bodoni MT" size="26.0" />
          </font>
@@ -75,5 +75,13 @@
             </DropShadow>
          </effect>
       </ImageView>
+      <Button fx:id="scoreBoardButton" layoutX="503.0" layoutY="561.0" minWidth="-Infinity" mnemonicParsing="false" onAction="#switchToScoreBoard" prefHeight="60.0" prefWidth="200.0" text="Classifica">
+         <font>
+            <Font name="Bodoni MT" size="26.0" />
+         </font>
+         <effect>
+            <InnerShadow />
+         </effect>
+      </Button>
    </children>
 </AnchorPane>

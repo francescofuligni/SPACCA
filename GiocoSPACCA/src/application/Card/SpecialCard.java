@@ -8,22 +8,18 @@ import application.Player.PlayerInGame;
 
 public class SpecialCard extends Card {
 	
-	private boolean imprevisto;			// variabile booleana per sapere se la carta deve essere giocata automaticamente
+	private PlayerInGame next;
+	private PlayerInGame current;
 	
 	public SpecialCard(int code) {
 		super(code);
-		if(code>=13 && code<=16)
-			imprevisto=true;
-		else
-			imprevisto=false;
-	}
-	
-	public boolean isImprevisto() {
-		return imprevisto;
 	}
 
 	@Override
 	public void effect(Game g) {
+		this.current=g.currentPlayer();
+		this.next=g.nextPlayerAlive();
+		
 		switch(this.getCode()) {
 		case 11:
 			effect1(g);
@@ -63,8 +59,6 @@ public class SpecialCard extends Card {
 	// principessa eroica
 	private void effect1(Game g) {
 		int damage = 5;
-		PlayerInGame current = g.currentPlayer();
-		PlayerInGame next = g.nextPlayer();
 		next.setHealthPoints(next.getHealthPoints() - damage);
 		current.setHealthPoints(current.getHealthPoints() + damage);
 	}
@@ -72,8 +66,6 @@ public class SpecialCard extends Card {
 	// sovrano guerriero
 	private void effect2(Game g) {
 		int damage = 6;
-		PlayerInGame current = g.currentPlayer();
-		PlayerInGame next = g.nextPlayer();
 		next.setHealthPoints(next.getHealthPoints() - damage);
 		current.setHealthPoints(current.getHealthPoints() + damage);
 	}
@@ -81,14 +73,11 @@ public class SpecialCard extends Card {
 	// ammutinamento (imprevisto)
 	private void effect3(Game g) {
 		int damage = 5;
-		PlayerInGame current = g.currentPlayer();
 		current.setHealthPoints(current.getHealthPoints() - damage);
-		//g.nextTurn();
 	}
 	
 	// scomunica (imprevisto)
 	private void effect4(Game g) {
-		PlayerInGame current = g.currentPlayer();
 		ArrayList<Card> hand = current.getHand();
 		Random rand = new Random();
 		hand.remove(rand.nextInt(hand.size()));
@@ -97,45 +86,39 @@ public class SpecialCard extends Card {
 	
 	// baratto (imprevisto)
 	private void effect5(Game g) {
-		PlayerInGame current = g.currentPlayer();
-		PlayerInGame next = g.nextPlayer();
 		ArrayList<Card> nextHand = next.getHand();
 		next.setHand(current.getHand());
+		next.addCard(g.deck.pick());
 		current.setHand(nextHand);
 	}
 	
 	// ghigliottina (imprevisto)
 	private void effect6(Game g) {
-		PlayerInGame current = g.currentPlayer();
 		int hp = current.getHealthPoints();
 		if(hp%2==0)
 			current.setHealthPoints(hp/2);
 		else
-			current.setHealthPoints((hp+1)/2);
+			current.setHealthPoints((hp-1)/2);
 	}
 	
 	// un giro in taverna (opportunità)
 	private void effect7(Game g) {
 		int damage = 3;
 		for(PlayerInGame p : g.getPlayers()) {
-
-			p.setHealthPoints(p.getHealthPoints() + damage);
-
+			if(p.getHealthPoints()>0)				// controllo per evitare resurrezione di giocatori eliminati
+				p.setHealthPoints(p.getHealthPoints() + damage);
 		}
-		PlayerInGame current = g.currentPlayer();
 		current.setHealthPoints(current.getHealthPoints() + damage);
 	}
 	
 	// veleno maleodorante (opportunità)
 	private void effect8(Game g) {
 		int damage = 10;
-		PlayerInGame next = g.nextPlayer();
 		next.setHealthPoints(next.getHealthPoints() - damage);
 	}
 	
 	// dono del mercante (opportunità)
 	private void effect9(Game g) {
-		PlayerInGame current = g.currentPlayer();
 		current.addCard(g.deck.pick());
 	}
 	

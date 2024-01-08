@@ -19,29 +19,35 @@ public class SingleGame extends Game{
 			String line=scan.nextLine();
 			String[] tokens = line.split(",");
 			
-			String username = tokens[0];
-			int healthPoints = Integer.parseInt(tokens[1]);
+			String username = tokens[1];
+			int healthPoints = Integer.parseInt(tokens[2]);
 			PlayerInGame p;
 			if(username == "BOT"+botCounter)
 				p = createBot(username, healthPoints);
 			else
 				p = new PlayerInGame(username, healthPoints);
 			
-			ArrayList<Card> hand = new ArrayList<>();
-			for(int i=2; i<tokens.length; i++) {
-				hand.add(deck.getCard(Integer.parseInt(tokens[i])));
+			if(tokens[0].equals("in")) {			// giocatori in partita
+				ArrayList<Card> hand = new ArrayList<>();
+				for(int i=3; i<tokens.length; i++)
+					hand.add(deck.getCard(Integer.parseInt(tokens[i])));
+				p.setHand(hand);
+				players.add(p);
+			} else {								// giocatori eliminati
+				eliminated.add(p);
 			}
-			p.setHand(hand);
-			
-			players.add(p);
 		}
 		scan.close();
 		
-		newGame();
+		if(currentPlayer().getHand().size() == 0)			// se i giocatori non hanno carte in mano, vengono distribuite le carte
+			newGame();
 	}
 	
+	@Override
 	public void removePlayer() {
-		players.remove(turn);
+		eliminated.add(0, players.remove(turn));
+		eliminated.get(0).setHand(new ArrayList<Card>());
+		eliminated.get(0).setHealthPoints(0);
 		if(turn-1<0)
 			turn = players.size()-1;
 		else 
@@ -52,12 +58,21 @@ public class SingleGame extends Game{
 	public void save() {
 		try {
 	        FileWriter fw = new FileWriter(gameFile.getAbsolutePath());			// sovrascrive il file
-	        Iterator<PlayerInGame> iter = players.iterator();
+	        fw.write("SingleGame," + difficulty + "," +  turn +  "\n");
 	        
-	        fw.write("SingleGame," + difficulty + "," +  turn + "\n");
-
-			while(iter.hasNext())
-				fw.write(iter.next() + "\n");
+	        // giocatori in partita
+	        if(players.size()>0) {
+	        	Iterator<PlayerInGame> iter1 = players.iterator();
+	        	while(iter1.hasNext())
+	        		fw.write("in," + iter1.next() + "\n");
+	        }
+			
+			// giocatori eliminati
+			if(eliminated.size()>0) {
+				Iterator<PlayerInGame> iter2 = eliminated.iterator();
+				while(iter2.hasNext())
+					fw.write("out," + iter2.next() + "\n");
+			}
 			
 			fw.flush();
 			fw.close();

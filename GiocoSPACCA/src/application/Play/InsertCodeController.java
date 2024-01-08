@@ -57,6 +57,7 @@ public class InsertCodeController {
 	    	root = (Parent) Loader.load();
 	    	scene = new Scene(root);
 	    	stage.setScene(scene);
+	    	
 	    	stage.show();
     		 
     		

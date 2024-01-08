@@ -20,6 +20,22 @@
 	-fx-background-radius: 15;
   }
 
+/*listview */
+.list-view{
+	-fx-background-color:transparent;
+}
+
+.list-cell{
+	 -fx-background-color: transparent;
+    -fx-font-size:22;
+    -fx-text-alignement:CENTER;
+}
+.list-cell:filled:selected:focused{
+    -fx-background-color: red;
+    -fx-font-weight: bold;
+   
+}
+
 /*tabpane*/
 .tab-header-area .tab-header-background {
  	-fx-background-color: -fx-primary-color;
