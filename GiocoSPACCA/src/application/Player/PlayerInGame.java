@@ -26,7 +26,7 @@ public class PlayerInGame extends Player {
 		this.hand = new ArrayList<>();
 	}
 	
-	public Card playCard(int i) {
+	public Card getCard(int i) {
 		return hand.remove(i);
 	}
 	public void addCard(Card c) {

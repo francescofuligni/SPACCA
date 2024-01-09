@@ -10,14 +10,18 @@ import java.net.URL;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
+import java.util.Random;
 import java.util.ResourceBundle;
 import java.util.Scanner;
 
+import application.Admin.BOTDIFF;
 import application.Card.Card;
+import application.Card.NormalCard;
+import application.Card.SpecialCard;
 import application.Games.*;
 import application.MainMenu.MainMenuController;
-import application.Player.IBot;
-import application.Player.PlayerInGame;
+import application.Player.*;
+import javafx.animation.PauseTransition;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
@@ -33,7 +37,7 @@ import javafx.scene.control.ListView;
 import javafx.scene.control.ProgressBar;
 import javafx.scene.control.Alert.AlertType;
 import javafx.stage.Stage;
-
+import javafx.util.Duration;
 
 public class BoardController implements Initializable {
 	
@@ -69,7 +73,7 @@ public class BoardController implements Initializable {
 		currentPlayer.setText(current.getUsername());						// label current player
 		nextPlayer.setText(nextAlive.getUsername());						// label next player (mostra il prossimo giocatore vivo)
 		
-		healthBar.setStyle("-fx-accent: green;");							// healthBar rossa
+		healthBar.setStyle("-fx-accent: green;");							// healthBar verde
 		
 		healthPoints.setText("" + current.getHealthPoints());
 		healthBar.setProgress((double)current.getHealthPoints()/current.MAXHP);
@@ -83,7 +87,6 @@ public class BoardController implements Initializable {
 				game.nextTurn();
 				game.removePlayer();
 			}
-			
 		} else if(current.getHealthPoints()<=0) {
 			isOut = true;
 			healthPoints.setText("" + 0);
@@ -105,28 +108,25 @@ public class BoardController implements Initializable {
 				images.add(iv);
 			}
 			cards.getItems().addAll(images);
+		}
+		
+		if(current.getUsername().startsWith("BOT")) {
 			
+			// BOT: non funziona
+			PauseTransition pause = new PauseTransition(Duration.seconds(20));
+			pause.play();
+			selectedImage = images.get(hand.indexOf(botCard()));
+			// evidenziare carta selezionata
+			pause.play();
+			playCardButton.fire();
+			
+		} else {
 			cards.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<ImageView>() {
 				@Override
 				public void changed(ObservableValue<? extends ImageView> arg0, ImageView arg1, ImageView arg2) {
 					selectedImage = cards.getSelectionModel().getSelectedItem();
 				}
 			});
-		}
-		
-		// TODO: controllo se è un bot --> giocata automatica (tempo per mostrare la giocata del bot)
-		
-		if(current instanceof IBot) {
-			if(!isOut) {
-				Card c = ((IBot)current).playCard();
-				images.get(hand.indexOf(c));
-				// aspettare qualche secondo
-			}
-			try {
-				playCard(new ActionEvent());
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
 		}
 	}
 	
@@ -141,7 +141,6 @@ public class BoardController implements Initializable {
 	
 	@FXML
 	public void playCard(ActionEvent e) throws IOException {
-		
 		if(current.equals(nextAlive)) {
 			endGame();
 		} else if(isOut) {	
@@ -166,7 +165,7 @@ public class BoardController implements Initializable {
 				playImprevisto.showAndWait();
 				
 			} else {
-				Card c = hand.remove(images.indexOf(selectedImage));
+				Card c = current.getCard(images.indexOf(selectedImage));
 				c.effect(game);
 				game.nextTurn();
 				nextPlayerBoard();
@@ -199,11 +198,10 @@ public class BoardController implements Initializable {
 	
 	private void endGame() throws IOException {
 		
-		// TODO: scrivere meccanismo punteggi vittoria/eliminazione nelle regole
-		// TODO: eliminare file partita a fine partita
+		// TODO: TABELLONE PARTITA
 		
 		finalScores();
-		game.gameFile.delete();
+		game.gameFile.delete();		// TODO: da spostare nella schermata del tabellone finale della partita
 		
 		stage = (Stage)(saveAndExitButton.getScene().getWindow());
 		  //IMPORTANTE RICORDA IL ../ nell'URL DEL FXML
@@ -212,8 +210,6 @@ public class BoardController implements Initializable {
 		  scene = new Scene(root);
 		  stage.setScene(scene);
 		  stage.show();
-		  
-		  game.gameFile.delete(); //prima di questo bisogna mostrare il podio
 	}
 	
 	private void finalScores() {
@@ -250,6 +246,33 @@ public class BoardController implements Initializable {
 			
 		} catch(IOException e) {
 			e.printStackTrace();
+		}
+	}
+	
+	
+	private Card botCard() {		// TODO: da spostare nella schermata del tabellone finale della partita
+		if(current.hasImprevisti())
+			for(Card c: hand)
+				if(c.getCode()<=16 && c.getCode()>=13)
+					return c;
+		
+		if(game.getDifficulty().equals(BOTDIFF.DIFFICILE)) {
+			boolean flag = true;
+			int imax = 0;
+			for(int i=0; i<hand.size(); i++) {
+				if(hand.get(i) instanceof SpecialCard) {
+					return hand.get(i);
+				} else if(flag) {
+					imax = i;
+					flag = false;
+				} else if(Math.abs(((NormalCard)hand.get(imax)).getDamage())<Math.abs(((NormalCard)hand.get(i)).getDamage())) {
+					imax = i;
+				}
+			}
+			return hand.get(imax);
+		} else {
+			Random rand = new Random();
+			return hand.get(rand.nextInt(hand.size()));
 		}
 	}
 }

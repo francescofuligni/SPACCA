@@ -3,7 +3,6 @@ package application.Games;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.Scanner;
 
 import application.Admin.BOTDIFF;
@@ -72,6 +71,16 @@ public abstract class Game {
 			return players.get(turn+1);
 	}
 	
+	public PlayerInGame nextPlayerAlive() {			// restitusce il primo giocatore successivo a currentPlayer ancora in partita (con HP>0)
+		PlayerInGame p = nextPlayer();
+		for(int i=players.indexOf(p)+1; p.getHealthPoints()<=0 && i!=players.indexOf(nextPlayer()); i++) {
+			if(i>=players.size())
+				i=0;
+			p=players.get(i);
+		}
+		return p;
+	}
+	
 	public void nextTurn() {
 		Card c;
 		do {
@@ -109,31 +118,11 @@ public abstract class Game {
 		return s;
 	}
 	
-	public PlayerInGame nextPlayerAlive() {			// restitusce il primo giocatore successivo a currentPlayer ancora in partita (con HP>0)
-		PlayerInGame p = nextPlayer();
-		for(int i=players.indexOf(p)+1; p.getHealthPoints()<=0 && i!=players.indexOf(nextPlayer()); i++) {
-			if(i>=players.size())
-				i=0;
-			p=players.get(i);
-		}
-		return p;
-	}
+	abstract public void removePlayer();		// eliminazione di un giocatore --> diverso a seconda della modalità
 	
-	public String toString() {
-		String s="";
-		Iterator<PlayerInGame> iter = players.iterator();
-		while(iter.hasNext())
-			s+=(iter.next() + "\n");
-		
-		return s;
-	}
-
-
-	abstract public void removePlayer();			// eliminazione di un giocatore --> diverso a seconda della modalità
+	abstract public void save();	 			// salvataggio della partita su file --> diverso a seconda della modalità
 	
-	abstract public void save();	 				// salvataggio della partita su file --> diverso a seconda della modalità
-	
-	protected boolean newGame() {					// distribuisce le carte ai giocatori se non ne hanno già in mano (se è una nuova partita)
+	protected boolean newGame() {
 		if(currentPlayer().getHealthPoints()>0 && currentPlayer().getHand().size() == 0) {			// se i giocatori non hanno carte in mano, vengono distribuite le carte
 			for(PlayerInGame p : players) {
 				ArrayList<Card> hand = new ArrayList<>();
@@ -150,14 +139,5 @@ public abstract class Game {
 		} else {
 			return false;
 		}
-	}
-	
-	protected PlayerInGame createBot(String botName, int healthPoints) {
-		PlayerInGame bot;
-		if(difficulty == BOTDIFF.FACILE)
-			bot = new EasyBot(botName, healthPoints);
-		else
-			bot = new HardBot(botName, healthPoints);
-		return bot;
 	}
 }

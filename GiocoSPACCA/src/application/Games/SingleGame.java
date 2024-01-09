@@ -4,7 +4,6 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Iterator;
 
 import application.Card.Card;
 import application.Player.PlayerInGame;
@@ -13,7 +12,6 @@ public class SingleGame extends Game{
 	
 	public SingleGame(File game)  {
 		super(game);
-		int botCounter=1;
 		
 		while(scan.hasNextLine() ) {				// aggiunge i giocatori all'arraylist allPlayers
 			String line=scan.nextLine();
@@ -21,11 +19,7 @@ public class SingleGame extends Game{
 			
 			String username = tokens[1];
 			int healthPoints = Integer.parseInt(tokens[2]);
-			PlayerInGame p;
-			if(username == "BOT"+botCounter)
-				p = createBot(username, healthPoints);
-			else
-				p = new PlayerInGame(username, healthPoints);
+			PlayerInGame p = new PlayerInGame(username, healthPoints);
 			
 			if(tokens[0].equals("in")) {			// giocatori in partita
 				ArrayList<Card> hand = new ArrayList<>();
@@ -37,8 +31,12 @@ public class SingleGame extends Game{
 				eliminated.add(p);
 			}
 		}
-		scan.close();
 		
+		if(players.size()==0) {		// nel caso in cui i giocatori sono morti tutti contemporaneamente, l'ultimo a morire (in base all'ordine) è il vincitore
+			players.add(eliminated.remove(0));
+			players.get(0).setHealthPoints(1);
+		}
+		scan.close();
 		newGame();
 	}
 	
@@ -60,18 +58,14 @@ public class SingleGame extends Game{
 	        fw.write("SingleGame," + difficulty + "," +  turn +  "\n");
 	        
 	        // giocatori in partita
-	        if(players.size()>0) {
-	        	Iterator<PlayerInGame> iter1 = players.iterator();
-	        	while(iter1.hasNext())
-	        		fw.write("in," + iter1.next() + "\n");
-	        }
+	        if(players.size()>0)
+	        	for(PlayerInGame p : players)
+	        		fw.write("in," + p + "\n");
 			
 			// giocatori eliminati
-			if(eliminated.size()>0) {
-				Iterator<PlayerInGame> iter2 = eliminated.iterator();
-				while(iter2.hasNext())
-					fw.write("out," + iter2.next() + "\n");
-			}
+			if(eliminated.size()>0)
+				for(PlayerInGame p : eliminated)
+					fw.write("out," + p + "\n");
 			
 			fw.flush();
 			fw.close();

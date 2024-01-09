@@ -1,6 +1,5 @@
 package application.Admin;
 
-
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -14,10 +13,7 @@ import java.util.Random;
 import java.util.ResourceBundle;
 import java.util.Scanner;
 
-import application.Player.EasyBot;
-import application.Player.HardBot;
-import application.Player.Player;
-import application.Player.PlayerInGame;
+import application.Player.*;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -229,20 +225,14 @@ public class CreateTournamentController implements Initializable  {
     
     private void fillPlayersInGame() {
 		int botCounter = 0;
-	    for(int i=0; i<MAXPLAYERS; i++) {											// inserisce i bot nei giocatori della partita
-	    	if(selectedPlayers[i]==null) {
-	    		if(chooseDifficulty.getValue().equals(BOTDIFF.FACILE)) {
-	    			botCounter++;
-	    			selectedPlayers[i] = new EasyBot("BOT" + botCounter);
-	    		} else {
-	    			botCounter++;
-	    			selectedPlayers[i] = new HardBot("BOT" + botCounter);
-	    		}
-	    	}
-	    }
 	    
-	    for(int i=0; i<MAXPLAYERS; i++) {											// converte ogni giocatore selezionato in PlayerInGame
-	    	playersInGame.add(new PlayerInGame(selectedPlayers[i]));
+	    for(int i=0; i<MAXPLAYERS; i++) {											
+	    	if(selectedPlayers[i] != null) {									// converte ogni giocatore selezionato in PlayerInGame
+	    		playersInGame.add(new PlayerInGame(selectedPlayers[i]));
+	    	} else {														// inserisce i bot nella partita
+	    		botCounter++;
+	    		playersInGame.add(new PlayerInGame("BOT" + botCounter));
+	    	}
 	    }
 	}
 	
@@ -254,7 +244,7 @@ public class CreateTournamentController implements Initializable  {
 	        Random rand=new Random();
 	        
 	        fw.write(tournamentMode.getValue() + "," + chooseDifficulty.getValue() + ","+ rand.nextInt(playersInGame.size())+ "\n");
-	        Collections.shuffle(playersInGame);			// mescola i giocatori per combinarli
+	        Collections.shuffle(playersInGame);			// mescola i giocatori
 			while(iter.hasNext())
 				fw.write("in," + iter.next() + "\n");
 			
