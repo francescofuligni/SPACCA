@@ -16,6 +16,7 @@ import java.util.Scanner;
 import application.Card.Card;
 import application.Games.*;
 import application.MainMenu.MainMenuController;
+import application.Player.IBot;
 import application.Player.PlayerInGame;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
@@ -34,16 +35,16 @@ import javafx.scene.control.Alert.AlertType;
 import javafx.stage.Stage;
 
 
-public class BoardController implements Initializable{
-	private ImageView selectedImage;
+public class BoardController implements Initializable {
 	
 	private Stage stage;
 	private Scene scene;
 	private Parent root;
 	
 	private ArrayList<ImageView> images;
-	private ArrayList<Card> cards;
-	private boolean isDead;
+	private ArrayList<Card> hand;
+	private boolean isOut;
+	private ImageView selectedImage;
 	
 	@FXML
 	private Label currentPlayer, nextPlayer, healthPoints, infoLabel;
@@ -52,7 +53,7 @@ public class BoardController implements Initializable{
 	private Button saveAndExitButton, infoBoardButton, playCardButton;
 	
 	@FXML
-	private ListView<ImageView> hand;
+	private ListView<ImageView> cards;
 	
 	@FXML
 	private ProgressBar healthBar;
@@ -84,37 +85,49 @@ public class BoardController implements Initializable{
 			}
 			
 		} else if(current.getHealthPoints()<=0) {
-			isDead = true;
+			isOut = true;
 			healthPoints.setText("" + 0);
 			healthBar.setProgress(0.0);
 			playCardButton.setText("ABBANDONA");
 			infoLabel.setTextFill(Color.RED);
 			infoLabel.setText("Sei stato eliminato:  clicca su ABBANDONA per uscire dalla partita");
-		} else{
-			isDead = false;
+		} else {
+			isOut = false;
 			healthPoints.setText("" + current.getHealthPoints());
 			healthBar.setProgress((double)current.getHealthPoints()/current.MAXHP);
-			cards = current.getHand();
+			hand = current.getHand();
 			images = new ArrayList<>();
-			for(Card c : cards) {
+			for(Card c : hand) {
 				ImageView iv = new ImageView();
 				iv.setImage(c.getPicture());
 				iv.setFitWidth(230);
 				iv.setPreserveRatio(true);
 				images.add(iv);
 			}
-			hand.getItems().addAll(images);
+			cards.getItems().addAll(images);
 			
-			hand.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<ImageView>() {
+			cards.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<ImageView>() {
 				@Override
 				public void changed(ObservableValue<? extends ImageView> arg0, ImageView arg1, ImageView arg2) {
-					selectedImage = hand.getSelectionModel().getSelectedItem();
+					selectedImage = cards.getSelectionModel().getSelectedItem();
 				}
 			});
 		}
 		
 		// TODO: controllo se è un bot --> giocata automatica (tempo per mostrare la giocata del bot)
 		
+		if(current instanceof IBot) {
+			if(!isOut) {
+				Card c = ((IBot)current).playCard();
+				images.get(hand.indexOf(c));
+				// aspettare qualche secondo
+			}
+			try {
+				playCard(new ActionEvent());
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		}
 	}
 	
 	@FXML
@@ -131,7 +144,7 @@ public class BoardController implements Initializable{
 		
 		if(current.equals(nextAlive)) {
 			endGame();
-		} else if(isDead) {	
+		} else if(isOut) {	
 			game.removePlayer();
 			nextPlayerBoard();
 			
@@ -143,7 +156,7 @@ public class BoardController implements Initializable{
 				noCardSelected.setContentText("Prima di giocare devi selezionare una carta");
 				noCardSelected.showAndWait();
 				
-			}else if(hasImprevisti() && (cards.get(images.indexOf(selectedImage)).getCode()>16 || cards.get(images.indexOf(selectedImage)).getCode()<13) ){
+			}else if(current.hasImprevisti() && (hand.get(images.indexOf(selectedImage)).getCode()>16 || hand.get(images.indexOf(selectedImage)).getCode()<13) ){
 				infoLabel.setTextFill(Color.VIOLET);
 				infoLabel.setText("Controlla le tue carte:  se hai un imprevisto sei costretto a giocarlo");
 				Alert playImprevisto = new Alert(AlertType.ERROR);
@@ -153,7 +166,7 @@ public class BoardController implements Initializable{
 				playImprevisto.showAndWait();
 				
 			} else {
-				Card c = cards.remove(images.indexOf(selectedImage));
+				Card c = hand.remove(images.indexOf(selectedImage));
 				c.effect(game);
 				game.nextTurn();
 				nextPlayerBoard();
@@ -184,22 +197,13 @@ public class BoardController implements Initializable{
 		  stage.show();
 	}
 	
-	private boolean hasImprevisti() {
-		for(Card c: cards) {
-			if(c.getCode()<=16 && c.getCode()>=13) {
-				return true;
-			}
-		}
-		return false;
-	}
-	
 	private void endGame() throws IOException {
 		
-		// TODO: fxml classifica globale giocatori con bottone dalla home
 		// TODO: scrivere meccanismo punteggi vittoria/eliminazione nelle regole
 		// TODO: eliminare file partita a fine partita
 		
 		finalScores();
+		game.gameFile.delete();
 		
 		stage = (Stage)(saveAndExitButton.getScene().getWindow());
 		  //IMPORTANTE RICORDA IL ../ nell'URL DEL FXML

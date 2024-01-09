@@ -8,6 +8,7 @@ import java.net.URL;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Iterator;
 import java.util.Random;
 import java.util.ResourceBundle;
@@ -253,6 +254,7 @@ public class CreateTournamentController implements Initializable  {
 	        Random rand=new Random();
 	        
 	        fw.write(tournamentMode.getValue() + "," + chooseDifficulty.getValue() + ","+ rand.nextInt(playersInGame.size())+ "\n");
+	        Collections.shuffle(playersInGame);			// mescola i giocatori per combinarli
 			while(iter.hasNext())
 				fw.write("in," + iter.next() + "\n");
 			
