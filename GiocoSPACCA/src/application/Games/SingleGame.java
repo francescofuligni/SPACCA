@@ -39,8 +39,7 @@ public class SingleGame extends Game{
 		}
 		scan.close();
 		
-		if(currentPlayer().getHand().size() == 0)			// se i giocatori non hanno carte in mano, vengono distribuite le carte
-			newGame();
+		newGame();
 	}
 	
 	@Override

@@ -42,7 +42,7 @@ public class BoardController implements Initializable{
 	private Parent root;
 	
 	private ArrayList<ImageView> images;
-	private ArrayList<Card> cards;
+	private ArrayList<Card> hand;
 	private boolean isDead;
 	
 	@FXML
@@ -52,7 +52,7 @@ public class BoardController implements Initializable{
 	private Button saveAndExitButton, infoBoardButton, playCardButton;
 	
 	@FXML
-	private ListView<ImageView> hand;
+	private ListView<ImageView> cards;
 	
 	@FXML
 	private ProgressBar healthBar;
@@ -94,26 +94,31 @@ public class BoardController implements Initializable{
 			isDead = false;
 			healthPoints.setText("" + current.getHealthPoints());
 			healthBar.setProgress((double)current.getHealthPoints()/current.MAXHP);
-			cards = current.getHand();
+			hand = current.getHand();
 			images = new ArrayList<>();
-			for(Card c : cards) {
+			for(Card c : hand) {
 				ImageView iv = new ImageView();
 				iv.setImage(c.getPicture());
 				iv.setFitWidth(230);
 				iv.setPreserveRatio(true);
 				images.add(iv);
 			}
-			hand.getItems().addAll(images);
+			cards.getItems().addAll(images);
 			
-			hand.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<ImageView>() {
+			cards.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<ImageView>() {
 				@Override
 				public void changed(ObservableValue<? extends ImageView> arg0, ImageView arg1, ImageView arg2) {
-					selectedImage = hand.getSelectionModel().getSelectedItem();
+					selectedImage = cards.getSelectionModel().getSelectedItem();
 				}
 			});
 		}
 		
 		// TODO: controllo se è un bot --> giocata automatica (tempo per mostrare la giocata del bot)
+		
+		// chiamare il metodo playcard
+		// selezionare la card nella listview
+		// aspettare qualche secondo
+		// richiamare metodo gioca
 		
 	}
 	
@@ -143,7 +148,7 @@ public class BoardController implements Initializable{
 				noCardSelected.setContentText("Prima di giocare devi selezionare una carta");
 				noCardSelected.showAndWait();
 				
-			}else if(hasImprevisti() && (cards.get(images.indexOf(selectedImage)).getCode()>16 || cards.get(images.indexOf(selectedImage)).getCode()<13) ){
+			}else if(current.hasImprevisti() && (hand.get(images.indexOf(selectedImage)).getCode()>16 || hand.get(images.indexOf(selectedImage)).getCode()<13) ){
 				infoLabel.setTextFill(Color.VIOLET);
 				infoLabel.setText("Controlla le tue carte:  se hai un imprevisto sei costretto a giocarlo");
 				Alert playImprevisto = new Alert(AlertType.ERROR);
@@ -153,7 +158,7 @@ public class BoardController implements Initializable{
 				playImprevisto.showAndWait();
 				
 			} else {
-				Card c = cards.remove(images.indexOf(selectedImage));
+				Card c = hand.remove(images.indexOf(selectedImage));
 				c.effect(game);
 				game.nextTurn();
 				nextPlayerBoard();
@@ -182,15 +187,6 @@ public class BoardController implements Initializable{
 		  scene = new Scene(root);
 		  stage.setScene(scene);
 		  stage.show();
-	}
-	
-	private boolean hasImprevisti() {
-		for(Card c: cards) {
-			if(c.getCode()<=16 && c.getCode()>=13) {
-				return true;
-			}
-		}
-		return false;
 	}
 	
 	private void endGame() throws IOException {

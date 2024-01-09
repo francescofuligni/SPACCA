@@ -33,6 +33,13 @@ public class PlayerInGame extends Player {
 		hand.add(0,c);
 	}
 	
+	public boolean hasImprevisti() {
+		for(Card c: hand)
+			if(c.getCode()<=16 && c.getCode()>=13)
+				return true;
+		
+		return false;
+	}
 	
 	public int getHealthPoints() {
 		return healthPoints;
@@ -57,11 +64,10 @@ public class PlayerInGame extends Player {
 	public String toString() {
 		String s =  super.toString() + "," + healthPoints;
 		
-		for(int i=0; i<hand.size(); i++) {
-			if(hand.get(i)!=null) {
+		for(int i=0; i<hand.size(); i++)
+			if(hand.get(i)!=null)
 				s+=("," + hand.get(i));
-			}
-		}
+				
 		return s;
 	}
 }

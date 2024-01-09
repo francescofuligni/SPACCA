@@ -76,12 +76,13 @@ public abstract class Game {
 		Card c;
 		do {
 			c=deck.pick();
-		}while(currentPlayer().getHand().size()==1&&c.getCode()==14);  //non puoi pescare la scomunica se hai solo una carta in mano perché autogiocandosi andresti in negativo
+			if(currentPlayer().getHand().size()==1 && c.getCode()==14)		// non puoi pescare la scomunica se hai solo una carta in mano perché autogiocandosi andresti in negativo
+				currentPlayer().getHand().remove(c);
+		}while(currentPlayer().getHand().size()==0);		
 		
 		currentPlayer().addCard(c);
-		if(turn+1==players.size()) {
-			turn=0;	
-		}
+		if(turn+1==players.size())
+			turn=0;
 		else
 			turn++;
 	}
@@ -132,17 +133,22 @@ public abstract class Game {
 	
 	abstract public void save();	 				// salvataggio della partita su file --> diverso a seconda della modalità
 	
-	protected void newGame() {						// distribuisce le carte ai giocatori se non ne hanno già in mano (se è una nuova partita)
-		for(PlayerInGame p : players) {
-			ArrayList<Card> hand = new ArrayList<>();
-			for(int i=0; i<4; i++) {
-				Card c;
-				do {
-					c = deck.pick();
-				} while(c.getCode()<=16 && c.getCode()>=13);			// un giocatore non può avere imprevisti nella mano iniziale
-				hand.add(c);
+	protected boolean newGame() {					// distribuisce le carte ai giocatori se non ne hanno già in mano (se è una nuova partita)
+		if(currentPlayer().getHealthPoints()>0 && currentPlayer().getHand().size() == 0) {			// se i giocatori non hanno carte in mano, vengono distribuite le carte
+			for(PlayerInGame p : players) {
+				ArrayList<Card> hand = new ArrayList<>();
+				for(int i=0; i<4; i++) {
+					Card c;
+					do {
+						c = deck.pick();
+					} while(c.getCode()<=16 && c.getCode()>=13);			// un giocatore non può avere imprevisti nella mano iniziale
+					hand.add(c);
+				}
+				p.setHand(hand);
 			}
-			p.setHand(hand);
+			return true;
+		} else {
+			return false;
 		}
 	}
 	
