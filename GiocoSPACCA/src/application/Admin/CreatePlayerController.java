@@ -49,8 +49,9 @@ public class CreatePlayerController {
 	@FXML
 	public void createPlayer(ActionEvent event) throws IOException {
 		String username = usernameField.getText();
+		username.trim().toUpperCase();
 		
-		if(username==null || username.trim().equals("") || username.trim().toUpperCase().equals("ADMINISTRATOR")) {			// controllare
+		if(username==null || username.equals("") || username.equals("ADMINISTRATOR") || username.startsWith("BOT")) {
 			Alert alert = new Alert(AlertType.ERROR);
 			alert.setTitle("Errore");
 			alert.setHeaderText("Errore nella creazione del giocatore");

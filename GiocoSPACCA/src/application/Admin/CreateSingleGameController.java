@@ -1,4 +1,3 @@
-
 package application.Admin;
 
 import java.io.File;
@@ -8,10 +7,12 @@ import java.net.URL;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Iterator;
 import java.util.Random;
 import java.util.ResourceBundle;
 import java.util.Scanner;
+
 import application.Player.*;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -217,20 +218,15 @@ public class CreateSingleGameController implements Initializable {
 	
 	private void fillPlayersInGame() {
 		int botCounter = 0;
-	    for(int i=0; i<MAXPLAYERS; i++) {											// inserisce i bot nei giocatori della partita
-	    	if(selectedPlayers[i]==null) {
-	    		if(chooseDifficulty.getValue().equals(BOTDIFF.FACILE)) {
-	    			botCounter++;
-	    			selectedPlayers[i] = new EasyBot("BOT" + botCounter);
-	    		} else {
-	    			botCounter++;
-	    			selectedPlayers[i] = new HardBot("BOT" + botCounter);
-	    		}
+	    
+	    for(int i=0; i<MAXPLAYERS; i++) {											
+	    	if(selectedPlayers[i] != null) {									// converte ogni giocatore selezionato in PlayerInGame
+	    		playersInGame.add(new PlayerInGame(selectedPlayers[i]));
+	    	} else {														// inserisce i bot nella partita
+	    		botCounter++;
+	    		playersInGame.add(new PlayerInGame("BOT" + botCounter));
 	    	}
 	    }
-	    
-	    for(int i=0; i<MAXPLAYERS; i++)											// converte ogni giocatore selezionato in PlayerInGame
-	    	playersInGame.add(new PlayerInGame(selectedPlayers[i]));
 	}
 	
 	
@@ -241,6 +237,7 @@ public class CreateSingleGameController implements Initializable {
 	        Random rand=new Random();
 	        
 	        fw.write("SingleGame," + chooseDifficulty.getValue() + ","+rand.nextInt(playersInGame.size())+"\n");
+	        Collections.shuffle(playersInGame);			// mescola i giocatori
 			while(iter.hasNext())
 				fw.write("in," + iter.next() + "\n");
 			
