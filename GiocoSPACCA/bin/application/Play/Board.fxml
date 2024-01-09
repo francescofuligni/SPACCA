@@ -35,7 +35,7 @@
                   </Label>
                </children>
             </Pane>
-            <ListView fx:id="hand" orientation="HORIZONTAL" prefHeight="409.0" prefWidth="974.0" />
+            <ListView fx:id="cards" orientation="HORIZONTAL" prefHeight="409.0" prefWidth="974.0" />
             <Pane prefHeight="200.0" prefWidth="340.0">
                <children>
                   <Label alignment="CENTER" contentDisplay="CENTER" layoutX="4.0" layoutY="114.0" prefHeight="19.0" prefWidth="340.0" text="Prossimo giocatore:" textAlignment="CENTER" textFill="#ff0000bf">

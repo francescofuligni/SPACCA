@@ -16,6 +16,7 @@ import java.util.Scanner;
 import application.Card.Card;
 import application.Games.*;
 import application.MainMenu.MainMenuController;
+import application.Player.IBot;
 import application.Player.PlayerInGame;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
@@ -34,8 +35,7 @@ import javafx.scene.control.Alert.AlertType;
 import javafx.stage.Stage;
 
 
-public class BoardController implements Initializable{
-	private ImageView selectedImage;
+public class BoardController implements Initializable {
 	
 	private Stage stage;
 	private Scene scene;
@@ -43,7 +43,8 @@ public class BoardController implements Initializable{
 	
 	private ArrayList<ImageView> images;
 	private ArrayList<Card> hand;
-	private boolean isDead;
+	private boolean isOut;
+	private ImageView selectedImage;
 	
 	@FXML
 	private Label currentPlayer, nextPlayer, healthPoints, infoLabel;
@@ -84,14 +85,14 @@ public class BoardController implements Initializable{
 			}
 			
 		} else if(current.getHealthPoints()<=0) {
-			isDead = true;
+			isOut = true;
 			healthPoints.setText("" + 0);
 			healthBar.setProgress(0.0);
 			playCardButton.setText("ABBANDONA");
 			infoLabel.setTextFill(Color.RED);
 			infoLabel.setText("Sei stato eliminato:  clicca su ABBANDONA per uscire dalla partita");
-		} else{
-			isDead = false;
+		} else {
+			isOut = false;
 			healthPoints.setText("" + current.getHealthPoints());
 			healthBar.setProgress((double)current.getHealthPoints()/current.MAXHP);
 			hand = current.getHand();
@@ -115,11 +116,18 @@ public class BoardController implements Initializable{
 		
 		// TODO: controllo se è un bot --> giocata automatica (tempo per mostrare la giocata del bot)
 		
-		// chiamare il metodo playcard
-		// selezionare la card nella listview
-		// aspettare qualche secondo
-		// richiamare metodo gioca
-		
+		if(current instanceof IBot) {
+			if(!isOut) {
+				Card c = ((IBot)current).playCard();
+				images.get(hand.indexOf(c));
+				// aspettare qualche secondo
+			}
+			try {
+				playCard(new ActionEvent());
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		}
 	}
 	
 	@FXML
@@ -136,7 +144,7 @@ public class BoardController implements Initializable{
 		
 		if(current.equals(nextAlive)) {
 			endGame();
-		} else if(isDead) {	
+		} else if(isOut) {	
 			game.removePlayer();
 			nextPlayerBoard();
 			
@@ -191,11 +199,11 @@ public class BoardController implements Initializable{
 	
 	private void endGame() throws IOException {
 		
-		// TODO: fxml classifica globale giocatori con bottone dalla home
 		// TODO: scrivere meccanismo punteggi vittoria/eliminazione nelle regole
 		// TODO: eliminare file partita a fine partita
 		
 		finalScores();
+		game.gameFile.delete();
 		
 		stage = (Stage)(saveAndExitButton.getScene().getWindow());
 		  //IMPORTANTE RICORDA IL ../ nell'URL DEL FXML
