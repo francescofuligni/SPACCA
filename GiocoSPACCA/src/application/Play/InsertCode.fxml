@@ -64,7 +64,7 @@
             <DropShadow />
          </effect>
       </Label>
-      <Label layoutX="508.0" layoutY="475.0" text="Oppure crea una nuova partita" textFill="WHITE" underline="true">
+      <Label fx:id="loginAdminLabel" layoutX="509.0" layoutY="475.0" onMouseClicked="#loginAdmin" onMousePressed="#setColorGrey" onMouseReleased="#setColorWhite" text="Oppure crea una nuova partita" textFill="WHITE" underline="true">
          <font>
             <Font name="Times New Roman Bold" size="14.0" />
          </font>

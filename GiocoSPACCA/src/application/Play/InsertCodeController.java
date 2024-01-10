@@ -6,6 +6,7 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 
 import application.Admin.CreateGameController;
+import application.Admin.LoginAdminController;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -13,7 +14,9 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.paint.Color;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.text.Text;
@@ -39,9 +42,12 @@ public class InsertCodeController {
     @FXML
     private Button returnToMainMenuButton;
     
+    @FXML
+    private Label loginAdminLabel;
+    
 
     @FXML
-    void enterGame(ActionEvent event) throws IOException {
+    public void enterGame(ActionEvent event) throws IOException {
     	
     	Path pathToFile = Paths.get("./GiocoSPACCA/Informazioni_Partite/" + codeField.getText().trim().toUpperCase() + ".csv");
     	File f=new File(pathToFile.toString());
@@ -72,7 +78,7 @@ public class InsertCodeController {
     }
 
     @FXML
-    void returnToMainMenu(ActionEvent event) throws IOException {
+    public void returnToMainMenu(ActionEvent event) throws IOException {
     	stage = (Stage)(returnToMainMenuButton.getScene().getWindow());
 		  //IMPORTANTE RICORDA IL ../ nell'URL DEL FXML
 		  FXMLLoader Loader=new FXMLLoader(CreateGameController.class.getResource("../MainMenu/MainMenu.fxml"));
@@ -82,6 +88,23 @@ public class InsertCodeController {
 		  stage.show();
     }
     
+    @FXML
+    public void loginAdmin(MouseEvent event) throws IOException {
+    	stage = (Stage)(loginAdminLabel.getScene().getWindow());
+		  //IMPORTANTE RICORDA IL ../ nell'URL DEL FXML
+		  FXMLLoader Loader=new FXMLLoader(LoginAdminController.class.getResource("../Admin/LoginAdmin.fxml"));
+		  root = (Parent) Loader.load();
+		  scene = new Scene(root);
+		  stage.setScene(scene);
+		  stage.show();
+    }
     
-
+    @FXML
+    public void setColorGrey(MouseEvent event) {
+    	loginAdminLabel.setTextFill(Color.GREY);
+    }
+    @FXML
+    public void setColorWhite(MouseEvent event) {
+    	loginAdminLabel.setTextFill(Color.WHITE);
+    }
 }
