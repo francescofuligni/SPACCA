@@ -40,6 +40,7 @@ public class SingleGame extends Game{
 		newGame();
 	}
 	
+	
 	@Override
 	public void removePlayer() {
 		eliminated.add(0, players.remove(turn));
