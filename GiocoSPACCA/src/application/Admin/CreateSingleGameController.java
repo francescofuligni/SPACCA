@@ -161,7 +161,6 @@ public class CreateSingleGameController implements Initializable {
     public void setColorGrey(MouseEvent event) {
     	undoSelection.setTextFill(Color.GREY);
     }
-    
     @FXML
     public void setColorWhite(MouseEvent event) {
     	undoSelection.setTextFill(Color.WHITE);

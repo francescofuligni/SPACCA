@@ -23,6 +23,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
 public class GameScoreBoardController implements Initializable {
@@ -56,8 +57,8 @@ public class GameScoreBoardController implements Initializable {
     @Override
     public void initialize(URL arg0, ResourceBundle arg1) {
     	
-    	String code = gameFile.getName();
-    	gameCodeLabel.setText("Classifica partita " + code);
+    	String[] code = gameFile.getName().split(".");
+    	gameCodeLabel.setText("Classifica partita " + code[0]);
     	
 		try {
 			Scanner scan=new Scanner(gameFile);
@@ -82,7 +83,7 @@ public class GameScoreBoardController implements Initializable {
 		}
 		
 		updateScores();
-		//gameFile.delete();
+		gameFile.delete();
     }
     
     @FXML
@@ -94,6 +95,15 @@ public class GameScoreBoardController implements Initializable {
 		  scene = new Scene(root);
 		  stage.setScene(scene);
 		  stage.show();
+    }
+
+    @FXML
+    public void setColorGrey(MouseEvent event) {
+    	generalScoreBoardLabel.setTextFill(Color.GREY);
+    }
+    @FXML
+    public void setColorWhite(MouseEvent event) {
+    	generalScoreBoardLabel.setTextFill(Color.WHITE);
     }
     
     

@@ -71,7 +71,7 @@ public class BoardController implements Initializable {
 		
 		healthBar.setStyle("-fx-accent: green;");							// healthBar verde
 		
-		healthPoints.setText("" + current.getHealthPoints());
+		healthPoints.setText("" + current.getHealthPoints() + "  HP");
 		healthBar.setProgress((double)current.getHealthPoints()/current.MAXHP);
 		
 		if(current.equals(nextAlive)) {					// il giocatore attuale è il vincitore (partita terminata)
@@ -79,13 +79,13 @@ public class BoardController implements Initializable {
 			infoLabel.setTextFill(Color.LIGHTGREEN);
 			infoLabel.setText("HAI VINTO!");
 			
-			while(game.getPlayers().size()>1) {
+			while(game.getPlayers().size()>1) {			// se i giocatori eliminati non sono stati rimossi, li rimuove
 				game.nextTurn();
 				game.removePlayer();
 			}
 		} else if(current.getHealthPoints()<=0) {		// il giocatore attuale è stato eliminato (abbandona la partita)
 			isOut = true;
-			healthPoints.setText("" + 0);
+			healthPoints.setText("0  HP");
 			healthBar.setProgress(0.0);
 			playCardButton.setText("ABBANDONA");
 			infoLabel.setTextFill(Color.RED);
