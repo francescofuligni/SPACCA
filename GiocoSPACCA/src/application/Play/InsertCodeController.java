@@ -47,9 +47,9 @@ public class InsertCodeController {
     	File f=new File(pathToFile.toString());
     	 
     	if(f.exists()) {
-    		 //se il codice esiste dobbiamo cambiare schermata all'fxml della board e caricarla con i dati di quella partita
+    		//se il codice esiste dobbiamo cambiare schermata all'fxml della board e caricarla con i dati di quella partita
     
-    		 file=new File(pathToFile.toString());
+    		file=new File(pathToFile.toString());
     		 
 	    	stage = (Stage)(returnToMainMenuButton.getScene().getWindow());
 	    	//IMPORTANTE RICORDA IL ../ nell'URL DEL FXML
@@ -57,10 +57,7 @@ public class InsertCodeController {
 	    	root = (Parent) Loader.load();
 	    	scene = new Scene(root);
 	    	stage.setScene(scene);
-	    	
 	    	stage.show();
-    		 
-    		
     	 }
     	 else {
     		Alert selectionAlert = new Alert(AlertType.ERROR);

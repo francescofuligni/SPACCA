@@ -3,18 +3,14 @@ package application.Play;
 import javafx.scene.image.ImageView;
 import javafx.scene.paint.Color;
 
-import java.io.File;
-import java.io.FileWriter;
 import java.io.IOException;
 import java.net.URL;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Random;
 import java.util.ResourceBundle;
-import java.util.Scanner;
 
 import application.Admin.BOTDIFF;
+import application.Admin.CreateGameController;
 import application.Card.Card;
 import application.Card.NormalCard;
 import application.Card.SpecialCard;
@@ -78,7 +74,7 @@ public class BoardController implements Initializable {
 		healthPoints.setText("" + current.getHealthPoints());
 		healthBar.setProgress((double)current.getHealthPoints()/current.MAXHP);
 		
-		if(current.equals(nextAlive)) {
+		if(current.equals(nextAlive)) {					// il giocatore attuale è il vincitore (partita terminata)
 			playCardButton.setText("FINE");
 			infoLabel.setTextFill(Color.LIGHTGREEN);
 			infoLabel.setText("HAI VINTO!");
@@ -87,14 +83,15 @@ public class BoardController implements Initializable {
 				game.nextTurn();
 				game.removePlayer();
 			}
-		} else if(current.getHealthPoints()<=0) {
+		} else if(current.getHealthPoints()<=0) {		// il giocatore attuale è stato eliminato (abbandona la partita)
 			isOut = true;
 			healthPoints.setText("" + 0);
 			healthBar.setProgress(0.0);
 			playCardButton.setText("ABBANDONA");
 			infoLabel.setTextFill(Color.RED);
 			infoLabel.setText("Sei stato eliminato:  clicca su ABBANDONA per uscire dalla partita");
-		} else {
+		
+		} else {										// il giocatore attuale è in partita (partita in corso)
 			isOut = false;
 			healthPoints.setText("" + current.getHealthPoints());
 			healthBar.setProgress((double)current.getHealthPoints()/current.MAXHP);
@@ -108,19 +105,7 @@ public class BoardController implements Initializable {
 				images.add(iv);
 			}
 			cards.getItems().addAll(images);
-		}
-		
-		if(current.getUsername().startsWith("BOT")) {
 			
-			// BOT: non funziona
-			PauseTransition pause = new PauseTransition(Duration.seconds(20));
-			pause.play();
-			selectedImage = images.get(hand.indexOf(botCard()));
-			// evidenziare carta selezionata
-			pause.play();
-			playCardButton.fire();
-			
-		} else {
 			cards.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<ImageView>() {
 				@Override
 				public void changed(ObservableValue<? extends ImageView> arg0, ImageView arg1, ImageView arg2) {
@@ -128,6 +113,17 @@ public class BoardController implements Initializable {
 				}
 			});
 		}
+		
+		/* // TODO: BOT non funziona
+		if(current.getUsername().startsWith("BOT")) {
+			PauseTransition pause = new PauseTransition(Duration.seconds(20));
+			pause.play();
+			selectedImage = images.get(hand.indexOf(botCard()));
+			// evidenziare carta selezionata
+			pause.play();
+			playCardButton.fire();
+		}
+		*/
 	}
 	
 	@FXML
@@ -140,7 +136,7 @@ public class BoardController implements Initializable {
 	}
 	
 	@FXML
-	public void playCard(ActionEvent e) throws IOException {
+	public void playCard() throws IOException {
 		if(current.equals(nextAlive)) {
 			endGame();
 		} else if(isOut) {	
@@ -185,7 +181,8 @@ public class BoardController implements Initializable {
 		  stage.show();
 	}
 	
-	private void nextPlayerBoard() throws IOException {
+	
+	private void nextPlayerBoard() throws IOException {			// carica la schermata del prossimo giocatore (e salva la partita)
 		game.save();
 		stage = (Stage)(playCardButton.getScene().getWindow());
 		  //IMPORTANTE RICORDA IL ../ nell'URL DEL FXML
@@ -196,61 +193,16 @@ public class BoardController implements Initializable {
 		  stage.show();
 	}
 	
-	private void endGame() throws IOException {
-		
-		// TODO: TABELLONE PARTITA
-		
-		finalScores();
-		game.gameFile.delete();		// TODO: da spostare nella schermata del tabellone finale della partita
-		
+	private void endGame() throws IOException {					// carica la classifica della partita
 		stage = (Stage)(saveAndExitButton.getScene().getWindow());
-		  //IMPORTANTE RICORDA IL ../ nell'URL DEL FXML
-		  FXMLLoader Loader=new FXMLLoader(MainMenuController.class.getResource("MainMenu.fxml"));
-		  root = (Parent) Loader.load();
-		  scene = new Scene(root);
-		  stage.setScene(scene);
-		  stage.show();
+    	FXMLLoader Loader=new FXMLLoader(GameScoreBoardController.class.getResource("../Play/GameScoreBoard.fxml"));
+    	root = (Parent) Loader.load();
+    	scene = new Scene(root);
+    	stage.setScene(scene);
+    	stage.show();
 	}
 	
-	private void finalScores() {
-		
-		Path pathToFile = Paths.get("./GiocoSPACCA/Informazioni_Partite/PLAYERS_REGISTER.csv");
-		File f=new File(pathToFile.toString());
-		ArrayList<String> usernames = new ArrayList<>();
-		
-		usernames.add(current.getUsername());
-		for(PlayerInGame p:game.getEliminated())
-			usernames.add(p.getUsername());
-		
-		int maxPoints = usernames.size()*4;
-		
-		try {
-			Scanner scan = new Scanner(f);
-			scan.reset();
-			String memory="";
-			
-			while(scan.hasNextLine() ) {
-				String line = scan.nextLine();
-				String[] tokens = line.split(",");
-				if(usernames.contains(tokens[0])) {
-					int score = (int) (Integer.parseInt(tokens[1]) + maxPoints/Math.pow(2, usernames.indexOf(tokens[0])));
-					memory = memory + tokens[0] + "," + score + "\n";			// salvataggio sul file
-				} else {		
-					memory = memory + line + "\n";					// le altre linee vengono riscritte nello stesso modo
-				}
-			}
-			scan.close();	
-			FileWriter fw = new FileWriter(f,false);
-			fw.write(memory);
-			fw.close();
-			
-		} catch(IOException e) {
-			e.printStackTrace();
-		}
-	}
-	
-	
-	private Card botCard() {		// TODO: da spostare nella schermata del tabellone finale della partita
+	private Card botCard() {			// metodo per la giocata del bot
 		if(current.hasImprevisti())
 			for(Card c: hand)
 				if(c.getCode()<=16 && c.getCode()>=13)

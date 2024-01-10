@@ -14,6 +14,7 @@ import java.util.Map.Entry;
 import java.util.ResourceBundle;
 import java.util.Scanner;
 
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -37,7 +38,7 @@ public class ScoreBoardController implements Initializable {
     private Button menuButton;
     
     @FXML
-    void returnToMainMenu() throws IOException {
+    void returnToMainMenu(ActionEvent e) throws IOException {
     	stage = (Stage)(menuButton.getScene().getWindow());
 		  //IMPORTANTE RICORDA IL ../ nell'URL DEL FXML
 		  FXMLLoader Loader=new FXMLLoader(ScoreBoardController.class.getResource("MainMenu.fxml"));
