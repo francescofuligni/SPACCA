@@ -62,17 +62,17 @@
                <font>
                   <Font name="Bodoni MT" size="26.0" />
                </font></TextField>
-            <Button fx:id="createButton" layoutX="259.0" layoutY="368.0" mnemonicParsing="false" onAction="#createPlayer" prefHeight="60.0" prefWidth="150.0" text="Crea">
+            <Button fx:id="createButton" layoutX="286.0" layoutY="360.0" mnemonicParsing="false" onAction="#createPlayer" prefHeight="51.0" prefWidth="107.0" text="Crea">
                <font>
-                  <Font name="Bodoni MT" size="30.0" />
+                  <Font name="Bodoni MT" size="24.0" />
                </font>
                <effect>
                   <InnerShadow />
          	   </effect>
             </Button>
-            <Button fx:id="endButton" layoutX="284.0" layoutY="456.0" mnemonicParsing="false" onAction="#returnToCreateGame" prefHeight="40.0" prefWidth="100.0" text="Fine">
+            <Button fx:id="endButton" layoutX="300.0" layoutY="463.0" mnemonicParsing="false" onAction="#returnToCreateGame" prefHeight="33.0" prefWidth="78.0" text="Fine">
                <font>
-                  <Font name="Bodoni MT" size="23.0" />
+                  <Font name="Bodoni MT" size="18.0" />
                </font>
                <effect>
                   <InnerShadow />

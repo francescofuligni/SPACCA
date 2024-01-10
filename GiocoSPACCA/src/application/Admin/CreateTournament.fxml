@@ -17,7 +17,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="668.0" stylesheets="@../style.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.Admin.CreateTournamentController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="668.0" stylesheets="@../style.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.Admin.CreateTournamentController">
    <children>
       <ImageView fitHeight="600.0" fitWidth="900.0" pickOnBounds="true" preserveRatio="true">
          <image>
@@ -104,9 +104,9 @@
             <Font name="Bodoni MT" size="18.0" />
          </font>
       </Text>
-      <Button fx:id="returnToCreateGameButton" layoutX="564.0" layoutY="553.0" mnemonicParsing="false" onAction="#returnToCreateGame" text=" Indietro ">
+      <Button fx:id="returnToCreateGameButton" layoutX="580.0" layoutY="553.0" mnemonicParsing="false" onAction="#returnToCreateGame" text=" Indietro ">
          <font>
-            <Font name="Bodoni MT" size="17.0" />
+            <Font name="Bodoni MT" size="14.0" />
          </font>
          <effect>
             <InnerShadow />
@@ -141,7 +141,7 @@
             <InnerShadow />
          </effect>
          <font>
-            <Font name="Bodoni MT" size="20.0" />
+            <Font name="Bodoni MT" size="24.0" />
          </font>
       </Button>
       <Rectangle arcHeight="5.0" arcWidth="5.0" height="52.0" layoutX="187.0" layoutY="162.0" stroke="WHITE" strokeLineCap="ROUND" strokeType="INSIDE" width="294.0">
@@ -173,11 +173,17 @@
          </font>
       </Text>
       <ChoiceBox fx:id="playersChoiceBox" layoutX="376.0" layoutY="400.0" prefHeight="26.0" prefWidth="124.0" />
-      <Label alignment="CENTER" layoutX="246.0" layoutY="446.0" prefHeight="17.0" prefWidth="161.0" text="Giocatori scelti:" textAlignment="CENTER" textFill="WHITE" />
-      <Label fx:id="selectedPlayersLabel" alignment="CENTER" layoutY="463.0" prefHeight="17.0" prefWidth="668.0" textAlignment="CENTER" textFill="WHITE" />
-      <Label fx:id="undoSelection" layoutX="535.0" layoutY="406.0" onMouseClicked="#undoAction" onMousePressed="#setColorGrey" onMouseReleased="#setColorWhite" text="Annulla" textFill="WHITE">
+      <Label alignment="CENTER" layoutX="246.0" layoutY="446.0" prefHeight="17.0" prefWidth="161.0" text="Giocatori scelti:" textAlignment="CENTER" textFill="WHITE">
          <font>
-            <Font name="System Bold" size="13.0" />
+            <Font name="Times New Roman Italic" size="14.0" />
+         </font></Label>
+      <Label fx:id="selectedPlayersLabel" alignment="CENTER" layoutY="465.0" prefHeight="22.0" prefWidth="668.0" textAlignment="CENTER" textFill="WHITE">
+         <font>
+            <Font name="Times New Roman Bold" size="14.0" />
+         </font></Label>
+      <Label fx:id="undoSelection" layoutX="529.0" layoutY="406.0" onMouseClicked="#undoAction" onMousePressed="#setColorGrey" onMouseReleased="#setColorWhite" text="Annulla" textFill="WHITE" underline="true">
+         <font>
+            <Font name="Times New Roman Bold" size="14.0" />
          </font>
       </Label>
    </children>

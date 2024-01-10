@@ -27,9 +27,9 @@
             <Image url="@../../../Images/stonetexture.jpg" />
          </image>
       </ImageView>
-      <Button fx:id="returnToMainMenuButton" layoutX="1001.0" layoutY="709.0" mnemonicParsing="false" onAction="#returnToMainMenu" text=" Indietro ">
+      <Button fx:id="returnToMainMenuButton" layoutX="1069.0" layoutY="736.0" mnemonicParsing="false" onAction="#returnToMainMenu" text=" Indietro ">
          <font>
-            <Font name="Bodoni MT" size="34.0" />
+            <Font name="Bodoni MT" size="18.0" />
          </font>
          <effect>
             <InnerShadow />
@@ -49,22 +49,22 @@
             </PasswordField>
             <Text fx:id="loginStatusText" fill="WHITE" fontSmoothingType="LCD" strokeType="OUTSIDE" strokeWidth="0.0" text="Inserire nome utente e password" textAlignment="CENTER" wrappingWidth="517.0666870117188">
                <font>
-                  <Font name="Bodoni MT" size="28.0" />
+                  <Font name="Bodoni MT" size="24.0" />
                </font>
             </Text>
          </children>
       </VBox>
-      <Button fx:id="confirmLogin" layoutX="555.0" layoutY="411.0" mnemonicParsing="false" onAction="#login" prefHeight="49.0" prefWidth="171.0" text="Login">
+      <Button fx:id="confirmLogin" layoutX="555.0" layoutY="419.0" mnemonicParsing="false" onAction="#login" prefHeight="49.0" prefWidth="171.0" text="LOGIN">
          <font>
-            <Font name="Bodoni MT" size="30.0" />
+            <Font name="Bodoni MT" size="24.0" />
          </font>
          <effect>
             <InnerShadow />
          </effect>
       </Button>
-      <Label alignment="CENTER" layoutX="381.0" layoutY="175.0" prefHeight="74.0" prefWidth="494.0" text="LOGIN ADMIN" textAlignment="CENTER" textFill="WHITE" textOverrun="CENTER_ELLIPSIS">
+      <Label alignment="CENTER" layoutX="381.0" layoutY="179.0" prefHeight="74.0" prefWidth="494.0" text="LOGIN ADMIN" textAlignment="CENTER" textFill="WHITE" textOverrun="CENTER_ELLIPSIS">
          <font>
-            <Font name="Bodoni MT" size="60.0" />
+            <Font name="Bodoni MT" size="50.0" />
          </font>
          <effect>
             <DropShadow />
