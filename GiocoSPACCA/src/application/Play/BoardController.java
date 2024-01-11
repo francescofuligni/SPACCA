@@ -47,7 +47,7 @@ public class BoardController implements Initializable {
 	private ImageView selectedImage;
 	
 	@FXML
-	private Label currentPlayer, nextPlayer, healthPoints, infoLabel;
+	private Label currentPlayer, nextPlayer, healthPoints, infoLabel, nextPlayerTitle;
 
 	@FXML
 	private Button saveAndExitButton, infoBoardButton, playCardButton;
@@ -67,7 +67,6 @@ public class BoardController implements Initializable {
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		
 		currentPlayer.setText(current.getUsername());						// label current player
-		nextPlayer.setText(nextAlive.getUsername());						// label next player (mostra il prossimo giocatore vivo)
 		
 		healthBar.setStyle("-fx-accent: green;");							// healthBar verde
 		
@@ -78,12 +77,18 @@ public class BoardController implements Initializable {
 			playCardButton.setText("FINE");
 			infoLabel.setTextFill(Color.LIGHTGREEN);
 			infoLabel.setText("HAI VINTO!");
+			nextPlayerTitle.setText("Vincitore:");
+			nextPlayerTitle.setTextFill(Color.LIGHTGREEN);
+			nextPlayer.setText(current.getUsername());
+			nextPlayer.setTextFill(Color.LIGHTGREEN);
 			
-			while(game.getPlayers().size()>1) {			// se i giocatori eliminati non sono stati rimossi, li rimuove
+			while(game.getPlayers().size()!=1) {			// se i giocatori eliminati non sono stati rimossi, li rimuove
 				game.nextTurn();
 				game.removePlayer();
+				System.out.println(game.getTurn());
 			}
 		} else if(current.getHealthPoints()<=0) {		// il giocatore attuale è stato eliminato (abbandona la partita)
+			nextPlayer.setText(nextAlive.getUsername());						// label next player (mostra il prossimo giocatore vivo)
 			isOut = true;
 			healthPoints.setText("0  HP");
 			healthBar.setProgress(0.0);
@@ -92,6 +97,7 @@ public class BoardController implements Initializable {
 			infoLabel.setText("Sei stato eliminato:  clicca su ABBANDONA per uscire dalla partita");
 		
 		} else {										// il giocatore attuale è in partita (partita in corso)
+			nextPlayer.setText(nextAlive.getUsername());						// label next player (mostra il prossimo giocatore vivo)
 			isOut = false;
 			healthPoints.setText("" + current.getHealthPoints());
 			healthBar.setProgress((double)current.getHealthPoints()/current.MAXHP);
@@ -163,7 +169,6 @@ public class BoardController implements Initializable {
 			} else {
 				Card c = current.getCard(images.indexOf(selectedImage));
 				c.effect(game);
-				game.nextTurn();
 				nextPlayerBoard();
 			}
 		}
@@ -183,6 +188,7 @@ public class BoardController implements Initializable {
 	
 	
 	private void nextPlayerBoard() throws IOException {			// carica la schermata del prossimo giocatore (e salva la partita)
+		game.nextTurn();
 		game.save();
 		stage = (Stage)(playCardButton.getScene().getWindow());
 		  //IMPORTANTE RICORDA IL ../ nell'URL DEL FXML
@@ -194,6 +200,7 @@ public class BoardController implements Initializable {
 	}
 	
 	private void endGame() throws IOException {					// carica la classifica della partita
+		game.save();
 		stage = (Stage)(saveAndExitButton.getScene().getWindow());
     	FXMLLoader Loader=new FXMLLoader(GameScoreBoardController.class.getResource("../Play/GameScoreBoard.fxml"));
     	root = (Parent) Loader.load();

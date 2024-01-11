@@ -38,7 +38,7 @@
             <ListView fx:id="cards" orientation="HORIZONTAL" prefHeight="409.0" prefWidth="974.0" />
             <Pane prefHeight="200.0" prefWidth="340.0">
                <children>
-                  <Label alignment="CENTER" contentDisplay="CENTER" layoutX="4.0" layoutY="114.0" prefHeight="19.0" prefWidth="340.0" text="Prossimo giocatore:" textAlignment="CENTER" textFill="#ff0000bf">
+                  <Label fx:id="nextPlayerTitle" alignment="CENTER" contentDisplay="CENTER" layoutX="4.0" layoutY="114.0" prefHeight="19.0" prefWidth="340.0" text="Prossimo giocatore:" textAlignment="CENTER" textFill="#ff0000bf">
                      <font>
                         <Font name="Times New Roman Italic" size="24.0" />
                      </font>
@@ -69,9 +69,9 @@
             <InnerShadow />
          </effect>
       </Button>
-      <Button fx:id="playCardButton" layoutX="1354.0" layoutY="429.0" mnemonicParsing="false" onAction="#playCard" prefHeight="65.0" prefWidth="180.0" text="GIOCA CARTA">
+      <Button fx:id="playCardButton" layoutX="1341.0" layoutY="446.0" mnemonicParsing="false" onAction="#playCard" prefHeight="65.0" prefWidth="211.0" text="GIOCA CARTA">
          <font>
-            <Font name="Times New Roman Bold" size="20.0" />
+            <Font name="Times New Roman Bold" size="24.0" />
          </font>
          <effect>
             <InnerShadow />

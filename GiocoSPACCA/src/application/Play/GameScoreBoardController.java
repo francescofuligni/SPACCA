@@ -57,7 +57,7 @@ public class GameScoreBoardController implements Initializable {
     @Override
     public void initialize(URL arg0, ResourceBundle arg1) {
     	
-    	String[] code = gameFile.getName().split(".");
+    	String[] code = gameFile.getName().split("\\.");
     	gameCodeLabel.setText("Classifica partita " + code[0]);
     	
 		try {
@@ -65,17 +65,16 @@ public class GameScoreBoardController implements Initializable {
 			if(scan.hasNextLine())
 				scan.nextLine();		// salta la prima riga (intestazione file .csv)
 			
-			int pos=0;
-			int maxPoints = 4;
 			while(scan.hasNextLine()){
 				String line=scan.nextLine();
 				String[] tokens = line.split(",");
-				this.players.put(tokens[1], maxPoints - pos);		// TODO: DECIDERE MECCANISMO PUNTI
-				pos++;
+				this.players.put(tokens[1], null);
 			}
-			// ordinamento
+			
+			givePoints();
+			
 			for(String username : players.keySet())
-				scoreBoard.getItems().add("[ +" + players.get(username) + " ]  " + username);
+				scoreBoard.getItems().add("[ +" + players.get(username) + " ] - " + username);
 		
 			scan.close();
 		} catch (FileNotFoundException e) {
@@ -108,7 +107,6 @@ public class GameScoreBoardController implements Initializable {
     
     
     private void updateScores() {		// aggiorna i punteggi generali dei giocatori
-		
 		Path pathToFile = Paths.get("./GiocoSPACCA/Informazioni_Partite/PLAYERS_REGISTER.csv");
 		File f=new File(pathToFile.toString());
 		
@@ -120,11 +118,10 @@ public class GameScoreBoardController implements Initializable {
 			while(scan.hasNextLine() ) {
 				String line = scan.nextLine();
 				String[] tokens = line.split(",");
-				if(players.keySet().contains(tokens[0])) {
-					memory = memory + tokens[0] + "," + players.get(tokens[0]) + "\n";			// salvataggio sul file
-				} else {		
+				if(players.keySet().contains(tokens[0]))
+					memory = memory + tokens[0] + "," + (players.get(tokens[0]) + Integer.parseInt(tokens[1])) + "\n";			// salvataggio sul file
+				else		
 					memory = memory + line + "\n";					// le altre linee vengono riscritte nello stesso modo
-				}
 			}
 			scan.close();	
 			FileWriter fw = new FileWriter(f,false);
@@ -135,4 +132,12 @@ public class GameScoreBoardController implements Initializable {
 			e.printStackTrace();
 		}
 	}
+    
+    private void givePoints() {
+    	int pos=0;
+    	for(String username : players.keySet()) {
+    		players.putIfAbsent(username, (int)Math.pow(2, players.size()-pos));
+    		pos++;
+    	}
+    }
 }
