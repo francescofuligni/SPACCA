@@ -1,9 +1,11 @@
 package application.Games;
 
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
+import java.util.Scanner;
 
 import application.Card.Card;
 import application.Player.PlayerInGame;
@@ -13,22 +15,39 @@ import application.Player.PlayerInGame;
 
 public class SimpleTournament extends Game { //in costruzione
 	
-	SingleGame partita1;
-	SingleGame partita2;
-	SingleGame finale;
-	int counter=0;
+	private SingleGame partita1;
+	private SingleGame partita2;
+	private SingleGame finale;
+	private int counter=0;
+	private PlayerInGame[] winners;
+	private PlayerInGame[] losers;
+	private String code; //serve per aprire la giusta directory torneo
 
 	public SimpleTournament(File game) {
 		super(game);
+		try {
+			scan = new Scanner(gameFile);
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		}
+		scan.reset();
+		
+		String line = scan.nextLine();
+		String tokens[] = line.split(",");
+		this.code = tokens[3];			
+		
+		Path pathToFile = Paths.get("./GiocoSPACCA/Informazioni_Partite/" + code + "/partita1.csv");
+		File f1=new File(pathToFile.toString());	
+		partita1= new SingleGame(f1);
+		partita1.newGame();
+		
+		
+		
+		
 				
 		
 		
-		if(players.size()==0) {		// nel caso in cui i giocatori sono morti tutti contemporaneamente, l'ultimo a morire (in base all'ordine) è il vincitore
-			players.add(eliminated.remove(0));
-			players.get(0).setHealthPoints(1);
-		}
-		scan.close();
-		newGame();
+	
 	}
 	
 //TODO forse serve nuovo fxml apposito con label che indichi che partita si sta giocando oppure aggiungere label alla nostra fxml che in SingleGame normali

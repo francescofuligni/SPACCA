@@ -43,8 +43,8 @@ public class CreateTournamentController implements Initializable  {
 	protected final static int MAXPLAYERS = 4;			// numero massimo di giocatori
 	private String code; //ESPERIMENTO PER PERMETTERE ALLA CLASSE SIMPLE-TOURNAMENT DI RICONOSCERE IL TORNEO IN QUESTIONE
 	
-	protected GAMEMODE chosenMode;
-	protected BOTDIFF chosenDifficulty;
+	protected GAMEMODE chosenMode; //da controllare perché forse non è utilizzata
+	protected BOTDIFF chosenDifficulty;//come sopra
 	private int playersCounter=0;
 	
 	private Player[] selectedPlayers = new Player[MAXPLAYERS];
@@ -288,7 +288,7 @@ public class CreateTournamentController implements Initializable  {
 	        Iterator<PlayerInGame> iter = playersInGame.iterator();
 	        Random rand=new Random();
 	        
-	        fw.write(code +","+tournamentMode.getValue() + "," + chooseDifficulty.getValue() + ","+ rand.nextInt(playersInGame.size())+ "\n");
+	        fw.write(tournamentMode.getValue() + "," + chooseDifficulty.getValue() + ","+ rand.nextInt(playersInGame.size())+","+ code + "\n");
 	        Collections.shuffle(playersInGame);			// mescola i giocatori
 			while(iter.hasNext())
 				fw.write("in," + iter.next() + "\n");
