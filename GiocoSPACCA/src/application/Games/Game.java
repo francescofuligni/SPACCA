@@ -64,6 +64,13 @@ public abstract class Game {
 		return players.get(turn);
 	}
 	
+	public PlayerInGame previousPlayer() {
+		if(turn-1<0)
+			return players.get(players.size()-1);
+		else
+			return players.get(turn-1);
+	}
+	
 	public PlayerInGame nextPlayer() {
 		if(turn+1>=players.size())
 			return players.get(0);
@@ -73,12 +80,12 @@ public abstract class Game {
 	
 	public PlayerInGame nextPlayerAlive() {			// restitusce il primo giocatore successivo a currentPlayer ancora in partita (con HP>0)
 		PlayerInGame p = nextPlayer();
-		for(int i=players.indexOf(p)+1; p.getHealthPoints()<=0 && i!=players.indexOf(nextPlayer()); i++) {
+		for(int i=players.indexOf(p)+1; p.getHealthPoints()<=0 && !p.equals(currentPlayer()); i++) {
 			if(i>=players.size())
 				i=0;
 			p=players.get(i);
 		}
-		return p;
+		return p;		// se non trova un giocatore vivo, ritorna il current
 	}
 	
 	public void nextTurn() {
@@ -135,8 +142,10 @@ public abstract class Game {
 				}
 				p.setHand(hand);
 			}
+			save();
 			return true;
 		} else {
+			save();
 			return false;
 		}
 	}

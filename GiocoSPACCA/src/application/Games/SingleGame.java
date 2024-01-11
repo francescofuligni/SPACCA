@@ -12,8 +12,9 @@ public class SingleGame extends Game{
 	
 	public SingleGame(File game)  {
 		super(game);
+		boolean allDead = true;
 		
-		while(scan.hasNextLine() ) {				// aggiunge i giocatori all'arraylist allPlayers
+		while(scan.hasNextLine()) {				// aggiunge i giocatori all'arraylist allPlayers
 			String line=scan.nextLine();
 			String[] tokens = line.split(",");
 			
@@ -27,15 +28,18 @@ public class SingleGame extends Game{
 					hand.add(deck.getCard(Integer.parseInt(tokens[i])));
 				p.setHand(hand);
 				players.add(p);
+				
+				if(p.getHealthPoints() > 0)
+					allDead=false;
 			} else {								// giocatori eliminati
 				eliminated.add(p);
 			}
 		}
 		
-		if(players.size()==0) {		// nel caso in cui i giocatori sono morti tutti contemporaneamente, l'ultimo a morire (in base all'ordine) è il vincitore
-			players.add(eliminated.remove(0));
-			players.get(0).setHealthPoints(1);
-		}
+		
+		if(allDead)			// nel caso in cui i giocatori sono morti tutti contemporaneamente, il vincitore è chi ha giocato la carta che ha ucciso tutti
+			previousPlayer().setHealthPoints(1);
+		
 		scan.close();
 		newGame();
 	}
