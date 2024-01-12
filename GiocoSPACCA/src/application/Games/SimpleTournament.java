@@ -1,13 +1,6 @@
 package application.Games;
 
 import java.io.File;
-import java.nio.file.Path;
-import java.nio.file.Paths;
-import java.util.ArrayList;
-
-import application.Card.Card;
-import application.Player.PlayerInGame;
-
 
 //flow ST:  inserisci codice> gioca e finisci partita1> gioca e finisci partita2>gioca e finisci finale> fine torneo con dispay posizioni/punteggi
 
