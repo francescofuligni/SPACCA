@@ -24,7 +24,6 @@ import javafx.util.Duration;
 
 public class SingleGameBoardController extends Board {
 	
-	
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		

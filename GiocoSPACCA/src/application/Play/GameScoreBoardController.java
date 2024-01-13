@@ -33,6 +33,7 @@ public class GameScoreBoardController implements Initializable {
 	private Scene scene;
 	private Parent root;
 	public static File gameFile = InsertCodeController.file;
+	public static String code = InsertCodeController.code;
 	
 	@FXML
 	private Label generalScoreBoardLabel, gameCodeLabel;
@@ -56,9 +57,6 @@ public class GameScoreBoardController implements Initializable {
     
     @Override
     public void initialize(URL arg0, ResourceBundle arg1) {
-    	
-    	String[] code = gameFile.getName().split("\\.");
-    	gameCodeLabel.setText("Classifica partita " + code[0]);
     	
 		try {
 			Scanner scan=new Scanner(gameFile);

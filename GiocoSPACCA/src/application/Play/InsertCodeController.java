@@ -29,6 +29,7 @@ public class InsertCodeController {
 	private Parent root;
 	
 	public static File file;
+	public static String code;
 	
     @FXML
     private TextField codeField;
@@ -56,6 +57,7 @@ public class InsertCodeController {
     		//se il codice esiste dobbiamo cambiare schermata all'fxml della board e caricarla con i dati di quella partita
     
     		file=new File(pathToFile.toString());
+    		code=codeField.getText().trim().toUpperCase();
     		 
 	    	stage = (Stage)(returnToMainMenuButton.getScene().getWindow());
 	    	//IMPORTANTE RICORDA IL ../ nell'URL DEL FXML

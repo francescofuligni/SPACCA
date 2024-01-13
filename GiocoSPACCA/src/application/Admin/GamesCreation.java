@@ -39,6 +39,7 @@ public abstract class GamesCreation implements Initializable {
 	protected ArrayList<Player> allPlayers = new ArrayList<>();
 	protected BOTDIFF[] diff= {BOTDIFF.FACILE,BOTDIFF.DIFFICILE};
 	protected int playersCounter=0;
+	protected String code;
 	
 	@FXML
 	protected ChoiceBox<Player> playersChoiceBox;
@@ -176,5 +177,5 @@ public abstract class GamesCreation implements Initializable {
 	@FXML
 	public abstract void play(ActionEvent event) throws IOException;
 	
-	protected abstract void fillGameFile(File f);
+	protected abstract void fillGameFile();
 }

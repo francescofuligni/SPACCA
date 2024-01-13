@@ -18,10 +18,12 @@ public abstract class Game {
 	protected int turn;
 	protected Scanner scan;
 	public File gameFile;
+	public String code;
 	public Deck deck;			// scope public per i metodi effect delle carte
 	
 	public Game(File game) {
 		this.gameFile = game;
+		code = gameFile.getName().split("\\.")[0];
 		try {
 			scan = new Scanner(this.gameFile);
 		} catch (FileNotFoundException e) {
