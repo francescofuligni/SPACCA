@@ -1,56 +1,27 @@
 package application.Games;
 
 import java.io.File;
-import java.io.FileNotFoundException;
-import java.nio.file.Path;
-import java.nio.file.Paths;
-import java.util.ArrayList;
-import java.util.Scanner;
-
-import application.Card.Card;
-import application.Player.PlayerInGame;
-
 
 //flow ST:  inserisci codice> gioca e finisci partita1> gioca e finisci partita2>gioca e finisci finale> fine torneo con dispay posizioni/punteggi
 
 public class SimpleTournament extends Game { //in costruzione
 	
-	private SingleGame currentGame;
-	private int counter=0;
-	private PlayerInGame[] winners;
-	private PlayerInGame[] losers;
-	private String code; //serve per aprire la giusta directory torneo
- 
+	SingleGame partita1;
+	SingleGame partita2;
+	SingleGame finale;
+	int counter=0;
+
 	public SimpleTournament(File game) {
 		super(game);
-		try {
-			scan = new Scanner(gameFile);
-		} catch (FileNotFoundException e) {
-			e.printStackTrace();
+				
+		
+		
+		if(players.size()==0) {		// nel caso in cui i giocatori sono morti tutti contemporaneamente, l'ultimo a morire (in base all'ordine) è il vincitore
+			players.add(eliminated.remove(0));
+			players.get(0).setHealthPoints(1);
 		}
-		scan.reset();
-		
-		String line = scan.nextLine();
-		String tokens[] = line.split(",");
-		this.code = tokens[3];			
-		
-		Path pathToFile1 = Paths.get("./GiocoSPACCA/Informazioni_Partite/" + code + "/partita1.csv");
-		File f1=new File(pathToFile1.toString());	
-		
-		
-		//
-		currentGame= new SingleGame(f1);
-		currentGame.newGame();
-		
-		
-		
-		
-		
-		
-				//controlla se funziona il controllo esistenza torneo
-		
-		
-	
+		scan.close();
+		newGame();
 	}
 	
 //TODO forse serve nuovo fxml apposito con label che indichi che partita si sta giocando oppure aggiungere label alla nostra fxml che in SingleGame normali

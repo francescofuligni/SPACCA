@@ -59,7 +59,7 @@ public class InsertCodeController {
     		 
 	    	stage = (Stage)(returnToMainMenuButton.getScene().getWindow());
 	    	//IMPORTANTE RICORDA IL ../ nell'URL DEL FXML
-	    	FXMLLoader Loader=new FXMLLoader(CreateGameController.class.getResource("../Play/Board.fxml"));
+	    	FXMLLoader Loader=new FXMLLoader(CreateGameController.class.getResource("../Play/SingleGameBoard.fxml"));
 	    	root = (Parent) Loader.load();
 	    	scene = new Scene(root);
 	    	stage.setScene(scene);
