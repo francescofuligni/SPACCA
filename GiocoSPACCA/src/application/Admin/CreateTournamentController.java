@@ -11,7 +11,6 @@ import java.util.Collections;
 import java.util.Iterator;
 import java.util.Random;
 import java.util.ResourceBundle;
-import java.util.Scanner;
 
 import application.Player.*;
 import javafx.event.ActionEvent;
@@ -23,8 +22,7 @@ import javafx.scene.control.ChoiceBox;
 
 public class CreateTournamentController extends GamesCreation {
 	
-	private GAMEMODE[] mode= {GAMEMODE.SEMPLICE, GAMEMODE.LASTMANSTANDING};
-	private String code; 	// ESPERIMENTO PER PERMETTERE ALLA CLASSE SIMPLE-TOURNAMENT DI RICONOSCERE IL TORNEO IN QUESTIONE
+	private GAMEMODE[] mode = {GAMEMODE.SEMPLICE, GAMEMODE.LASTMANSTANDING};
 	
     @FXML
     private ChoiceBox<GAMEMODE> tournamentMode;
@@ -52,8 +50,7 @@ public class CreateTournamentController extends GamesCreation {
     		selectionAlert.showAndWait();
 	    	
 	    } else {
-	    	File f;
-	    	Scanner scan;
+	    	Path pathDirectory;
 		    do {
 		    	code = "T";
 			    for(int i=0;i<5;i++) {						// genera il codice partita
@@ -61,84 +58,75 @@ public class CreateTournamentController extends GamesCreation {
 			    	code = code + rand.nextInt(10);
 			    }
 			    
-			    Path pathDirectory = Paths.get("./GiocoSPACCA/Informazioni_Partite/" + code); //creo directory in cui mettere file csv relativi alle singole partite sottostanti al torneo
-			    Files.createDirectories(pathDirectory);
-			    
-			    Path pathToFile = Paths.get("./GiocoSPACCA/Informazioni_Partite/" + code +"/" + code + ".csv"); //creo file torneo utile per creare le singole partite
-				f=new File(pathToFile.toString());
+			    pathDirectory = Paths.get("./GiocoSPACCA/Informazioni_Partite/" + code);		// directory del torneo, contenente i file delle singole partite
 							
-		    } while(f.exists());			// se esiste già un file con lo stesso codice, genera un codice diverso
+		    } while(Files.exists(pathDirectory));			// se esiste già un file con lo stesso codice, genera un codice diverso
 		    
+		    Files.createDirectory(pathDirectory);
 		    
-		    f.createNewFile();				// crea il file per il codice generato
 		    fillPlayersInGame();			// popola l'ArrayList playersInGame
-		    fillGameFile(f); 				// popola il file della partita
-		
-		    
-		    
-		    scan=new Scanner(f);  //scanner per leggere il file principale del torneo e copiare il contenuto sui file partita
-		    scan.nextLine(); //salta la prima riga
-		    
-		    
-		    //TODO cercare un modo per metodizzare righe 219-251 e rendere più efficiente
-		    if(tournamentMode.getValue()==GAMEMODE.SEMPLICE) { //se il torneo è semplice si creano i due file partita separati
-		    	Path pathPartita1 = Paths.get("./GiocoSPACCA/Informazioni_Partite/" + code +"/partita1.csv"); //creo file torneo utile per creare le singole partite
-		    	File f1=new File(pathPartita1.toString());
-		    	f1.createNewFile();
-		    	FileWriter fw1 = new FileWriter(f1,true);
-		    	fw1.write("SingleGame,"+tournamentMode.getValue()+",0\n");
-		    	
-		    	
-		    	
-				Path pathPartita2 = Paths.get("./GiocoSPACCA/Informazioni_Partite/" + code +"/partita2.csv"); //creo file torneo utile per creare le singole partite
-				File f2=new File(pathPartita2.toString());
-				f2.createNewFile();
-				FileWriter fw2 = new FileWriter(f2,true);
-				fw2.write("SingleGame,"+tournamentMode.getValue()+",0\n");
-				
-				for(int i=0;i<4;i++) {
-		    		if(i<2) {
-		    			String line = scan.nextLine();
-			    		fw1.write(line+"\n");
-		    		}
-		    		else{
-		    			String line = scan.nextLine();
-		    			fw2.write(line+"\n");
-		    		}		
-		    	}
-				fw1.flush();
-				fw1.close();
-				fw2.flush();
-				fw2.close();
-		    }
-		    
+		    fillGameFile(); 				// popola il file della partita
 		    
 		    Alert codeInfo = new Alert(AlertType.INFORMATION);					// mostra il codice generato
 		    codeInfo.setTitle("CODICE GENERATO");
 		    codeInfo.setContentText("Codice della partita creata");
 		    codeInfo.setHeaderText(code);
 		    codeInfo.showAndWait();
-	    	scan.close();
 	    	returnToHome();
 	    }
     }
     
     @Override
-	protected void fillGameFile(File f) {
-		try {
-	        FileWriter fw = new FileWriter(f.getAbsolutePath(),true);
-	        Iterator<PlayerInGame> iter = playersInGame.iterator();
-	        Random rand=new Random();
-	        
-	        fw.write(code +","+tournamentMode.getValue() + "," + chooseDifficulty.getValue() + ","+ rand.nextInt(playersInGame.size())+ "\n");
-	        Collections.shuffle(playersInGame);			// mescola i giocatori
-			while(iter.hasNext())
-				fw.write("in," + iter.next() + "\n");
-			
-			fw.flush();
-			fw.close();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
+	protected void fillGameFile() {
+    	try {
+    		Collections.shuffle(playersInGame);			// mescola i giocatori
+        	Random rand = new Random();
+    		
+	    	if(tournamentMode.getValue()==GAMEMODE.SEMPLICE) { 
+	    		// TORNEO SEMPLICE
+	    		
+	    		// file partita singola semifinale 1
+		    	File semi1=new File("./GiocoSPACCA/Informazioni_Partite/" + code + "/semifinale1.csv");
+		    	FileWriter fw1 = new FileWriter(semi1);
+		    	fw1.write("SingleGame,"+tournamentMode.getValue()+"," + rand.nextInt(2) + "\n");
+		    	fw1.write("in," + playersInGame.remove(rand.nextInt(playersInGame.size())) + "\n");
+		    	fw1.write("in," + playersInGame.remove(rand.nextInt(playersInGame.size())) + "\n");
+		    	fw1.flush();
+				fw1.close();
+		    	
+		    	// file partita singola semifinale 2
+				File semi2=new File("./GiocoSPACCA/Informazioni_Partite/" + code + "/semifinale2.csv");
+				FileWriter fw2 = new FileWriter(semi2);
+				fw2.write("SingleGame,"+ chooseDifficulty.getValue() + "," + rand.nextInt(2) + "\n");
+				fw2.write("in," + playersInGame.remove(rand.nextInt(playersInGame.size())) + "\n");
+				fw2.write("in," + playersInGame.remove(rand.nextInt(playersInGame.size())) + "\n");
+				fw2.flush();
+				fw2.close();
+				
+				// file partita singola finale
+		    	File fin = new File("./GiocoSPACCA/Informazioni_Partite/" + code + "/finale.csv");
+		    	FileWriter fwfin = new FileWriter(fin);
+		    	fwfin.write("SingleGame,"+ chooseDifficulty.getValue() + "," + rand.nextInt(2) + "\n");
+		    	fwfin.flush();
+				fwfin.close();
+		    
+			} else {
+				// TORNEO LAST MAN STANDING
+				
+		    	// file parita singola iniziale
+		    	File gameFile=new File("./GiocoSPACCA/Informazioni_Partite/" + code + "/partita.csv");
+		    	FileWriter fw = new FileWriter(gameFile);
+		    	Iterator<PlayerInGame> iter = playersInGame.iterator();
+		        
+		        fw.write("SingleGame," + chooseDifficulty.getValue() + "," + rand.nextInt(playersInGame.size()) + "\n");
+				while(iter.hasNext())
+					fw.write("in," + iter.next() + "\n");
+		    	
+		    	fw.flush();
+				fw.close();
+		    }
+    	} catch(IOException e) {
+    		 e.printStackTrace();
+    	}
 	}
 }
