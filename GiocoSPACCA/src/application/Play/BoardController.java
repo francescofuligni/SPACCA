@@ -63,10 +63,14 @@ public class BoardController implements Initializable {
 	private PlayerInGame current = game.currentPlayer();
 	private PlayerInGame nextAlive = game.nextPlayerAlive();
 	
+	public static boolean tournamentFlag; //flag per riconoscere la fine delle singole partite interne ai tornei
+	
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		
 		game = new SingleGame(InsertCodeController.file);
+		
+		tournamentFlag=false;
 		
 		currentPlayer.setText(current.getUsername());						// label current player
 		
@@ -76,6 +80,7 @@ public class BoardController implements Initializable {
 		healthBar.setProgress((double)current.getHealthPoints()/current.MAXHP);
 		
 		if(current.equals(nextAlive)) {					// il giocatore attuale è il vincitore (partita terminata)
+			
 			playCardButton.setText("FINE");
 			infoLabel.setTextFill(Color.LIGHTGREEN);
 			infoLabel.setText("HAI VINTO!");
@@ -83,6 +88,7 @@ public class BoardController implements Initializable {
 			nextPlayerTitle.setTextFill(Color.LIGHTGREEN);
 			nextPlayer.setText(current.getUsername());
 			nextPlayer.setTextFill(Color.LIGHTGREEN);
+			tournamentFlag = true;
 			
 			while(game.getPlayers().size()!=1) {			// se i giocatori eliminati non sono stati rimossi, li rimuove
 				game.nextTurn();
