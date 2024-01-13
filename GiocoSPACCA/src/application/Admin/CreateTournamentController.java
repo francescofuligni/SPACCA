@@ -106,7 +106,7 @@ public class CreateTournamentController extends GamesCreation {
 				// file partita singola finale
 		    	File fin = new File("./GiocoSPACCA/Informazioni_Partite/" + code + "/finale.csv");
 		    	FileWriter fwfin = new FileWriter(fin);
-		    	fwfin.write("SingleGame,"+ chooseDifficulty.getValue() + "," + rand.nextInt(2) + "\n");
+		    	fwfin.write("SingleGame," + chooseDifficulty.getValue() + "," + rand.nextInt(2) + "\n");
 		    	fwfin.flush();
 				fwfin.close();
 		    
@@ -118,7 +118,7 @@ public class CreateTournamentController extends GamesCreation {
 		    	FileWriter fw = new FileWriter(gameFile);
 		    	Iterator<PlayerInGame> iter = playersInGame.iterator();
 		        
-		        fw.write("SingleGame," + chooseDifficulty.getValue() + "," + rand.nextInt(playersInGame.size()) + "\n");
+		        fw.write(tournamentMode.getValue() + "," + chooseDifficulty.getValue() + "," + rand.nextInt(playersInGame.size()) + "\n");
 				while(iter.hasNext())
 					fw.write("in," + iter.next() + "\n");
 		    	

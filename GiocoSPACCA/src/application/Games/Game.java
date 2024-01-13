@@ -21,25 +21,26 @@ public abstract class Game {
 	public String code;
 	public Deck deck;			// scope public per i metodi effect delle carte
 	
-	public Game(File game) {
-		this.gameFile = game;
-		code = gameFile.getName().split("\\.")[0];
+	public Game(File gameFile) {
+		this.gameFile = gameFile;
+		this.code = gameFile.getName().split("\\.")[0];
+		
 		try {
 			scan = new Scanner(this.gameFile);
+			scan.reset();
+			
+			if(scan.hasNextLine()) {
+				String line=scan.nextLine();
+				String[] tokens = line.split(",");
+				
+				if(tokens[1]=="DIFFICILE")
+					difficulty = BOTDIFF.DIFFICILE;
+				else
+					difficulty = BOTDIFF.FACILE;
+				this.turn=Integer.parseInt(tokens[2]);
+			}
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
-		}
-		scan.reset();
-		
-		if(scan.hasNextLine()) {
-			String line=scan.nextLine();
-			String[] tokens = line.split(",");
-			
-			if(tokens[1]=="DIFFICILE")
-				difficulty = BOTDIFF.DIFFICILE;
-			else
-				difficulty = BOTDIFF.FACILE;
-			this.turn=Integer.parseInt(tokens[2]);
 		}
 		this.players=new ArrayList<PlayerInGame>();
 		this.eliminated=new ArrayList<PlayerInGame>();
@@ -127,10 +128,6 @@ public abstract class Game {
 		return s;
 	}
 	
-	abstract public void removePlayer();		// eliminazione di un giocatore --> diverso a seconda della modalità
-	
-	abstract public void save();	 			// salvataggio della partita su file --> diverso a seconda della modalità
-	
 	protected boolean newGame() {
 		if(currentPlayer().getHealthPoints()>0 && currentPlayer().getHand().size() == 0) {			// se i giocatori non hanno carte in mano, vengono distribuite le carte
 			for(PlayerInGame p : players) {
@@ -147,8 +144,13 @@ public abstract class Game {
 			save();
 			return true;
 		} else {
-			save();
 			return false;
 		}
 	}
+	
+	
+	// metodi astratti
+	abstract public void removePlayer();		// eliminazione di un giocatore --> diverso a seconda della modalità
+	
+	abstract public void save();	 			// salvataggio della partita su file --> diverso a seconda della modalità
 }

@@ -8,9 +8,9 @@ import java.util.Scanner;
 
 public class SimpleTournament { //in costruzione
 	
-	SingleGame currentGame;
-	String code, message;
-	int counter=0;
+	protected SingleGame currentGame;
+	protected String message;
+	public String code;
 
 	public SimpleTournament(String code) {
 		try {
@@ -18,7 +18,10 @@ public class SimpleTournament { //in costruzione
 			
 			File fin = new File("./GiocoSPACCA/Informazioni_Partite/" + code + "/finale.csv");
 			Scanner scan = new Scanner(fin);
-			scan.nextLine();				// salta la prima riga (intestazione)
+			scan.reset();
+			
+			if(scan.hasNextLine())
+				scan.nextLine();				// salta la prima riga (intestazione)
 			
 			if(scan.hasNextLine()) {
 				if(scan.hasNextLine()) {

@@ -8,11 +8,13 @@ import java.util.ArrayList;
 import application.Card.Card;
 import application.Player.PlayerInGame;
 
-public class SingleGame extends Game{
+public class LastManStanding extends Game {
 	
-	public SingleGame(File gameFile)  {
+	public boolean isNewGame = false;
+	// TODO: VISUALIZZARE UNA SCHERMATA ALL'INIZIO DI OGNI PARTITA
+
+	public LastManStanding(File gameFile)  {
 		super(gameFile);
-		boolean allDead = true;
 		
 		while(scan.hasNextLine()) {				// aggiunge i giocatori all'arraylist allPlayers
 			String line=scan.nextLine();
@@ -29,20 +31,14 @@ public class SingleGame extends Game{
 				p.setHand(hand);
 				players.add(p);
 				
-				if(p.getHealthPoints()>0)
-					allDead=false;
 			} else {								// giocatori eliminati
 				eliminated.add(p);
 			}
 		}
-		
-		if(allDead)			// nel caso in cui i giocatori sono morti tutti contemporaneamente, il vincitore è chi ha giocato la carta che ha ucciso tutti
-			previousPlayer().setHealthPoints(1);
-		
 		scan.close();
-		newGame();
+		
+		this.isNewGame = newGame();
 	}
-	
 	
 	@Override
 	public void removePlayer() {
@@ -53,13 +49,16 @@ public class SingleGame extends Game{
 			turn = players.size()-1;
 		else 
 			turn--;
+		
+		restartGame();
 	}
 
 	@Override
 	public void save() {
+		
 		try {
 	        FileWriter fw = new FileWriter(gameFile.getAbsolutePath());			// sovrascrive il file
-	        fw.write("SingleGame," + difficulty + "," +  turn +  "\n");
+	        fw.write("LASTMANSTANDING," + difficulty + "," +  turn +  "\n");
 	        
 	        // giocatori in partita
 	        if(players.size()>0)
@@ -69,12 +68,20 @@ public class SingleGame extends Game{
 			// giocatori eliminati
 			if(eliminated.size()>0)
 				for(PlayerInGame p : eliminated)
-					fw.write("out," + p + "\n");
+					fw.write("eliminated," + p + "\n");
 			
 			fw.flush();
 			fw.close();
 		} catch (IOException e) {
 			e.printStackTrace();
+		}
+		
+	}
+	
+	private void restartGame() {
+		for(PlayerInGame p : players) {
+			p.setHealthPoints(p.MAXHP);			// reinizializza i punti salute
+			p.setHand(new ArrayList<>());		// rimuove le vecchie carte
 		}
 	}
 }
