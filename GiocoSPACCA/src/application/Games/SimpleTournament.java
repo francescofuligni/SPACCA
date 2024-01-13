@@ -15,14 +15,12 @@ import application.Player.PlayerInGame;
 
 public class SimpleTournament extends Game { //in costruzione
 	
-	private SingleGame partita1;
-	private SingleGame partita2;
-	private SingleGame finale;
+	private SingleGame currentGame;
 	private int counter=0;
 	private PlayerInGame[] winners;
 	private PlayerInGame[] losers;
 	private String code; //serve per aprire la giusta directory torneo
-
+ 
 	public SimpleTournament(File game) {
 		super(game);
 		try {
@@ -36,15 +34,20 @@ public class SimpleTournament extends Game { //in costruzione
 		String tokens[] = line.split(",");
 		this.code = tokens[3];			
 		
-		Path pathToFile = Paths.get("./GiocoSPACCA/Informazioni_Partite/" + code + "/partita1.csv");
-		File f1=new File(pathToFile.toString());	
-		partita1= new SingleGame(f1);
-		partita1.newGame();
+		Path pathToFile1 = Paths.get("./GiocoSPACCA/Informazioni_Partite/" + code + "/partita1.csv");
+		File f1=new File(pathToFile1.toString());	
+		
+		
+		//
+		currentGame= new SingleGame(f1);
+		currentGame.newGame();
 		
 		
 		
 		
-				
+		
+		
+				//controlla se funziona il controllo esistenza torneo
 		
 		
 	

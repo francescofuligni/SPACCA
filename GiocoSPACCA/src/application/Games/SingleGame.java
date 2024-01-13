@@ -22,6 +22,10 @@ public class SingleGame extends Game{
 			int healthPoints = Integer.parseInt(tokens[2]);
 			PlayerInGame p = new PlayerInGame(username, healthPoints);
 			
+			
+			//
+			
+			
 			if(tokens[0].equals("in")) {			// giocatori in partita
 				ArrayList<Card> hand = new ArrayList<>();
 				for(int i=3; i<tokens.length; i++)

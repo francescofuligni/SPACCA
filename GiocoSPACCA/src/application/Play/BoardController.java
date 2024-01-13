@@ -58,13 +58,15 @@ public class BoardController implements Initializable {
 	@FXML
 	private ProgressBar healthBar;
 
-	private Game game = new SingleGame(InsertCodeController.file);
+	private Game game;
 		
 	private PlayerInGame current = game.currentPlayer();
 	private PlayerInGame nextAlive = game.nextPlayerAlive();
 	
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
+		
+		game = new SingleGame(InsertCodeController.file);
 		
 		currentPlayer.setText(current.getUsername());						// label current player
 		
@@ -199,6 +201,8 @@ public class BoardController implements Initializable {
 		  stage.show();
 	}
 	
+	
+	//differenziare il comportamento sulla base del tipo di game
 	private void endGame() throws IOException {					// carica la classifica della partita
 		game.save();
 		stage = (Stage)(saveAndExitButton.getScene().getWindow());
