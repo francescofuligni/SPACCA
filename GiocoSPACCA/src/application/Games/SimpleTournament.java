@@ -2,46 +2,50 @@ package application.Games;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.ArrayList;
 import java.util.Scanner;
 
-import javafx.scene.shape.Path;
+import application.Player.PlayerInGame;
 
 //flow ST:  inserisci codice> gioca e finisci partita1> gioca e finisci partita2>gioca e finisci finale> fine torneo con dispay posizioni/punteggi
 
 public class SimpleTournament { //in costruzione
 	
-	protected SingleGame currentGame;
-	protected String message;
+	private SingleGame currentGame;
+	private File fin;
 	public String code;
 
-	public SimpleTournament(Path path) {
+	public SimpleTournament(Path pathToGame) {
 		try {
 			// per sapere la partita corrente, si controlla il file della finale
 			
-			File fin = new File(path.toString() + "/finale.csv");
+			fin = new File(pathToGame.toString() + "/finale.csv");
 			Scanner scan = new Scanner(fin);
 			scan.reset();
 			
-			if(scan.hasNextLine())
-				scan.nextLine();				// salta la prima riga (intestazione)
-			
 			if(scan.hasNextLine()) {
+				scan.nextLine();			// salta la prima riga (intestazione)
+			
 				if(scan.hasNextLine()) {
-					// caso finale	-->	sono stati scritti entrambi i finalisti
-					this.currentGame = new SingleGame(fin.toPath());
-					this.message = "FINALE";
+					scan.nextLine();
+					if(scan.hasNextLine()) {
+						// caso finale	-->	sono stati scritti entrambi i finalisti
+						this.currentGame = new SingleGame(fin.toPath());
+					} else {
+						// caso semifinale 2	-->	è stato scritto un solo finalista
+						this.currentGame = new SingleGame(Paths.get(pathToGame.toString() + "/semifinale2.csv"));
+					}
 				} else {
-					// caso semifinale 2	-->	è stato scritto un solo finalista
-					this.currentGame = new SingleGame(Paths.get(path.toString() + "/semifinale2.csv"));
-					this.message = "SEMIFINALE 2";
+					// caso semifinale 1	--> non è stato scritto alcun finalista
+					this.currentGame = new SingleGame(Paths.get(pathToGame.toString() + "/semifinale1.csv"));
 				}
-			} else {
-				// caso semifinale 1	--> non è stato scritto alcun finalista
-				this.currentGame = new SingleGame(Paths.get(path.toString() + "/semifinale1.csv"));
-				this.message = "SEMIFINALE 1";
 			}
 			scan.close();
+			
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
 		}
@@ -50,8 +54,21 @@ public class SimpleTournament { //in costruzione
 	public SingleGame getCurrentGame() {
 		return this.currentGame;
 	}
-	public String getMessage() {
-		return this.message;
+	
+	public void updateFinal() {
+		try {
+	        FileWriter fw = new FileWriter(fin.getAbsolutePath(), true);			// sovrascrive il file
+	        PlayerInGame winner = currentGame.getPlayers().get(0);
+	        winner.setHealthPoints(winner.MAXHP);
+	        winner.setHand(new ArrayList<>());
+	        fw.write("in," + winner + "\n");
+	        
+			fw.flush();
+			fw.close();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		
 	}
 	
 	// note di Fula

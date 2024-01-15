@@ -15,8 +15,8 @@ public abstract class Game {
 	protected BOTDIFF difficulty;
 	protected ArrayList<PlayerInGame> players;
 	protected ArrayList<PlayerInGame> eliminated;
+	protected boolean allDead = true;
 	protected int turn;
-	protected boolean allDead = false;
 	
 	public File gameFile;
 	public String code;
@@ -60,7 +60,7 @@ public abstract class Game {
 					players.add(p);
 					
 					if(p.getHealthPoints()>0)
-						this.allDead=false;
+						this.allDead = false;
 				} else {								// giocatori eliminati
 					eliminated.add(p);
 				}
@@ -154,7 +154,7 @@ public abstract class Game {
 	}
 	
 	protected boolean newGame() {
-		if(currentPlayer().getHealthPoints()>0 && currentPlayer().getHand().size() == 0) {			// se i giocatori non hanno carte in mano, vengono distribuite le carte
+		if(eliminated.size() == 0 && (currentPlayer().getHealthPoints()>0 && currentPlayer().getHand().size() == 0)) {			// se i giocatori non hanno carte in mano, vengono distribuite le carte
 			for(PlayerInGame p : players) {
 				ArrayList<Card> hand = new ArrayList<>();
 				for(int i=0; i<4; i++) {
