@@ -2,7 +2,10 @@ package application.Games;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.nio.file.Paths;
 import java.util.Scanner;
+
+import javafx.scene.shape.Path;
 
 //flow ST:  inserisci codice> gioca e finisci partita1> gioca e finisci partita2>gioca e finisci finale> fine torneo con dispay posizioni/punteggi
 
@@ -12,11 +15,11 @@ public class SimpleTournament { //in costruzione
 	protected String message;
 	public String code;
 
-	public SimpleTournament(String code) {
+	public SimpleTournament(Path path) {
 		try {
 			// per sapere la partita corrente, si controlla il file della finale
 			
-			File fin = new File("./GiocoSPACCA/Informazioni_Partite/" + code + "/finale.csv");
+			File fin = new File(path.toString() + "/finale.csv");
 			Scanner scan = new Scanner(fin);
 			scan.reset();
 			
@@ -26,18 +29,16 @@ public class SimpleTournament { //in costruzione
 			if(scan.hasNextLine()) {
 				if(scan.hasNextLine()) {
 					// caso finale	-->	sono stati scritti entrambi i finalisti
-					this.currentGame = new SingleGame(fin);
+					this.currentGame = new SingleGame(fin.toPath());
 					this.message = "FINALE";
 				} else {
 					// caso semifinale 2	-->	è stato scritto un solo finalista
-					File gameFile = new File("./GiocoSPACCA/Informazioni_Partite/" + code + "/semifinale2.csv");
-					this.currentGame = new SingleGame(gameFile);
+					this.currentGame = new SingleGame(Paths.get(path.toString() + "/semifinale2.csv"));
 					this.message = "SEMIFINALE 2";
 				}
 			} else {
 				// caso semifinale 1	--> non è stato scritto alcun finalista
-				File gameFile = new File("./GiocoSPACCA/Informazioni_Partite/" + code + "/semifinale1.csv");
-				this.currentGame = new SingleGame(gameFile);
+				this.currentGame = new SingleGame(Paths.get(path.toString() + "/semifinale1.csv"));
 				this.message = "SEMIFINALE 1";
 			}
 			scan.close();

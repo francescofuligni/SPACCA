@@ -80,7 +80,6 @@ public class InsertCodeController {
      		enterStatusText.setText("Codice inserito non riconosciuto, riprovare");
      		enterStatusText.setFill(Color.RED);
     	 }
-    	
     }
 
     @FXML

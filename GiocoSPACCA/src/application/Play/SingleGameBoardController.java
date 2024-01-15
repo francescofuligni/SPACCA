@@ -27,7 +27,7 @@ public class SingleGameBoardController extends Board {
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		
-		game = new SingleGame(InsertCodeController.file);
+		game = new SingleGame(InsertCodeController.pathToGame);
 		current = game.currentPlayer();
 		nextAlive = game.nextPlayerAlive();
 		
