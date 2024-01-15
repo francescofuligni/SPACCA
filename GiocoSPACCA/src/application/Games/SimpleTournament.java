@@ -1,43 +1,75 @@
 package application.Games;
 
 import java.io.File;
+import java.io.FileNotFoundException;
+import java.util.Scanner;
 
 //flow ST:  inserisci codice> gioca e finisci partita1> gioca e finisci partita2>gioca e finisci finale> fine torneo con dispay posizioni/punteggi
 
-public class SimpleTournament extends Game { //in costruzione
+public class SimpleTournament { //in costruzione
 	
-	SingleGame partita1;
-	SingleGame partita2;
-	SingleGame finale;
-	int counter=0;
+	protected SingleGame currentGame;
+	protected String message;
+	public String code;
 
-	public SimpleTournament(File game) {
-		super(game);
-				
-		
-		
-		if(players.size()==0) {		// nel caso in cui i giocatori sono morti tutti contemporaneamente, l'ultimo a morire (in base all'ordine) è il vincitore
-			players.add(eliminated.remove(0));
-			players.get(0).setHealthPoints(1);
+	public SimpleTournament(String code) {
+		try {
+			// per sapere la partita corrente, si controlla il file della finale
+			
+			File fin = new File("./GiocoSPACCA/Informazioni_Partite/" + code + "/finale.csv");
+			Scanner scan = new Scanner(fin);
+			scan.reset();
+			
+			if(scan.hasNextLine())
+				scan.nextLine();				// salta la prima riga (intestazione)
+			
+			if(scan.hasNextLine()) {
+				if(scan.hasNextLine()) {
+					// caso finale	-->	sono stati scritti entrambi i finalisti
+					this.currentGame = new SingleGame(fin);
+					this.message = "FINALE";
+				} else {
+					// caso semifinale 2	-->	è stato scritto un solo finalista
+					File gameFile = new File("./GiocoSPACCA/Informazioni_Partite/" + code + "/semifinale2.csv");
+					this.currentGame = new SingleGame(gameFile);
+					this.message = "SEMIFINALE 2";
+				}
+			} else {
+				// caso semifinale 1	--> non è stato scritto alcun finalista
+				File gameFile = new File("./GiocoSPACCA/Informazioni_Partite/" + code + "/semifinale1.csv");
+				this.currentGame = new SingleGame(gameFile);
+				this.message = "SEMIFINALE 1";
+			}
+			scan.close();
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
 		}
-		scan.close();
-		newGame();
 	}
 	
-//TODO forse serve nuovo fxml apposito con label che indichi che partita si sta giocando oppure aggiungere label alla nostra fxml che in SingleGame normali
-	//mostra codice partita mentre in singleGame derivato da tournament mostri "partita1", "partita2" oppure "finale"
-	
-	
-	@Override
-	public void removePlayer() {
-		// TODO Auto-generated method stub
-		
+	public SingleGame getCurrentGame() {
+		return this.currentGame;
 	}
-
-	@Override
-	public void save() {
-		// TODO Auto-generated method stub
-		
+	public String getMessage() {
+		return this.message;
 	}
-
+	
+	// note di Fula
+	
+	// IL TORNEO LAST MAN STANDING PUO' ESSERE IMPLEMENTATO COME SOTTOCLASSE DI GAME, modificando il metodo removePlayer in modo che ricarichi la vita degli altri giocatori
+	//	--> NELLA BOARD sarebbe utile aggiungere un messaggio o una schermata intermedia quando si ricarica la partita, per distinguere il torneo LMS dalla partita normale
+	
+	// i salvataggi e le eliminazioni vengono gestite direttamente all'interno di SingleGame
+	// 	--> nella board, i metodi verranno richiamati sul currentGame, restituito dal metodo getCurrentGame()
+	
+	// NELLA BOARD del torneo è utile inseirire un label (piccolo in alto) che specifica la partita attuale, restituita da getMessage()
+	//	--> sarebbe anche utile aggiungere una schermata intermedia tra una partita e l'altra con un messaggio che indichi che partita sta per iniziare
+	
+	/* TODO
+	 * 
+	 * Nell'endgame della SimpleTournamentBoard (DA IMPLEMENTARE COME SOTTOCLASSE DI BOARD) bisogna fare un controllo:
+	 * - se il codice del currentGame è semifinale1 o semifinale2, bisogna scrivere il vincitore (unico giocatore con stato "in") nel file della finale
+	 * 		e successivamente si lancia la board sulla prossima partita (semifinale2 o finale) --> basta semplicemente ricaricare l'fxml: il costruttore della classe SimpleTournament troverà automaticamente la prossima partita
+	 * - se il codice del currentGame è finale, bisogna lanciare l'fxml per la classifica della partita
+	 * 
+	 */
 }

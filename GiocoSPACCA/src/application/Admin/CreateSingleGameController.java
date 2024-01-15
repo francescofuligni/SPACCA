@@ -20,6 +20,8 @@ import javafx.scene.control.Alert.AlertType;
 
 public class CreateSingleGameController extends GamesCreation {
 
+	File gameFile;		// file partita
+	
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		MAXPLAYERS = SelectPlayerNumberSGController.playerNumber;
@@ -42,8 +44,6 @@ public class CreateSingleGameController extends GamesCreation {
     		selectionAlert.showAndWait();
     		
 	    } else {
-	    	File f;
-	    	String code;
 
 		    do {
 		    	code = "S";
@@ -52,13 +52,13 @@ public class CreateSingleGameController extends GamesCreation {
 			    	code = code + rand.nextInt(10);
 			    }
 			    Path pathToFile = Paths.get("./GiocoSPACCA/Informazioni_Partite/" + code + ".csv");
-				f=new File(pathToFile.toString());
-		    } while(f.exists());							// se esiste già un file con lo stesso codice, genera un codice diverso
-		    f.createNewFile();								// crea il file per il codice generato
+				gameFile=new File(pathToFile.toString());
+		    } while(gameFile.exists());							// se esiste già un file con lo stesso codice, genera un codice diverso
+		    gameFile.createNewFile();								// crea il file per il codice generato
 		    
 		    
 		    fillPlayersInGame();							// popola l'ArrayList playersInGame
-		    fillGameFile(f); 								// popola il file della partita
+		    fillGameFile(); 								// popola il file della partita
 		    
 		    Alert codeInfo = new Alert(AlertType.INFORMATION);					// mostra il codice generato
 		    codeInfo.setTitle("CODICE GENERATO");
@@ -71,9 +71,9 @@ public class CreateSingleGameController extends GamesCreation {
 	}
 	
 	@Override
-	protected void fillGameFile(File f) {
+	protected void fillGameFile() {
 		try {
-	        FileWriter fw = new FileWriter(f.getAbsolutePath(),true);
+	        FileWriter fw = new FileWriter(gameFile.getAbsolutePath(),true);
 	        Iterator<PlayerInGame> iter = playersInGame.iterator();
 	        Random rand=new Random();
 	        

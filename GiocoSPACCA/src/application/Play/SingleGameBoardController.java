@@ -24,7 +24,6 @@ import javafx.util.Duration;
 
 public class SingleGameBoardController extends Board {
 	
-	
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		
@@ -65,7 +64,7 @@ public class SingleGameBoardController extends Board {
 		} else {										// il giocatore attuale è in partita (partita in corso)
 			nextPlayer.setText(nextAlive.getUsername());						// label next player (mostra il prossimo giocatore vivo)
 			isOut = false;
-			healthPoints.setText("" + current.getHealthPoints());
+			healthPoints.setText("" + current.getHealthPoints() + "  HP");
 			healthBar.setProgress((double)current.getHealthPoints()/current.MAXHP);
 			hand = current.getHand();
 			images = new ArrayList<>();

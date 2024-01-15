@@ -28,32 +28,32 @@
             <Image url="@../../../Images/stonetexture.jpg" />
          </image>
       </ImageView>
-      <Label layoutX="447.0" layoutY="234.0" prefHeight="74.0" prefWidth="319.0" text="CREDITI" textAlignment="CENTER" textFill="WHITE">
+      <Label alignment="CENTER" layoutX="401.0" layoutY="235.0" prefHeight="81.0" prefWidth="400.0" text="CREDITI" textAlignment="CENTER" textFill="WHITE">
          <font>
-            <Font name="Bodoni MT" size="66.0" />
+            <Font name="Bodoni MT" size="60.0" />
          </font>
          <effect>
             <DropShadow height="38.8" radius="16.674999999999997" width="29.9" />
          </effect>
       </Label>
-      <Text fill="WHITE" layoutX="487.0" layoutY="502.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Zanolli Roberto">
+      <Text fill="WHITE" layoutX="400.0" layoutY="486.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Zanolli Roberto" textAlignment="CENTER" wrappingWidth="400.0">
          <font>
-            <Font name="Bodoni MT" size="36.0" />
+            <Font name="Bodoni MT" size="30.0" />
          </font>
       </Text>
-      <Text fill="WHITE" layoutX="415.0" layoutY="436.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Fuligni Francesco Maria" wrappingWidth="369.55731201171875">
+      <Text fill="WHITE" layoutX="400.0" layoutY="434.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Fuligni Francesco Maria" textAlignment="CENTER" wrappingWidth="400.0">
          <font>
-            <Font name="Bodoni MT" size="36.0" />
+            <Font name="Bodoni MT" size="30.0" />
          </font>
       </Text>
-      <Text fill="WHITE" layoutX="481.0" layoutY="370.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Baldari Cristian">
+      <Text fill="WHITE" layoutX="400.0" layoutY="383.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Baldari Cristian" textAlignment="CENTER" wrappingWidth="400.0">
          <font>
-            <Font name="Bodoni MT" size="36.0" />
+            <Font name="Bodoni MT" size="30.0" />
          </font>
       </Text>
-      <Button fx:id="returnToMainMenuButton" layoutX="532.0" layoutY="544.0" mnemonicParsing="false" onAction="#returnToMainMenu" text=" Indietro ">
+      <Button fx:id="returnToMainMenuButton" layoutX="538.0" layoutY="560.0" mnemonicParsing="false" onAction="#returnToMainMenu" text=" Indietro ">
          <font>
-            <Font name="Bodoni MT" size="26.0" />
+            <Font name="Bodoni MT" size="24.0" />
          </font>
          <effect>
             <InnerShadow />
