@@ -46,51 +46,13 @@ public class InsertCodeController {
     @FXML
     private Label loginAdminLabel;
     
-    private int i;
-    ////////////////////////////////////////////////////////////////////
-//differenziare il comportamento di InsCodeContr in base a tipo di codice inserito
+
     @FXML
     public void enterGame(ActionEvent event) throws IOException {
     	
-    	if(codeField.getText().startsWith("T")){   //implementa controllo su esistenza file torneo e controllo su esistenza file partite 
-    		this.i = 1;
-    	do {
-    		Path pathToFile = Paths.get("./GiocoSPACCA/Informazioni_Partite/" + codeField.getText().trim().toUpperCase() + "/partita"+i+".csv");
-        	File f=new File(pathToFile.toString());
-        	
-        //	while(!f.exists() && i<4)
-        	//	i++;
-        	
-        	if(f.exists()) {
-        		//se il codice esiste dobbiamo cambiare schermata all'fxml della board e caricarla con i dati di quella partita
-        
-        		file=new File(pathToFile.toString());
-        		 
-    	    	stage = (Stage)(returnToMainMenuButton.getScene().getWindow());
-    	    	//IMPORTANTE RICORDA IL ../ nell'URL DEL FXML
-    	    	FXMLLoader Loader=new FXMLLoader(CreateGameController.class.getResource("../Play/SingleGameBoard.fxml"));
-    	    	root = (Parent) Loader.load();
-    	    	scene = new Scene(root);
-    	    	stage.setScene(scene);
-    	    	stage.show();
-    	    	
-        	 }
-        	 else {
-        		Alert selectionAlert = new Alert(AlertType.ERROR);
-         		selectionAlert.setTitle("ERRORE!");
-         		selectionAlert.setContentText("CODICE PARTITA NON RICONOSCIUTO");
-         		selectionAlert.showAndWait();
-         		
-         		enterStatusText.setText("Codice inserito non riconosciuto, riprovare");
-         		enterStatusText.setFill(Color.RED);
-        	 }
-    	} while(i<3);
-    	}
+    	// TODO controllo sul codice --> se inizia con T cerca directory, altrimenti cerca file
+    	// settare diverso controller a seconda del tipo di partita
     	
-    	
-    	
-    	////////////////////////////////////////////////////////////////
-    	else {
     	Path pathToFile = Paths.get("./GiocoSPACCA/Informazioni_Partite/" + codeField.getText().trim().toUpperCase() + ".csv");
     	File f=new File(pathToFile.toString());
     	 
@@ -101,8 +63,9 @@ public class InsertCodeController {
     		code=codeField.getText().trim().toUpperCase();
     		 
 	    	stage = (Stage)(returnToMainMenuButton.getScene().getWindow());
-	    	//IMPORTANTE RICORDA IL ../ nell'URL DEL FXML
 	    	FXMLLoader Loader=new FXMLLoader(CreateGameController.class.getResource("../Play/SingleGameBoard.fxml"));
+	    	SingleGameBoardController sgb = new SingleGameBoardController();
+	    	Loader.setController(sgb);
 	    	root = (Parent) Loader.load();
 	    	scene = new Scene(root);
 	    	stage.setScene(scene);
@@ -117,7 +80,7 @@ public class InsertCodeController {
      		enterStatusText.setText("Codice inserito non riconosciuto, riprovare");
      		enterStatusText.setFill(Color.RED);
     	 }
-    	}
+    	
     }
 
     @FXML

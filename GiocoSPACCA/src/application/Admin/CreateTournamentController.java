@@ -50,19 +50,37 @@ public class CreateTournamentController extends GamesCreation {
     		selectionAlert.showAndWait();
 	    	
 	    } else {
-	    	Path pathDirectory;
-		    do {
-		    	code = "T";
-			    for(int i=0;i<5;i++) {						// genera il codice partita
-			    	Random rand = new Random();
-			    	code = code + rand.nextInt(10);
-			    }
-			    
-			    pathDirectory = Paths.get("./GiocoSPACCA/Informazioni_Partite/" + code);		// directory del torneo, contenente i file delle singole partite
-							
-		    } while(Files.exists(pathDirectory));			// se esiste già un file con lo stesso codice, genera un codice diverso
-		    
-		    Files.createDirectory(pathDirectory);
+	    	
+	    	if(tournamentMode.getValue().equals(GAMEMODE.SEMPLICE)) {
+	    		// TORNEO SEMPLICE
+	    		
+	    		Path pathDirectory;
+			    do {
+			    	if(tournamentMode.getValue().equals(GAMEMODE.LASTMANSTANDING))
+			    		code = "T";
+				    for(int i=0;i<5;i++) {						// genera il codice partita
+				    	Random rand = new Random();
+				    	code = code + rand.nextInt(10);
+				    }
+				    pathDirectory = Paths.get("./GiocoSPACCA/Informazioni_Partite/" + code);		// directory del torneo, contenente i file delle singole partite		
+			    } while(Files.exists(pathDirectory));			// se esiste già un file con lo stesso codice, genera un codice diverso
+			    Files.createDirectory(pathDirectory);
+	    	
+	    	} else {
+	    		// TORNEO LAST MAN STANDING
+	    		
+	    		File gameFile;
+	    		do {
+			    	code = "L";
+				    for(int i=0;i<5;i++) {						// genera il codice torneo LMS
+				    	Random rand = new Random();
+				    	code = code + rand.nextInt(10);
+				    }
+				    Path pathToFile = Paths.get("./GiocoSPACCA/Informazioni_Partite/" + code + ".csv");
+					gameFile=new File(pathToFile.toString());
+			    } while(gameFile.exists());							// se esiste già un file con lo stesso codice, genera un codice diverso
+			    gameFile.createNewFile();							// crea il file per il codice generato
+	    	}
 		    
 		    fillPlayersInGame();			// popola l'ArrayList playersInGame
 		    fillGameFile(); 				// popola il file della partita
@@ -114,7 +132,7 @@ public class CreateTournamentController extends GamesCreation {
 				// TORNEO LAST MAN STANDING
 				
 		    	// file parita singola iniziale
-		    	File gameFile=new File("./GiocoSPACCA/Informazioni_Partite/" + code + "/partita.csv");
+		    	File gameFile=new File("./GiocoSPACCA/Informazioni_Partite/" + code + ".csv");
 		    	FileWriter fw = new FileWriter(gameFile);
 		    	Iterator<PlayerInGame> iter = playersInGame.iterator();
 		        
