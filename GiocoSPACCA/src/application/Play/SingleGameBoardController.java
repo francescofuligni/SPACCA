@@ -10,7 +10,7 @@ import javafx.stage.Stage;
 public class SingleGameBoardController extends Board {
 	
 	public SingleGameBoardController() {
-		super(new SingleGame(InsertCodeController.pathToGame));
+		game = new SingleGame(InsertCodeController.pathToGame);
 	}
 	
 	@Override

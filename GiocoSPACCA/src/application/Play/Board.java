@@ -35,7 +35,6 @@ import javafx.stage.Stage;
 import javafx.animation.PauseTransition;
 import javafx.util.Duration;
 
-
 public abstract class Board implements Initializable {
 	
 	protected Stage stage;
@@ -51,7 +50,7 @@ public abstract class Board implements Initializable {
 	protected PlayerInGame nextAlive;
 	
 	@FXML
-	protected Label currentPlayer, nextPlayer, healthPoints, infoLabel, nextPlayerTitle;
+	protected Label currentPlayer, nextPlayer, healthPoints, infoLabel, nextPlayerTitle, gameTitle;
 
 	@FXML
 	protected Button saveAndExitButton, infoBoardButton, playCardButton;
@@ -61,10 +60,6 @@ public abstract class Board implements Initializable {
 	
 	@FXML
 	protected ProgressBar healthBar;
-	
-	public Board(Game game) {
-		this.game = game;
-	}
 	
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
@@ -78,8 +73,9 @@ public abstract class Board implements Initializable {
 		
 		healthPoints.setText("" + current.getHealthPoints() + "  HP");
 		healthBar.setProgress((double)current.getHealthPoints()/current.MAXHP);
+		gameTitle.setText(game.gameFile.getName().split("\\.")[0].toUpperCase());
 		
-		if(current.equals(nextAlive)) {					// il giocatore attuale è il vincitore (partita terminata)
+		if(current.equals(nextAlive)) {						// il giocatore attuale è il vincitore (partita terminata)
 			playCardButton.setText("FINE");
 			infoLabel.setTextFill(Color.LIGHTGREEN);
 			infoLabel.setText("HAI VINTO!");
@@ -93,7 +89,7 @@ public abstract class Board implements Initializable {
 				game.removePlayer();
 				System.out.println(game.getTurn());
 			}
-		} else if(current.getHealthPoints()<=0) {		// il giocatore attuale è stato eliminato (abbandona la partita)
+		} else if(current.getHealthPoints()<=0) {			// il giocatore attuale è stato eliminato (abbandona la partita)
 			nextPlayer.setText(nextAlive.getUsername());						// label next player (mostra il prossimo giocatore vivo)
 			isOut = true;
 			healthPoints.setText("0  HP");

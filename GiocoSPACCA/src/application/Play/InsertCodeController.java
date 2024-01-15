@@ -63,7 +63,7 @@ public class InsertCodeController {
     			
     			stage = (Stage)(returnToMainMenuButton.getScene().getWindow());
     	    	FXMLLoader Loader=new FXMLLoader(CreateGameController.class.getResource("../Play/SingleGameBoard.fxml"));
-    	    	//Loader.setController(new SimpleTournamentBoardController());
+    	    	Loader.setController(new SimpleTournamentBoardController());
     	    	root = (Parent) Loader.load();
     	    	scene = new Scene(root);
     	    	stage.setScene(scene);
@@ -84,11 +84,17 @@ public class InsertCodeController {
 	    	pathToGame = Paths.get("./GiocoSPACCA/Informazioni_Partite/" + code + ".csv"); 
 	    	file = new File(pathToGame.toString());
 	    	if(file.exists()) {
-	    		//se il codice esiste dobbiamo cambiare schermata all'fxml della board e caricarla con i dati di quella partit
 	    		 
 		    	stage = (Stage)(returnToMainMenuButton.getScene().getWindow());
 		    	FXMLLoader Loader=new FXMLLoader(CreateGameController.class.getResource("../Play/SingleGameBoard.fxml"));
-		    	Loader.setController(new SingleGameBoardController());
+		    	
+		    	// TODO: LastManStandingBoardController
+		    	
+		    	// if(code.startsWith("S")) {
+		    		Loader.setController(new SingleGameBoardController());
+		    	// } else		
+		    		// Loader.setController(new LastManStandingBoardController());
+		    		
 		    	root = (Parent) Loader.load();
 		    	scene = new Scene(root);
 		    	stage.setScene(scene);
