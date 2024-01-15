@@ -2,6 +2,8 @@ package application.Play;
 
 import java.io.File;
 import java.io.IOException;
+import java.nio.*;
+import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
@@ -30,6 +32,8 @@ public class InsertCodeController {
 	
 	public static File file;
 	public static String code;
+	public static Path pathToGame
+	;
 	
     @FXML
     private TextField codeField;
@@ -52,34 +56,57 @@ public class InsertCodeController {
     	
     	// TODO controllo sul codice --> se inizia con T cerca directory, altrimenti cerca file
     	// settare diverso controller a seconda del tipo di partita
+    	code = codeField.getText().trim().toUpperCase();
     	
-    	Path pathToFile = Paths.get("./GiocoSPACCA/Informazioni_Partite/" + codeField.getText().trim().toUpperCase() + ".csv");
-    	File f=new File(pathToFile.toString());
-    	 
-    	if(f.exists()) {
-    		//se il codice esiste dobbiamo cambiare schermata all'fxml della board e caricarla con i dati di quella partita
-    
-    		file=new File(pathToFile.toString());
-    		code=codeField.getText().trim().toUpperCase();
-    		 
-	    	stage = (Stage)(returnToMainMenuButton.getScene().getWindow());
-	    	FXMLLoader Loader=new FXMLLoader(CreateGameController.class.getResource("../Play/SingleGameBoard.fxml"));
-	    	SingleGameBoardController sgb = new SingleGameBoardController();
-	    	Loader.setController(sgb);
-	    	root = (Parent) Loader.load();
-	    	scene = new Scene(root);
-	    	stage.setScene(scene);
-	    	stage.show();
-    	 }
-    	 else {
-    		Alert selectionAlert = new Alert(AlertType.ERROR);
-     		selectionAlert.setTitle("ERRORE!");
-     		selectionAlert.setContentText("CODICE PARTITA NON RICONOSCIUTO");
-     		selectionAlert.showAndWait();
-     		
-     		enterStatusText.setText("Codice inserito non riconosciuto, riprovare");
-     		enterStatusText.setFill(Color.RED);
-    	 }
+    	if(code.startsWith("T")) {
+    		Path pathToDirectory = Paths.get("./GiocoSPACCA/Informazioni_Partite/" + code); 
+    		
+    		if(Files.isDirectory(pathToDirectory)) {
+    			
+    			stage = (Stage)(returnToMainMenuButton.getScene().getWindow());
+    	    	FXMLLoader Loader=new FXMLLoader(CreateGameController.class.getResource("../Play/SingleGameBoard.fxml"));
+    	    //	SimpleTournamentBoardController stb = new SimpleTournamentBoardController();
+    	    	//Loader.setController(stb);
+    	    	root = (Parent) Loader.load();
+    	    	scene = new Scene(root);
+    	    	stage.setScene(scene);
+    	    	stage.show();
+    			
+    		}
+    		else {
+    			Alert selectionAlert = new Alert(AlertType.ERROR);
+         		selectionAlert.setTitle("ERRORE!");
+         		selectionAlert.setContentText("CODICE TORNEO NON RICONOSCIUTO");
+         		selectionAlert.showAndWait();
+         		
+         		enterStatusText.setText("Codice inserito non riconosciuto, riprovare");
+         		enterStatusText.setFill(Color.RED);
+    		}
+    	}
+    	else {
+	    	Path pathToFile = Paths.get("./GiocoSPACCA/Informazioni_Partite/" + codeField.getText().trim().toUpperCase()+".csv"); 
+	    	file = new File(pathToFile.toString());
+	    	if(file.exists()) {
+	    		//se il codice esiste dobbiamo cambiare schermata all'fxml della board e caricarla con i dati di quella partit
+	    		 
+		    	stage = (Stage)(returnToMainMenuButton.getScene().getWindow());
+		    	FXMLLoader Loader=new FXMLLoader(CreateGameController.class.getResource("../Play/SingleGameBoard.fxml"));
+		    	Loader.setController(new SingleGameBoardController());
+		    	root = (Parent) Loader.load();
+		    	scene = new Scene(root);
+		    	stage.setScene(scene);
+		    	stage.show();
+	    	 }
+	    	 else {
+	    		Alert selectionAlert = new Alert(AlertType.ERROR);
+	     		selectionAlert.setTitle("ERRORE!");
+	     		selectionAlert.setContentText("CODICE PARTITA NON RICONOSCIUTO");
+	     		selectionAlert.showAndWait();
+	     		
+	     		enterStatusText.setText("Codice inserito non riconosciuto, riprovare");
+	     		enterStatusText.setFill(Color.RED);
+	    	 }
+    	}
     	
     }
 

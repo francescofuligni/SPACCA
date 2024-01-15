@@ -105,6 +105,7 @@ public class SingleGameBoardController extends Board {
 		stage = (Stage)(playCardButton.getScene().getWindow());
 		  //IMPORTANTE RICORDA IL ../ nell'URL DEL FXML
 		  FXMLLoader Loader=new FXMLLoader(SingleGameBoardController.class.getResource("SingleGameBoard.fxml"));
+		  Loader.setController(new SingleGameBoardController());
 		  root = (Parent) Loader.load();
 		  scene = new Scene(root);
 		  stage.setScene(scene);

@@ -58,6 +58,8 @@ public class GameScoreBoardController implements Initializable {
     @Override
     public void initialize(URL arg0, ResourceBundle arg1) {
     	
+    	gameCodeLabel.setText("Classifica Partita " + code);
+    	
 		try {
 			Scanner scan=new Scanner(gameFile);
 			if(scan.hasNextLine())
