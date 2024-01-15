@@ -50,6 +50,9 @@ public class InsertCodeController {
     @FXML
     public void enterGame(ActionEvent event) throws IOException {
     	
+    	// TODO controllo sul codice --> se inizia con T cerca directory, altrimenti cerca file
+    	// settare diverso controller a seconda del tipo di partita
+    	
     	Path pathToFile = Paths.get("./GiocoSPACCA/Informazioni_Partite/" + codeField.getText().trim().toUpperCase() + ".csv");
     	File f=new File(pathToFile.toString());
     	 
@@ -60,8 +63,9 @@ public class InsertCodeController {
     		code=codeField.getText().trim().toUpperCase();
     		 
 	    	stage = (Stage)(returnToMainMenuButton.getScene().getWindow());
-	    	//IMPORTANTE RICORDA IL ../ nell'URL DEL FXML
 	    	FXMLLoader Loader=new FXMLLoader(CreateGameController.class.getResource("../Play/SingleGameBoard.fxml"));
+	    	SingleGameBoardController sgb = new SingleGameBoardController();
+	    	Loader.setController(sgb);
 	    	root = (Parent) Loader.load();
 	    	scene = new Scene(root);
 	    	stage.setScene(scene);
