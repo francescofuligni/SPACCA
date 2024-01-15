@@ -2,6 +2,7 @@ package application.Games;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -14,22 +15,25 @@ public abstract class Game {
 	protected BOTDIFF difficulty;
 	protected ArrayList<PlayerInGame> players;
 	protected ArrayList<PlayerInGame> eliminated;
-
+	protected boolean allDead = true;
 	protected int turn;
-	protected Scanner scan;
+	
 	public File gameFile;
 	public String code;
 	public Deck deck;			// scope public per i metodi effect delle carte
 	
-	public Game(File gameFile) {
-		this.gameFile = gameFile;
+	public Game(Path path) {
+		this.gameFile = new File(path.toString());
 		this.code = gameFile.getName().split("\\.")[0];
+		this.players=new ArrayList<PlayerInGame>();
+		this.eliminated=new ArrayList<PlayerInGame>();
+		this.deck=new Deck();
 		
 		try {
-			scan = new Scanner(this.gameFile);
+			Scanner scan = new Scanner(this.gameFile);
 			scan.reset();
 			
-			if(scan.hasNextLine()) {
+			if(scan.hasNextLine()) {				// prende le informazioni dall'intestazione
 				String line=scan.nextLine();
 				String[] tokens = line.split(",");
 				
@@ -39,12 +43,33 @@ public abstract class Game {
 					difficulty = BOTDIFF.FACILE;
 				this.turn=Integer.parseInt(tokens[2]);
 			}
+			
+			while(scan.hasNextLine()) {				// aggiunge i giocatori all'arraylist allPlayers
+				String line=scan.nextLine();
+				String[] tokens = line.split(",");
+				
+				String username = tokens[1];
+				int healthPoints = Integer.parseInt(tokens[2]);
+				PlayerInGame p = new PlayerInGame(username, healthPoints);
+				
+				if(tokens[0].equals("in")) {			// giocatori in partita
+					ArrayList<Card> hand = new ArrayList<>();
+					for(int i=3; i<tokens.length; i++)
+						hand.add(deck.getCard(Integer.parseInt(tokens[i])));
+					p.setHand(hand);
+					players.add(p);
+					
+					if(p.getHealthPoints()>0)
+						this.allDead = false;
+				} else {								// giocatori eliminati
+					eliminated.add(p);
+				}
+			}
+			scan.close();
+			
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
 		}
-		this.players=new ArrayList<PlayerInGame>();
-		this.eliminated=new ArrayList<PlayerInGame>();
-		this.deck=new Deck();	
 	}
 	
 	public BOTDIFF getDifficulty() {
@@ -129,7 +154,7 @@ public abstract class Game {
 	}
 	
 	protected boolean newGame() {
-		if(currentPlayer().getHealthPoints()>0 && currentPlayer().getHand().size() == 0) {			// se i giocatori non hanno carte in mano, vengono distribuite le carte
+		if(eliminated.size() == 0 && (currentPlayer().getHealthPoints()>0 && currentPlayer().getHand().size() == 0)) {			// se i giocatori non hanno carte in mano, vengono distribuite le carte
 			for(PlayerInGame p : players) {
 				ArrayList<Card> hand = new ArrayList<>();
 				for(int i=0; i<4; i++) {
