@@ -44,7 +44,7 @@ public abstract class Board implements Initializable {
 	protected ArrayList<ImageView> images;
 	protected ArrayList<Card> hand;
 	protected ImageView selectedImage;
-	protected boolean isOut;
+	protected boolean isOut = false;
 	protected Game game;
 	protected PlayerInGame current;
 	protected PlayerInGame nextAlive;
@@ -100,7 +100,6 @@ public abstract class Board implements Initializable {
 		
 		} else {										// il giocatore attuale è in partita (partita in corso)
 			nextPlayer.setText(nextAlive.getUsername());						// label next player (mostra il prossimo giocatore vivo)
-			isOut = false;
 			healthPoints.setText("" + current.getHealthPoints() + "  HP");
 			healthBar.setProgress((double)current.getHealthPoints()/current.MAXHP);
 			hand = current.getHand();
@@ -197,6 +196,8 @@ public abstract class Board implements Initializable {
 					return c;
 		
 		if(game.getDifficulty().equals(BOTDIFF.DIFFICILE)) {
+			// BOT DIFFICILE
+			
 			boolean flag = true;
 			int imax = 0;
 			for(int i=0; i<hand.size(); i++) {
@@ -210,7 +211,10 @@ public abstract class Board implements Initializable {
 				}
 			}
 			return hand.get(imax);
+			
 		} else {
+			// BOT FACILE
+			
 			Random rand = new Random();
 			return hand.get(rand.nextInt(hand.size()));
 		}

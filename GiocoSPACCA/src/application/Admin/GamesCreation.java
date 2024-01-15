@@ -34,6 +34,7 @@ public abstract class GamesCreation implements Initializable {
 	protected Parent root;
 	
 	public int MAXPLAYERS;
+	protected final int CODELENGTH = 5;
 	protected Player[] selectedPlayers;
 	protected ArrayList<PlayerInGame> playersInGame = new ArrayList<>();
 	protected ArrayList<Player> allPlayers = new ArrayList<>();

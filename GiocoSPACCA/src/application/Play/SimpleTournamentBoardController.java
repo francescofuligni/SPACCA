@@ -20,10 +20,8 @@ public class SimpleTournamentBoardController extends Board {
 	@Override
 	protected void nextPlayerBoard() throws IOException {
 		game.nextTurn();
-		
 		game.save();
 		stage = (Stage)(playCardButton.getScene().getWindow());
-		  //IMPORTANTE RICORDA IL ../ nell'URL DEL FXML
 		  FXMLLoader Loader=new FXMLLoader(SimpleTournamentBoardController.class.getResource("SingleGameBoard.fxml"));
 		  Loader.setController(new SimpleTournamentBoardController());
 		  root = (Parent) Loader.load();
@@ -35,22 +33,26 @@ public class SimpleTournamentBoardController extends Board {
 	@Override
 	protected void endGame() throws IOException {
 		game.save();
+		
 		if(!game.gameFile.getName().split("\\.")[0].equals("finale")) {		// se è una semifinale
 			
 			tournament.updateFinal();				// scrive il vincitore della semifinale nel file della finale
 			stage = (Stage)(playCardButton.getScene().getWindow());
-			  //IMPORTANTE RICORDA IL ../ nell'URL DEL FXML
 			  FXMLLoader Loader=new FXMLLoader(SimpleTournamentBoardController.class.getResource("SingleGameBoard.fxml"));
-			  Loader.setController(new SimpleTournamentBoardController());
+			  Loader.setController(this);
 			  root = (Parent) Loader.load();
 			  scene = new Scene(root);
 			  stage.setScene(scene);
 			  stage.show();
 			  
 		} else {									// se è la finale
-			// TODO
-			// carica la classifica del torneo
-			// Files.delete(InsertCodeController.pathToGame);		// elimina la directory del torneo
+			game.save();
+			stage = (Stage)(saveAndExitButton.getScene().getWindow());
+	    	FXMLLoader Loader=new FXMLLoader(GameScoreBoardController.class.getResource("GameScoreBoard.fxml"));
+	    	root = (Parent) Loader.load();
+	    	scene = new Scene(root);
+	    	stage.setScene(scene);
+	    	stage.show();
 		}
 	}
 }

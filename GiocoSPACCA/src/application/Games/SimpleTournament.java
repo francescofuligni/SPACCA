@@ -11,17 +11,14 @@ import java.util.Scanner;
 
 import application.Player.PlayerInGame;
 
-//flow ST:  inserisci codice> gioca e finisci partita1> gioca e finisci partita2>gioca e finisci finale> fine torneo con dispay posizioni/punteggi
-
-public class SimpleTournament { //in costruzione
+public class SimpleTournament {
 	
 	private SingleGame currentGame;
 	private File fin;
-	public String code;
 
 	public SimpleTournament(Path pathToGame) {
 		try {
-			// per sapere la partita corrente, si controlla il file della finale
+			// per individuare la partita corrente, controlla il file della finale
 			
 			fin = new File(pathToGame.toString() + "/finale.csv");
 			Scanner scan = new Scanner(fin);

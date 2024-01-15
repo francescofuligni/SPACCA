@@ -1,6 +1,5 @@
 package application.Play;
 
-import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -29,7 +28,6 @@ public class InsertCodeController {
 	private Scene scene;
 	private Parent root;
 	
-	public static File file;
 	public static String code;
 	public static Path pathToGame;
 	
@@ -51,63 +49,39 @@ public class InsertCodeController {
 
     @FXML
     public void enterGame(ActionEvent event) throws IOException {
-    	
-    	// TODO controllo sul codice --> se inizia con T cerca directory, altrimenti cerca file
-    	// settare diverso controller a seconda del tipo di partita
     	code = codeField.getText().trim().toUpperCase();
     	
     	if(code.startsWith("T")) {
+    		// SIMPLE TOURNAMENT
     		pathToGame = Paths.get("./GiocoSPACCA/Informazioni_Partite/" + code); 
     		
     		if(Files.exists(pathToGame)) {
-    			
-    			stage = (Stage)(returnToMainMenuButton.getScene().getWindow());
-    	    	FXMLLoader Loader=new FXMLLoader(CreateGameController.class.getResource("../Play/SingleGameBoard.fxml"));
-    	    	Loader.setController(new SimpleTournamentBoardController());
-    	    	root = (Parent) Loader.load();
-    	    	scene = new Scene(root);
-    	    	stage.setScene(scene);
-    	    	stage.show();
-    			
-    		}
-    		else {
+    			start();
+    		} else {
     			Alert selectionAlert = new Alert(AlertType.ERROR);
          		selectionAlert.setTitle("ERRORE!");
-         		selectionAlert.setContentText("CODICE TORNEO NON RICONOSCIUTO");
+         		selectionAlert.setHeaderText("Codice non riconosciuto");
          		selectionAlert.showAndWait();
          		
          		enterStatusText.setText("Codice inserito non riconosciuto, riprovare");
          		enterStatusText.setFill(Color.RED);
     		}
-    	}
-    	else {
+    		
+    	} else {
+    		// SINGLE GAME O LAST MAN STANDING
 	    	pathToGame = Paths.get("./GiocoSPACCA/Informazioni_Partite/" + code + ".csv"); 
-	    	file = new File(pathToGame.toString());
-	    	if(file.exists()) {
-	    		 
-		    	stage = (Stage)(returnToMainMenuButton.getScene().getWindow());
-		    	FXMLLoader Loader=new FXMLLoader(CreateGameController.class.getResource("../Play/SingleGameBoard.fxml"));
-		    	
-		    	// TODO: LastManStandingBoardController
-		    	
-		    	// if(code.startsWith("S")) {
-		    		Loader.setController(new SingleGameBoardController());
-		    	// } else		
-		    		// Loader.setController(new LastManStandingBoardController());
-		    		
-		    	root = (Parent) Loader.load();
-		    	scene = new Scene(root);
-		    	stage.setScene(scene);
-		    	stage.show();
-	    	 }
-	    	 else {
+	    	
+	    	if(Files.exists(pathToGame)) {
+		    	start();
+	    	 } else {
+	    		enterStatusText.setText("Codice inserito non riconosciuto, riprovare");
+		     	enterStatusText.setFill(Color.RED);
+		     	
 	    		Alert selectionAlert = new Alert(AlertType.ERROR);
-	     		selectionAlert.setTitle("ERRORE!");
-	     		selectionAlert.setContentText("CODICE PARTITA NON RICONOSCIUTO");
-	     		selectionAlert.showAndWait();
+	     		selectionAlert.setTitle("ERRORE");
+	     		selectionAlert.setHeaderText("Codice non riconosciuto");
 	     		
-	     		enterStatusText.setText("Codice inserito non riconosciuto, riprovare");
-	     		enterStatusText.setFill(Color.RED);
+	     		selectionAlert.showAndWait();
 	    	 }
     	}
     	
@@ -142,5 +116,17 @@ public class InsertCodeController {
     @FXML
     public void setColorWhite(MouseEvent event) {
     	loginAdminLabel.setTextFill(Color.WHITE);
+    }
+    
+    
+    private void start() throws IOException {
+    	// lancia la schermata di inizio partita
+    	
+    	stage = (Stage)(returnToMainMenuButton.getScene().getWindow());
+    	FXMLLoader Loader=new FXMLLoader(CreateGameController.class.getResource("../Play/StartScreen.fxml"));
+    	root = (Parent) Loader.load();
+    	scene = new Scene(root);
+    	stage.setScene(scene);
+    	stage.show();
     }
 }

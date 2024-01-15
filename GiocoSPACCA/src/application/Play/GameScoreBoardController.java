@@ -1,10 +1,10 @@
 package application.Play;
 
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.net.URL;
+import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.LinkedHashMap;
@@ -32,8 +32,8 @@ public class GameScoreBoardController implements Initializable {
 	private Stage stage;
 	private Scene scene;
 	private Parent root;
-	public static File gameFile = InsertCodeController.file;
-	public static String code = InsertCodeController.code;
+	private final String code = InsertCodeController.code;
+	private final Path pathToGame = InsertCodeController.pathToGame;
 	
 	@FXML
 	private Label generalScoreBoardLabel, gameCodeLabel;
@@ -58,31 +58,39 @@ public class GameScoreBoardController implements Initializable {
     @Override
     public void initialize(URL arg0, ResourceBundle arg1) {
     	
-    	gameCodeLabel.setText("Classifica Partita " + code);
-    	
-		try {
-			Scanner scan=new Scanner(gameFile);
-			if(scan.hasNextLine())
-				scan.nextLine();		// salta la prima riga (intestazione file .csv)
+    	gameCodeLabel.setText("Classifica partita " + code);
+    	try {
+			if(code.startsWith("T")) {
+				// SIMPLE TOURNAMENT
+				// TODO
+				
+			} else {
+				// SINGLE GAME O LAST MAN STANDING
+				
+				Scanner scan=new Scanner(new File(pathToGame.toString()));
+				if(scan.hasNextLine())
+					scan.nextLine();		// salta la prima riga (intestazione)
 			
-			while(scan.hasNextLine()){
-				String line=scan.nextLine();
-				String[] tokens = line.split(",");
-				this.players.put(tokens[1], null);
+				while(scan.hasNextLine()){
+					String line=scan.nextLine();
+					String[] tokens = line.split(",");
+					this.players.put(tokens[1], null);
+				}
+			
+				givePoints();
+			
+				for(String username : players.keySet())
+					scoreBoard.getItems().add("[ +" + players.get(username) + " ] - " + username);
+		
+				scan.close();
 			}
 			
-			givePoints();
+			updateScores();
+			Files.delete(pathToGame);	// elimina i file relativi alla partita
 			
-			for(String username : players.keySet())
-				scoreBoard.getItems().add("[ +" + players.get(username) + " ] - " + username);
-		
-			scan.close();
-		} catch (FileNotFoundException e) {
+		} catch (IOException e) {		// FileNotFoundException is a IOException
 			e.printStackTrace();
 		}
-		
-		updateScores();
-		gameFile.delete();
     }
     
     @FXML
@@ -134,6 +142,7 @@ public class GameScoreBoardController implements Initializable {
 	}
     
     private void givePoints() {
+    	// punteggi Single Game
     	int pos=0;
     	for(String username : players.keySet()) {
     		players.putIfAbsent(username, (int)Math.pow(2, players.size()-pos));

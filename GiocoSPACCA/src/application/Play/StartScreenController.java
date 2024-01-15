@@ -1,20 +1,23 @@
 package application.Play;
 
 import java.io.IOException;
+import java.net.URL;
+import java.util.ResourceBundle;
 
-import application.Admin.CreateGameController;
-import javafx.event.ActionEvent;
+import application.Games.LastManStanding;
+import application.Games.SimpleTournament;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 
-public class StartScreenController {
+public class StartScreenController implements Initializable {
 
-	private String code = InsertCodeController.code;
+	private final String code = InsertCodeController.code;
 	private Stage stage;
 	private Scene scene;
 	private Parent root;
@@ -22,20 +25,36 @@ public class StartScreenController {
 	@FXML
 	private Label title;
 	
-	@FXML
-	 public void start(MouseEvent event) throws IOException{
-		stage = (Stage)(title.getScene().getWindow());
-		  //IMPORTANTE RICORDA IL ../ nell'URL DEL FXML
-		  FXMLLoader Loader=new FXMLLoader(StartScreenController.class.getResource("SingleGameBoard.fxml"));
-		  if(code.startsWith("T"))
-			  Loader.setController(new SimpleTournamentBoardController());
-		  else 
-			  Loader.setController(new SingleGameBoardController());
-		  
-		  root = (Parent) Loader.load();
-		  scene = new Scene(root);
-		  stage.setScene(scene);
-		  stage.show();
-	 }
+	@Override
+	public void initialize(URL arg0, ResourceBundle arg1) {
+		if(code.startsWith("T")) {
+			SimpleTournament t = new SimpleTournament(InsertCodeController.pathToGame);
+			title.setText(t.getCurrentGame().code.toUpperCase());
+		} else if(code.startsWith("L")){
+			LastManStanding l = new LastManStanding(InsertCodeController.pathToGame);
+			title.setText(l.getRound());
+		} else {
+			title.setText("COMBATTI");
+		}
+	}
 	
+	@FXML
+	public void start(MouseEvent event) throws IOException{
+		// lancia la board con il giusto controller
+		
+		stage = (Stage)(title.getScene().getWindow());
+		FXMLLoader Loader=new FXMLLoader(StartScreenController.class.getResource("SingleGameBoard.fxml"));
+		  
+		if(code.startsWith("T"))
+			Loader.setController(new SimpleTournamentBoardController());
+		// else if(code.startsWith("L"))
+			// Loader.setController(new LastManStandingBoardController());
+		else 
+			Loader.setController(new SingleGameBoardController());
+		  
+		root = (Parent) Loader.load();
+		scene = new Scene(root);
+		stage.setScene(scene);
+		stage.show();
+	}
 }

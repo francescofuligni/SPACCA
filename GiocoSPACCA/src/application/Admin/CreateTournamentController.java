@@ -23,6 +23,7 @@ import javafx.scene.control.ChoiceBox;
 public class CreateTournamentController extends GamesCreation {
 	
 	private GAMEMODE[] mode = {GAMEMODE.SEMPLICE, GAMEMODE.LASTMANSTANDING};
+	private Path pathToGame;
 	
     @FXML
     private ChoiceBox<GAMEMODE> tournamentMode;
@@ -53,37 +54,31 @@ public class CreateTournamentController extends GamesCreation {
 	    	
 	    	if(tournamentMode.getValue().equals(GAMEMODE.SEMPLICE)) {
 	    		// TORNEO SEMPLICE
-	    		
-	    		Path pathDirectory;
 			    do {
-			    	if(tournamentMode.getValue().equals(GAMEMODE.LASTMANSTANDING))
-			    		code = "T";
-				    for(int i=0;i<5;i++) {						// genera il codice partita
+			    	code = "T";
+				    for(int i=0;i<CODELENGTH;i++) {					// genera il codice partita
 				    	Random rand = new Random();
 				    	code = code + rand.nextInt(10);
 				    }
-				    pathDirectory = Paths.get("./GiocoSPACCA/Informazioni_Partite/" + code);		// directory del torneo, contenente i file delle singole partite		
-			    } while(Files.exists(pathDirectory));			// se esiste già un file con lo stesso codice, genera un codice diverso
-			    Files.createDirectory(pathDirectory);
+				    pathToGame = Paths.get("./GiocoSPACCA/Informazioni_Partite/" + code);		// directory del torneo, contenente i file delle singole partite
+				    Files.createDirectory(pathToGame);
+			    } while(Files.exists(pathToGame));					// se esiste già il codice, genera un codice diverso
 	    	
 	    	} else {
 	    		// TORNEO LAST MAN STANDING
-	    		
-	    		File gameFile;
 	    		do {
 			    	code = "L";
-				    for(int i=0;i<5;i++) {						// genera il codice torneo LMS
+				    for(int i=0;i<CODELENGTH;i++) {					// genera il codice torneo LMS
 				    	Random rand = new Random();
 				    	code = code + rand.nextInt(10);
 				    }
-				    Path pathToFile = Paths.get("./GiocoSPACCA/Informazioni_Partite/" + code + ".csv");
-					gameFile=new File(pathToFile.toString());
-			    } while(gameFile.exists());							// se esiste già un file con lo stesso codice, genera un codice diverso
-			    gameFile.createNewFile();							// crea il file per il codice generato
+				    pathToGame = Paths.get("./GiocoSPACCA/Informazioni_Partite/" + code + ".csv");
+			    } while(Files.exists(pathToGame));					// se esiste già il codice, genera un codice diverso
+	    		Files.createFile(pathToGame);
 	    	}
-		    
-		    fillPlayersInGame();			// popola l'ArrayList playersInGame
-		    fillGameFile(); 				// popola il file della partita
+	    	
+		    fillPlayersInGame();				// popola l'ArrayList playersInGame
+		    fillGameFile(); 					// popola il file della partita
 		    
 		    Alert codeInfo = new Alert(AlertType.INFORMATION);					// mostra il codice generato
 		    codeInfo.setTitle("CODICE GENERATO");
