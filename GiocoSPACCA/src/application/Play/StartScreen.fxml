@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane fx:id="screen" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onMouseClicked="#start" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.Play.StartScreenController">
+   <children>
+      <ImageView fitHeight="400.0" fitWidth="600.0" layoutY="29.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../../../../../../../Downloads/Sfondo%20StartScreen.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="58.0" fitWidth="285.0" layoutX="164.0" layoutY="71.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../../Images/flagBanner.png" />
+         </image>
+      </ImageView>
+      <Label fx:id="title" layoutX="221.0" layoutY="73.0" opacity="0.79" text="COMBATTI" textFill="WHITE">
+         <font>
+            <Font name="Times New Roman Bold" size="28.0" />
+         </font>
+      </Label>
+      <Label layoutX="178.0" layoutY="340.0" text="CLICCA UN PUNTO QUALSIASI PER INIZIARE" textFill="WHITE" />
+   </children>
+</AnchorPane>
