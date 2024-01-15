@@ -2,7 +2,6 @@ package application.Play;
 
 import java.io.File;
 import java.io.IOException;
-import java.nio.*;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -32,8 +31,7 @@ public class InsertCodeController {
 	
 	public static File file;
 	public static String code;
-	public static Path pathToGame
-	;
+	public static Path pathToGame;
 	
     @FXML
     private TextField codeField;
@@ -59,14 +57,13 @@ public class InsertCodeController {
     	code = codeField.getText().trim().toUpperCase();
     	
     	if(code.startsWith("T")) {
-    		Path pathToDirectory = Paths.get("./GiocoSPACCA/Informazioni_Partite/" + code); 
+    		pathToGame = Paths.get("./GiocoSPACCA/Informazioni_Partite/" + code); 
     		
-    		if(Files.isDirectory(pathToDirectory)) {
+    		if(Files.exists(pathToGame)) {
     			
     			stage = (Stage)(returnToMainMenuButton.getScene().getWindow());
     	    	FXMLLoader Loader=new FXMLLoader(CreateGameController.class.getResource("../Play/SingleGameBoard.fxml"));
-    	    //	SimpleTournamentBoardController stb = new SimpleTournamentBoardController();
-    	    	//Loader.setController(stb);
+    	    	//Loader.setController(new SimpleTournamentBoardController());
     	    	root = (Parent) Loader.load();
     	    	scene = new Scene(root);
     	    	stage.setScene(scene);
@@ -84,8 +81,8 @@ public class InsertCodeController {
     		}
     	}
     	else {
-	    	Path pathToFile = Paths.get("./GiocoSPACCA/Informazioni_Partite/" + codeField.getText().trim().toUpperCase()+".csv"); 
-	    	file = new File(pathToFile.toString());
+	    	pathToGame = Paths.get("./GiocoSPACCA/Informazioni_Partite/" + code + ".csv"); 
+	    	file = new File(pathToGame.toString());
 	    	if(file.exists()) {
 	    		//se il codice esiste dobbiamo cambiare schermata all'fxml della board e caricarla con i dati di quella partit
 	    		 
