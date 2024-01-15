@@ -25,6 +25,7 @@ public abstract class Game {
 	public Game(Path path) {
 		this.gameFile = new File(path.toString());
 		this.code = gameFile.getName().split("\\.")[0];
+		
 		this.players=new ArrayList<PlayerInGame>();
 		this.eliminated=new ArrayList<PlayerInGame>();
 		this.deck=new Deck();

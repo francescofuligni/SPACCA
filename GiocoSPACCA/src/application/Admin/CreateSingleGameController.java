@@ -44,21 +44,20 @@ public class CreateSingleGameController extends GamesCreation {
     		selectionAlert.showAndWait();
     		
 	    } else {
-
+	    	// genera il codice partita
 		    do {
 		    	code = "S";
-			    for(int i=0;i<5;i++) {						// genera il codice partita
+			    for(int i=0;i<CODELENGTH;i++) {
 			    	Random rand = new Random();
 			    	code = code + rand.nextInt(10);
 			    }
 			    Path pathToFile = Paths.get("./GiocoSPACCA/Informazioni_Partite/" + code + ".csv");
 				gameFile=new File(pathToFile.toString());
-		    } while(gameFile.exists());							// se esiste già un file con lo stesso codice, genera un codice diverso
-		    gameFile.createNewFile();								// crea il file per il codice generato
+		    } while(gameFile.exists());								// se esiste già un file con lo stesso codice, genera un codice diverso
 		    
-		    
-		    fillPlayersInGame();							// popola l'ArrayList playersInGame
-		    fillGameFile(); 								// popola il file della partita
+		    gameFile.createNewFile();				// crea il file per il codice generato
+		    fillPlayersInGame();					// popola l'ArrayList playersInGame
+		    fillGameFile(); 						// popola il file della partita
 		    
 		    Alert codeInfo = new Alert(AlertType.INFORMATION);					// mostra il codice generato
 		    codeInfo.setTitle("CODICE GENERATO");

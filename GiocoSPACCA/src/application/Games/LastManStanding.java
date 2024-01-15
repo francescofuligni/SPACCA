@@ -16,10 +16,12 @@ public class LastManStanding extends Game {
 		super(path);
 		
 		this.isNewGame = newGame();
+		maxOneDead();
+		someoneDied();		// TODO
 	}
 	
-	public String getMessage() {
-		return "PARTITA " + (5-players.size());
+	public String getRound() {
+		return "ROUND " + (5-players.size());
 	}
 	
 	@Override
@@ -32,7 +34,8 @@ public class LastManStanding extends Game {
 		else 
 			turn--;
 		
-		restartGame();
+		if(!currentPlayer().equals(nextPlayerAlive()))
+			restartGame();
 	}
 
 	@Override
@@ -63,5 +66,20 @@ public class LastManStanding extends Game {
 			p.setHealthPoints(p.MAXHP);			// reinizializza i punti salute
 			p.setHand(new ArrayList<>());		// rimuove le vecchie carte
 		}
+	}
+	
+	
+	// TODO: COMBINARE I DUE METODI SEGUENTI IN MODO CHE SI FACCIANO MENO ITERAZIONI POSSIBILI
+	// --> obiettivo: scorrere al massimo una volta il vettore contenente i giocatori per individuare se ci sono uno o più eliminati che devono abbandonare
+	
+	private void someoneDied() {
+		// TODO
+		// controlla se qualcuno è morto --> se trova un giocatore morto, setta il turno in modo che sia il turno del giocatore morto
+		// --> in questo modo, appena un giocatore muore è costretto ad abbandonare e la partita viene ricaricata
+	}
+	
+	private void maxOneDead() {
+		// TODO
+		// metodo che si assicura che muoia solo un giocatore per turno --> se ne muoiono di più, imposta i punti vita degli altri a 1
 	}
 }

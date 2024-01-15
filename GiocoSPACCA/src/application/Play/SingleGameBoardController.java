@@ -18,20 +18,19 @@ public class SingleGameBoardController extends Board {
 		game.nextTurn();
 		game.save();
 		stage = (Stage)(playCardButton.getScene().getWindow());
-		  //IMPORTANTE RICORDA IL ../ nell'URL DEL FXML
-		  FXMLLoader Loader=new FXMLLoader(SingleGameBoardController.class.getResource("SingleGameBoard.fxml"));
-		  Loader.setController(new SingleGameBoardController());
-		  root = (Parent) Loader.load();
-		  scene = new Scene(root);
-		  stage.setScene(scene);
-		  stage.show();
+		FXMLLoader Loader=new FXMLLoader(SingleGameBoardController.class.getResource("SingleGameBoard.fxml"));
+		Loader.setController(this);
+		root = (Parent) Loader.load();
+		scene = new Scene(root);
+		stage.setScene(scene);
+		stage.show();
 	}
 	
 	@Override
 	protected void endGame() throws IOException {					// carica la classifica della partita
 		game.save();
 		stage = (Stage)(saveAndExitButton.getScene().getWindow());
-    	FXMLLoader Loader=new FXMLLoader(GameScoreBoardController.class.getResource("../Play/GameScoreBoard.fxml"));
+    	FXMLLoader Loader=new FXMLLoader(GameScoreBoardController.class.getResource("GameScoreBoard.fxml"));
     	root = (Parent) Loader.load();
     	scene = new Scene(root);
     	stage.setScene(scene);
