@@ -10,13 +10,11 @@ import application.Card.Card;
 import application.Player.PlayerInGame;
 
 public class LastManStanding extends Game {
-	
-	public boolean isNewGame;
 
 	public LastManStanding(Path path)  {
 		super(path);
 		
-		this.isNewGame = newGame();
+		newGame();
 		someoneDied();
 	}
 	
@@ -29,13 +27,15 @@ public class LastManStanding extends Game {
 		eliminated.add(0, players.remove(turn));
 		eliminated.get(0).setHand(new ArrayList<Card>());
 		eliminated.get(0).setHealthPoints(0);
-		if(turn-1<0)
-			turn = players.size()-1;
-		else 
-			turn--;
 		
-		if(!currentPlayer().equals(nextPlayerAlive()))
+		if(players.size()>1) {
 			restartGame();
+		} else {
+			if(turn-1<0)
+				turn = players.size()-1;
+			else 
+				turn--;
+		}
 	}
 
 	@Override
@@ -76,18 +76,21 @@ public class LastManStanding extends Game {
 		// --> in questo modo, appena un giocatore muore è costretto ad abbandonare e la partita viene ricaricata
 		
 		boolean firstDead = true;
-		for(int i=turn; i<players.indexOf(previousPlayer()); i++) {
-			if(i>players.size())
+		int cont=0, i=turn;
+		while(cont<players.size()) {
+			if(i>=players.size())
 				i=0;
 			
-			if(players.get(i).getHealthPoints()<=0 && !firstDead) {
-				players.get(i).setHealthPoints(1);
-			} else if(players.get(i).getHealthPoints()<=0 && firstDead) {
-				turn = i;
-				firstDead=false;
-			} else {
-				continue;
+			if(players.get(i).getHealthPoints()<=0) {
+				if(!firstDead) {
+					players.get(i).setHealthPoints(1);
+				} else {
+					turn = i;
+					firstDead=false;
+				}
 			}
+			cont++;
+			i++;
 		}
 	}
 }

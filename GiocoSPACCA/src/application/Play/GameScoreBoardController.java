@@ -60,71 +60,61 @@ public class GameScoreBoardController implements Initializable {
     	
     	gameCodeLabel.setText("Classifica " + code);
     	try {
-    	
+    		Scanner scan;
+    		File f;
 			if(code.startsWith("T")) {
-				Scanner scan=new Scanner(new File(pathToGame.toString()+"/finale.csv"));
+				// SIMPLE TOURNAMENT
+				String line="";
 				
-				if(scan.hasNextLine())
-					scan.nextLine();		// salta la prima riga (intestazione)
-			
-				while(scan.hasNextLine()){
-					String line=scan.nextLine();
-					String[] tokens = line.split(",");
-					this.players.put(tokens[1], null);
+				// file finale
+				f = new File(pathToGame.toString()+"/finale.csv");
+				scan=new Scanner(f);
 				
+				if(scan.hasNextLine()) {
+					scan.nextLine();			// salta la prima riga (intestazione)
 				}
+				while(scan.hasNextLine()){
+					line=scan.nextLine();
+					this.players.put(line.split(",")[1], null);
+				}
+				f.delete();
+				scan.reset();
 				
+				// file seminfinali
+				for(int i=1; i<=2; i++) {
+					f = new File(pathToGame.toString()+"/semifinale" + i + ".csv");
+					scan = new Scanner(f); 
+					while(scan.hasNextLine()) {
+						line = scan.nextLine();
+					}
+					this.players.put(line.split(",")[1], null);
+					f.delete();
+				}
+				Files.delete(pathToGame);		// elimina la directory della partita
 				
-				 scan= new Scanner(new File(pathToGame.toString()+"/semifinale1.csv"));
-				 scan.nextLine();
-				 scan.nextLine();
-				
-				 String line=scan.nextLine();
-				 String[] tokens = line.split(",");
-				 this.players.put(tokens[1], null);
-				 
-				
-				 scan= new Scanner(new File(pathToGame.toString()+"/semifinale2.csv"));
-				 scan.nextLine();
-			     scan.nextLine();
-				
-				 line=scan.nextLine();
-				 tokens = line.split(",");
-				 this.players.put(tokens[1], null);
-				
-				
-				
-			}else {
+			} else {
 				// SINGLE GAME O LAST MAN STANDING
-				
-				Scanner scan=new Scanner(new File(pathToGame.toString()));
-				if(scan.hasNextLine())
-					scan.nextLine();		// salta la prima riga (intestazione)
-			
-				while(scan.hasNextLine()){
-					String line=scan.nextLine();
-					String[] tokens = line.split(",");
-					this.players.put(tokens[1], null);
+				f = new File(pathToGame.toString());
+				scan=new Scanner(f);
+				if(scan.hasNextLine()) {
+					scan.nextLine();			// salta la prima riga (intestazione)
 				}
-			
+				while(scan.hasNextLine()) {
+					this.players.put(scan.nextLine().split(",")[1], null);
+				}
 				scan.close();
+				f.delete();						// elimina il file della partita
 			}
 			
-			givePoints();
-			
-			for(String username : players.keySet())
+			givePoints();						// assegna i punti
+			for(String username : players.keySet()) {
 				scoreBoard.getItems().add("[ +" + players.get(username) + " ] - " + username);
-	
+			}
+			updateScores();						// aggiorna il punteggio totale dei giocatori nella classifica generale
 			
-			updateScores();
-			
-
-			
-		} catch (IOException e) {		// FileNotFoundException is a IOException
+		} catch (IOException e) {				// FileNotFoundException is a IOException
 			e.printStackTrace();
 		}
-    	
-    	
     }
     
     @FXML
@@ -148,7 +138,7 @@ public class GameScoreBoardController implements Initializable {
     }
     
     
-    private void updateScores() {		// aggiorna i punteggi generali dei giocatori
+    private void updateScores() {		// aggiorna il punteggio totale dei giocatori nella classifica generale
 		Path pathToFile = Paths.get("./GiocoSPACCA/Informazioni_Partite/PLAYERS_REGISTER.csv");
 		File f=new File(pathToFile.toString());
 		
@@ -175,12 +165,29 @@ public class GameScoreBoardController implements Initializable {
 		}
 	}
     
-    private void givePoints() {
-    	// punteggi Single Game
+    private void givePoints() {			// assegna i punti in base alla partita e all'ordine di classifica
     	int pos=0;
-    	for(String username : players.keySet()) {
-    		players.putIfAbsent(username, (int)Math.pow(2, players.size()-pos));
-    		pos++;
+    	if(code.startsWith("T")) {
+    		// punteggi torneo
+    		for(String username : players.keySet()) {
+    			if(pos>=players.size()-2)
+    				players.putIfAbsent(username, 2);												// ultimo e penultimo classificato
+    			else
+    				players.putIfAbsent(username, (int)(Math.pow(2, players.size()-pos)*1.25));		// primo e secondo classificato
+    			pos++;
+    		}
+    	} else if(code.startsWith("L")) {
+    		// punteggi last man standing
+    		for(String username : players.keySet()) {
+    			players.putIfAbsent(username, (int)(Math.pow(2, players.size()-pos)*1.25));
+    			pos++;
+    		}
+    	} else {
+    		// punteggi single game
+        	for(String username : players.keySet()) {
+        		players.putIfAbsent(username, (int)Math.pow(2, players.size()-pos));
+        		pos++;
+        	}
     	}
     }
 }
