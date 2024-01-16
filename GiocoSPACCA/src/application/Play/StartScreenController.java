@@ -47,8 +47,8 @@ public class StartScreenController implements Initializable {
 		  
 		if(code.startsWith("T"))
 			Loader.setController(new SimpleTournamentBoardController());
-		// else if(code.startsWith("L"))
-			// Loader.setController(new LastManStandingBoardController());
+		else if(code.startsWith("L"))
+			Loader.setController(new LastManStandingBoardController());
 		else 
 			Loader.setController(new SingleGameBoardController());
 		  
