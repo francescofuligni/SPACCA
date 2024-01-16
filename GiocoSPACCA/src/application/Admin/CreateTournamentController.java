@@ -61,9 +61,8 @@ public class CreateTournamentController extends GamesCreation {
 				    	code = code + rand.nextInt(10);
 				    }
 				    pathToGame = Paths.get("./GiocoSPACCA/Informazioni_Partite/" + code);		// directory del torneo, contenente i file delle singole partite
-				    Files.createDirectory(pathToGame);
 			    } while(Files.exists(pathToGame));					// se esiste già il codice, genera un codice diverso
-	    	
+			    Files.createDirectory(pathToGame);
 	    	} else {
 	    		// TORNEO LAST MAN STANDING
 	    		do {

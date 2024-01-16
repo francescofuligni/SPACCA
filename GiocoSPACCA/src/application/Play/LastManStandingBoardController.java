@@ -30,7 +30,7 @@ public class LastManStandingBoardController extends Board {
 			// carica la schermata del prossimo giocatore
 			stage = (Stage)(playCardButton.getScene().getWindow());
 			FXMLLoader Loader=new FXMLLoader(SingleGameBoardController.class.getResource("SingleGameBoard.fxml"));
-			Loader.setController(this);
+			Loader.setController(new LastManStandingBoardController());
 			root = (Parent) Loader.load();
 			scene = new Scene(root);
 			stage.setScene(scene);
