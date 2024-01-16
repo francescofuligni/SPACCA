@@ -44,6 +44,7 @@ public class SimpleTournamentBoardController extends Board {
 	    	root = (Parent) Loader.load();
 	    	scene = new Scene(root);
 	    	stage.setScene(scene);
+	    	stage.centerOnScreen();
 	    	stage.show();
 			  
 		} else {					// se è la finale
