@@ -25,6 +25,7 @@ public class LastManStandingBoardController extends Board {
 	    	root = (Parent) Loader.load();
 	    	scene = new Scene(root);
 	    	stage.setScene(scene);
+	    	stage.centerOnScreen();
 	    	stage.show();
 		} else {
 			// carica la schermata del prossimo giocatore
@@ -34,6 +35,7 @@ public class LastManStandingBoardController extends Board {
 			root = (Parent) Loader.load();
 			scene = new Scene(root);
 			stage.setScene(scene);
+			stage.centerOnScreen();
 			stage.show();
 		}
 	}

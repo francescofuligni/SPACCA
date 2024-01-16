@@ -94,6 +94,9 @@ public class CreateTournamentController extends GamesCreation {
     		Collections.shuffle(playersInGame);			// mescola i giocatori
         	Random rand = new Random();
     		
+        	if(chooseDifficulty.getValue()==null)		// se non è stato specificato un livello, viene settato il livello facile di default
+        		chooseDifficulty.setValue(BOTDIFF.FACILE);
+        	
 	    	if(tournamentMode.getValue()==GAMEMODE.SEMPLICE) { 
 	    		// TORNEO SEMPLICE
 	    		

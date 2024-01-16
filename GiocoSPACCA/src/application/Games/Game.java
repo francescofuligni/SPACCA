@@ -169,9 +169,8 @@ public abstract class Game {
 			}
 			save();
 			return true;
-		} else {
-			return false;
 		}
+		return false;
 	}
 	
 	

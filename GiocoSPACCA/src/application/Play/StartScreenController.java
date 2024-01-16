@@ -55,6 +55,7 @@ public class StartScreenController implements Initializable {
 		root = (Parent) Loader.load();
 		scene = new Scene(root);
 		stage.setScene(scene);
+		stage.centerOnScreen();
 		stage.show();
 	}
 }
