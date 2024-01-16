@@ -76,15 +76,12 @@ public class GameScoreBoardController implements Initializable {
 					String[] tokens = line.split(",");
 					this.players.put(tokens[1], null);
 				}
-			
 				givePoints();
 			
 				for(String username : players.keySet())
 					scoreBoard.getItems().add("[ +" + players.get(username) + " ] - " + username);
-		
 				scan.close();
 			}
-			
 			updateScores();
 			Files.delete(pathToGame);	// elimina i file relativi alla partita
 			

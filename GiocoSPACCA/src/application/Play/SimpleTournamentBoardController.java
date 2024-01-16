@@ -21,13 +21,14 @@ public class SimpleTournamentBoardController extends Board {
 	protected void nextPlayerBoard() throws IOException {
 		game.nextTurn();
 		game.save();
+		
 		stage = (Stage)(playCardButton.getScene().getWindow());
-		  FXMLLoader Loader=new FXMLLoader(SimpleTournamentBoardController.class.getResource("SingleGameBoard.fxml"));
-		  Loader.setController(new SimpleTournamentBoardController());
-		  root = (Parent) Loader.load();
-		  scene = new Scene(root);
-		  stage.setScene(scene);
-		  stage.show();
+		FXMLLoader Loader=new FXMLLoader(SimpleTournamentBoardController.class.getResource("SingleGameBoard.fxml"));
+		Loader.setController(new SimpleTournamentBoardController());
+		root = (Parent) Loader.load();
+		scene = new Scene(root);
+		stage.setScene(scene);
+		stage.show();
 	}
 
 	@Override
@@ -35,18 +36,20 @@ public class SimpleTournamentBoardController extends Board {
 		game.save();
 		
 		if(!game.gameFile.getName().split("\\.")[0].equals("finale")) {		// se è una semifinale
-			
-			tournament.updateFinal();				// scrive il vincitore della semifinale nel file della finale
+			tournament.updateFinal();										// scrive il vincitore della semifinale nel file della finale
+	
+			// ricarica la pagina di inizio partita
 			stage = (Stage)(playCardButton.getScene().getWindow());
-			  FXMLLoader Loader=new FXMLLoader(SimpleTournamentBoardController.class.getResource("SingleGameBoard.fxml"));
-			  Loader.setController(new SimpleTournamentBoardController());
-			  root = (Parent) Loader.load();
-			  scene = new Scene(root);
-			  stage.setScene(scene);
-			  stage.show();
+	    	FXMLLoader Loader=new FXMLLoader(StartScreenController.class.getResource("StartScreen.fxml"));
+	    	root = (Parent) Loader.load();
+	    	scene = new Scene(root);
+	    	stage.setScene(scene);
+	    	stage.show();
 			  
-		} else {									// se è la finale
+		} else {					// se è la finale
 			game.save();
+			
+			// carica la classifica del torneo (TODO)
 			stage = (Stage)(saveAndExitButton.getScene().getWindow());
 	    	FXMLLoader Loader=new FXMLLoader(GameScoreBoardController.class.getResource("GameScoreBoard.fxml"));
 	    	root = (Parent) Loader.load();
