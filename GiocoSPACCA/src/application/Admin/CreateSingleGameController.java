@@ -72,6 +72,9 @@ public class CreateSingleGameController extends GamesCreation {
 	@Override
 	protected void fillGameFile() {
 		try {
+			if(chooseDifficulty.getValue()==null)		// se non è stato specificato un livello, viene settato il livello facile di default
+	    		chooseDifficulty.setValue(BOTDIFF.FACILE);
+			
 	        FileWriter fw = new FileWriter(gameFile.getAbsolutePath(),true);
 	        Iterator<PlayerInGame> iter = playersInGame.iterator();
 	        Random rand=new Random();
