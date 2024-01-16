@@ -16,21 +16,24 @@ public class LastManStandingBoardController extends Board {
 	
 	@Override
 	protected void nextPlayerBoard() throws IOException {
-		game.nextTurn();
-		game.save();
-		if(isOut) {
-			// ricarica la schermata di inizio partita		// TODO: controllare perché non funziona (controllare se la flag isOut funziona correttamente)
+		if(isOut && game.getPlayers().size()>1) {
+			game.save();
+			
+			// ricarica la schermata di inizio partita
 			stage = (Stage)(playCardButton.getScene().getWindow());
-	    	FXMLLoader Loader=new FXMLLoader(StartScreenController.class.getResource("StartScreen.fxml"));
+	    	FXMLLoader Loader=new FXMLLoader(LastManStandingBoardController.class.getResource("StartScreen.fxml"));
 	    	root = (Parent) Loader.load();
 	    	scene = new Scene(root);
 	    	stage.setScene(scene);
 	    	stage.centerOnScreen();
 	    	stage.show();
 		} else {
+			game.nextTurn();
+			game.save();
+			
 			// carica la schermata del prossimo giocatore
 			stage = (Stage)(playCardButton.getScene().getWindow());
-			FXMLLoader Loader=new FXMLLoader(SingleGameBoardController.class.getResource("SingleGameBoard.fxml"));
+			FXMLLoader Loader=new FXMLLoader(LastManStandingBoardController.class.getResource("Board.fxml"));
 			Loader.setController(new LastManStandingBoardController());
 			root = (Parent) Loader.load();
 			scene = new Scene(root);
@@ -49,5 +52,14 @@ public class LastManStandingBoardController extends Board {
     	scene = new Scene(root);
     	stage.setScene(scene);
     	stage.show();
+	}
+
+	@Override
+	protected void setTitle() {
+		int round = 5-game.getPlayers().size();
+		if(round > 3)
+			round = 3;
+		
+		gameTitle.setText("ROUND " + round);
 	}
 }

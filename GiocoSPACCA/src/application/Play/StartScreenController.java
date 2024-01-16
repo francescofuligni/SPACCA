@@ -29,12 +29,17 @@ public class StartScreenController implements Initializable {
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		if(code.startsWith("T")) {
 			SimpleTournament t = new SimpleTournament(InsertCodeController.pathToGame);
-			title.setText(t.getCurrentGame().code.toUpperCase());
+			if(t.getCurrentGame().code.endsWith("1"))
+				title.setText("SEMIFINALE 1");
+			else if(t.getCurrentGame().code.endsWith("2"))
+				title.setText("SEMIFINALE 2");
+			else
+				title.setText("FINALE");
 		} else if(code.startsWith("L")){
 			LastManStanding l = new LastManStanding(InsertCodeController.pathToGame);
-			title.setText(l.getRound());
+			title.setText("ROUND " + (5-l.getPlayers().size()));
 		} else {
-			title.setText("COMBATTI");
+			title.setText("COMBATTI!");
 		}
 	}
 	
@@ -43,7 +48,7 @@ public class StartScreenController implements Initializable {
 		// lancia la board con il giusto controller
 		
 		stage = (Stage)(title.getScene().getWindow());
-		FXMLLoader Loader=new FXMLLoader(StartScreenController.class.getResource("SingleGameBoard.fxml"));
+		FXMLLoader Loader=new FXMLLoader(StartScreenController.class.getResource("Board.fxml"));
 		  
 		if(code.startsWith("T"))
 			Loader.setController(new SimpleTournamentBoardController());

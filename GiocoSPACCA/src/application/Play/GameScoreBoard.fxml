@@ -23,7 +23,7 @@
          </effect>
       </Rectangle>
       <ListView fx:id="scoreBoard" layoutX="406.0" layoutY="223.0" prefHeight="354.0" prefWidth="389.0" />
-      <Label fx:id="gameCodeLabel" alignment="CENTER" layoutX="352.0" layoutY="118.0" prefHeight="43.0" prefWidth="498.0" text="Classifica partita #code#" textFill="RED">
+      <Label fx:id="gameCodeLabel" alignment="CENTER" layoutX="352.0" layoutY="118.0" prefHeight="43.0" prefWidth="498.0" text="Classifica #code#" textFill="RED">
          <font>
             <Font name="Times New Roman Bold" size="35.0" />
          </font>

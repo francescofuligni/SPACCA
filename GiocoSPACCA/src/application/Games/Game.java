@@ -114,7 +114,7 @@ public abstract class Game {
 				i=0;
 			p=players.get(i);
 		}
-		return p;		// se non trova un giocatore vivo, ritorna il current
+		return p;		// se non trova un giocatore vivo, ritorna il currentPlayer
 	}
 	
 	public void nextTurn() {
@@ -155,7 +155,7 @@ public abstract class Game {
 	}
 	
 	protected boolean newGame() {
-		if(eliminated.size() == 0 && (currentPlayer().getHealthPoints()>0 && currentPlayer().getHand().size() == 0)) {			// se i giocatori non hanno carte in mano, vengono distribuite le carte
+		if(currentPlayer().getHealthPoints()>0 && currentPlayer().getHand().size() == 0) {			// se i giocatori non hanno carte in mano, vengono distribuite le carte
 			for(PlayerInGame p : players) {
 				ArrayList<Card> hand = new ArrayList<>();
 				for(int i=0; i<4; i++) {

@@ -18,7 +18,7 @@ public class SingleGameBoardController extends Board {
 		game.nextTurn();
 		game.save();
 		stage = (Stage)(playCardButton.getScene().getWindow());
-		FXMLLoader Loader=new FXMLLoader(SingleGameBoardController.class.getResource("SingleGameBoard.fxml"));
+		FXMLLoader Loader=new FXMLLoader(SingleGameBoardController.class.getResource("Board.fxml"));
 		Loader.setController(new SingleGameBoardController());
 		root = (Parent) Loader.load();
 		scene = new Scene(root);
@@ -37,5 +37,10 @@ public class SingleGameBoardController extends Board {
     	scene = new Scene(root);
     	stage.setScene(scene);
     	stage.show();
+	}
+
+	@Override
+	protected void setTitle() {
+		gameTitle.setText(game.code.toUpperCase());
 	}
 }

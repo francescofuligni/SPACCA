@@ -23,7 +23,7 @@ public class SimpleTournamentBoardController extends Board {
 		game.save();
 		
 		stage = (Stage)(playCardButton.getScene().getWindow());
-		FXMLLoader Loader=new FXMLLoader(SimpleTournamentBoardController.class.getResource("SingleGameBoard.fxml"));
+		FXMLLoader Loader=new FXMLLoader(SimpleTournamentBoardController.class.getResource("Board.fxml"));
 		Loader.setController(new SimpleTournamentBoardController());
 		root = (Parent) Loader.load();
 		scene = new Scene(root);
@@ -58,5 +58,15 @@ public class SimpleTournamentBoardController extends Board {
 	    	stage.setScene(scene);
 	    	stage.show();
 		}
+	}
+
+	@Override
+	protected void setTitle() {
+		if(game.code.endsWith("1"))
+			gameTitle.setText("SEMIFINALE 1");
+		else if(game.code.endsWith("2"))
+			gameTitle.setText("SEMIFINALE 2");
+		else
+			gameTitle.setText("FINALE");
 	}
 }

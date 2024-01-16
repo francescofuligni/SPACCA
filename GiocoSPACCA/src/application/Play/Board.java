@@ -73,7 +73,8 @@ public abstract class Board implements Initializable {
 		
 		healthPoints.setText("" + current.getHealthPoints() + "  HP");
 		healthBar.setProgress((double)current.getHealthPoints()/current.MAXHP);
-		gameTitle.setText(game.gameFile.getName().split("\\.")[0].toUpperCase());
+		
+		setTitle();
 		
 		if(current.equals(nextAlive)) {						// il giocatore attuale è il vincitore (partita terminata)
 			playCardButton.setText("FINE");
@@ -225,4 +226,6 @@ public abstract class Board implements Initializable {
 	protected abstract void nextPlayerBoard() throws IOException;
 	
 	protected abstract void endGame() throws IOException;
+	
+	protected abstract void setTitle();
 }
