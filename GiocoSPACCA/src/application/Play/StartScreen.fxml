@@ -14,7 +14,7 @@
             <Image url="@../../../Images/SfondoStartScreen.png" />
          </image>
       </ImageView>
-      <Label fx:id="title" alignment="CENTER" layoutX="200.0" layoutY="109.0" prefHeight="120.0" prefWidth="1200.0" text="COMBATTI" textFill="WHITE">
+      <Label fx:id="title" alignment="CENTER" layoutX="200.0" layoutY="78.0" prefHeight="120.0" prefWidth="1200.0" text="COMBATTI" textFill="WHITE">
          <font>
             <Font name="Times New Roman Bold" size="130.0" />
          </font>
@@ -22,9 +22,9 @@
             <DropShadow />
          </effect>
       </Label>
-      <Label alignment="CENTER" layoutX="454.0" layoutY="852.0" prefHeight="34.0" prefWidth="691.0" text="CLICCA UN PUNTO QUALSIASI PER INIZIARE" textAlignment="CENTER" textFill="WHITE">
+      <Label alignment="CENTER" layoutX="454.0" layoutY="856.0" prefHeight="34.0" prefWidth="691.0" text="CLICCA UN PUNTO QUALSIASI PER INIZIARE" textAlignment="CENTER" textFill="WHITE">
          <font>
-            <Font name="Times New Roman Bold" size="30.0" />
+            <Font name="Times New Roman Italic" size="30.0" />
          </font></Label>
    </children>
 </AnchorPane>

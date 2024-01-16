@@ -18,10 +18,6 @@ public class LastManStanding extends Game {
 		someoneDied();
 	}
 	
-	public String getRound() {
-		return "ROUND " + (5-players.size());
-	}
-	
 	@Override
 	public void removePlayer() {
 		eliminated.add(0, players.remove(turn));

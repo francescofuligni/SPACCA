@@ -94,9 +94,9 @@
             <InnerShadow />
          </effect>
       </Button>
-      <Label fx:id="gameTitle" alignment="CENTER" layoutX="438.0" layoutY="3.0" prefHeight="35.0" prefWidth="692.0" textAlignment="CENTER" textFill="WHITE">
+      <Label fx:id="gameTitle" alignment="CENTER" layoutX="438.0" prefHeight="35.0" prefWidth="692.0" textAlignment="CENTER" textFill="WHITE">
          <font>
-            <Font name="Times New Roman Italic" size="24.0" />
+            <Font name="Times New Roman" size="24.0" />
          </font>
       </Label>
    </children>

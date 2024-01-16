@@ -59,4 +59,14 @@ public class SimpleTournamentBoardController extends Board {
 	    	stage.show();
 		}
 	}
+
+	@Override
+	protected void setTitle() {
+		if(game.code.endsWith("1"))
+			gameTitle.setText("SEMIFINALE 1");
+		else if(game.code.endsWith("2"))
+			gameTitle.setText("SEMIFINALE 2");
+		else
+			gameTitle.setText("FINALE");
+	}
 }

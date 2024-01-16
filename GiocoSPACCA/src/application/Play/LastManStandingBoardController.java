@@ -53,4 +53,9 @@ public class LastManStandingBoardController extends Board {
     	stage.setScene(scene);
     	stage.show();
 	}
+
+	@Override
+	protected void setTitle() {
+		gameTitle.setText("ROUND " + (5-game.getPlayers().size()));
+	}
 }

@@ -38,4 +38,9 @@ public class SingleGameBoardController extends Board {
     	stage.setScene(scene);
     	stage.show();
 	}
+
+	@Override
+	protected void setTitle() {
+		gameTitle.setText(game.code.toUpperCase());
+	}
 }
