@@ -58,13 +58,43 @@ public class GameScoreBoardController implements Initializable {
     @Override
     public void initialize(URL arg0, ResourceBundle arg1) {
     	
-    	gameCodeLabel.setText("Classifica partita " + code);
+    	gameCodeLabel.setText("Classifica " + code);
     	try {
+    	
 			if(code.startsWith("T")) {
-				// SIMPLE TOURNAMENT
-				// TODO
+				Scanner scan=new Scanner(new File(pathToGame.toString()+"/finale.csv"));
 				
-			} else {
+				if(scan.hasNextLine())
+					scan.nextLine();		// salta la prima riga (intestazione)
+			
+				while(scan.hasNextLine()){
+					String line=scan.nextLine();
+					String[] tokens = line.split(",");
+					this.players.put(tokens[1], null);
+				
+				}
+				
+				
+				 scan= new Scanner(new File(pathToGame.toString()+"/semifinale1.csv"));
+				 scan.nextLine();
+				 scan.nextLine();
+				
+				 String line=scan.nextLine();
+				 String[] tokens = line.split(",");
+				 this.players.put(tokens[1], null);
+				 
+				
+				 scan= new Scanner(new File(pathToGame.toString()+"/semifinale2.csv"));
+				 scan.nextLine();
+			     scan.nextLine();
+				
+				 line=scan.nextLine();
+				 tokens = line.split(",");
+				 this.players.put(tokens[1], null);
+				
+				
+				
+			}else {
 				// SINGLE GAME O LAST MAN STANDING
 				
 				Scanner scan=new Scanner(new File(pathToGame.toString()));
@@ -77,20 +107,24 @@ public class GameScoreBoardController implements Initializable {
 					this.players.put(tokens[1], null);
 				}
 			
-				givePoints();
-			
-				for(String username : players.keySet())
-					scoreBoard.getItems().add("[ +" + players.get(username) + " ] - " + username);
-		
 				scan.close();
 			}
 			
+			givePoints();
+			
+			for(String username : players.keySet())
+				scoreBoard.getItems().add("[ +" + players.get(username) + " ] - " + username);
+	
+			
 			updateScores();
-			Files.delete(pathToGame);	// elimina i file relativi alla partita
+			
+
 			
 		} catch (IOException e) {		// FileNotFoundException is a IOException
 			e.printStackTrace();
 		}
+    	
+    	
     }
     
     @FXML
