@@ -33,7 +33,7 @@ public class LastManStandingBoardController extends Board {
 			
 			// carica la schermata del prossimo giocatore
 			stage = (Stage)(playCardButton.getScene().getWindow());
-			FXMLLoader Loader=new FXMLLoader(LastManStandingBoardController.class.getResource("SingleGameBoard.fxml"));
+			FXMLLoader Loader=new FXMLLoader(LastManStandingBoardController.class.getResource("Board.fxml"));
 			Loader.setController(new LastManStandingBoardController());
 			root = (Parent) Loader.load();
 			scene = new Scene(root);
@@ -56,6 +56,10 @@ public class LastManStandingBoardController extends Board {
 
 	@Override
 	protected void setTitle() {
-		gameTitle.setText("ROUND " + (5-game.getPlayers().size()));
+		int round = 5-game.getPlayers().size();
+		if(round > 3)
+			round = 3;
+		
+		gameTitle.setText("ROUND " + round);
 	}
 }

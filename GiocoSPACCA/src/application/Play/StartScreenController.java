@@ -48,7 +48,7 @@ public class StartScreenController implements Initializable {
 		// lancia la board con il giusto controller
 		
 		stage = (Stage)(title.getScene().getWindow());
-		FXMLLoader Loader=new FXMLLoader(StartScreenController.class.getResource("SingleGameBoard.fxml"));
+		FXMLLoader Loader=new FXMLLoader(StartScreenController.class.getResource("Board.fxml"));
 		  
 		if(code.startsWith("T"))
 			Loader.setController(new SimpleTournamentBoardController());

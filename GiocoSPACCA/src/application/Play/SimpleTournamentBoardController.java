@@ -23,7 +23,7 @@ public class SimpleTournamentBoardController extends Board {
 		game.save();
 		
 		stage = (Stage)(playCardButton.getScene().getWindow());
-		FXMLLoader Loader=new FXMLLoader(SimpleTournamentBoardController.class.getResource("SingleGameBoard.fxml"));
+		FXMLLoader Loader=new FXMLLoader(SimpleTournamentBoardController.class.getResource("Board.fxml"));
 		Loader.setController(new SimpleTournamentBoardController());
 		root = (Parent) Loader.load();
 		scene = new Scene(root);

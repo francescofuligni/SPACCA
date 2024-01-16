@@ -18,7 +18,7 @@ public class SingleGameBoardController extends Board {
 		game.nextTurn();
 		game.save();
 		stage = (Stage)(playCardButton.getScene().getWindow());
-		FXMLLoader Loader=new FXMLLoader(SingleGameBoardController.class.getResource("SingleGameBoard.fxml"));
+		FXMLLoader Loader=new FXMLLoader(SingleGameBoardController.class.getResource("Board.fxml"));
 		Loader.setController(new SingleGameBoardController());
 		root = (Parent) Loader.load();
 		scene = new Scene(root);
