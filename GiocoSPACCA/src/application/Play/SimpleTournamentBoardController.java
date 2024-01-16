@@ -39,7 +39,7 @@ public class SimpleTournamentBoardController extends Board {
 			tournament.updateFinal();				// scrive il vincitore della semifinale nel file della finale
 			stage = (Stage)(playCardButton.getScene().getWindow());
 			  FXMLLoader Loader=new FXMLLoader(SimpleTournamentBoardController.class.getResource("SingleGameBoard.fxml"));
-			  Loader.setController(this);
+			  Loader.setController(new SimpleTournamentBoardController());
 			  root = (Parent) Loader.load();
 			  scene = new Scene(root);
 			  stage.setScene(scene);

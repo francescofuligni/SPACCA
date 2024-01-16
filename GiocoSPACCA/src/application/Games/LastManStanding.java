@@ -4,6 +4,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.nio.file.Path;
 import java.util.ArrayList;
+import java.util.Random;
 
 import application.Card.Card;
 import application.Player.PlayerInGame;
@@ -66,6 +67,8 @@ public class LastManStanding extends Game {
 			p.setHealthPoints(p.MAXHP);			// reinizializza i punti salute
 			p.setHand(new ArrayList<>());		// rimuove le vecchie carte
 		}
+		Random rand = new Random();
+		turn = rand.nextInt(players.size());
 	}
 	
 	
