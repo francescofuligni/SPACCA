@@ -181,8 +181,8 @@ public abstract class Board implements Initializable {
 	public void saveAndExit(ActionEvent e) throws IOException {
 		game.save();
 		stage = (Stage)(saveAndExitButton.getScene().getWindow());
-		 
-		  FXMLLoader Loader=new FXMLLoader(MainMenuController.class.getResource("/application/MainMenu/MainMenu.fxml"));
+		  //IMPORTANTE RICORDA IL ../ nell'URL DEL FXML
+		  FXMLLoader Loader=new FXMLLoader(MainMenuController.class.getResource("MainMenu.fxml"));
 		  root = (Parent) Loader.load();
 		  scene = new Scene(root);
 		  stage.setScene(scene);

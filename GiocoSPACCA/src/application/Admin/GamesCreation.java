@@ -61,8 +61,8 @@ public abstract class GamesCreation implements Initializable {
 	@FXML
     public void returnToCreateGame(ActionEvent event) throws IOException {
     	stage = (Stage)(returnToCreateGameButton.getScene().getWindow());
-		 
-		  FXMLLoader Loader=new FXMLLoader(CreateGameController.class.getResource("/application/Admin/CreateGame.fxml"));
+		  //IMPORTANTE RICORDA IL ../ nell'URL DEL FXML
+		  FXMLLoader Loader=new FXMLLoader(CreateGameController.class.getResource("../Admin/CreateGame.fxml"));
 		  root = (Parent) Loader.load();
 		  scene = new Scene(root);
 		  stage.setScene(scene);
@@ -98,8 +98,8 @@ public abstract class GamesCreation implements Initializable {
     @FXML
     public void returnToHome() throws IOException {
     	stage = (Stage)(returnToCreateGameButton.getScene().getWindow());
-		 
-		  FXMLLoader Loader=new FXMLLoader(CreateGameController.class.getResource("/application/MainMenu/MainMenu.fxml"));
+		  //IMPORTANTE RICORDA IL ../ nell'URL DEL FXML
+		  FXMLLoader Loader=new FXMLLoader(CreateGameController.class.getResource("../MainMenu/MainMenu.fxml"));
 		  root = (Parent) Loader.load();
 		  scene = new Scene(root);
 		  stage.setScene(scene);

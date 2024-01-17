@@ -91,7 +91,7 @@ public class InsertCodeController {
     public void returnToMainMenu(ActionEvent event) throws IOException {
     	stage = (Stage)(returnToMainMenuButton.getScene().getWindow());
 		  //IMPORTANTE RICORDA IL ../ nell'URL DEL FXML
-		  FXMLLoader Loader=new FXMLLoader(CreateGameController.class.getResource("/application/MainMenu/MainMenu.fxml"));
+		  FXMLLoader Loader=new FXMLLoader(CreateGameController.class.getResource("../MainMenu/MainMenu.fxml"));
 		  root = (Parent) Loader.load();
 		  scene = new Scene(root);
 		  stage.setScene(scene);
@@ -102,7 +102,7 @@ public class InsertCodeController {
     public void loginAdmin(MouseEvent event) throws IOException {
     	stage = (Stage)(loginAdminLabel.getScene().getWindow());
 		  //IMPORTANTE RICORDA IL ../ nell'URL DEL FXML
-		  FXMLLoader Loader=new FXMLLoader(LoginAdminController.class.getResource("/application/Admin/LoginAdmin.fxml"));
+		  FXMLLoader Loader=new FXMLLoader(LoginAdminController.class.getResource("../Admin/LoginAdmin.fxml"));
 		  root = (Parent) Loader.load();
 		  scene = new Scene(root);
 		  stage.setScene(scene);
@@ -123,7 +123,7 @@ public class InsertCodeController {
     	// lancia la schermata di inizio partita
     	
     	stage = (Stage)(returnToMainMenuButton.getScene().getWindow());
-    	FXMLLoader Loader=new FXMLLoader(CreateGameController.class.getResource("/application/Play/StartScreen.fxml"));
+    	FXMLLoader Loader=new FXMLLoader(CreateGameController.class.getResource("../Play/StartScreen.fxml"));
     	root = (Parent) Loader.load();
     	scene = new Scene(root);
     	stage.setScene(scene);

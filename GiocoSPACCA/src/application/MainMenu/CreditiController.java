@@ -22,8 +22,8 @@ public class CreditiController {
     @FXML
      public void returnToMainMenu(ActionEvent event) throws IOException {
     	stage = (Stage)(returnToMainMenuButton.getScene().getWindow());
-		 
-		  FXMLLoader Loader=new FXMLLoader(MainMenuController.class.getResource("/application/MainMenu/MainMenu.fxml"));
+		  //IMPORTANTE RICORDA IL ../ nell'URL DEL FXML
+		  FXMLLoader Loader=new FXMLLoader(MainMenuController.class.getResource("MainMenu.fxml"));
 		  root = (Parent) Loader.load();
 		  scene = new Scene(root);
 		  stage.setScene(scene);
