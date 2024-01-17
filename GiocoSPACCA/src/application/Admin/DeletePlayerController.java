@@ -24,21 +24,18 @@ public class DeletePlayerController {
 	
 	@FXML
 	private Label message;
-	
 	@FXML
 	private Button endButton;
-	
 	@FXML
 	private Button deleteButton;
-	
 	@FXML
 	private TextField usernameField;
 	
 	@FXML
-	public void returnToCreateGame(ActionEvent event) throws IOException {
+	public void back(ActionEvent event) throws IOException {
+		// ritorna alla gestione dei giocatori
     	stage = (Stage)(endButton.getScene().getWindow());
-		 
-		  FXMLLoader Loader=new FXMLLoader(CreateGameController.class.getResource("/application/Admin/CreateGame.fxml"));
+		  FXMLLoader Loader=new FXMLLoader(PlayersManagerController.class.getResource("/application/Admin/PlayersManager.fxml"));
 		  root = (Parent) Loader.load();
 		  scene = new Scene(root);
 		  stage.setScene(scene);

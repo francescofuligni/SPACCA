@@ -17,63 +17,54 @@ public class SelectPlayerNumberSGController {
 	public static int playerNumber;
 	
 	@FXML
-	private Button returnToCreateGameButton;
-	
+	private Button backButton;
 	@FXML
-    private Button button2;
-
+	private Button button2;
+	@FXML
+	private Button button3;
+	@FXML
+	private Button button4;
+    
     @FXML
-    private Button button3;
-
-    @FXML
-    private Button button4;
-    @FXML
-    void set2Players(ActionEvent event) throws IOException {
+    public void set2Players(ActionEvent event) throws IOException {
+    	// lancia la schermata di creazione nella partita singola con 2 giocatori
     	playerNumber=2;
     	stage = (Stage)(button2.getScene().getWindow());
-		 
-		  FXMLLoader Loader=new FXMLLoader(CreateSingleGameController.class.getResource("/application/Admin/CreateSingleGame.fxml"));
-		  root = (Parent) Loader.load();
-		  scene = new Scene(root);
-		  stage.setScene(scene);
-		  stage.show();
+    	launchCreateSingleGame(event);
     }
 
     @FXML
-    void set3Players(ActionEvent event) throws IOException {
+    public void set3Players(ActionEvent event) throws IOException {
+    	// lancia la schermata di creazione nella partita singola con 3 giocatori
     	playerNumber=3;
     	stage = (Stage)(button3.getScene().getWindow());
-		 
-		  FXMLLoader Loader=new FXMLLoader(CreateSingleGameController.class.getResource("/application/Admin/CreateSingleGame.fxml"));
-		  root = (Parent) Loader.load();
-		  scene = new Scene(root);
-		  stage.setScene(scene);
-		  stage.show();
+		launchCreateSingleGame(event);
     }
     
     @FXML
-    public void returnToCreateGame(ActionEvent event) throws IOException {
-    	stage = (Stage)(returnToCreateGameButton.getScene().getWindow());
-		 
-		  FXMLLoader Loader=new FXMLLoader(CreateGameController.class.getResource("/application/Admin/CreateGame.fxml"));
-		  root = (Parent) Loader.load();
-		  scene = new Scene(root);
-		  stage.setScene(scene);
-		  stage.show();
-    }
-
-    @FXML
-    void set4Players(ActionEvent event) throws IOException {
+    public void set4Players(ActionEvent event) throws IOException {
+    	// lancia la schermata di creazione nella partita singola con 4 giocatori
     	playerNumber=4;
     	stage = (Stage)(button4.getScene().getWindow());
-		 
-		  FXMLLoader Loader=new FXMLLoader(CreateSingleGameController.class.getResource("/application/Admin/CreateSingleGame.fxml"));
+    	launchCreateSingleGame(event);
+    }
+    
+    @FXML
+    public void back(ActionEvent event) throws IOException {
+    	// ritorna alla gestione partite
+    	stage = (Stage)(backButton.getScene().getWindow());
+		  FXMLLoader Loader=new FXMLLoader(GamesManagerController.class.getResource("/application/Admin/GamesManagerController.fxml"));
 		  root = (Parent) Loader.load();
 		  scene = new Scene(root);
 		  stage.setScene(scene);
 		  stage.show();
     }
     
-    
-    
+    private void launchCreateSingleGame(ActionEvent event) throws IOException {
+		  FXMLLoader Loader=new FXMLLoader(CreateSingleGameController.class.getResource("/application/Admin/CreateSingleGame.fxml"));
+		  root = (Parent) Loader.load();
+		  scene = new Scene(root);
+		  stage.setScene(scene);
+		  stage.show();
+    }
 }

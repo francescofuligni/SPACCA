@@ -12,7 +12,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="668.0" stylesheets="@../style.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.Admin.PlayersManagerController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="668.0" stylesheets="@../style.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.Admin.AdminMenuController">
    <children>
       <ImageView fitHeight="600.0" fitWidth="668.0" pickOnBounds="true" preserveRatio="true">
          <image>
@@ -37,7 +37,7 @@
             </RadialGradient>
          </fill>
       </Rectangle>
-      <Button fx:id="manageGamesButton" layoutX="233.0" layoutY="219.0" mnemonicParsing="false" onAction="#manageGames" prefHeight="50.0" prefWidth="213.0" text="Gestione partite" textAlignment="CENTER">
+      <Button fx:id="manageGamesButton" layoutX="234.0" layoutY="215.0" mnemonicParsing="false" onAction="#manageGames" prefHeight="51.0" prefWidth="213.0" text="Gestione partite" textAlignment="CENTER">
          <font>
             <Font name="Bodoni MT" size="24.0" />
          </font>

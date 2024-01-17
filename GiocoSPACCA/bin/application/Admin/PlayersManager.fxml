@@ -37,7 +37,7 @@
             </RadialGradient>
          </fill>
       </Rectangle>
-      <Button fx:id="newPlayerButton" layoutX="233.0" layoutY="219.0" mnemonicParsing="false" onAction="#newPlayer" prefHeight="50.0" prefWidth="213.0" text="Crea giocatori">
+      <Button fx:id="createPlayerButton" layoutX="233.0" layoutY="219.0" mnemonicParsing="false" onAction="#createPlayer" prefHeight="50.0" prefWidth="213.0" text="Crea giocatori">
          <font>
             <Font name="Bodoni MT" size="24.0" />
          </font>
