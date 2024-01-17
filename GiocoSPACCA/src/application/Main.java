@@ -17,7 +17,7 @@ public class Main extends Application {
 			 * tutto il percorso ma solo quelli successivi ad application)
 			 */
 			
-			FXMLLoader loader = new FXMLLoader(getClass().getResource("MainMenu/MainMenu.fxml"));
+			FXMLLoader loader = new FXMLLoader(getClass().getResource("/application/MainMenu/MainMenu.fxml"));
 	        AnchorPane rootLayout = (AnchorPane) loader.load();
 	        primaryStage.setTitle("S.P.A.C.C.A. the GAME");
 	        primaryStage.setResizable(false);

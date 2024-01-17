@@ -32,8 +32,8 @@ public class CreateGameController {
     @FXML
     public void createSingleGame(ActionEvent event) throws IOException {
     	stage = (Stage)(createSingleGameButton.getScene().getWindow());
-		  //IMPORTANTE RICORDA IL ../ nell'URL DEL FXML
-		  FXMLLoader Loader=new FXMLLoader(SelectPlayerNumberSGController.class.getResource("../Admin/SelectPlayerNumberSG.fxml"));
+		 
+		  FXMLLoader Loader=new FXMLLoader(SelectPlayerNumberSGController.class.getResource("/application/Admin/SelectPlayerNumberSG.fxml"));
 		  root = (Parent) Loader.load();
 		  scene = new Scene(root);
 		  stage.setScene(scene);
@@ -44,8 +44,8 @@ public class CreateGameController {
 	@FXML
     public void createTournament(ActionEvent event) throws IOException {
 		stage = (Stage)(createTournamentButton.getScene().getWindow());
-		  //IMPORTANTE RICORDA IL ../ nell'URL DEL FXML
-		  FXMLLoader Loader=new FXMLLoader(CreateTournamentController.class.getResource("../Admin/CreateTournament.fxml"));
+		 
+		  FXMLLoader Loader=new FXMLLoader(CreateTournamentController.class.getResource("/application/Admin/CreateTournament.fxml"));
 		  root = (Parent) Loader.load();
 		  scene = new Scene(root);
 		  stage.setScene(scene);
@@ -55,8 +55,8 @@ public class CreateGameController {
 	@FXML
     public void managePlayers(ActionEvent event) throws IOException {
 		stage = (Stage)(managePlayersButton.getScene().getWindow());
-		  //IMPORTANTE RICORDA IL ../ nell'URL DEL FXML
-		  FXMLLoader Loader=new FXMLLoader(PlayersManagerController.class.getResource("../Admin/PlayersManager.fxml"));
+		 
+		  FXMLLoader Loader=new FXMLLoader(PlayersManagerController.class.getResource("/application/Admin/PlayersManager.fxml"));
 		  root = (Parent) Loader.load();
 		  scene = new Scene(root);
 		  stage.setScene(scene);
@@ -66,8 +66,8 @@ public class CreateGameController {
 	@FXML
 	public void logout(ActionEvent event) throws IOException {
     	stage = (Stage)(logoutButton.getScene().getWindow());
-		  //IMPORTANTE RICORDA IL ../ nell'URL DEL FXML
-    	  FXMLLoader Loader=new FXMLLoader(MainMenuController.class.getResource("MainMenu.fxml"));
+		
+    	  FXMLLoader Loader=new FXMLLoader(MainMenuController.class.getResource("/application/MainMenu/MainMenu.fxml"));
 		  root = (Parent) Loader.load();
 		  scene = new Scene(root);
 		  stage.setScene(scene);
