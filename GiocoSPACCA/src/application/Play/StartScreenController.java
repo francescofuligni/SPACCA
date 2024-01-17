@@ -4,8 +4,8 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-import application.Games.LastManStanding;
-import application.Games.SimpleTournament;
+import application.Games.*;
+import application.Player.*;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -23,12 +23,14 @@ public class StartScreenController implements Initializable {
 	private Parent root;
 	
 	@FXML
-	private Label title;
+	private Label title, playersLabel;
 	
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
+		Game game;
 		if(code.startsWith("T")) {
 			SimpleTournament t = new SimpleTournament(InsertCodeController.pathToGame);
+			game = t.getCurrentGame();
 			if(t.getCurrentGame().code.endsWith("1"))
 				title.setText("SEMIFINALE 1");
 			else if(t.getCurrentGame().code.endsWith("2"))
@@ -36,11 +38,18 @@ public class StartScreenController implements Initializable {
 			else
 				title.setText("FINALE");
 		} else if(code.startsWith("L")){
-			LastManStanding l = new LastManStanding(InsertCodeController.pathToGame);
-			title.setText("ROUND " + (5-l.getPlayers().size()));
+			game = new LastManStanding(InsertCodeController.pathToGame);
+			title.setText("ROUND " + (5-game.getPlayers().size()));
 		} else {
+			game = new SingleGame(InsertCodeController.pathToGame);
 			title.setText("COMBATTI!");
 		}
+		
+		String playersList = "";
+		for(Player p : game.getPlayers()) {
+			playersList+=("   " + p.getUsername() + "   ");
+		}
+		playersLabel.setText(playersList);
 	}
 	
 	@FXML
