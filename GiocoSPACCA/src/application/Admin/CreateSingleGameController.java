@@ -20,7 +20,7 @@ import javafx.scene.control.Alert.AlertType;
 
 public class CreateSingleGameController extends GamesCreation {
 
-	File gameFile;		// file partita
+	private File gameFile;		// file partita
 	
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
@@ -65,7 +65,7 @@ public class CreateSingleGameController extends GamesCreation {
 		    codeInfo.setHeaderText(code);
 		    codeInfo.showAndWait();
 
-		    returnToHome();
+		    returnToAdminMenu();
 	    }
 	}
 	

@@ -34,7 +34,7 @@ public abstract class GamesCreation implements Initializable {
 	protected Parent root;
 	
 	public int MAXPLAYERS;
-	protected final int CODELENGTH = 5;
+	protected final int CODELENGTH = 4;
 	protected Player[] selectedPlayers;
 	protected ArrayList<PlayerInGame> playersInGame = new ArrayList<>();
 	protected ArrayList<Player> allPlayers = new ArrayList<>();
@@ -44,25 +44,25 @@ public abstract class GamesCreation implements Initializable {
 	
 	@FXML
 	protected ChoiceBox<Player> playersChoiceBox;
-    
-    @FXML
-    protected Label selectedPlayersLabel, undoSelection;
-    
-    @FXML
-    protected Text botNumber;
-    
     @FXML
     protected ChoiceBox<BOTDIFF> chooseDifficulty;
-
     @FXML
-    protected Button returnToCreateGameButton, play;
+    protected Label selectedPlayersLabel;
+    @FXML
+    protected Label undoSelection;
+    @FXML
+    protected Text botNumber;
+    @FXML
+    protected Button backButton;
+    @FXML
+    protected Button play;
     
 	
 	@FXML
-    public void returnToCreateGame(ActionEvent event) throws IOException {
-    	stage = (Stage)(returnToCreateGameButton.getScene().getWindow());
-		 
-		  FXMLLoader Loader=new FXMLLoader(CreateGameController.class.getResource("/application/Admin/CreateGame.fxml"));
+    public void back(ActionEvent event) throws IOException {
+		// ritorna alla gestione partite
+    	stage = (Stage)(backButton.getScene().getWindow());
+		  FXMLLoader Loader=new FXMLLoader(GamesManagerController.class.getResource("/application/Admin/GamesManager.fxml"));
 		  root = (Parent) Loader.load();
 		  scene = new Scene(root);
 		  stage.setScene(scene);
@@ -89,17 +89,16 @@ public abstract class GamesCreation implements Initializable {
     public void setColorGrey(MouseEvent event) {
     	undoSelection.setTextFill(Color.GREY);
     }
-    
     @FXML
     public void setColorWhite(MouseEvent event) {
     	undoSelection.setTextFill(Color.WHITE);
     }
 	
     @FXML
-    public void returnToHome() throws IOException {
-    	stage = (Stage)(returnToCreateGameButton.getScene().getWindow());
-		 
-		  FXMLLoader Loader=new FXMLLoader(CreateGameController.class.getResource("/application/MainMenu/MainMenu.fxml"));
+    public void returnToAdminMenu() throws IOException {
+    	// ritorna all'AdminMenu
+    	stage = (Stage)(backButton.getScene().getWindow());
+		  FXMLLoader Loader=new FXMLLoader(AdminMenuController.class.getResource("/application/Admin/AdminMenu.fxml"));
 		  root = (Parent) Loader.load();
 		  scene = new Scene(root);
 		  stage.setScene(scene);

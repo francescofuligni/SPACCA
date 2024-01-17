@@ -25,52 +25,52 @@ public class LoginAdminController {
 	private Stage stage;
 	private Scene scene;
 	private Parent root;
-	 	@FXML
-	    private Button returnToMainMenuButton;
-		@FXML
-		private TextField adminNameField;
-		@FXML
-		private PasswordField adminPasswordField;
-		@FXML 
-		private Button confirmLogin;
-		@FXML 
-		private Text loginStatusText;
-		
-		public void login() throws IOException{
-			if(adminNameField.getText().equals(adminName) &&
-				adminPasswordField.getText().equals(adminPassword)) {
-					
-				//Se le credenziali sono giuste entra in Create game
-				stage = (Stage)(confirmLogin.getScene().getWindow());
-				 
-				  FXMLLoader Loader=new FXMLLoader(CreateGameController.class.getResource("/application/Admin/CreateGame.fxml"));
-				  root = (Parent) Loader.load();
-				  scene = new Scene(root);
-				  stage.setScene(scene);
-				  stage.show();	
-			}
-			
-			else {
-				Alert loginError = new Alert(AlertType.ERROR);
-				loginError.setTitle("ERRORE!");
-				loginError.setContentText("Nome admin o password errati: riprovare.");
-				loginStatusText.setText("Nome admin o password errati: riprovare");
-				loginStatusText.setFill(Color.RED);
-				loginError.showAndWait();
-				
-				adminNameField.clear();
-				adminPasswordField.clear();
-			}	
-		}
 
-	    @FXML
-	    public void returnToMainMenu(ActionEvent event) throws IOException {
-	    	stage = (Stage)(returnToMainMenuButton.getScene().getWindow());
-			 
-			  FXMLLoader Loader=new FXMLLoader(MainMenuController.class.getResource("/application/MainMenu/MainMenu.fxml"));
+ 	@FXML
+    private Button returnToMainMenuButton;
+	@FXML
+	private TextField adminNameField;
+	@FXML
+	private PasswordField adminPasswordField;
+	@FXML 
+	private Button confirmLogin;
+	@FXML 
+	private Text loginStatusText;
+	
+	public void login() throws IOException{
+		if(adminNameField.getText().equals(adminName) &&
+			adminPasswordField.getText().equals(adminPassword)) {
+				
+			//Se le credenziali sono giuste entra in AdminMenu
+			stage = (Stage)(confirmLogin.getScene().getWindow());
+			  FXMLLoader Loader=new FXMLLoader(AdminMenuController.class.getResource("/application/Admin/AdminMenu.fxml"));
 			  root = (Parent) Loader.load();
 			  scene = new Scene(root);
 			  stage.setScene(scene);
-			  stage.show();
-	    }
+			  stage.show();	
+		}
+		
+		else {
+			Alert loginError = new Alert(AlertType.ERROR);
+			loginError.setTitle("ERRORE!");
+			loginError.setContentText("Nome admin o password errati: riprovare.");
+			loginStatusText.setText("Nome admin o password errati: riprovare");
+			loginStatusText.setFill(Color.RED);
+			loginError.showAndWait();
+			
+			adminNameField.clear();
+			adminPasswordField.clear();
+		}	
+	}
+
+    @FXML
+    public void returnToMainMenu(ActionEvent event) throws IOException {
+    	stage = (Stage)(returnToMainMenuButton.getScene().getWindow());
+		 
+		  FXMLLoader Loader=new FXMLLoader(MainMenuController.class.getResource("/application/MainMenu/MainMenu.fxml"));
+		  root = (Parent) Loader.load();
+		  scene = new Scene(root);
+		  stage.setScene(scene);
+		  stage.show();
+    }
 }

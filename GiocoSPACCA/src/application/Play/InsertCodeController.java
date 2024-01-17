@@ -5,8 +5,8 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
-import application.Admin.CreateGameController;
 import application.Admin.LoginAdminController;
+import application.MainMenu.MainMenuController;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -35,18 +35,15 @@ public class InsertCodeController {
     private TextField codeField;
 
     @FXML
-    private Button confirmEnter;
+    private Button confirmEnter, returnToMainMenuButton;
 
     @FXML
     private Text enterStatusText;
-
-    @FXML
-    private Button returnToMainMenuButton;
     
     @FXML
     private Label loginAdminLabel;
     
-
+    
     @FXML
     public void enterGame(ActionEvent event) throws IOException {
     	code = codeField.getText().trim().toUpperCase();
@@ -84,14 +81,13 @@ public class InsertCodeController {
 	     		selectionAlert.showAndWait();
 	    	 }
     	}
-    	
     }
 
     @FXML
     public void returnToMainMenu(ActionEvent event) throws IOException {
+    	// ritorna alla schermata home
     	stage = (Stage)(returnToMainMenuButton.getScene().getWindow());
-		  //IMPORTANTE RICORDA IL ../ nell'URL DEL FXML
-		  FXMLLoader Loader=new FXMLLoader(CreateGameController.class.getResource("/application/MainMenu/MainMenu.fxml"));
+		  FXMLLoader Loader=new FXMLLoader(MainMenuController.class.getResource("/application/MainMenu/MainMenu.fxml"));
 		  root = (Parent) Loader.load();
 		  scene = new Scene(root);
 		  stage.setScene(scene);
@@ -100,8 +96,8 @@ public class InsertCodeController {
     
     @FXML
     public void loginAdmin(MouseEvent event) throws IOException {
+    	// lancia la schermata di login dell'amministratore
     	stage = (Stage)(loginAdminLabel.getScene().getWindow());
-		  //IMPORTANTE RICORDA IL ../ nell'URL DEL FXML
 		  FXMLLoader Loader=new FXMLLoader(LoginAdminController.class.getResource("/application/Admin/LoginAdmin.fxml"));
 		  root = (Parent) Loader.load();
 		  scene = new Scene(root);
@@ -121,9 +117,8 @@ public class InsertCodeController {
     
     private void start() throws IOException {
     	// lancia la schermata di inizio partita
-    	
     	stage = (Stage)(returnToMainMenuButton.getScene().getWindow());
-    	FXMLLoader Loader=new FXMLLoader(CreateGameController.class.getResource("/application/Play/StartScreen.fxml"));
+    	FXMLLoader Loader=new FXMLLoader(StartScreenController.class.getResource("/application/Play/StartScreen.fxml"));
     	root = (Parent) Loader.load();
     	scene = new Scene(root);
     	stage.setScene(scene);
