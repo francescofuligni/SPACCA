@@ -41,7 +41,7 @@ public class ScoreBoardController implements Initializable {
     void returnToMainMenu(ActionEvent e) throws IOException {
     	stage = (Stage)(menuButton.getScene().getWindow());
 		  //IMPORTANTE RICORDA IL ../ nell'URL DEL FXML
-		  FXMLLoader Loader=new FXMLLoader(ScoreBoardController.class.getResource("MainMenu.fxml"));
+		  FXMLLoader Loader=new FXMLLoader(ScoreBoardController.class.getResource("/application/MainMenu/MainMenu.fxml"));
 		  root = (Parent) Loader.load();
 		  scene = new Scene(root);
 		  stage.setScene(scene);
