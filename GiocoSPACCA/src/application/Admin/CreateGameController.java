@@ -63,6 +63,7 @@ public class CreateGameController {
 		  stage.show();
     }
 	
+<<<<<<< Updated upstream
 	@FXML
 	public void logout(ActionEvent event) throws IOException {
     	stage = (Stage)(logoutButton.getScene().getWindow());
@@ -73,4 +74,7 @@ public class CreateGameController {
 		  stage.setScene(scene);
 		  stage.show();
     }
+=======
+	
+>>>>>>> Stashed changes
 }
