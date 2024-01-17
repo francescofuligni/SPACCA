@@ -47,8 +47,8 @@ public class GameScoreBoardController implements Initializable {
     @FXML
     public void returnToMainMenu(ActionEvent event) throws IOException {
     	stage = (Stage)(menuButton.getScene().getWindow());
-		  //IMPORTANTE RICORDA IL ../ nell'URL DEL FXML
-		  FXMLLoader Loader=new FXMLLoader(MainMenuController.class.getResource("MainMenu.fxml"));
+		  
+		  FXMLLoader Loader=new FXMLLoader(MainMenuController.class.getResource("/application/MainMenu/MainMenu.fxml"));
 		  root = (Parent) Loader.load();
 		  scene = new Scene(root);
 		  stage.setScene(scene);
@@ -120,8 +120,8 @@ public class GameScoreBoardController implements Initializable {
     @FXML
     public void generalScoreBoard(MouseEvent event) throws IOException {
     	stage = (Stage)(menuButton.getScene().getWindow());
-		  //IMPORTANTE RICORDA IL ../ nell'URL DEL FXML
-		  FXMLLoader Loader=new FXMLLoader(ScoreBoardController.class.getResource("../MainMenu/ScoreBoard.fxml"));
+		 
+		  FXMLLoader Loader=new FXMLLoader(ScoreBoardController.class.getResource("ScoreBoard.fxml"));
 		  root = (Parent) Loader.load();
 		  scene = new Scene(root);
 		  stage.setScene(scene);

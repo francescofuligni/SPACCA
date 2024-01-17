@@ -42,8 +42,8 @@ public class LoginAdminController {
 					
 				//Se le credenziali sono giuste entra in Create game
 				stage = (Stage)(confirmLogin.getScene().getWindow());
-				  //IMPORTANTE RICORDA IL ../ nell'URL DEL FXML
-				  FXMLLoader Loader=new FXMLLoader(CreateGameController.class.getResource("../Admin/CreateGame.fxml"));
+				 
+				  FXMLLoader Loader=new FXMLLoader(CreateGameController.class.getResource("/application/Admin/CreateGame.fxml"));
 				  root = (Parent) Loader.load();
 				  scene = new Scene(root);
 				  stage.setScene(scene);
@@ -66,8 +66,8 @@ public class LoginAdminController {
 	    @FXML
 	    public void returnToMainMenu(ActionEvent event) throws IOException {
 	    	stage = (Stage)(returnToMainMenuButton.getScene().getWindow());
-			  //IMPORTANTE RICORDA IL ../ nell'URL DEL FXML
-			  FXMLLoader Loader=new FXMLLoader(MainMenuController.class.getResource("MainMenu.fxml"));
+			 
+			  FXMLLoader Loader=new FXMLLoader(MainMenuController.class.getResource("/application/MainMenu/MainMenu.fxml"));
 			  root = (Parent) Loader.load();
 			  scene = new Scene(root);
 			  stage.setScene(scene);
