@@ -11,7 +11,7 @@ import java.util.Scanner;
 
 public class Player {
 	
-	private String username;
+	protected String username;
 	private int score;
 	
 	// costruttore 1
@@ -27,7 +27,7 @@ public class Player {
 	
 	
 	public void memorize() {
-		
+		// scrive il giocatore nel Players Register
 		Path pathToFile = Paths.get("./GiocoSPACCA/Informazioni_Partite/PLAYERS_REGISTER.csv");
 		File f=new File(pathToFile.toString());
 		if(!f.exists())
@@ -49,10 +49,9 @@ public class Player {
 	}
 	
 	public boolean exists() throws FileNotFoundException {
-		
+		// controlla se il giocatore è già stato memorizzato nel Players Register
 		Path pathToFile = Paths.get("./GiocoSPACCA/Informazioni_Partite/PLAYERS_REGISTER.csv");
 		File f=new File(pathToFile.toString());
-		boolean exists=false;
 		
 		if(!f.exists())
 			try {
@@ -63,19 +62,19 @@ public class Player {
 			}	
 		
 		Scanner scan = new Scanner(f);	
-		while(scan.hasNextLine() ) {	
-			String[] tokens = scan.nextLine().split(",");
-			if(tokens[0].equals(this.username)) {
-				exists=true;
+		while(scan.hasNextLine()) {	
+			if(scan.nextLine().split(",")[0].equals(this.username)) {
+				scan.close();
+				return true;
 			}
 		}
 		scan.close();
-		return exists;
+		return false;
 	}
 	
 	
 	public void forget() {
-		
+		// elimina il giocatore dal Players Register
 		Path pathToFile = Paths.get("./GiocoSPACCA/Informazioni_Partite/PLAYERS_REGISTER.csv");
 		File f=new File(pathToFile.toString());
 		
@@ -94,28 +93,24 @@ public class Player {
 			
 			while(scan.hasNextLine() ) {
 				String line=scan.nextLine();			// NEXTLINE MANDA AVANTI LO SCANNER OGNI VOLTA CHE VIENE CHIAMATA ANCHE PER I CONTROLLI
-				
 				String[] tokens = line.split(",");
 				if(!tokens[0].equals(this.username)) {
 					memory=memory+line + "\n";
 				}
 			}
-			
 			scan.close();	
 				
-			FileWriter fw = new FileWriter(f,false);
+			FileWriter fw = new FileWriter(f);
 			fw.write(memory);
+			fw.flush();
 			fw.close();
 			
 		} catch(IOException e) {
-			
 			e.printStackTrace();
 		}
-		
-		
 	}
 	
-	//getters e setters
+	// getters e setters
 	public String getUsername() {
 		return username;
 	}

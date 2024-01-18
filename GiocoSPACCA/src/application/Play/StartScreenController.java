@@ -47,7 +47,7 @@ public class StartScreenController implements Initializable {
 		
 		String playersList = "";
 		for(Player p : game.getPlayers()) {
-			playersList+=("   " + p.getUsername() + "   ");
+			playersList+=("  \"" + p.getUsername() + "\"  ");
 		}
 		playersLabel.setText(playersList);
 	}
