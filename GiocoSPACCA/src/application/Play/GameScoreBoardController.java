@@ -197,17 +197,19 @@ public class GameScoreBoardController implements Initializable {
     private void deleteCode() throws IOException {
     	// cancella il codice della partita eliminata dal Games Register
     	Path pathToGamesRegister = Paths.get("./GiocoSPACCA/Informazioni_Partite/GAMES_REGISTER.csv");
-    	Scanner scan = new Scanner(pathToGamesRegister.toString());
-    	
+    	File f = new File(pathToGamesRegister.toString());
+    	Scanner scan = new Scanner(f);
+    	scan.reset();
     	String memory = "";
     	while(scan.hasNextLine()) {
     		String line = scan.nextLine();
-    		if(line!=code)
+    		System.out.println(line);
+    		if(!line.equals(code))
     			memory = memory + line + "\n";
     	}
     	scan.close();
     	
-    	FileWriter fw = new FileWriter(pathToGamesRegister.toString());
+    	FileWriter fw = new FileWriter(f.getAbsolutePath(), false);
     	fw.write(memory);
     	fw.flush();
     	fw.close();

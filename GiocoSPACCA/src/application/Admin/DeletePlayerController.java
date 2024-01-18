@@ -67,8 +67,6 @@ public class DeletePlayerController {
 		 }  else{
 			 Player toDelete=new Player(username.trim());
 			 
-			 
-			 
 			 if(toDelete.exists()) {
 				 Alert alert = new Alert(AlertType.CONFIRMATION);
 					alert.setTitle("Elimina giocatore");

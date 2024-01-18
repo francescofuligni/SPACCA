@@ -43,35 +43,36 @@ public class DeleteGameController {
     public void deleteGame(ActionEvent event) throws IOException { 
     	// elimina la partita con il codice inserito
     	code = codeField.getText().toUpperCase();
+    	
     	if(code.startsWith("T")) {
-    		toDelete = new File(Paths.get("./GiocoSPACCA//Informazioni_Partite/" + codeField.getText().toUpperCase()).toString());
+    		toDelete = new File(Paths.get("./GiocoSPACCA//Informazioni_Partite/" + code).toString());
     		if(toDelete.exists()) {
     			Alert alert = new Alert(AlertType.CONFIRMATION);
    				alert.setTitle("Elimina partita");
    				alert.setHeaderText("OPERAZIONE IRREVERSIBILE");
-   				alert.setContentText("Sei sicuro di voler eliminare la partita \"" + codeField.getText().trim().toUpperCase() + "\"?");
+   				alert.setContentText("Sei sicuro di voler eliminare la partita \"" + code + "\"?");
    				
    				if(alert.showAndWait().get() == ButtonType.OK) {
    					// prima di eliminare la directory bisogna eliminare i file all'interno di essa
    					
-   					toDelete = new File(Paths.get("./GiocoSPACCA/Informazioni_Partite/" + codeField.getText().toUpperCase() + "/semifinale1.csv").toString());
+   					toDelete = new File(Paths.get("./GiocoSPACCA/Informazioni_Partite/" + code + "/semifinale1.csv").toString());
    		    		if(toDelete.exists())
    		    			toDelete.delete();
    		    		
-   		    		toDelete = new File(Paths.get("./GiocoSPACCA/Informazioni_Partite/" + codeField.getText().toUpperCase() + "/semifinale2.csv").toString());
+   		    		toDelete = new File(Paths.get("./GiocoSPACCA/Informazioni_Partite/" + code + "/semifinale2.csv").toString());
    		    		if(toDelete.exists())
    		    			toDelete.delete();
    		    		
-   		    		toDelete = new File(Paths.get("./GiocoSPACCA/Informazioni_Partite/" + codeField.getText().toUpperCase() + "/finale.csv").toString());
+   		    		toDelete = new File(Paths.get("./GiocoSPACCA/Informazioni_Partite/" + code + "/finale.csv").toString());
    		    		if(toDelete.exists())
    		    			toDelete.delete();
    		    		
    		    		// eliminazione della directory
-   		    		toDelete = new File(Paths.get("./GiocoSPACCA/Informazioni_Partite/" + codeField.getText().toUpperCase()).toString());
+   		    		toDelete = new File(Paths.get("./GiocoSPACCA/Informazioni_Partite/" + code).toString());
    		    		toDelete.delete();
    		    		
    					message.setTextFill(Color.GREEN);
-   					message.setText("Partita \"" + codeField.getText().trim() + "\" eliminata correttamente");
+   					message.setText("Partita \"" + code + "\" eliminata correttamente");
    				} else{
    					message.setTextFill(Color.RED);
    					message.setText("Partita non eliminata");
@@ -83,18 +84,18 @@ public class DeleteGameController {
     			gameNotFound();
 	    	}
 	    } else if(code.startsWith("L") || code.startsWith("S")) {
-	    	toDelete = new File(Paths.get("./GiocoSPACCA/Informazioni_Partite/" + codeField.getText().toUpperCase() + ".csv").toString());
+	    	toDelete = new File(Paths.get("./GiocoSPACCA/Informazioni_Partite/" + code + ".csv").toString());
 	    		
     		if(toDelete.exists()) {
        		 Alert alert = new Alert(AlertType.CONFIRMATION);
    				alert.setTitle("Elimina partita");
    				alert.setHeaderText("Stai eliminando un partita");
-   				alert.setContentText("Sei sicuro di voler eliminare la partita \"" + codeField.getText().trim() + "\"?");
+   				alert.setContentText("Sei sicuro di voler eliminare la partita \"" + code + "\"?");
    				
    				if(alert.showAndWait().get() == ButtonType.OK) {
    					toDelete.delete(); //in caso non sia torneo semplice allora si tratta di un solo file 
    					message.setTextFill(Color.GREEN);
-   					message.setText("Partita \"" + codeField.getText().trim() + "\" eliminata correttamente");
+   					message.setText("Partita \"" + code + "\" eliminata correttamente");
    				} else {
    					message.setTextFill(Color.RED);
    					message.setText("Partita non eliminata");
@@ -135,17 +136,18 @@ public class DeleteGameController {
     private void deleteCode() throws IOException {
     	// cancella il codice della partita eliminata dal Games Register
     	Path pathToGamesRegister = Paths.get("./GiocoSPACCA/Informazioni_Partite/GAMES_REGISTER.csv");
-    	Scanner scan = new Scanner(pathToGamesRegister.toString());
-    	
+    	File f = new File(pathToGamesRegister.toString());
+    	Scanner scan = new Scanner(f);
+    	scan.reset();
     	String memory = "";
     	while(scan.hasNextLine()) {
     		String line = scan.nextLine();
-    		if(line!=code)
+    		if(!line.equals(code))
     			memory = memory + line + "\n";
     	}
     	scan.close();
     	
-    	FileWriter fw = new FileWriter(pathToGamesRegister.toString());
+    	FileWriter fw = new FileWriter(f.getAbsolutePath(), false);
     	fw.write(memory);
     	fw.flush();
     	fw.close();
