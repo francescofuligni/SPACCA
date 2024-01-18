@@ -1,6 +1,7 @@
 package application.Admin;
 
 import java.io.File;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.net.URL;
 import java.nio.file.Path;
@@ -78,7 +79,7 @@ public abstract class GamesCreation implements Initializable {
         	
         	String message = "";
         	for(int i=0; i<playersCounter; i++) {
-        		message += (" '" + selectedPlayers[i] + "'");
+        		message += ("  \"" + selectedPlayers[i] + "\"  ");
         	}
         	selectedPlayersLabel.setText(message);
         	botNumber.setText(" --  " + (MAXPLAYERS - playersCounter) + "  -- ");
@@ -159,15 +160,24 @@ public abstract class GamesCreation implements Initializable {
     		selectionAlert.setContentText("Numero massimo di giocatori inseribili raggiunto");
     		selectionAlert.showAndWait();
     	}
-    	if(playersCounter < MAXPLAYERS){
+    	if(playersCounter < MAXPLAYERS && player!=null){
     		selectedPlayers[playersCounter] = player;
 			playersCounter++;
 
-			selectedPlayersLabel.setText(selectedPlayersLabel.getText() + " '" + player.getUsername() + "' ");
+			selectedPlayersLabel.setText(selectedPlayersLabel.getText() + "  \"" + player + "\"  ");
 			botNumber.setText(" --  " + (MAXPLAYERS - playersCounter) + "  -- ");
 			playersChoiceBox.getItems().remove(player);
     	}
     }
+	
+	protected void saveCode() throws IOException {
+		// salva il codice creato nell'elenco contenente tutti i codici delle partite
+		Path pathToGamesRegister = Paths.get("./GiocoSPACCA/Informazioni_Partite/GAMES_REGISTER.csv");
+		FileWriter fw = new FileWriter(pathToGamesRegister.toString(),true);
+		fw.write(code + "\n");
+		fw.flush();
+		fw.close();
+	}
     
 	
 	// metodi astratti

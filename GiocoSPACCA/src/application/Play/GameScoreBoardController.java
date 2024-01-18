@@ -81,16 +81,17 @@ public class GameScoreBoardController implements Initializable {
 				scan.reset();
 				
 				// file seminfinali
-				for(int i=1; i<=2; i++) {
+				for(int i=2; i>0; i--) {
 					f = new File(pathToGame.toString()+"/semifinale" + i + ".csv");
 					scan = new Scanner(f); 
-					while(scan.hasNextLine()) {
+					while(scan.hasNextLine())
 						line = scan.nextLine();
-					}
 					this.players.put(line.split(",")[1], null);
 					f.delete();
 				}
+				
 				Files.delete(pathToGame);		// elimina la directory della partita
+				deleteCode();					// cancella il codice
 				
 			} else {
 				// SINGLE GAME O LAST MAN STANDING
@@ -103,7 +104,9 @@ public class GameScoreBoardController implements Initializable {
 					this.players.put(scan.nextLine().split(",")[1], null);
 				}
 				scan.close();
+				
 				f.delete();						// elimina il file della partita
+				deleteCode();					// cancella il codice
 			}
 			
 			givePoints();						// assegna i punti
@@ -151,7 +154,7 @@ public class GameScoreBoardController implements Initializable {
 				String line = scan.nextLine();
 				String[] tokens = line.split(",");
 				if(players.keySet().contains(tokens[0]))
-					memory = memory + tokens[0] + "," + (players.get(tokens[0]) + Integer.parseInt(tokens[1])) + "\n";			// salvataggio sul file
+					memory = memory + tokens[0] + "," + (players.get(tokens[0]) + Integer.parseInt(tokens[1])) + "\n";		// salvataggio sul file
 				else		
 					memory = memory + line + "\n";					// le altre linee vengono riscritte nello stesso modo
 			}
@@ -189,5 +192,26 @@ public class GameScoreBoardController implements Initializable {
         		pos++;
         	}
     	}
+    }
+    
+    private void deleteCode() throws IOException {
+    	// cancella il codice della partita eliminata dal Games Register
+    	Path pathToGamesRegister = Paths.get("./GiocoSPACCA/Informazioni_Partite/GAMES_REGISTER.csv");
+    	File f = new File(pathToGamesRegister.toString());
+    	Scanner scan = new Scanner(f);
+    	scan.reset();
+    	String memory = "";
+    	while(scan.hasNextLine()) {
+    		String line = scan.nextLine();
+    		System.out.println(line);
+    		if(!line.equals(code))
+    			memory = memory + line + "\n";
+    	}
+    	scan.close();
+    	
+    	FileWriter fw = new FileWriter(f.getAbsolutePath(), false);
+    	fw.write(memory);
+    	fw.flush();
+    	fw.close();
     }
 }
