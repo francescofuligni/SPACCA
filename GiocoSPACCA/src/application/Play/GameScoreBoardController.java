@@ -91,7 +91,6 @@ public class GameScoreBoardController implements Initializable {
 				}
 				
 				Files.delete(pathToGame);		// elimina la directory della partita
-				deleteCode();					// cancella il codice
 				
 			} else {
 				// SINGLE GAME O LAST MAN STANDING
@@ -106,7 +105,6 @@ public class GameScoreBoardController implements Initializable {
 				scan.close();
 				
 				f.delete();						// elimina il file della partita
-				deleteCode();					// cancella il codice
 			}
 			
 			givePoints();						// assegna i punti
@@ -141,7 +139,7 @@ public class GameScoreBoardController implements Initializable {
     }
     
     
-    private void updateScores() {		// aggiorna il punteggio totale dei giocatori nella classifica generale
+    private void updateScores() {								// aggiorna il punteggio totale dei giocatori nella classifica generale
 		Path pathToFile = Paths.get("./GiocoSPACCA/Informazioni_Partite/PLAYERS_REGISTER.csv");
 		File f=new File(pathToFile.toString());
 		
@@ -153,10 +151,10 @@ public class GameScoreBoardController implements Initializable {
 			while(scan.hasNextLine() ) {
 				String line = scan.nextLine();
 				String[] tokens = line.split(",");
-				if(players.keySet().contains(tokens[0]))
-					memory = memory + tokens[0] + "," + (players.get(tokens[0]) + Integer.parseInt(tokens[1])) + "\n";		// salvataggio sul file
+				if(players.keySet().contains(tokens[0]))		// salva su file il nuovo punteggio e decrementa di 1 il contatore delle partite del giocatore
+					memory = memory + tokens[0] + "," + (players.get(tokens[0]) + Integer.parseInt(tokens[1])) + "," + (Integer.parseInt(tokens[2])-1) + "\n";
 				else		
-					memory = memory + line + "\n";					// le altre linee vengono riscritte nello stesso modo
+					memory = memory + line + "\n";				// le altre linee vengono riscritte nello stesso modo
 			}
 			scan.close();	
 			FileWriter fw = new FileWriter(f,false);
@@ -168,7 +166,7 @@ public class GameScoreBoardController implements Initializable {
 		}
 	}
     
-    private void givePoints() {			// assegna i punti in base alla partita e all'ordine di classifica
+    private void givePoints() {									// assegna i punti in base alla partita e all'ordine di classifica
     	int pos=0;
     	if(code.startsWith("T")) {
     		// punteggi torneo
@@ -192,26 +190,5 @@ public class GameScoreBoardController implements Initializable {
         		pos++;
         	}
     	}
-    }
-    
-    private void deleteCode() throws IOException {
-    	// cancella il codice della partita eliminata dal Games Register
-    	Path pathToGamesRegister = Paths.get("./GiocoSPACCA/Informazioni_Partite/GAMES_REGISTER.csv");
-    	File f = new File(pathToGamesRegister.toString());
-    	Scanner scan = new Scanner(f);
-    	scan.reset();
-    	String memory = "";
-    	while(scan.hasNextLine()) {
-    		String line = scan.nextLine();
-    		System.out.println(line);
-    		if(!line.equals(code))
-    			memory = memory + line + "\n";
-    	}
-    	scan.close();
-    	
-    	FileWriter fw = new FileWriter(f.getAbsolutePath(), false);
-    	fw.write(memory);
-    	fw.flush();
-    	fw.close();
     }
 }

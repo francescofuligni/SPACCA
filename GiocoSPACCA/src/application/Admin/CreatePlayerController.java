@@ -45,10 +45,9 @@ public class CreatePlayerController {
 	
 	@FXML
 	public void createPlayer(ActionEvent event) throws IOException {
-		String username = usernameField.getText();
-		username.trim().toUpperCase();
+		String username = usernameField.getText().trim();
 		
-		if(username==null || username.equals("") || username.equals("ADMINISTRATOR") || username.startsWith("BOT")) {
+		if(username==null || username.equals("") || username.toUpperCase().equals("ADMIN") || username.toUpperCase().startsWith("BOT")) {
 			Alert alert = new Alert(AlertType.ERROR);
 			alert.setTitle("Errore");
 			alert.setHeaderText("Errore nella creazione del giocatore");
@@ -60,11 +59,11 @@ public class CreatePlayerController {
 		} else {
 			Alert alert = new Alert(AlertType.CONFIRMATION);
 			alert.setTitle("Crea giocatore");
-			alert.setHeaderText("Stai creando un nuovo giocatore");
-			alert.setContentText("Sei sicuro di voler creare il giocatore \"" + username.trim() + "\"?");
+			alert.setHeaderText("Stai per creare un nuovo giocatore");
+			alert.setContentText("Sei sicuro di voler creare il giocatore \"" + username + "\"?");
 			
 			if(alert.showAndWait().get() == ButtonType.OK) {
-				Player player = new Player(username.trim());
+				Player player = new Player(username);
 				if(player.exists()) {
 					Alert alert2 = new Alert(AlertType.ERROR);
 					alert2.setTitle("Errore");
@@ -76,7 +75,7 @@ public class CreatePlayerController {
 				} else {
 					player.memorize();
 					message.setTextFill(Color.GREEN);
-					message.setText("Giocatore \"" + username.trim() + "\" aggiunto correttamente");
+					message.setText("Giocatore \"" + username + "\" aggiunto correttamente");
 				}
 				
 			} else {

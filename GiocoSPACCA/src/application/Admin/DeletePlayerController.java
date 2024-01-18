@@ -45,54 +45,47 @@ public class DeletePlayerController {
 	@FXML
 	public void deletePlayer(ActionEvent event) throws IOException {
 		
-    	String username = usernameField.getText();
+    	String username = usernameField.getText().trim();
     	
-    	if(username==null || username.trim().equals("")) {				
-			Alert alert = new Alert(AlertType.ERROR);
-			alert.setTitle("Errore");
-			alert.setHeaderText("Errore nell'eliminazione del giocatore");
-			alert.setContentText("Non esistono giocatori con nome vuoto");
-			alert.showAndWait();
-			message.setTextFill(Color.RED);
-			message.setText("Giocatore non trovato");
-    	}	else if(username.trim().toUpperCase().equals("ADMINISTRATOR")) {
-    		Alert alert = new Alert(AlertType.ERROR);
-			alert.setTitle("Errore");
-			alert.setHeaderText("Errore nell'eliminazione del giocatore");
-			alert.setContentText("Non puoi rimuovere accunt amministratore");
-			alert.showAndWait();
-			message.setTextFill(Color.RED);
-			message.setText("Giocatore non eliminato");
-			
-		 }  else{
-			 Player toDelete=new Player(username.trim());
-			 
-			 if(toDelete.exists()) {
-				 Alert alert = new Alert(AlertType.CONFIRMATION);
-					alert.setTitle("Elimina giocatore");
-					alert.setHeaderText("Stai eliminando un giocatore");
-					alert.setContentText("Sei sicuro di voler eliminare il giocatore \"" + username.trim() + "\"?");
-					
-					if(alert.showAndWait().get() == ButtonType.OK) {
-						toDelete.forget();
-						
-						message.setTextFill(Color.GREEN);
-						message.setText("Giocatore \"" + username.trim() + "\" eliminato correttamente");
-					}else{
-						
-						message.setTextFill(Color.RED);
-						message.setText("Giocatore non eliminato");
-					}
-				}else {
-				Alert alert = new Alert(AlertType.ERROR);
-				alert.setTitle("Errore");
-				alert.setHeaderText("Errore nell'eliminazione del giocatore");
-				alert.showAndWait();
-				message.setTextFill(Color.RED);
-				message.setText("Giocatore non trovato");
-		} 
+    	if(username==null || username.equals("")) {				
+			eliminationError("Non esistono giocatori con nome vuoto");
+    	
+    	} else if (username.toUpperCase().equals("ADMIN")) {
+			eliminationError("Non puoi rimuovere l'account amministratore");
 		
-    }
+    	} else {
+			Player toDelete=new Player(username);
+			
+			if(!toDelete.exists()) {
+				eliminationError("Giocatore non trovato");
+			} else if(toDelete.isInGame()) {
+				eliminationError("Il giocatore ha una partita in corso");			// impedisce di rimuovere giocatori in partita
+			} else {
+				Alert alert = new Alert(AlertType.CONFIRMATION);
+				alert.setTitle("Elimina giocatore");
+				alert.setHeaderText("Stai per eliminare un giocatore");
+				alert.setContentText("Sei sicuro di voler eliminare il giocatore \"" + username + "\"?");
+				
+				if(alert.showAndWait().get() == ButtonType.OK) {
+					toDelete.delete();
+					message.setTextFill(Color.GREEN);
+					message.setText("Giocatore \"" + username + "\" eliminato correttamente");
+				} else {
+					message.setTextFill(Color.RED);
+					message.setText("Giocatore non eliminato");
+				}
+			}
+		}
     	usernameField.setText(null);
+	}
+	
+	private void eliminationError(String text) {
+		Alert alert = new Alert(AlertType.ERROR);
+		alert.setTitle("Errore");
+		alert.setHeaderText("Eliminazione fallita");
+		alert.setContentText(text);
+		alert.showAndWait();
+		message.setTextFill(Color.RED);
+		message.setText("Eliminazione fallita");
 	}
 }

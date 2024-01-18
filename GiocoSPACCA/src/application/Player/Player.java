@@ -12,19 +12,13 @@ import java.util.Scanner;
 public class Player {
 	
 	protected String username;
-	private int score;
 	
-	// costruttore 1
-	public Player(String username, int totalScore) {
-		this.username=username;
-		this.score=totalScore;
-	}
-	// costruttore 2
 	public Player(String username) {		
 		this.username=username;
-		this.score=0;
 	}
-	
+	public String getUsername() {
+		return username;
+	}
 	
 	public void memorize() {
 		// scrive il giocatore nel Players Register
@@ -40,7 +34,7 @@ public class Player {
 	        	
 		try {
 	        FileWriter fw = new FileWriter(f.getAbsolutePath(), true);
-			fw.write(this.username + "," + this.score + "\n" );
+			fw.write(this.username + ",0,0\n" );
 			fw.flush();
 			fw.close();
 		} catch (IOException e) {
@@ -74,7 +68,7 @@ public class Player {
 	}
 	
 	
-	public void forget() {
+	public void delete() {
 		// elimina il giocatore dal Players Register
 		Path pathToFile = Paths.get("./GiocoSPACCA/Informazioni_Partite/PLAYERS_REGISTER.csv");
 		File f=new File(pathToFile.toString());
@@ -93,7 +87,7 @@ public class Player {
 			String memory="";
 			
 			while(scan.hasNextLine()) {
-				String line=scan.nextLine();			// NEXTLINE MANDA AVANTI LO SCANNER OGNI VOLTA CHE VIENE CHIAMATA ANCHE PER I CONTROLLI
+				String line=scan.nextLine();
 				String[] tokens = line.split(",");
 				if(!tokens[0].equals(this.username)) {
 					memory=memory+line + "\n";
@@ -112,66 +106,100 @@ public class Player {
 	}
 	
 	
-	public boolean isInGame() throws FileNotFoundException {
-		// TODO: scorrere tutti i file delle partite e controllare se è presente il nome del giocatore
-    	Path pathToGamesRegister = Paths.get("./GiocoSPACCA/Informazioni_Partite/GAMES_REGISTER.csv");
-    	File f = new File(pathToGamesRegister.toString());
-    	Scanner scan = new Scanner(f);
-    	
-		while(scan.hasNextLine()) {
-			String code = scan.nextLine();
-			if(code.startsWith("T")) {
-				Path pathToGame = Paths.get("./GiocoSPACCA//Informazioni_Partite/" + code);
+	public void addGame() {
+		// viene richiamato quando il giocatore viene aggiunto a una partita	-->	aggiunge una partita al giocatore
+		Path pathToFile = Paths.get("./GiocoSPACCA/Informazioni_Partite/PLAYERS_REGISTER.csv");
+		File f=new File(pathToFile.toString());
+		
+		try {
+			Scanner scan = new Scanner(f);
+			scan.reset();
+			String memory="";
+			
+			while(scan.hasNextLine()) {
+				String line=scan.nextLine();
+				String[] tokens = line.split(",");
+				if(tokens[0].equals(this.username)) {
+					int gamesCounter = Integer.parseInt(tokens[2])+1;
+					memory = memory + tokens[0] + "," + tokens[1] + "," + gamesCounter + "\n";
+				} else {
+					memory = memory+line+"\n";
+				}
+			}
+			scan.close();	
 				
-				// controllo file finale
-				File fin = new File(pathToGame.toString() + "/finale.csv");
-				Scanner scanFin = new Scanner(fin);
-				if(scanFin.hasNextLine())
-					scanFin.nextLine();
+			FileWriter fw = new FileWriter(f.getAbsolutePath(), false);
+			fw.write(memory);
+			fw.flush();
+			fw.close();
+		} catch(IOException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	
+	public void subtractGame() {
+		// viene richiamato quando il giocatore temrina una partita	-->	toglie una partita al giocatore
+		Path pathToFile = Paths.get("./GiocoSPACCA/Informazioni_Partite/PLAYERS_REGISTER.csv");
+		File f=new File(pathToFile.toString());
+		
+		try {
+			Scanner scan = new Scanner(f);
+			scan.reset();
+			String memory="";
+			
+			while(scan.hasNextLine()) {
+				String line=scan.nextLine();
+				String[] tokens = line.split(",");
+				if(tokens[0].equals(this.username)) {
+					int gamesCounter = Integer.parseInt(tokens[2])-1;
+					if(gamesCounter<=0)
+						gamesCounter=0;
+					memory = memory + tokens[0] + "," + tokens[1] + "," + gamesCounter + "\n";
+				} else {
+					memory = memory+line+"\n";
+				}
+			}
+			scan.close();	
 				
-				while(scanFin.hasNextLine()) {
-					String data = scanFin.nextLine().split(",")[1];
-					if(this.username.equals(data)) {
+			FileWriter fw = new FileWriter(f.getAbsolutePath(), false);
+			fw.write(memory);
+			fw.flush();
+			fw.close();
+		} catch(IOException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	
+	public boolean isInGame() {
+		// ritorna true se il giocatore si trova in una partita esistente, altrimenti ritorna false
+		Path pathToFile = Paths.get("./GiocoSPACCA/Informazioni_Partite/PLAYERS_REGISTER.csv");
+		File f=new File(pathToFile.toString());
+		
+		try {
+			Scanner scan = new Scanner(f);
+			scan.reset();
+			
+			while(scan.hasNextLine()) {
+				String line=scan.nextLine();
+				String[] tokens = line.split(",");
+				if(tokens[0].equals(this.username)) {
+					int gamesCounter = Integer.parseInt(tokens[2]);
+					if(gamesCounter<=0) {
 						scan.close();
-						scanFin.close();
+						return false;
+					} else {
+						scan.close();
 						return true;
 					}
 				}
-				scanFin.close();
-				
-				// TODO: aggiungere un terzo valore al player register --> valore intero che conta il numero di partite in cui è il giocatore
-				//		--> quando aggiungo il giocatore a una partita, incremento di 1 il valore
-				// 		--> quando termina una partita o la parita viene eliminata, decremento di 1
-				
-				// TODO: metodo per memorizzare i giocatori in partita nel player register incrementando/decrementando il valore
-				// 		da inserire dentro il metodo per il salvataggio/eliminazione del codice (UNIFICARE I DUE METODI)
-				
-			} else {
-				
-				
-				
-				
-				
 			}
+			scan.close();
+		} catch(IOException e) {
+			e.printStackTrace();
 		}
-    	scan.close();
-		return false;
-	}
-	
-	
-	// getters e setters
-	public String getUsername() {
-		return username;
-	}
-	public void setUsername(String username) {
-		this.username = username;
-	}
-	
-	public int getScore() {
-		return score;
-	}
-	public void setScore(int score) {
-		this.score = score;
+		return false;		// se non trova il giocatore, ritorna false
 	}
 	
 	@Override

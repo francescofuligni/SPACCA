@@ -1,7 +1,6 @@
 package application.Admin;
 
 import java.io.File;
-import java.io.FileWriter;
 import java.io.IOException;
 import java.net.URL;
 import java.nio.file.Path;
@@ -10,6 +9,7 @@ import java.util.ArrayList;
 import java.util.ResourceBundle;
 import java.util.Scanner;
 
+import application.Player.Bot;
 import application.Player.Player;
 import application.Player.PlayerInGame;
 import javafx.event.ActionEvent;
@@ -112,15 +112,17 @@ public abstract class GamesCreation implements Initializable {
 	    
 	    for(int i=0; i<MAXPLAYERS; i++) {											
 	    	if(selectedPlayers[i] != null) {									// converte ogni giocatore selezionato in PlayerInGame
-	    		playersInGame.add(new PlayerInGame(selectedPlayers[i]));
-	    	} else {														// inserisce i bot nella partita
+	    		PlayerInGame p = new PlayerInGame(selectedPlayers[i].getUsername());
+	    		playersInGame.add(p);
+	    		p.addGame();			// aggiunge una partita al giocatore nel Players Register
+	    	} else {															// inserisce i bot nella partita
 	    		botCounter++;
-	    		playersInGame.add(new PlayerInGame("BOT" + botCounter));
+	    		playersInGame.add(new Bot("BOT" + botCounter));
 	    	}
 	    }
 	}
 	
-	protected void getPlayersFromFile() {			// popola l'ArrayList allPlayers con i giocatori memorizzati su file
+	protected void getPlayersFromFile() {				// popola l'ArrayList allPlayers con i giocatori memorizzati su file
 		Path pathToFile = Paths.get("./GiocoSPACCA/Informazioni_Partite/PLAYERS_REGISTER.csv");
 		File f=new File(pathToFile.toString());
 			
@@ -131,12 +133,8 @@ public abstract class GamesCreation implements Initializable {
 			while(scan.hasNextLine() ) {				// aggiunge i giocatori all'arraylist allPlayers
 				String line=scan.nextLine();
 				String[] tokens = line.split(",");
-				
 				String username = tokens[0];
-			
-				int totalScore = Integer.parseInt(tokens[1]);
-				
-				Player p = new Player(username, totalScore);
+				Player p = new Player(username);
 				allPlayers.add(p);
 			}
 			
@@ -169,15 +167,6 @@ public abstract class GamesCreation implements Initializable {
 			playersChoiceBox.getItems().remove(player);
     	}
     }
-	
-	protected void saveCode() throws IOException {
-		// salva il codice creato nell'elenco contenente tutti i codici delle partite
-		Path pathToGamesRegister = Paths.get("./GiocoSPACCA/Informazioni_Partite/GAMES_REGISTER.csv");
-		FileWriter fw = new FileWriter(pathToGamesRegister.toString(),true);
-		fw.write(code + "\n");
-		fw.flush();
-		fw.close();
-	}
     
 	
 	// metodi astratti
