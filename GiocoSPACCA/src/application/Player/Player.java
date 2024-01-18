@@ -11,7 +11,7 @@ import java.util.Scanner;
 
 public class Player {
 	
-	private String username;
+	protected String username;
 	private int score;
 	
 	// costruttore 1
@@ -27,7 +27,7 @@ public class Player {
 	
 	
 	public void memorize() {
-		
+		// scrive il giocatore nel Players Register
 		Path pathToFile = Paths.get("./GiocoSPACCA/Informazioni_Partite/PLAYERS_REGISTER.csv");
 		File f=new File(pathToFile.toString());
 		if(!f.exists())
@@ -39,7 +39,7 @@ public class Player {
 	        }
 	        	
 		try {
-	        FileWriter fw = new FileWriter(f.getAbsolutePath(),true);
+	        FileWriter fw = new FileWriter(f.getAbsolutePath(), true);
 			fw.write(this.username + "," + this.score + "\n" );
 			fw.flush();
 			fw.close();
@@ -48,11 +48,11 @@ public class Player {
 		}
 	}
 	
+	
 	public boolean exists() throws FileNotFoundException {
-		
+		// controlla se il giocatore è già stato memorizzato nel Players Register
 		Path pathToFile = Paths.get("./GiocoSPACCA/Informazioni_Partite/PLAYERS_REGISTER.csv");
 		File f=new File(pathToFile.toString());
-		boolean exists=false;
 		
 		if(!f.exists())
 			try {
@@ -63,19 +63,19 @@ public class Player {
 			}	
 		
 		Scanner scan = new Scanner(f);	
-		while(scan.hasNextLine() ) {	
-			String[] tokens = scan.nextLine().split(",");
-			if(tokens[0].equals(this.username)) {
-				exists=true;
+		while(scan.hasNextLine()) {	
+			if(scan.nextLine().split(",")[0].equals(this.username)) {
+				scan.close();
+				return true;
 			}
 		}
 		scan.close();
-		return exists;
+		return false;
 	}
 	
 	
 	public void forget() {
-		
+		// elimina il giocatore dal Players Register
 		Path pathToFile = Paths.get("./GiocoSPACCA/Informazioni_Partite/PLAYERS_REGISTER.csv");
 		File f=new File(pathToFile.toString());
 		
@@ -92,30 +92,74 @@ public class Player {
 			scan.reset();
 			String memory="";
 			
-			while(scan.hasNextLine() ) {
+			while(scan.hasNextLine()) {
 				String line=scan.nextLine();			// NEXTLINE MANDA AVANTI LO SCANNER OGNI VOLTA CHE VIENE CHIAMATA ANCHE PER I CONTROLLI
-				
 				String[] tokens = line.split(",");
 				if(!tokens[0].equals(this.username)) {
 					memory=memory+line + "\n";
 				}
 			}
-			
 			scan.close();	
 				
-			FileWriter fw = new FileWriter(f,false);
+			FileWriter fw = new FileWriter(f.getAbsolutePath(), false);
 			fw.write(memory);
+			fw.flush();
 			fw.close();
 			
 		} catch(IOException e) {
-			
 			e.printStackTrace();
 		}
-		
-		
 	}
 	
-	//getters e setters
+	
+	public boolean isInGame() throws FileNotFoundException {
+		// TODO: scorrere tutti i file delle partite e controllare se è presente il nome del giocatore
+    	Path pathToGamesRegister = Paths.get("./GiocoSPACCA/Informazioni_Partite/GAMES_REGISTER.csv");
+    	File f = new File(pathToGamesRegister.toString());
+    	Scanner scan = new Scanner(f);
+    	
+		while(scan.hasNextLine()) {
+			String code = scan.nextLine();
+			if(code.startsWith("T")) {
+				Path pathToGame = Paths.get("./GiocoSPACCA//Informazioni_Partite/" + code);
+				
+				// controllo file finale
+				File fin = new File(pathToGame.toString() + "/finale.csv");
+				Scanner scanFin = new Scanner(fin);
+				if(scanFin.hasNextLine())
+					scanFin.nextLine();
+				
+				while(scanFin.hasNextLine()) {
+					String data = scanFin.nextLine().split(",")[1];
+					if(this.username.equals(data)) {
+						scan.close();
+						scanFin.close();
+						return true;
+					}
+				}
+				scanFin.close();
+				
+				// TODO: aggiungere un terzo valore al player register --> valore intero che conta il numero di partite in cui è il giocatore
+				//		--> quando aggiungo il giocatore a una partita, incremento di 1 il valore
+				// 		--> quando termina una partita o la parita viene eliminata, decremento di 1
+				
+				// TODO: metodo per memorizzare i giocatori in partita nel player register incrementando/decrementando il valore
+				// 		da inserire dentro il metodo per il salvataggio/eliminazione del codice (UNIFICARE I DUE METODI)
+				
+			} else {
+				
+				
+				
+				
+				
+			}
+		}
+    	scan.close();
+		return false;
+	}
+	
+	
+	// getters e setters
 	public String getUsername() {
 		return username;
 	}

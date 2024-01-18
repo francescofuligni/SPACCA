@@ -6,7 +6,7 @@ import application.Card.*;
 
 public class PlayerInGame extends Player {
 	
-	private int healthPoints;
+	protected int healthPoints;
 	protected ArrayList<Card> hand;				// scope protected per permetterne la visibilità nelle sottoclassi EasyBot e HardBot
 	public final int MAXHP = 20;				// valore massimo di punti salute
 	
@@ -24,6 +24,11 @@ public class PlayerInGame extends Player {
 		super(username);
 		this.healthPoints = healthPoints;
 		this.hand = new ArrayList<>();
+	}
+	public PlayerInGame(String username, int healthPoints, ArrayList<Card> hand) {
+		super(username);
+		this.healthPoints = healthPoints;
+		this.hand = hand;
 	}
 	
 	public Card getCard(int i) {
