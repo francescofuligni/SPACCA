@@ -40,7 +40,7 @@ public class Player {
 	        	
 		try {
 	        FileWriter fw = new FileWriter(f.getAbsolutePath(),true);
-			fw.write(this.username + "," + this.score + "\n");
+			fw.write(this.username + "," + this.score + "\n" );
 			fw.flush();
 			fw.close();
 		} catch (IOException e) {
