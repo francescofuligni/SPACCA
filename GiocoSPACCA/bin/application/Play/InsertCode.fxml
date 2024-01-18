@@ -64,7 +64,7 @@
             <DropShadow />
          </effect>
       </Label>
-      <Label fx:id="loginAdminLabel" alignment="CENTER" layoutX="490.0" layoutY="476.0" onMouseClicked="#loginAdmin" onMousePressed="#setColorGrey" onMouseReleased="#setColorWhite" text="Oppure crea una NUOVA PARTITA" textFill="WHITE" underline="true">
+      <Label fx:id="loginAdminLabel" alignment="CENTER" layoutX="435.0" layoutY="477.0" onMouseClicked="#loginAdmin" onMousePressed="#setColorGrey" onMouseReleased="#setColorWhite" prefHeight="16.0" prefWidth="334.0" text="Oppure crea una nuova partita" textFill="WHITE" underline="true">
          <font>
             <Font name="Times New Roman Bold" size="14.0" />
          </font>

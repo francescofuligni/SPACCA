@@ -94,7 +94,7 @@
          </fill>
       </Rectangle>
       <ChoiceBox fx:id="chooseDifficulty" layoutX="345.0" layoutY="261.0" prefHeight="26.0" prefWidth="124.0" />
-      <Text fill="WHITE" layoutX="197.0" layoutY="279.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Difficoltà Bot" textAlignment="CENTER" wrappingWidth="123.7320556640625">
+      <Text fill="WHITE" layoutX="197.0" layoutY="279.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Difficoltà BOT" textAlignment="CENTER" wrappingWidth="123.7320556640625">
          <font>
             <Font name="Bodoni MT" size="18.0" />
          </font>
@@ -122,14 +122,6 @@
             <Font name="Bodoni MT" size="18.0" />
          </font>
       </Text>
-      <Button fx:id="returnToCreateGameButton" layoutX="580.0" layoutY="560.0" mnemonicParsing="false" onAction="#returnToCreateGame" text=" Indietro ">
-         <font>
-            <Font name="Bodoni MT" size="14.0" />
-         </font>
-         <effect>
-            <InnerShadow />
-         </effect>
-      </Button>
       <Button fx:id="play" layoutX="253.0" layoutY="465.0" mnemonicParsing="false" onAction="#play" prefHeight="52.0" prefWidth="163.0" text="CREA">
          <effect>
             <InnerShadow />
@@ -138,7 +130,7 @@
             <Font name="Bodoni MT" size="24.0" />
          </font>
       </Button>
-      <Text fill="WHITE" layoutX="201.0" layoutY="215.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Numero Bot" textAlignment="CENTER" wrappingWidth="123.7320556640625">
+      <Text fill="WHITE" layoutX="201.0" layoutY="215.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Numero BOT" textAlignment="CENTER" wrappingWidth="123.7320556640625">
          <font>
             <Font name="Bodoni MT" size="18.0" />
          </font>
@@ -149,11 +141,11 @@
          </font>
       </Text>
       <ChoiceBox fx:id="playersChoiceBox" layoutX="345.0" layoutY="334.0" prefHeight="26.0" prefWidth="124.0" />
-      <Label layoutX="279.0" layoutY="382.0" text="Giocatori selezionati:" textFill="WHITE">
+      <Label layoutX="279.0" layoutY="392.0" text="Giocatori selezionati:" textFill="WHITE">
          <font>
             <Font name="Times New Roman Italic" size="14.0" />
          </font></Label>
-      <Label fx:id="selectedPlayersLabel" alignment="CENTER" layoutX="1.0" layoutY="396.0" prefHeight="22.0" prefWidth="668.0" textAlignment="CENTER" textFill="WHITE">
+      <Label fx:id="selectedPlayersLabel" alignment="CENTER" layoutX="1.0" layoutY="408.0" prefHeight="22.0" prefWidth="668.0" textAlignment="CENTER" textFill="WHITE">
          <font>
             <Font name="Times New Roman Bold" size="14.0" />
          </font></Label>
@@ -162,5 +154,13 @@
             <Font name="Times New Roman Bold" size="14.0" />
          </font>
       </Label>
+      <Button fx:id="backButton" layoutX="586.0" layoutY="560.0" mnemonicParsing="false" onAction="#back" text="Indietro">
+         <font>
+            <Font name="Bodoni MT" size="14.0" />
+         </font>
+         <effect>
+            <InnerShadow />
+         </effect>
+      </Button>
    </children>
 </AnchorPane>

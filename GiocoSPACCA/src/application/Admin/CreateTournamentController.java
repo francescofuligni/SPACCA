@@ -84,7 +84,8 @@ public class CreateTournamentController extends GamesCreation {
 		    codeInfo.setContentText("Codice della partita creata");
 		    codeInfo.setHeaderText(code);
 		    codeInfo.showAndWait();
-	    	returnToHome();
+	    	
+		    returnToAdminMenu();
 	    }
     }
     

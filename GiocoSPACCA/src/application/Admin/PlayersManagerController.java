@@ -11,25 +11,22 @@ import javafx.scene.control.Button;
 import javafx.stage.Stage;
 
 public class PlayersManagerController {
-	
-	@FXML
-	private Button backButton;
-	
-	@FXML
-	private Button newPlayerButton;
-	
-	@FXML
-	private Button deletePlayerButton;
-	
 	private Stage stage;
 	private Scene scene;
 	private Parent root;
 	
 	@FXML
+	private Button backButton;
+	@FXML
+	private Button createPlayerButton;
+	@FXML
+	private Button deletePlayerButton;
+	
+	@FXML
 	public void back(ActionEvent event) throws IOException {
+		// ritorna all'AdminMenu
     	stage = (Stage)(backButton.getScene().getWindow());
-		  //IMPORTANTE RICORDA IL ../ nell'URL DEL FXML
-		  FXMLLoader Loader=new FXMLLoader(CreateGameController.class.getResource("../Admin/CreateGame.fxml"));
+		  FXMLLoader Loader=new FXMLLoader(AdminMenuController.class.getResource("/application/Admin/AdminMenu.fxml"));
 		  root = (Parent) Loader.load();
 		  scene = new Scene(root);
 		  stage.setScene(scene);
@@ -37,10 +34,10 @@ public class PlayersManagerController {
     }
 	
 	@FXML
-	public void newPlayer(ActionEvent event) throws IOException {
-    	stage = (Stage)(newPlayerButton.getScene().getWindow());
-		  //IMPORTANTE RICORDA IL ../ nell'URL DEL FXML
-		  FXMLLoader Loader = new FXMLLoader(CreatePlayerController.class.getResource("../Admin/CreatePlayer.fxml"));
+	public void createPlayer(ActionEvent event) throws IOException {
+		// lancia la schermata per la creazione di un nuovo giocatore
+    	stage = (Stage)(createPlayerButton.getScene().getWindow());
+		  FXMLLoader Loader = new FXMLLoader(CreatePlayerController.class.getResource("/application/Admin/CreatePlayer.fxml"));
 		  root = (Parent) Loader.load();
 		  scene = new Scene(root);
 		  stage.setScene(scene);
@@ -49,9 +46,9 @@ public class PlayersManagerController {
 	
 	@FXML
 	public void deletePlayer(ActionEvent event) throws IOException {
+		// lancia la schermata per l'eliminazione di un giocatore
     	stage = (Stage)(deletePlayerButton.getScene().getWindow());
-		  //IMPORTANTE RICORDA IL ../ nell'URL DEL FXML
-		  FXMLLoader Loader = new FXMLLoader(DeletePlayerController.class.getResource("../Admin/DeletePlayer.fxml"));
+		  FXMLLoader Loader = new FXMLLoader(DeletePlayerController.class.getResource("/application/Admin/DeletePlayer.fxml"));
 		  root = (Parent) Loader.load();
 		  scene = new Scene(root);
 		  stage.setScene(scene);
