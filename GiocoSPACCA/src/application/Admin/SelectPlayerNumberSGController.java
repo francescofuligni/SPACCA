@@ -53,7 +53,7 @@ public class SelectPlayerNumberSGController {
     public void back(ActionEvent event) throws IOException {
     	// ritorna alla gestione partite
     	stage = (Stage)(backButton.getScene().getWindow());
-		  FXMLLoader Loader=new FXMLLoader(GamesManagerController.class.getResource("/application/Admin/GamesManagerController.fxml"));
+		  FXMLLoader Loader=new FXMLLoader(GamesManagerController.class.getResource("/application/Admin/GamesManager.fxml"));
 		  root = (Parent) Loader.load();
 		  scene = new Scene(root);
 		  stage.setScene(scene);
