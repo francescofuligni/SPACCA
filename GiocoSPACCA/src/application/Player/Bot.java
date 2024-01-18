@@ -9,6 +9,9 @@ import application.Card.SpecialCard;
 
 public class Bot extends PlayerInGame {
 	
+	public Bot(String username) {
+		super(username);
+	}
 	public Bot(PlayerInGame p) {
 		super(p.username, p.healthPoints, p.hand);
 	}

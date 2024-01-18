@@ -15,11 +15,6 @@ public class PlayerInGame extends Player {
 		this.healthPoints = MAXHP;
 		this.hand = new ArrayList<>();
 	}
-	public PlayerInGame(Player p) {
-		super(p.getUsername(), p.getScore());
-		this.healthPoints = MAXHP;
-		this.hand = new ArrayList<>();
-	}
 	public PlayerInGame(String username, int healthPoints) {
 		super(username);
 		this.healthPoints = healthPoints;

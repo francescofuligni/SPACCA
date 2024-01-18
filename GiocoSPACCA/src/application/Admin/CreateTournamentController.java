@@ -76,7 +76,6 @@ public class CreateTournamentController extends GamesCreation {
 	    		Files.createFile(pathToGame);
 	    	}
 	    	
-	    	saveCode();							// salva il codice nel Games Register
 		    fillPlayersInGame();				// popola l'ArrayList playersInGame
 		    fillGameFile(); 					// popola il file della partita
 		    

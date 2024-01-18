@@ -1,12 +1,13 @@
 package application.Admin;
 
 import java.io.File;
-import java.io.FileWriter;
+import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.ArrayList;
 import java.util.Scanner;
 
+import application.Player.Player;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -29,6 +30,7 @@ public class DeleteGameController {
 	
 	private File toDelete;
 	private String code;
+	private ArrayList<Player> players = new ArrayList<>();
 	
     @FXML
     private TextField codeField;
@@ -53,19 +55,26 @@ public class DeleteGameController {
    				alert.setContentText("Sei sicuro di voler eliminare la partita \"" + code + "\"?");
    				
    				if(alert.showAndWait().get() == ButtonType.OK) {
-   					// prima di eliminare la directory bisogna eliminare i file all'interno di essa
+   					// prima di eliminare la directory del torneo bisogna eliminare i file all'interno di essa
+   					
+   					toDelete = new File(Paths.get("./GiocoSPACCA/Informazioni_Partite/" + code + "/finale.csv").toString());
+   		    		if(toDelete.exists()) {
+   		    			getPlayers(toDelete);
+   		    			toDelete.delete();
+   		    		}
    					
    					toDelete = new File(Paths.get("./GiocoSPACCA/Informazioni_Partite/" + code + "/semifinale1.csv").toString());
-   		    		if(toDelete.exists())
+   					getPlayers(toDelete);
+   		    		if(toDelete.exists()) {
+   		    			getPlayers(toDelete);
    		    			toDelete.delete();
+   		    		}
    		    		
    		    		toDelete = new File(Paths.get("./GiocoSPACCA/Informazioni_Partite/" + code + "/semifinale2.csv").toString());
-   		    		if(toDelete.exists())
+   		    		if(toDelete.exists()) {
+   		    			getPlayers(toDelete);
    		    			toDelete.delete();
-   		    		
-   		    		toDelete = new File(Paths.get("./GiocoSPACCA/Informazioni_Partite/" + code + "/finale.csv").toString());
-   		    		if(toDelete.exists())
-   		    			toDelete.delete();
+   		    		}	
    		    		
    		    		// eliminazione della directory
    		    		toDelete = new File(Paths.get("./GiocoSPACCA/Informazioni_Partite/" + code).toString());
@@ -77,23 +86,24 @@ public class DeleteGameController {
    					message.setTextFill(Color.RED);
    					message.setText("Partita non eliminata");
    				}
-   				
-   				deleteCode();		// cancella il codice
-   				
     		} else {
     			gameNotFound();
 	    	}
+    	
 	    } else if(code.startsWith("L") || code.startsWith("S")) {
 	    	toDelete = new File(Paths.get("./GiocoSPACCA/Informazioni_Partite/" + code + ".csv").toString());
-	    		
+	    	
     		if(toDelete.exists()) {
-       		 Alert alert = new Alert(AlertType.CONFIRMATION);
-   				alert.setTitle("Elimina partita");
+    			Alert alert = new Alert(AlertType.CONFIRMATION);
+       		 	alert.setTitle("Elimina partita");
    				alert.setHeaderText("Stai eliminando un partita");
    				alert.setContentText("Sei sicuro di voler eliminare la partita \"" + code + "\"?");
    				
    				if(alert.showAndWait().get() == ButtonType.OK) {
-   					toDelete.delete(); //in caso non sia torneo semplice allora si tratta di un solo file 
+   					// eliminazione del file partita
+   					
+   					getPlayers(toDelete);
+   					toDelete.delete();
    					message.setTextFill(Color.GREEN);
    					message.setText("Partita \"" + code + "\" eliminata correttamente");
    				} else {
@@ -101,14 +111,14 @@ public class DeleteGameController {
    					message.setText("Partita non eliminata");
    				}
    				
-   				deleteCode();		// cancella il codice
-   				
        		} else {
        			gameNotFound();
     		}
+    		
 	    } else {
 	    	gameNotFound();
 	    }
+    	subtractPlayersGames();
     }
 
     @FXML
@@ -133,23 +143,29 @@ public class DeleteGameController {
 		alert.showAndWait();
     }
     
-    private void deleteCode() throws IOException {
-    	// cancella il codice della partita eliminata dal Games Register
-    	Path pathToGamesRegister = Paths.get("./GiocoSPACCA/Informazioni_Partite/GAMES_REGISTER.csv");
-    	File f = new File(pathToGamesRegister.toString());
-    	Scanner scan = new Scanner(f);
-    	scan.reset();
-    	String memory = "";
-    	while(scan.hasNextLine()) {
-    		String line = scan.nextLine();
-    		if(!line.equals(code))
-    			memory = memory + line + "\n";
-    	}
-    	scan.close();
-    	
-    	FileWriter fw = new FileWriter(f.getAbsolutePath(), false);
-    	fw.write(memory);
-    	fw.flush();
-    	fw.close();
+    private void subtractPlayersGames() {
+    	// decrementa di uno il contatore delle partite dei giocatori
+    	if(players.size()!=0)
+    		for(Player p : players)
+        		p.subtractGame();
+    }
+    
+    private void getPlayers(File f) {
+    	// estrae tutti i giocatori dal file
+    	try {
+			Scanner scan = new Scanner(f);
+			scan.reset();
+			if(scan.hasNextLine())
+				scan.nextLine();			// salta la prima riga (intestazione)
+			
+			while(scan.hasNextLine()) {
+				Player p = new Player(scan.nextLine().split(",")[1]);
+				if(!players.contains(p))
+					players.add(p);
+			}
+			scan.close();
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		}
     }
 }

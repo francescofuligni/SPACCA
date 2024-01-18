@@ -55,7 +55,6 @@ public class CreateSingleGameController extends GamesCreation {
 				gameFile=new File(pathToFile.toString());
 		    } while(gameFile.exists());								// se esiste già un file con lo stesso codice, genera un codice diverso
 		    
-		    saveCode();								// salva il codice nel Games Register
 		    gameFile.createNewFile();				// crea il file per il codice generato
 		    fillPlayersInGame();					// popola l'ArrayList playersInGame
 		    fillGameFile(); 						// popola il file della partita
