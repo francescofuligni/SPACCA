@@ -7,7 +7,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="screen" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onMouseClicked="#start" prefHeight="900.0" prefWidth="1600.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.Play.StartScreenController">
+<AnchorPane fx:id="screen" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onMouseClicked="#start" prefHeight="900.0" prefWidth="1600.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.Play.StartScreenController">
    <children>
       <ImageView fitHeight="903.0" fitWidth="1609.0" layoutX="-5.0" pickOnBounds="true">
          <image>
@@ -26,10 +26,13 @@
          <font>
             <Font name="Times New Roman Italic" size="24.0" />
          </font></Label>
-      <Label fx:id="playersLabel" alignment="BOTTOM_CENTER" layoutY="206.0" prefHeight="34.0" prefWidth="1600.0" text="giocatori" textFill="RED">
+      <Label fx:id="playersLabel" alignment="BOTTOM_CENTER" layoutY="206.0" prefHeight="34.0" prefWidth="1600.0" text="giocatori" textFill="WHITE">
          <font>
-            <Font name="Times New Roman Bold" size="24.0" />
+            <Font name="Times New Roman Bold" size="30.0" />
          </font>
+         <effect>
+            <DropShadow height="16.32" radius="5.335" width="7.02" />
+         </effect>
       </Label>
    </children>
 </AnchorPane>
