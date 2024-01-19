@@ -38,7 +38,7 @@ public abstract class Game {
 				String line=scan.nextLine();
 				String[] tokens = line.split(",");
 				
-				if(tokens[1]=="DIFFICILE")
+				if(tokens[1].equals("DIFFICILE"))
 					difficulty = BOTDIFF.DIFFICILE;
 				else
 					difficulty = BOTDIFF.FACILE;

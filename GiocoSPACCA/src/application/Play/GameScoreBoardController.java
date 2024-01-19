@@ -153,7 +153,7 @@ public class GameScoreBoardController implements Initializable {
 				String[] tokens = line.split(",");
 				if(players.keySet().contains(tokens[0]))		// salva su file il nuovo punteggio e decrementa di 1 il contatore delle partite del giocatore
 					memory = memory + tokens[0] + "," + (players.get(tokens[0]) + Integer.parseInt(tokens[1])) + "," + (Integer.parseInt(tokens[2])-1) + "\n";
-				else		
+				else
 					memory = memory + line + "\n";				// le altre linee vengono riscritte nello stesso modo
 			}
 			scan.close();	
