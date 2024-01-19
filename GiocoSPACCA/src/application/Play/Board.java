@@ -24,6 +24,8 @@ import javafx.scene.control.ListView;
 import javafx.scene.control.ProgressBar;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
@@ -45,6 +47,8 @@ public abstract class Board implements Initializable {
 	protected PlayerInGame current;
 	protected PlayerInGame nextAlive;
 	
+	@FXML
+	protected AnchorPane anchorPane;
 	@FXML
 	protected Label currentPlayer;
 	@FXML
@@ -94,24 +98,30 @@ public abstract class Board implements Initializable {
 		}
 		
 		// TODO	-->	BOT non funziona
-		/*if(current.getUsername().startsWith("BOT")) {
-			// il giocatore è un Bot
-			PauseTransition pause = new PauseTransition(Duration.seconds(20));
-			pause.play();
-			Bot bot = new Bot(current);
-			selectedImage = images.get(bot.botCard(game.getDifficulty()));
-			pause.play();
-			playCardButton.fire();
-			
-		} else {
-			*/// il giocatore è un essere umano
+		if(!current.getUsername().startsWith("BOT")) {
+			// il giocatore è un essere umano
 			cards.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<ImageView>() {
 				@Override
 				public void changed(ObservableValue<? extends ImageView> arg0, ImageView arg1, ImageView arg2) {
 					selectedImage = cards.getSelectionModel().getSelectedItem();
 				}
 			});
-		//}
+		}
+	}
+	
+	@FXML
+	public void playBot(MouseEvent event) {
+		if(current.getUsername().startsWith("BOT")) {
+			PauseTransition pause = new PauseTransition(Duration.seconds(20));
+			Bot bot = new Bot(current);
+			int index=bot.botCard(game.getDifficulty());
+			selectedImage = images.get(index);
+			cards.getSelectionModel().select(selectedImage);
+			pause.playFromStart();
+			
+			System.out.println(hand.get(index).getCode());
+			playCardButton.fire();
+		}
 	}
 	
 	@FXML
@@ -166,6 +176,7 @@ public abstract class Board implements Initializable {
 		  stage.setScene(scene);
 		  stage.show();
 	}
+	
 	
 	private void initializeWinner() {
 		playCardButton.setText("FINE");

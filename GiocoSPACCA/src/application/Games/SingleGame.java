@@ -13,8 +13,20 @@ public class SingleGame extends Game{
 	public SingleGame(Path path)  {
 		super(path);
 		
-		if(this.allDead)			// nel caso in cui i giocatori sono morti tutti contemporaneamente, il vincitore è chi ha giocato la carta che ha ucciso tutti
-			previousPlayer().setHealthPoints(1);
+		if(this.allDead) {			// nel caso in cui i giocatori sono eliminati tutti contemporaneamente, il vincitore è chi ha maggiori punti salute
+			int iHighest = -1, cont = 0, i=turn;
+			
+			while(cont<players.size()) {
+				if(i>=players.size())
+					i=0;
+				
+				if(i==turn || players.get(i).getHealthPoints() > players.get(iHighest).getHealthPoints())
+					iHighest = i;
+				cont++;
+				i++;
+			}
+			players.get(iHighest).setHealthPoints(1);
+		}
 		
 		newGame();
 	}
