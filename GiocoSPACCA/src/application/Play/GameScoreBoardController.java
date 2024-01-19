@@ -22,6 +22,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
+import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
@@ -43,6 +44,12 @@ public class GameScoreBoardController implements Initializable {
 
     @FXML
     private ListView<String> scoreBoard;
+    
+    @FXML
+    private TextField emailField;
+    
+    @FXML
+    private Button sendEmailButton;
 
     @FXML
     public void returnToMainMenu(ActionEvent event) throws IOException {
@@ -117,6 +124,18 @@ public class GameScoreBoardController implements Initializable {
 			e.printStackTrace();
 		}
     }
+    
+    
+    @FXML
+    public void sendMail() throws Exception {
+    	
+    	String to = emailField.getText();
+    	EmailSender.sendMail(to);
+    	
+    	
+    }
+    
+    
     
     @FXML
     public void generalScoreBoard(MouseEvent event) throws IOException {
