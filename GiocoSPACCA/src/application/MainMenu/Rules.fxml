@@ -34,17 +34,12 @@
                               <Font name="Bodoni MT" size="22.0" />
                            </font>
                         </Text>
-                        <Text fill="WHITE" layoutX="218.0" layoutY="338.0" strokeType="OUTSIDE" strokeWidth="0.0" text="La turnazione avviene in senso antiorario." wrappingWidth="763.9970703125">
+                        <Text fill="WHITE" layoutX="218.0" layoutY="349.0" strokeType="OUTSIDE" strokeWidth="0.0" text="In un mazzo sono presenti 11 Figure e, in numero differente a seconda delle espansioni scelte, carte &quot;Imprevisti&quot; o &quot;Opportunità&quot;. Se non viene selezionata alcuna espansione, in un mazzo saranno presenti 2 carte &quot;Opportunità&quot; e 2 carte &quot;Imprevisti&quot;." wrappingWidth="763.9970703125">
                            <font>
                               <Font name="Bodoni MT" size="22.0" />
                            </font>
                         </Text>
-                        <Text fill="WHITE" layoutX="218.0" layoutY="406.0" strokeType="OUTSIDE" strokeWidth="0.0" text="In un mazzo sono presenti 11 Figure e, in numero differente a seconda delle espansioni scelte, carte &quot;Imprevisti&quot; o &quot;Opportunità&quot;. Se non viene selezionata alcuna espansione, in un mazzo saranno presenti 2 carte &quot;Opportunità&quot; e 2 carte &quot;Imprevisti&quot;." wrappingWidth="763.9970703125">
-                           <font>
-                              <Font name="Bodoni MT" size="22.0" />
-                           </font>
-                        </Text>
-                        <Text fill="WHITE" layoutX="218.0" layoutY="556.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Il mazzo è infinito, tutte le carte hanno la stessa probabilità di essere pescate ogni turno. Le condizioni di vittoria variano a seconda della modalità di gioco." wrappingWidth="763.9970703125">
+                        <Text fill="WHITE" layoutX="218.0" layoutY="506.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Il mazzo è infinito, tutte le carte hanno la stessa probabilità di essere pescate ogni turno. Le condizioni di vittoria variano a seconda della modalità di gioco." wrappingWidth="763.9970703125">
                            <font>
                               <Font name="Bodoni MT" size="22.0" />
                            </font>
@@ -89,12 +84,12 @@
                               <Font name="Bodoni MT" size="22.0" />
                            </font>
                         </Text>
-                        <Text fill="WHITE" layoutX="228.0" layoutY="407.0" strokeType="OUTSIDE" strokeWidth="0.0" text="TORNEO &quot;SEMPLICE&quot;: è un torneo a eliminazione diretta a 4 giocatori consistente in una serie di partite 1 vs 1." wrappingWidth="763.9970703125">
+                        <Text fill="WHITE" layoutX="228.0" layoutY="407.0" strokeType="OUTSIDE" strokeWidth="0.0" text="TORNEO &quot;SEMPLICE&quot;: è un torneo a eliminazione diretta a 4 giocatori consistente in due partite 1 vs 1." wrappingWidth="763.9970703125">
                            <font>
                               <Font name="Bodoni MT" size="22.0" />
                            </font>
                         </Text>
-                        <Text fill="WHITE" layoutX="228.0" layoutY="494.0" strokeType="OUTSIDE" strokeWidth="0.0" text="TORNEO &quot;LAST MAN STANDING&quot;: è un torneo composto da una serie di partite che terminano con l'eliminazione del primo giocatore. La prima partita sarà a 4 giocatori, la seconda a 3 giocatori e la terza sarà la finale tra gli ultimi 2 giocatori rimasti." wrappingWidth="763.9970703125">
+                        <Text fill="WHITE" layoutX="228.0" layoutY="494.0" strokeType="OUTSIDE" strokeWidth="0.0" text="TORNEO &quot;LAST MAN STANDING&quot;: è un torneo consistente in tre partite, si inizia da una partita singola a 4 giocatori e ad ogni giocatore eliminato viene iniziata una nuova partita con i giocatori rimasti. Il torneo finisce quando un giocatore vince l'unica partita 1 vs 1, la terza e ultima." wrappingWidth="763.9970703125">
                            <font>
                               <Font name="Bodoni MT" size="22.0" />
                            </font>
@@ -146,7 +141,7 @@
                             </Tab>
                           </tabs>
                         </TabPane>
-                        <Text fill="WHITE" layoutX="582.0" layoutY="202.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Le figure sono riconoscibili da uno sfondo in areanaria con un titolo bianco. Sono di 2 tipologie:" wrappingWidth="468.9970703125">
+                        <Text fill="WHITE" layoutX="572.0" layoutY="186.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Le figure sono riconoscibili da uno sfondo in areanaria con un titolo bianco. Sono di due tipologie:" wrappingWidth="488.197021484375">
                            <font>
                               <Font name="Bodoni MT" size="22.0" />
                            </font>
@@ -183,12 +178,12 @@
                               <DropShadow height="130.0" radius="64.5" spread="0.9" width="130.0" />
                            </effect>
                         </Label>
-                        <Text fill="WHITE" layoutX="597.0" layoutY="280.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Gli imprevisti sono riconoscibili da uno sfondo in ossidiana con un titolo avvolto da un aura viola." wrappingWidth="468.9970703125">
+                        <Text fill="WHITE" layoutX="601.0" layoutY="291.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Gli imprevisti sono riconoscibili da uno sfondo in ossidiana con un titolo avvolto da un'aura viola." wrappingWidth="468.9970703125">
                            <font>
                               <Font name="Bodoni MT" size="22.0" />
                            </font>
                         </Text>
-                        <Text fill="WHITE" layoutX="601.0" layoutY="368.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Gli imprevisti hanno la particolarità di auto-giocarsi nel momento in cui vengono pescati e comportano un malus per colui che le pesca o per tutti quanti." wrappingWidth="468.9970703125">
+                        <Text fill="WHITE" layoutX="601.0" layoutY="375.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Gli imprevisti hanno la particolarità di auto-giocarsi nel momento in cui vengono pescati e comportano un malus per colui che le pesca o per tutti quanti." wrappingWidth="468.9970703125">
                            <font>
                               <Font name="Bodoni MT" size="22.0" />
                            </font>
@@ -215,7 +210,7 @@
                               <DropShadow height="130.0" radius="64.5" spread="0.9" width="130.0" />
                            </effect>
                         </Label>
-                        <Text fill="WHITE" layoutX="607.0" layoutY="290.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Le Opportunità sono riconoscibili da uno sfondo in ossidiana con un titolo avvolto da un aura verde." wrappingWidth="468.9970703125">
+                        <Text fill="WHITE" layoutX="607.0" layoutY="290.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Le Opportunità sono riconoscibili da uno sfondo in ossidiana con un titolo avvolto da un'aura verde." wrappingWidth="468.9970703125">
                            <font>
                               <Font name="Bodoni MT" size="22.0" />
                            </font>
