@@ -50,8 +50,11 @@
       </Label>
       <Button fx:id="sendEmailButton" layoutX="769.0" layoutY="548.0" mnemonicParsing="false" onAction="#sendMail" prefHeight="40.0" prefWidth="78.0" text="Invia">
          <font>
-            <Font name="Bodoni MT" size="21.0" />
+            <Font name="Bodoni MT" size="18.0" />
          </font>
+         <effect>
+            <InnerShadow />
+         </effect>
       </Button>
    </children>
 </AnchorPane>
