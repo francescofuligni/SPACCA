@@ -1,6 +1,6 @@
 # Gioco di carte S.P.A.C.C.A.
 
-Procedura per iniziare a giocare: 
+PROCEDURA PER GIOCARE: 
 
 1) Una volta avviata l'applicazione compare la prima schermata, composta da quattro bottoni principali:
    - il bottone "GIOCA" permette di accedere ad una partita, inserendone il codice;
