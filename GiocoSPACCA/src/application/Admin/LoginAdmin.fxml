@@ -54,7 +54,7 @@
             </Text>
          </children>
       </VBox>
-      <Button fx:id="confirmLogin" layoutX="515.0" layoutY="400.0" mnemonicParsing="false" onAction="#login" prefHeight="49.0" prefWidth="171.0" text="LOGIN">
+      <Button fx:id="confirmLogin" layoutX="515.0" layoutY="400.0" mnemonicParsing="false" onAction="#login" prefHeight="49.0" prefWidth="171.0" text="Login">
          <font>
             <Font name="Bodoni MT" size="24.0" />
          </font>
