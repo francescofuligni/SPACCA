@@ -2,7 +2,7 @@
 
 PROCEDURA PER GIOCARE: 
 
-1) Una volta avviata l'applicazione compare la prima schermata, composta da quattro bottoni principali:
+1) Una volta avviata l'applicazione si visualizza la schermata iniziale, composta da quattro bottoni principali:
    - il bottone "GIOCA" permette di accedere ad una partita, inserendone il codice;
    - il bottone "Login Admin" porta al menù amministratore per la gestione di partite e giocatori, cui è possibile accedere tramite le credenziali di admin;
    - il bottone "Regole" visualizza la schermata in cui sono contenute le regole del gioco;
@@ -15,7 +15,9 @@ PROCEDURA PER GIOCARE:
 
 4) Una volta creata una paritta/torneo verrà restituito un codice unioco. Per giocare, eseguire logout dall'account amministratore (dalla sezione menù admin) e inserire il codice generato cliccando su "GIOCA".
 
-5) Una volta entrati in partita verrà visualizzata la schermata di inizio partita, con i giocatori che ne fanno parte. Al termine della partita verrà visualizzata la classifica con i punti attribuiti ad ogni giocatore.
+5) Una volta entrati in partita verrà visualizzata la schermata di inizio partita, con i giocatori che ne fanno parte. Cliccando un punto qualsiasi dello schermo si dà inizio alla partita.
+
+6) Al termine della partita verrà visualizzata la classifica con i punti attribuiti ad ogni giocatore. Selezionando "Esci" si verrà reindirizzati alla schermata iniziale.
 
 
 NOTE:
