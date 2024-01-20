@@ -1,6 +1,4 @@
-# ProgettoSPACCA
-
-Gioco di carte S.P.A.C.C.A.
+# Gioco di carte S.P.A.C.C.A.
 
 Procedura per iniziare a giocare: 
 
