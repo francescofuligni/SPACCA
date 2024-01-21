@@ -1,5 +1,9 @@
 # Gioco di carte S.P.A.C.C.A.
 
+Credenziali admin:
+- Username: admin
+- Password: admin1234
+
 PROCEDURA PER GIOCARE: 
 
 1) Una volta avviata l'applicazione si visualizza la schermata iniziale, composta da quattro bottoni principali:
