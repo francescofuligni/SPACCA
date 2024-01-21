@@ -46,7 +46,7 @@ public class EmailSender {
 			message.setRecipient(Message.RecipientType.TO, new InternetAddress(to));
 			message.setSubject("Risultati Partita SPACCA: " + GameScoreBoardController.code);
 			message.setText(messageText);
-			System.out.println("mail sent succsesfully");
+			System.out.println("mail sent succsesfully");			// STAMPA DI PROVA
 			return message;
 		}catch(Exception e) {
 			Logger.getLogger(EmailSender.class.getName()). log(Level.SEVERE, null, e);

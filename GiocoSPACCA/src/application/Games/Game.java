@@ -23,6 +23,7 @@ public abstract class Game {
 	public Deck deck;			// scope public per i metodi effect delle carte
 	
 	public Game(Path path) {
+		System.out.println("Game istanziato");		// STAMPA DI PROVA
 		this.gameFile = new File(path.toString());
 		this.code = gameFile.getName().split("\\.")[0];
 		
@@ -109,10 +110,12 @@ public abstract class Game {
 	
 	public PlayerInGame nextPlayerAlive() {			// restitusce il primo giocatore successivo a currentPlayer ancora in partita (con HP>0)
 		PlayerInGame p = nextPlayer();
-		for(int i=players.indexOf(p)+1; p.getHealthPoints()<=0 && !p.equals(currentPlayer()); i++) {
+		int cont = 0;
+		for(int i=players.indexOf(p)+1; p.getHealthPoints()<=0 && cont<=players.size(); i++) {
 			if(i>=players.size())
 				i=0;
 			p=players.get(i);
+			cont++;
 		}
 		return p;		// se non trova un giocatore vivo, ritorna il currentPlayer
 	}

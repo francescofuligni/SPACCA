@@ -2,7 +2,7 @@ package application.Play;
 
 import java.io.IOException;
 
-import application.Games.LastManStanding;
+import application.Games.*;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -10,8 +10,8 @@ import javafx.stage.Stage;
 
 public class LastManStandingBoardController extends Board {
 
-	public LastManStandingBoardController() {
-		game = new LastManStanding(InsertCodeController.pathToGame);
+	public LastManStandingBoardController(Game game) {
+		this.game = game;
 	}
 	
 	@Override
@@ -34,7 +34,7 @@ public class LastManStandingBoardController extends Board {
 			// carica la schermata del prossimo giocatore
 			stage = (Stage)(playCardButton.getScene().getWindow());
 			FXMLLoader Loader=new FXMLLoader(LastManStandingBoardController.class.getResource("Board.fxml"));
-			Loader.setController(new LastManStandingBoardController());
+			Loader.setController(this);
 			root = (Parent) Loader.load();
 			scene = new Scene(root);
 			stage.setScene(scene);

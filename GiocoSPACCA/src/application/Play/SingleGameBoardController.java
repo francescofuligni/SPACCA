@@ -9,8 +9,8 @@ import javafx.stage.Stage;
 
 public class SingleGameBoardController extends Board {
 	
-	public SingleGameBoardController() {
-		game = new SingleGame(InsertCodeController.pathToGame);
+	public SingleGameBoardController(Game game) {
+		this.game = game;
 	}
 	
 	@Override
@@ -19,7 +19,7 @@ public class SingleGameBoardController extends Board {
 		game.save();
 		stage = (Stage)(playCardButton.getScene().getWindow());
 		FXMLLoader Loader=new FXMLLoader(SingleGameBoardController.class.getResource("Board.fxml"));
-		Loader.setController(new SingleGameBoardController());
+		Loader.setController(this);
 		root = (Parent) Loader.load();
 		scene = new Scene(root);
 		stage.setScene(scene);
