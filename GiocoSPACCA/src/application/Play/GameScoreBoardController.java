@@ -33,7 +33,7 @@ public class GameScoreBoardController implements Initializable {
 	private Stage stage;
 	private Scene scene;
 	private Parent root;
-	private final String code = InsertCodeController.code;
+	public static final String code = InsertCodeController.code;
 	private final Path pathToGame = InsertCodeController.pathToGame;
 	
 	@FXML
@@ -129,8 +129,8 @@ public class GameScoreBoardController implements Initializable {
     @FXML
     public void sendMail() throws Exception {
     	
-    	String to = emailField.getText();
-    	EmailSender.sendMail(to);
+    	String to = emailField.getText().trim().toLowerCase(); //tanto tutte mail in minuscolo
+    	EmailSender.sendMail(to,getMessage());
     	
     	
     }
@@ -210,4 +210,16 @@ public class GameScoreBoardController implements Initializable {
         	}
     	}
     }
+    
+    private String getMessage() {
+    	String message="-- CLASSIFICA " + code + " -- \n\n";
+    	int cont=1;
+    	for(String p: players.keySet()) {
+    		message+= cont + "°  --  [ +"+players.get(p)+ " ]  "+ p+"\n" ;
+    		cont++;
+    	}
+    	message+="\n\nMail generata automaticamente, si prega di non rispondere.";
+		return message;
+    }
+    
 }
