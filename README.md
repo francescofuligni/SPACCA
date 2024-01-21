@@ -1,6 +1,6 @@
 # Gioco di carte S.P.A.C.C.A.
 
-Credenziali admin:
+Credenziali admin (non modificabili):
 - Username: admin
 - Password: admin1234
 
