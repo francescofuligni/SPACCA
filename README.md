@@ -34,7 +34,7 @@ NOTE:
 Per consultare le regole complete del gioco, cliccare sul bottone “Regole” nella schermata iniziale.
 
 
-Buon divertimento dal team di SPACCA!
+Buon divertimento dal team di S.P.A.C.C.A.
 Baldari Cristian, Fuligni Francesco Maria, Zanolli Roberto.
 
 	

@@ -215,10 +215,10 @@ public class GameScoreBoardController implements Initializable {
     	String message="-- CLASSIFICA " + code + " -- \n\n";
     	int cont=1;
     	for(String p: players.keySet()) {
-    		message+= cont + "°  --  [ +"+players.get(p)+ " ]  "+ p+"\n" ;
+    		message+=(cont + "°  --  [ +"+players.get(p)+ " ]  "+ p+"\n");
     		cont++;
     	}
-    	message+="\n\nMail generata automaticamente, si prega di non rispondere.";
+    	message += ("\n\nMail generata automaticamente, si prega di non rispondere.");
 		return message;
     }
     
