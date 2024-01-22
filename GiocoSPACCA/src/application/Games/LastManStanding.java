@@ -14,8 +14,8 @@ public class LastManStanding extends Game {
 	public LastManStanding(Path path)  {
 		super(path);
 		
-		newGame();
-		someoneDied();
+		if(!newGame())
+			eliminationManagement();
 	}
 	
 	@Override
@@ -57,17 +57,8 @@ public class LastManStanding extends Game {
 		}
 	}
 	
-	private void restartGame() {
-		for(PlayerInGame p : players) {
-			p.setHealthPoints(p.MAXHP);			// reinizializza i punti salute
-			p.setHand(new ArrayList<>());		// rimuove le vecchie carte
-		}
-		Random rand = new Random();
-		turn = rand.nextInt(players.size());
-	}
-	
-	
-	private boolean someoneDied() {
+	@Override
+	public void eliminationManagement() {
 		// --> se trova un giocatore morto, setta il turno in modo che sia il turno del giocatore morto
 		// --> in questo modo, appena un giocatore muore è costretto ad abbandonare e la partita viene ricaricata
 		
@@ -89,15 +80,22 @@ public class LastManStanding extends Game {
 			i++;
 		}
 		
-		if(iLowest==-1) {
-			return false;
-		} else {
+		if(iLowest!=-1) {
 			for(int j=0; j<players.size(); j++) {
 				if(players.get(j).getHealthPoints()<=0 && j!=iLowest)
 					players.get(j).setHealthPoints(1);			// mantiene in partita tutti i giocatori tranne quello con punti salute minori
 			}
 			turn = iLowest;
-			return true;
 		}
+	}
+	
+	
+	private void restartGame() {
+		for(PlayerInGame p : players) {
+			p.setHealthPoints(p.MAXHP);			// reinizializza i punti salute
+			p.setHand(new ArrayList<>());		// rimuove le vecchie carte
+		}
+		Random rand = new Random();
+		turn = rand.nextInt(players.size());
 	}
 }

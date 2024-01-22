@@ -79,9 +79,6 @@ public abstract class Board implements Initializable {
 		nextAlive = game.nextPlayerAlive();
 		currentPlayer.setText(current.getUsername());
 		healthBar.setStyle("-fx-accent: green;");							// barra salute verde
-		healthPoints.setText("" + current.getHealthPoints() + "  HP"); 
-		healthBar.setProgress((double)current.getHealthPoints()/current.MAXHP);
-		setTitle();
 		
 		if(current.equals(nextAlive)) {
 			// CASO 1	-->	il giocatore attuale è il vincitore (partita terminata)
@@ -96,6 +93,8 @@ public abstract class Board implements Initializable {
 			initializeNormal();
 			
 		}
+		
+		setTitle();
 		
 		// TODO	-->	BOT non funziona
 		if(!current.getUsername().startsWith("BOT")) {
@@ -119,7 +118,7 @@ public abstract class Board implements Initializable {
 			cards.getSelectionModel().select(selectedImage);
 			pause.playFromStart();
 			
-			System.out.println(hand.get(index).getCode());
+			System.out.println(hand.get(index).getCode());			// stampa di prova
 			playCardButton.fire();
 		}
 	}
@@ -161,6 +160,7 @@ public abstract class Board implements Initializable {
 			} else {
 				Card c = current.getCard(images.indexOf(selectedImage));
 				c.effect(game);
+				
 				nextPlayerBoard();
 			}
 		}
@@ -187,6 +187,14 @@ public abstract class Board implements Initializable {
 		nextPlayer.setText(current.getUsername());
 		nextPlayer.setTextFill(Color.LIGHTGREEN);
 		
+		if(current.getHealthPoints()<=0) {
+			healthPoints.setText("1  HP");
+			healthBar.setProgress(1.0);
+		} else {
+			healthPoints.setText(current.getHealthPoints() + "  HP"); 
+			healthBar.setProgress((double)current.getHealthPoints()/current.MAXHP);
+		}
+		
 		while(game.getPlayers().size()!=1) {			// se i giocatori eliminati non sono stati rimossi (perché non hanno abbandonato), li rimuove
 			game.nextTurn();
 			game.removePlayer();
@@ -206,7 +214,7 @@ public abstract class Board implements Initializable {
 	
 	private void initializeNormal() {
 		nextPlayer.setText(nextAlive.getUsername());						// label next player (mostra il prossimo giocatore vivo)
-		healthPoints.setText("" + current.getHealthPoints() + "  HP");
+		healthPoints.setText(current.getHealthPoints() + "  HP");
 		healthBar.setProgress((double)current.getHealthPoints()/current.MAXHP);
 		hand = current.getHand();
 		images = new ArrayList<>();
