@@ -12,6 +12,7 @@ public class LastManStandingBoardController extends Board {
 
 	public LastManStandingBoardController(Game game) {
 		this.game = game;
+		System.out.println("Controller istanziato");		// stampa di prova
 	}
 	
 	@Override
@@ -29,6 +30,7 @@ public class LastManStandingBoardController extends Board {
 	    	stage.show();
 		} else {
 			game.nextTurn();
+			game.eliminationManagement();		// controllo per eliminazioni multiple/contemporanee
 			game.save();
 			
 			// carica la schermata del prossimo giocatore
@@ -61,5 +63,10 @@ public class LastManStandingBoardController extends Board {
 			round = 3;
 		
 		gameTitle.setText("ROUND " + round);
+		
+		if(isOut && game.getPlayers().size()>2) {
+			nextPlayerTitle.setText("");
+			nextPlayer.setText("");
+		}
 	}
 }

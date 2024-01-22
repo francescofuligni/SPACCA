@@ -15,7 +15,6 @@ public abstract class Game {
 	protected BOTDIFF difficulty;
 	protected ArrayList<PlayerInGame> players;
 	protected ArrayList<PlayerInGame> eliminated;
-	protected boolean allDead = true;
 	protected int turn;
 	
 	public File gameFile;
@@ -60,9 +59,6 @@ public abstract class Game {
 						hand.add(deck.getCard(Integer.parseInt(tokens[i])));
 					p.setHand(hand);
 					players.add(p);
-					
-					if(p.getHealthPoints()>0)
-						this.allDead = false;
 				} else {								// giocatori eliminati
 					eliminated.add(p);
 				}
@@ -178,7 +174,9 @@ public abstract class Game {
 	
 	
 	// metodi astratti
-	abstract public void removePlayer();		// eliminazione di un giocatore --> diverso a seconda della modalità
+	abstract public void removePlayer();			// eliminazione di un giocatore --> diverso a seconda della modalità
 	
-	abstract public void save();	 			// salvataggio della partita su file --> diverso a seconda della modalità
+	abstract public void save();	 				// salvataggio della partita su file --> diverso a seconda della modalità
+	
+	abstract public void eliminationManagement();	// gestisce eliminazioni contemporanee/multiple --> diverso a seconda della modalità
 }

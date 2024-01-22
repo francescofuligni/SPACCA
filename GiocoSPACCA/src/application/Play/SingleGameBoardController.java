@@ -11,12 +11,15 @@ public class SingleGameBoardController extends Board {
 	
 	public SingleGameBoardController(Game game) {
 		this.game = game;
+		System.out.println("Controller istanziato");		// stampa di prova
 	}
 	
 	@Override
 	protected void nextPlayerBoard() throws IOException {			// carica la schermata del prossimo giocatore (e salva la partita)
 		game.nextTurn();
+		game.eliminationManagement();		// controllo per eliminazioni multiple/contemporanee
 		game.save();
+		
 		stage = (Stage)(playCardButton.getScene().getWindow());
 		FXMLLoader Loader=new FXMLLoader(SingleGameBoardController.class.getResource("Board.fxml"));
 		Loader.setController(this);
@@ -25,7 +28,6 @@ public class SingleGameBoardController extends Board {
 		stage.setScene(scene);
 		stage.centerOnScreen();
 		stage.show();
-		
 	}
 	
 	@Override

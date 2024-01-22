@@ -15,11 +15,13 @@ public class SimpleTournamentBoardController extends Board {
 	public SimpleTournamentBoardController(SimpleTournament tournament, Game game) {
 		this.tournament = tournament;
 		this.game = game;
+		System.out.println("Controller istanziato");		// stampa di prova
 	}
 
 	@Override
 	protected void nextPlayerBoard() throws IOException {
 		game.nextTurn();
+		game.eliminationManagement();		// controllo per eliminazioni multiple/contemporanee
 		game.save();
 		
 		stage = (Stage)(playCardButton.getScene().getWindow());

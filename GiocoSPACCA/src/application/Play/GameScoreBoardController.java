@@ -33,7 +33,7 @@ public class GameScoreBoardController implements Initializable {
 	private Stage stage;
 	private Scene scene;
 	private Parent root;
-	public static final String code = InsertCodeController.code;
+	private final String code = InsertCodeController.code;
 	private final Path pathToGame = InsertCodeController.pathToGame;
 	
 	@FXML
@@ -54,7 +54,6 @@ public class GameScoreBoardController implements Initializable {
     @FXML
     public void returnToMainMenu(ActionEvent event) throws IOException {
     	stage = (Stage)(menuButton.getScene().getWindow());
-		  
 		  FXMLLoader Loader=new FXMLLoader(MainMenuController.class.getResource("/application/MainMenu/MainMenu.fxml"));
 		  root = (Parent) Loader.load();
 		  scene = new Scene(root);

@@ -16,7 +16,7 @@ public class EmailSender {
 	
 	public static void sendMail(String to, String messageText) throws Exception {
 		Properties properties = new Properties();
-		 //protocollo smtp con tls
+		// protocollo smtp con tls
 		properties.put("mail.smtp.host", "smtp.gmail.com");
         properties.put("mail.smtp.port", "587");
         properties.put("mail.smtp.auth", "true");
@@ -33,8 +33,7 @@ public class EmailSender {
 			}
 		});
 		
-		Message message = prepareMessage (session, senderEmail, to, messageText );
-		
+		Message message = prepareMessage (session, senderEmail, to, messageText);
 		Transport.send(message);
 	}
 	
@@ -44,16 +43,15 @@ public class EmailSender {
 			Message message=new MimeMessage(session);
 			message.setFrom(new InternetAddress(senderEmail));
 			message.setRecipient(Message.RecipientType.TO, new InternetAddress(to));
-			message.setSubject("Risultati Partita SPACCA: " + GameScoreBoardController.code);
+			message.setSubject("Risultati Partita SPACCA: " + InsertCodeController.code);
 			message.setText(messageText);
-			System.out.println("mail sent succsesfully");			// STAMPA DI PROVA
+			System.out.println("Mail sent succsesfully");			// STAMPA DI PROVA
 			return message;
-		}catch(Exception e) {
+		} catch(Exception e) {
 			Logger.getLogger(EmailSender.class.getName()). log(Level.SEVERE, null, e);
 		}
 		
 		return null;
-		
 	}
 	
 }
