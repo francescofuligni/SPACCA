@@ -12,7 +12,7 @@ public class LastManStandingBoardController extends Board {
 
 	public LastManStandingBoardController(Game game) {
 		this.game = game;
-		System.out.println("Controller istanziato");		// stampa di prova
+		
 	}
 	
 	@Override

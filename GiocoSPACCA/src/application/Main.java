@@ -17,6 +17,7 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 
 public class Main extends Application {
@@ -80,6 +81,11 @@ public class Main extends Application {
 		exitAlert.setTitle("TERMINA");
 		exitAlert.setHeaderText("Vuoi terminare l'applicazione?");
 		exitAlert.setContentText("Se sei in partita perderai eventuali progressi.");
+		
+		ImageView icon=new ImageView(this.getClass().getResource("/icona.png").toString());
+		icon.setFitWidth(50);
+		icon.setPreserveRatio(true);
+		exitAlert.setGraphic(icon); //setto l'icona al posto della predefinita
 		
 		if(exitAlert.showAndWait().get() == ButtonType.OK)
 			s.close();
