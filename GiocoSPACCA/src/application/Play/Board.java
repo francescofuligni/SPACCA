@@ -244,7 +244,7 @@ public abstract class Board implements Initializable {
 		for(Card c : hand) {
 			ImageView iv = new ImageView();
 			iv.setImage(c.getPicture());
-			iv.setFitWidth(230);
+			iv.setFitWidth(200);
 			iv.setPreserveRatio(true);
 			images.add(iv);
 		}
