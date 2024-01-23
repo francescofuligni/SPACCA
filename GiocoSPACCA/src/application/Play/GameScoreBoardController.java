@@ -133,12 +133,16 @@ public class GameScoreBoardController implements Initializable {
     
     @FXML
     public void sendMail() throws Exception {
-    	
-    	mailLabel.setTextFill(Color.GREEN);
-    	mailLabel.setText("Mail inviata correttamente"); 
     	String to = emailField.getText().trim().toLowerCase(); //tanto tutte mail in minuscolo
-    	EmailSender.sendMail(to,getMessage());
-    	
+    	if( to!=null && !to.equals("") && to.contains("@") && to.contains(".") ) {
+    		mailLabel.setTextFill(Color.GREEN);
+        	mailLabel.setText("Mail inviata correttamente"); 
+        	EmailSender.sendMail(to,getMessage());
+    	}
+    	else {
+    		mailLabel.setTextFill(Color.RED);
+        	mailLabel.setText("Indirizzo Email non valido."); 
+    	}
     }
     
     
