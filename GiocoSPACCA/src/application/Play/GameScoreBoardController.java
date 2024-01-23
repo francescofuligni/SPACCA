@@ -37,7 +37,10 @@ public class GameScoreBoardController implements Initializable {
 	private final Path pathToGame = InsertCodeController.pathToGame;
 	
 	@FXML
-	private Label generalScoreBoardLabel, gameCodeLabel;
+	private Label generalScoreBoardLabel;
+	
+	@FXML
+	private Label gameCodeLabel;
 	
     @FXML
     private Button menuButton;

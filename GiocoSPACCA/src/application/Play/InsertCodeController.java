@@ -35,7 +35,10 @@ public class InsertCodeController {
     private TextField codeField;
 
     @FXML
-    private Button confirmEnter, returnToMainMenuButton;
+    private Button confirmEnter;
+    
+    @FXML
+    private Button returnToMainMenuButton;
 
     @FXML
     private Text enterStatusText;

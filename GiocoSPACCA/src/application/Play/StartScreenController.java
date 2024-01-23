@@ -25,7 +25,9 @@ public class StartScreenController implements Initializable {
 	private SimpleTournament t;
 	
 	@FXML
-	private Label title, playersLabel;
+	private Label title;
+	@FXML
+	private Label playersLabel;
 	
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
