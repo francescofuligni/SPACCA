@@ -22,7 +22,6 @@ public class SimpleTournamentBoardController extends Board {
 	protected void nextPlayerBoard() throws IOException {
 		game.nextTurn();
 		game.eliminationManagement();		// controllo per eliminazioni multiple/contemporanee
-		game.save();
 		
 		stage = (Stage)(playCardButton.getScene().getWindow());
 		FXMLLoader Loader=new FXMLLoader(SimpleTournamentBoardController.class.getResource("Board.fxml"));

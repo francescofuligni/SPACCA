@@ -31,7 +31,6 @@ public class LastManStandingBoardController extends Board {
 		} else {
 			game.nextTurn();
 			game.eliminationManagement();		// controllo per eliminazioni multiple/contemporanee
-			game.save();
 			
 			// carica la schermata del prossimo giocatore
 			stage = (Stage)(playCardButton.getScene().getWindow());
