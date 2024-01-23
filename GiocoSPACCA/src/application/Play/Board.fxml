@@ -13,14 +13,14 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="anchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onMouseClicked="#playBot" prefHeight="900.0" prefWidth="1600.0" stylesheets="@../style.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane fx:id="anchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="900.0" prefWidth="1600.0" stylesheets="@../style.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <ImageView fitHeight="900.0" fitWidth="1655.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../../../Images/Board.png" />
          </image>
       </ImageView>
-      <HBox layoutX="-1.0" layoutY="495.0" prefHeight="404.0" prefWidth="1604.0">
+      <HBox layoutX="1.0" layoutY="494.0" prefHeight="401.0" prefWidth="1604.0">
          <children>
             <Pane prefHeight="222.0" prefWidth="315.0">
                <children>
@@ -36,7 +36,7 @@
                   </Label>
                </children>
             </Pane>
-            <ListView fx:id="cards" orientation="HORIZONTAL" prefHeight="409.0" prefWidth="974.0">
+            <ListView fx:id="cards" orientation="HORIZONTAL" prefHeight="394.0" prefWidth="937.0">
                <cursor>
                   <Cursor fx:constant="HAND" />
                </cursor></ListView>
@@ -56,11 +56,11 @@
             </Pane>
          </children>
       </HBox>
-      <ProgressBar fx:id="healthBar" layoutX="285.0" layoutY="469.0" prefHeight="18.0" prefWidth="310.0" progress="0.0">
+      <ProgressBar fx:id="healthBar" layoutX="309.0" layoutY="480.0" prefHeight="18.0" prefWidth="310.0" progress="0.0">
          <effect>
             <InnerShadow />
          </effect></ProgressBar>
-      <Label fx:id="healthPoints" layoutX="620.0" layoutY="464.0" prefHeight="28.0" prefWidth="86.0" text="xx HP" textAlignment="CENTER" textFill="WHITE">
+      <Label fx:id="healthPoints" layoutX="629.0" layoutY="475.0" prefHeight="28.0" prefWidth="86.0" text="xx HP" textAlignment="CENTER" textFill="WHITE">
          <font>
             <Font name="Times New Roman Bold" size="24.0" />
          </font>
@@ -73,7 +73,7 @@
             <InnerShadow />
          </effect>
       </Button>
-      <Button fx:id="playCardButton" layoutX="1341.0" layoutY="446.0" mnemonicParsing="false" onAction="#playCard" prefHeight="65.0" prefWidth="211.0" text="GIOCA CARTA">
+      <Button fx:id="playCardButton" layoutX="1350.0" layoutY="448.0" mnemonicParsing="false" onAction="#playCard" prefHeight="65.0" prefWidth="211.0" text="GIOCA CARTA">
          <font>
             <Font name="Times New Roman Bold" size="24.0" />
          </font>
@@ -81,7 +81,7 @@
             <InnerShadow />
          </effect>
       </Button>
-      <Label fx:id="infoLabel" alignment="CENTER" contentDisplay="CENTER" layoutX="230.0" layoutY="364.0" prefHeight="97.0" prefWidth="1107.0" textAlignment="CENTER" textFill="WHITE">
+      <Label fx:id="infoLabel" alignment="CENTER" contentDisplay="CENTER" layoutX="270.0" layoutY="375.0" prefHeight="97.0" prefWidth="1107.0" textAlignment="CENTER" textFill="WHITE">
          <font>
             <Font name="Times New Roman" size="30.0" />
          </font>
@@ -99,5 +99,6 @@
             <Font name="Times New Roman" size="24.0" />
          </font>
       </Label>
+      <ImageView fx:id="showSelectedCard" fitHeight="460.0" fitWidth="380.0" layoutX="24.0" layoutY="21.0" pickOnBounds="true" preserveRatio="true" />
    </children>
 </AnchorPane>

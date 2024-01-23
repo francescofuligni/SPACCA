@@ -31,6 +31,7 @@ import javafx.stage.Stage;
 
 //import per animazioni bot
 import javafx.animation.PauseTransition;
+import javafx.application.Platform;
 import javafx.util.Duration;
 
 public abstract class Board implements Initializable {
@@ -71,7 +72,9 @@ public abstract class Board implements Initializable {
 	protected ListView<ImageView> cards;
 	@FXML
 	protected ProgressBar healthBar;
-	
+	 @FXML
+	private ImageView showSelectedCard;
+
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		
@@ -103,24 +106,39 @@ public abstract class Board implements Initializable {
 				@Override
 				public void changed(ObservableValue<? extends ImageView> arg0, ImageView arg1, ImageView arg2) {
 					selectedImage = cards.getSelectionModel().getSelectedItem();
+					showSelectedCard.setImage(selectedImage.getImage());
+					
 				}
 			});
 		}
-	}
-	
-	@FXML
-	public void playBot(MouseEvent event) {
-		if(current.getUsername().startsWith("BOT")) {
-			PauseTransition pause = new PauseTransition(Duration.seconds(20));
-			Bot bot = new Bot(current);
-			int index=bot.botCard(game.getDifficulty());
-			selectedImage = images.get(index);
-			cards.getSelectionModel().select(selectedImage);
-			pause.playFromStart();
+		
+		else {  //crea un thread per far selezionare la carta al bot
+			Thread botThread = new Thread(() -> {
+				
+				Bot bot = new Bot(current);
+				int index=bot.botCard(game.getDifficulty()); //a seconda della difficoltá cambia líndice restituito
+				selectedImage = images.get(index);
+				cards.getSelectionModel().select(selectedImage); 
+				showSelectedCard.setImage(selectedImage.getImage()); //setto la carta selezionata nell' imageview
+				
+				try {
+					Thread.sleep(4000); //pausa di 4 s (4000ms) prima di chiamare il metodo fire
+				} catch (InterruptedException e) {
+					e.printStackTrace();
+				}
+				
+				Platform.runLater(new Runnable() {  //pre poter interagire con la GUI devo richiamare il main thread (application)
+					@Override
+					public void run() {
+						
+						playCardButton.fire();
+					}
+				});
+			});
 			
-			System.out.println(hand.get(index).getCode());			// stampa di prova
-			playCardButton.fire();
-		}
+			botThread.start(); //startando il thread faccio eseguire al bot le operazioni
+			
+		}	
 	}
 	
 	@FXML
@@ -160,7 +178,6 @@ public abstract class Board implements Initializable {
 			} else {
 				Card c = current.getCard(images.indexOf(selectedImage));
 				c.effect(game);
-				
 				nextPlayerBoard();
 			}
 		}
