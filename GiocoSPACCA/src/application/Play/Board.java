@@ -24,15 +24,10 @@ import javafx.scene.control.ListView;
 import javafx.scene.control.ProgressBar;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.image.ImageView;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
-
-//import per animazioni bot
-import javafx.animation.PauseTransition;
 import javafx.application.Platform;
-import javafx.util.Duration;
 
 public abstract class Board implements Initializable {
 	
@@ -47,6 +42,8 @@ public abstract class Board implements Initializable {
 	protected Game game;
 	protected PlayerInGame current;
 	protected PlayerInGame nextAlive;
+	private Thread botThread;
+	private boolean exited = false;
 	
 	@FXML
 	protected AnchorPane anchorPane;
@@ -72,7 +69,7 @@ public abstract class Board implements Initializable {
 	protected ListView<ImageView> cards;
 	@FXML
 	protected ProgressBar healthBar;
-	 @FXML
+	@FXML
 	private ImageView showSelectedCard;
 
 	@Override
@@ -81,7 +78,7 @@ public abstract class Board implements Initializable {
 		current = game.currentPlayer();
 		nextAlive = game.nextPlayerAlive();
 		currentPlayer.setText(current.getUsername());
-		healthBar.setStyle("-fx-accent: green;");							// barra salute verde
+		healthBar.setStyle("-fx-accent: green;");		// barra salute verde
 		
 		if(current.equals(nextAlive)) {
 			// CASO 1	-->	il giocatore attuale è il vincitore (partita terminata)
@@ -95,50 +92,57 @@ public abstract class Board implements Initializable {
 			// CASO 3	--> il giocatore attuale è in partita (partita in corso)
 			initializeNormal();
 			
-		}
-		
-		setTitle();
-		
-		// TODO	-->	BOT non funziona
-		if(!current.getUsername().startsWith("BOT")) {
-			// il giocatore è un essere umano
 			cards.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<ImageView>() {
 				@Override
 				public void changed(ObservableValue<? extends ImageView> arg0, ImageView arg1, ImageView arg2) {
 					selectedImage = cards.getSelectionModel().getSelectedItem();
 					showSelectedCard.setImage(selectedImage.getImage());
-					
 				}
 			});
 		}
 		
-		else {  //crea un thread per far selezionare la carta al bot
-			Thread botThread = new Thread(() -> {
-				
-				Bot bot = new Bot(current);
-				int index=bot.botCard(game.getDifficulty()); //a seconda della difficoltá cambia líndice restituito
-				selectedImage = images.get(index);
-				cards.getSelectionModel().select(selectedImage); 
-				showSelectedCard.setImage(selectedImage.getImage()); //setto la carta selezionata nell' imageview
-				
+		setTitle();
+		
+		if(current.getUsername().startsWith("BOT")) {	// il giocatore è un bot
+			
+			// disabilita le interazioni dell'utente con gli elementi della GUI
+			cards.setMouseTransparent(true);	// disabilita click listview
+		    cards.setFocusTraversable(false);	// disabilita interazioni tastiera con listview
+		    // disabilita i bottoni
+		    playCardButton.setDisable(true);
+		    infoBoardButton.setDisable(true);
+		    //saveAndExitButton.setDisable(true);
+			
+			// crea un thread per far selezionare la carta al bot
+			botThread = new Thread(() -> {
 				try {
-					Thread.sleep(4000); //pausa di 4 s (4000ms) prima di chiamare il metodo fire
+					Thread.sleep(1000); 				// pausa di 1s prima di selezionare la carta
+					
+					Bot bot = new Bot(current);
+					int index=bot.botCard(game.getDifficulty()); 					// a seconda della difficoltà cambia l'indice restituito
+					if(bot.getHealthPoints()>0 && !current.equals(nextAlive)) {
+						selectedImage = images.get(index);
+						cards.getSelectionModel().select(selectedImage); 
+						showSelectedCard.setImage(selectedImage.getImage()); 		// imposto la carta selezionata nell'ImageView
+						Thread.sleep(2000); 			// pausa di 2s prima di chiamare il metodo fire
+					}
+					
+					Platform.runLater(new Runnable() {  	// per poter interagire con la GUI devo richiamare il main thread (application)
+						@Override
+						public void run() {
+							try {
+								playCard(new ActionEvent());
+							} catch (IOException e) {
+								e.printStackTrace();
+							}
+						}
+					});
 				} catch (InterruptedException e) {
 					e.printStackTrace();
 				}
-				
-				Platform.runLater(new Runnable() {  //pre poter interagire con la GUI devo richiamare il main thread (application)
-					@Override
-					public void run() {
-						
-						playCardButton.fire();
-					}
-				});
 			});
-			
-			botThread.start(); //startando il thread faccio eseguire al bot le operazioni
-			
-		}	
+			botThread.start(); 							// avviando il thread, il bot esegue le operazioni
+		}
 	}
 	
 	@FXML
@@ -151,40 +155,43 @@ public abstract class Board implements Initializable {
 	}
 	
 	@FXML
-	public void playCard() throws IOException {
-		if(current.equals(nextAlive)) {
-			endGame();
-		} else if(isOut) {	
-			game.removePlayer();
-			nextPlayerBoard();
-			
-		} else {
-			if(selectedImage == null) {
-				Alert noCardSelected = new Alert(AlertType.ERROR);
-				noCardSelected.setTitle("ERRORE!");
-				noCardSelected.setHeaderText("SELEZIONA UNA CARTA");
-				noCardSelected.setContentText("Prima di giocare devi selezionare una carta");
-				noCardSelected.showAndWait();
-				
-			} else if(current.hasImprevisti() && (hand.get(images.indexOf(selectedImage)).getCode()>16 || hand.get(images.indexOf(selectedImage)).getCode()<13) ){
-				infoLabel.setTextFill(Color.VIOLET);
-				infoLabel.setText("Controlla le tue carte:  se hai un imprevisto sei costretto a giocarlo");
-				Alert playImprevisto = new Alert(AlertType.ERROR);
-				playImprevisto.setTitle("ERRORE!");
-				playImprevisto.setHeaderText("HAI UN IMPREVISTO DA GIOCARE");
-				playImprevisto.setContentText("Se hai un imprevisto sei costretto a giocarlo");
-				playImprevisto.showAndWait();
+	public void playCard(ActionEvent event) throws IOException {
+		if(!exited) {
+			if(current.equals(nextAlive)) {
+				endGame();
+			} else if(isOut) {	
+				game.removePlayer();
+				nextPlayerBoard();
 				
 			} else {
-				Card c = current.getCard(images.indexOf(selectedImage));
-				c.effect(game);
-				nextPlayerBoard();
+				if(selectedImage == null) {
+					Alert noCardSelected = new Alert(AlertType.ERROR);
+					noCardSelected.setTitle("ERRORE!");
+					noCardSelected.setHeaderText("SELEZIONA UNA CARTA");
+					noCardSelected.setContentText("Prima di giocare devi selezionare una carta");
+					noCardSelected.showAndWait();
+					
+				} else if(current.hasImprevisti() && (hand.get(images.indexOf(selectedImage)).getCode()>16 || hand.get(images.indexOf(selectedImage)).getCode()<13) ){
+					infoLabel.setTextFill(Color.VIOLET);
+					infoLabel.setText("Controlla le tue carte:  se hai un imprevisto sei costretto a giocarlo");
+					Alert playImprevisto = new Alert(AlertType.ERROR);
+					playImprevisto.setTitle("ERRORE!");
+					playImprevisto.setHeaderText("HAI UN IMPREVISTO DA GIOCARE");
+					playImprevisto.setContentText("Se hai un imprevisto sei costretto a giocarlo");
+					playImprevisto.showAndWait();
+					
+				} else {
+					Card c = current.getCard(images.indexOf(selectedImage));
+					c.effect(game);
+					nextPlayerBoard();
+				}
 			}
 		}
 	}
 	
 	@FXML
 	public void saveAndExit(ActionEvent e) throws IOException {
+		exited=true;
 		game.save();
 		stage = (Stage)(saveAndExitButton.getScene().getWindow());
 		  FXMLLoader Loader=new FXMLLoader(MainMenuController.class.getResource("/application/MainMenu/MainMenu.fxml"));
@@ -201,7 +208,7 @@ public abstract class Board implements Initializable {
 		infoLabel.setText("HAI VINTO!");
 		nextPlayerTitle.setText("Vincitore:");
 		nextPlayerTitle.setTextFill(Color.LIGHTGREEN);
-		nextPlayer.setText(current.getUsername());
+		nextPlayer.setText(current.getUsername());							// label next player (mostra il vincitore)
 		nextPlayer.setTextFill(Color.LIGHTGREEN);
 		
 		if(current.getHealthPoints()<=0) {
@@ -212,10 +219,9 @@ public abstract class Board implements Initializable {
 			healthBar.setProgress((double)current.getHealthPoints()/current.MAXHP);
 		}
 		
-		while(game.getPlayers().size()!=1) {			// se i giocatori eliminati non sono stati rimossi (perché non hanno abbandonato), li rimuove
+		while(game.getPlayers().size()!=1) {				// se i giocatori eliminati non sono stati rimossi (perché non hanno abbandonato), li rimuove
 			game.nextTurn();
 			game.removePlayer();
-			System.out.println(game.getTurn());
 		}
 	}
 	
