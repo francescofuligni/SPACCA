@@ -22,6 +22,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
+import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
@@ -43,11 +44,16 @@ public class GameScoreBoardController implements Initializable {
 
     @FXML
     private ListView<String> scoreBoard;
+    
+    @FXML
+    private TextField emailField;
+    
+    @FXML
+    private Button sendEmailButton;
 
     @FXML
     public void returnToMainMenu(ActionEvent event) throws IOException {
     	stage = (Stage)(menuButton.getScene().getWindow());
-		  
 		  FXMLLoader Loader=new FXMLLoader(MainMenuController.class.getResource("/application/MainMenu/MainMenu.fxml"));
 		  root = (Parent) Loader.load();
 		  scene = new Scene(root);
@@ -118,6 +124,18 @@ public class GameScoreBoardController implements Initializable {
 		}
     }
     
+    
+    @FXML
+    public void sendMail() throws Exception {
+    	
+    	String to = emailField.getText().trim().toLowerCase(); //tanto tutte mail in minuscolo
+    	EmailSender.sendMail(to,getMessage());
+    	
+    	
+    }
+    
+    
+    
     @FXML
     public void generalScoreBoard(MouseEvent event) throws IOException {
     	stage = (Stage)(menuButton.getScene().getWindow());
@@ -153,7 +171,7 @@ public class GameScoreBoardController implements Initializable {
 				String[] tokens = line.split(",");
 				if(players.keySet().contains(tokens[0]))		// salva su file il nuovo punteggio e decrementa di 1 il contatore delle partite del giocatore
 					memory = memory + tokens[0] + "," + (players.get(tokens[0]) + Integer.parseInt(tokens[1])) + "," + (Integer.parseInt(tokens[2])-1) + "\n";
-				else		
+				else
 					memory = memory + line + "\n";				// le altre linee vengono riscritte nello stesso modo
 			}
 			scan.close();	
@@ -191,4 +209,16 @@ public class GameScoreBoardController implements Initializable {
         	}
     	}
     }
+    
+    private String getMessage() {
+    	String message="-- CLASSIFICA " + code + " -- \n\n";
+    	int cont=1;
+    	for(String p: players.keySet()) {
+    		message+=(cont + "°  --  [ +"+players.get(p)+ " ]  "+ p+"\n");
+    		cont++;
+    	}
+    	message += ("\n\nMail generata automaticamente, si prega di non rispondere.");
+		return message;
+    }
+    
 }

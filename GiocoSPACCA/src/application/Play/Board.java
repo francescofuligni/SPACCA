@@ -24,11 +24,14 @@ import javafx.scene.control.ListView;
 import javafx.scene.control.ProgressBar;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
 //import per animazioni bot
 import javafx.animation.PauseTransition;
+import javafx.application.Platform;
 import javafx.util.Duration;
 
 public abstract class Board implements Initializable {
@@ -45,6 +48,8 @@ public abstract class Board implements Initializable {
 	protected PlayerInGame current;
 	protected PlayerInGame nextAlive;
 	
+	@FXML
+	protected AnchorPane anchorPane;
 	@FXML
 	protected Label currentPlayer;
 	@FXML
@@ -67,7 +72,9 @@ public abstract class Board implements Initializable {
 	protected ListView<ImageView> cards;
 	@FXML
 	protected ProgressBar healthBar;
-	
+	 @FXML
+	private ImageView showSelectedCard;
+
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		
@@ -75,9 +82,6 @@ public abstract class Board implements Initializable {
 		nextAlive = game.nextPlayerAlive();
 		currentPlayer.setText(current.getUsername());
 		healthBar.setStyle("-fx-accent: green;");							// barra salute verde
-		healthPoints.setText("" + current.getHealthPoints() + "  HP"); 
-		healthBar.setProgress((double)current.getHealthPoints()/current.MAXHP);
-		setTitle();
 		
 		if(current.equals(nextAlive)) {
 			// CASO 1	-->	il giocatore attuale è il vincitore (partita terminata)
@@ -93,25 +97,48 @@ public abstract class Board implements Initializable {
 			
 		}
 		
+		setTitle();
+		
 		// TODO	-->	BOT non funziona
-		/*if(current.getUsername().startsWith("BOT")) {
-			// il giocatore è un Bot
-			PauseTransition pause = new PauseTransition(Duration.seconds(20));
-			pause.play();
-			Bot bot = new Bot(current);
-			selectedImage = images.get(bot.botCard(game.getDifficulty()));
-			pause.play();
-			playCardButton.fire();
-			
-		} else {
-			*/// il giocatore è un essere umano
+		if(!current.getUsername().startsWith("BOT")) {
+			// il giocatore è un essere umano
 			cards.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<ImageView>() {
 				@Override
 				public void changed(ObservableValue<? extends ImageView> arg0, ImageView arg1, ImageView arg2) {
 					selectedImage = cards.getSelectionModel().getSelectedItem();
+					showSelectedCard.setImage(selectedImage.getImage());
+					
 				}
 			});
-		//}
+		}
+		
+		else {  //crea un thread per far selezionare la carta al bot
+			Thread botThread = new Thread(() -> {
+				
+				Bot bot = new Bot(current);
+				int index=bot.botCard(game.getDifficulty()); //a seconda della difficoltá cambia líndice restituito
+				selectedImage = images.get(index);
+				cards.getSelectionModel().select(selectedImage); 
+				showSelectedCard.setImage(selectedImage.getImage()); //setto la carta selezionata nell' imageview
+				
+				try {
+					Thread.sleep(4000); //pausa di 4 s (4000ms) prima di chiamare il metodo fire
+				} catch (InterruptedException e) {
+					e.printStackTrace();
+				}
+				
+				Platform.runLater(new Runnable() {  //pre poter interagire con la GUI devo richiamare il main thread (application)
+					@Override
+					public void run() {
+						
+						playCardButton.fire();
+					}
+				});
+			});
+			
+			botThread.start(); //startando il thread faccio eseguire al bot le operazioni
+			
+		}	
 	}
 	
 	@FXML
@@ -167,6 +194,7 @@ public abstract class Board implements Initializable {
 		  stage.show();
 	}
 	
+	
 	private void initializeWinner() {
 		playCardButton.setText("FINE");
 		infoLabel.setTextFill(Color.LIGHTGREEN);
@@ -175,6 +203,14 @@ public abstract class Board implements Initializable {
 		nextPlayerTitle.setTextFill(Color.LIGHTGREEN);
 		nextPlayer.setText(current.getUsername());
 		nextPlayer.setTextFill(Color.LIGHTGREEN);
+		
+		if(current.getHealthPoints()<=0) {
+			healthPoints.setText("1  HP");
+			healthBar.setProgress(1.0);
+		} else {
+			healthPoints.setText(current.getHealthPoints() + "  HP"); 
+			healthBar.setProgress((double)current.getHealthPoints()/current.MAXHP);
+		}
 		
 		while(game.getPlayers().size()!=1) {			// se i giocatori eliminati non sono stati rimossi (perché non hanno abbandonato), li rimuove
 			game.nextTurn();
@@ -195,7 +231,7 @@ public abstract class Board implements Initializable {
 	
 	private void initializeNormal() {
 		nextPlayer.setText(nextAlive.getUsername());						// label next player (mostra il prossimo giocatore vivo)
-		healthPoints.setText("" + current.getHealthPoints() + "  HP");
+		healthPoints.setText(current.getHealthPoints() + "  HP");
 		healthBar.setProgress((double)current.getHealthPoints()/current.MAXHP);
 		hand = current.getHand();
 		images = new ArrayList<>();

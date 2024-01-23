@@ -21,15 +21,16 @@ public class StartScreenController implements Initializable {
 	private Stage stage;
 	private Scene scene;
 	private Parent root;
+	private Game game;
+	private SimpleTournament t;
 	
 	@FXML
 	private Label title, playersLabel;
 	
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
-		Game game;
 		if(code.startsWith("T")) {
-			SimpleTournament t = new SimpleTournament(InsertCodeController.pathToGame);
+			t = new SimpleTournament(InsertCodeController.pathToGame);
 			game = t.getCurrentGame();
 			if(t.getCurrentGame().code.endsWith("1"))
 				title.setText("SEMIFINALE 1");
@@ -60,11 +61,11 @@ public class StartScreenController implements Initializable {
 		FXMLLoader Loader=new FXMLLoader(StartScreenController.class.getResource("Board.fxml"));
 		  
 		if(code.startsWith("T"))
-			Loader.setController(new SimpleTournamentBoardController());
+			Loader.setController(new SimpleTournamentBoardController(t, game));
 		else if(code.startsWith("L"))
-			Loader.setController(new LastManStandingBoardController());
+			Loader.setController(new LastManStandingBoardController(game));
 		else 
-			Loader.setController(new SingleGameBoardController());
+			Loader.setController(new SingleGameBoardController(game));
 		  
 		root = (Parent) Loader.load();
 		scene = new Scene(root);

@@ -2,7 +2,7 @@ package application.Play;
 
 import java.io.IOException;
 
-import application.Games.SimpleTournament;
+import application.Games.*;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -12,19 +12,21 @@ public class SimpleTournamentBoardController extends Board {
 	
 	private SimpleTournament tournament;
 	
-	public SimpleTournamentBoardController() {
-		this.tournament = new SimpleTournament(InsertCodeController.pathToGame);
-		this.game = tournament.getCurrentGame();
+	public SimpleTournamentBoardController(SimpleTournament tournament, Game game) {
+		this.tournament = tournament;
+		this.game = game;
+		System.out.println("Controller istanziato");		// stampa di prova
 	}
 
 	@Override
 	protected void nextPlayerBoard() throws IOException {
 		game.nextTurn();
+		game.eliminationManagement();		// controllo per eliminazioni multiple/contemporanee
 		game.save();
 		
 		stage = (Stage)(playCardButton.getScene().getWindow());
 		FXMLLoader Loader=new FXMLLoader(SimpleTournamentBoardController.class.getResource("Board.fxml"));
-		Loader.setController(new SimpleTournamentBoardController());
+		Loader.setController(this);
 		root = (Parent) Loader.load();
 		scene = new Scene(root);
 		stage.setScene(scene);

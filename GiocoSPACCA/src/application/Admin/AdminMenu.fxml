@@ -61,7 +61,7 @@
             <InnerShadow />
          </effect>
       </Button>
-      <Text fill="WHITE" layoutX="188.0" layoutY="114.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Menù" textAlignment="CENTER" wrappingWidth="303.423828125">
+      <Text fill="WHITE" layoutX="188.0" layoutY="114.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Menù Admin" textAlignment="CENTER" wrappingWidth="303.423828125">
          <font>
             <Font name="Bodoni MT" size="36.0" />
          </font>

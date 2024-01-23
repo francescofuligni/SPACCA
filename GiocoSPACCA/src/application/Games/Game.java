@@ -15,7 +15,6 @@ public abstract class Game {
 	protected BOTDIFF difficulty;
 	protected ArrayList<PlayerInGame> players;
 	protected ArrayList<PlayerInGame> eliminated;
-	protected boolean allDead = true;
 	protected int turn;
 	
 	public File gameFile;
@@ -23,6 +22,7 @@ public abstract class Game {
 	public Deck deck;			// scope public per i metodi effect delle carte
 	
 	public Game(Path path) {
+		System.out.println("Game istanziato");		// STAMPA DI PROVA
 		this.gameFile = new File(path.toString());
 		this.code = gameFile.getName().split("\\.")[0];
 		
@@ -38,7 +38,7 @@ public abstract class Game {
 				String line=scan.nextLine();
 				String[] tokens = line.split(",");
 				
-				if(tokens[1]=="DIFFICILE")
+				if(tokens[1].equals("DIFFICILE"))
 					difficulty = BOTDIFF.DIFFICILE;
 				else
 					difficulty = BOTDIFF.FACILE;
@@ -59,9 +59,6 @@ public abstract class Game {
 						hand.add(deck.getCard(Integer.parseInt(tokens[i])));
 					p.setHand(hand);
 					players.add(p);
-					
-					if(p.getHealthPoints()>0)
-						this.allDead = false;
 				} else {								// giocatori eliminati
 					eliminated.add(p);
 				}
@@ -109,10 +106,12 @@ public abstract class Game {
 	
 	public PlayerInGame nextPlayerAlive() {			// restitusce il primo giocatore successivo a currentPlayer ancora in partita (con HP>0)
 		PlayerInGame p = nextPlayer();
-		for(int i=players.indexOf(p)+1; p.getHealthPoints()<=0 && !p.equals(currentPlayer()); i++) {
+		int cont = 0;
+		for(int i=players.indexOf(p)+1; p.getHealthPoints()<=0 && cont<=players.size(); i++) {
 			if(i>=players.size())
 				i=0;
 			p=players.get(i);
+			cont++;
 		}
 		return p;		// se non trova un giocatore vivo, ritorna il currentPlayer
 	}
@@ -175,7 +174,9 @@ public abstract class Game {
 	
 	
 	// metodi astratti
-	abstract public void removePlayer();		// eliminazione di un giocatore --> diverso a seconda della modalità
+	abstract public void removePlayer();			// eliminazione di un giocatore --> diverso a seconda della modalità
 	
-	abstract public void save();	 			// salvataggio della partita su file --> diverso a seconda della modalità
+	abstract public void save();	 				// salvataggio della partita su file --> diverso a seconda della modalità
+	
+	abstract public void eliminationManagement();	// gestisce eliminazioni contemporanee/multiple --> diverso a seconda della modalità
 }

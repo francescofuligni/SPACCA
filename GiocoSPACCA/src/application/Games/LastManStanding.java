@@ -14,8 +14,8 @@ public class LastManStanding extends Game {
 	public LastManStanding(Path path)  {
 		super(path);
 		
-		newGame();
-		someoneDied();
+		if(!newGame())
+			eliminationManagement();
 	}
 	
 	@Override
@@ -57,6 +57,39 @@ public class LastManStanding extends Game {
 		}
 	}
 	
+	@Override
+	public void eliminationManagement() {
+		// --> se trova un giocatore morto, setta il turno in modo che sia il turno del giocatore morto
+		// --> in questo modo, appena un giocatore muore è costretto ad abbandonare e la partita viene ricaricata
+		
+		// se ci sono più giocatori eliminati contemporaneamente, viene eliminato quello con minori punti salute minori
+		int cont=0, i=turn, iLowest=-1;
+		boolean first = true;
+		
+		while(cont<players.size()) {							// identifica il giocatore con punti salute minori
+			if(i>=players.size())
+				i=0;
+			
+			if((players.get(i).getHealthPoints()<=0 && first)) {
+				iLowest = i;
+				first = false;
+			} else if(iLowest!=-1 && players.get(i).getHealthPoints() < players.get(iLowest).getHealthPoints()) {
+				iLowest = i;
+			}
+			cont++;
+			i++;
+		}
+		
+		if(iLowest!=-1) {
+			for(int j=0; j<players.size(); j++) {
+				if(players.get(j).getHealthPoints()<=0 && j!=iLowest)
+					players.get(j).setHealthPoints(1);			// mantiene in partita tutti i giocatori tranne quello con punti salute minori
+			}
+			turn = iLowest;
+		}
+	}
+	
+	
 	private void restartGame() {
 		for(PlayerInGame p : players) {
 			p.setHealthPoints(p.MAXHP);			// reinizializza i punti salute
@@ -64,29 +97,5 @@ public class LastManStanding extends Game {
 		}
 		Random rand = new Random();
 		turn = rand.nextInt(players.size());
-	}
-	
-	
-	private void someoneDied() {
-		// --> se trova un giocatore morto, setta il turno in modo che sia il turno del giocatore morto
-		// --> in questo modo, appena un giocatore muore è costretto ad abbandonare e la partita viene ricaricata
-		
-		boolean firstDead = true;
-		int cont=0, i=turn;
-		while(cont<players.size()) {
-			if(i>=players.size())
-				i=0;
-			
-			if(players.get(i).getHealthPoints()<=0) {
-				if(!firstDead) {
-					players.get(i).setHealthPoints(1);
-				} else {
-					turn = i;
-					firstDead=false;
-				}
-			}
-			cont++;
-			i++;
-		}
 	}
 }
