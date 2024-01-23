@@ -18,7 +18,6 @@ public class SingleGameBoardController extends Board {
 	protected void nextPlayerBoard() throws IOException {			// carica la schermata del prossimo giocatore (e salva la partita)
 		game.nextTurn();
 		game.eliminationManagement();		// controllo per eliminazioni multiple/contemporanee
-		game.save();
 		
 		stage = (Stage)(playCardButton.getScene().getWindow());
 		FXMLLoader Loader=new FXMLLoader(SingleGameBoardController.class.getResource("Board.fxml"));

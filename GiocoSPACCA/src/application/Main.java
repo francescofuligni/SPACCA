@@ -8,13 +8,20 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 
 import javafx.application.Application;
+import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
 import javafx.stage.Stage;
+import javafx.stage.WindowEvent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
+import javafx.scene.control.ButtonType;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 
 public class Main extends Application {
+	
+	public static boolean message = false;
 
 	public void start(Stage primaryStage) throws Exception {
 		try {
@@ -34,6 +41,13 @@ public class Main extends Application {
 	        primaryStage.getIcons().add(icon);
 	        primaryStage.setFullScreen(false);
 			primaryStage.show();
+			primaryStage.setOnCloseRequest(new EventHandler<WindowEvent>() {
+				@Override
+				public void handle(WindowEvent event) {
+					event.consume();
+					closeApp(primaryStage);
+				}
+			});
 			
 		} catch(Exception e) {
 			e.printStackTrace();
@@ -48,13 +62,28 @@ public class Main extends Application {
 	            Files.createDirectories(pathToFile.getParent());
 	            Files.createFile(pathToFile);
 	            FileWriter fw = new FileWriter(f.getAbsolutePath(), true);
-				fw.write( "ADMIN,0,0\n" );
+				fw.write( "ADMIN,0,0\n"
+						+ "OSPITE1,0,0\n"
+						+ "OSPITE2,0,0\n"
+						+ "OSPITE3,0,0\n");
 				fw.flush();
 				fw.close();
 	        } catch (IOException e) {
 	            System.out.println(e);
 	        }
 		
+	}
+	
+	private void closeApp(Stage s) {
+		message = true;
+		Alert exitAlert = new Alert(AlertType.CONFIRMATION);
+		exitAlert.setTitle("TERMINA");
+		exitAlert.setHeaderText("Vuoi terminare l'applicazione?");
+		exitAlert.setContentText("Se sei in partita perderai eventuali progressi.");
+		
+		if(exitAlert.showAndWait().get() == ButtonType.OK)
+			s.close();
+		message = false;
 	}
 
 	public static void main(String[] args) {

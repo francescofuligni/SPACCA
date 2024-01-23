@@ -5,6 +5,7 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 
+import application.Main;
 import application.Card.Card;
 import application.Games.*;
 import application.MainMenu.MainMenuController;
@@ -38,12 +39,15 @@ public abstract class Board implements Initializable {
 	protected ArrayList<ImageView> images;
 	protected ArrayList<Card> hand;
 	protected ImageView selectedImage;
-	protected boolean isOut = false;
 	protected Game game;
 	protected PlayerInGame current;
 	protected PlayerInGame nextAlive;
+	protected boolean isOut = false;
 	private Thread botThread;
-	private boolean exited = false;
+	
+	// flag per bot
+	private boolean exited = false;			// true se si esce salvando la partita
+	private boolean infoBoard = false;		// true se si apre il tabellone HP
 	
 	@FXML
 	protected AnchorPane anchorPane;
@@ -103,20 +107,18 @@ public abstract class Board implements Initializable {
 		
 		setTitle();
 		
-		if(current.getUsername().startsWith("BOT")) {	// il giocatore è un bot
+		if(current.getUsername().startsWith("BOT")) {		// il giocatore è un bot (username unovoco)
 			
 			// disabilita le interazioni dell'utente con gli elementi della GUI
 			cards.setMouseTransparent(true);	// disabilita click listview
 		    cards.setFocusTraversable(false);	// disabilita interazioni tastiera con listview
 		    // disabilita i bottoni
 		    playCardButton.setDisable(true);
-		    infoBoardButton.setDisable(true);
-		    //saveAndExitButton.setDisable(true);
 			
 			// crea un thread per far selezionare la carta al bot
 			botThread = new Thread(() -> {
 				try {
-					Thread.sleep(1000); 				// pausa di 1s prima di selezionare la carta
+					Thread.sleep(1000); 					// pausa di 1s prima di selezionare la carta
 					
 					Bot bot = new Bot(current);
 					int index=bot.botCard(game.getDifficulty()); 					// a seconda della difficoltà cambia l'indice restituito
@@ -124,8 +126,10 @@ public abstract class Board implements Initializable {
 						selectedImage = images.get(index);
 						cards.getSelectionModel().select(selectedImage); 
 						showSelectedCard.setImage(selectedImage.getImage()); 		// imposto la carta selezionata nell'ImageView
-						Thread.sleep(2000); 			// pausa di 2s prima di chiamare il metodo fire
+						Thread.sleep(1500); 				// pausa di 1s e mezzo prima di chiamare il metodo fire
 					}
+					while(infoBoard || Main.message)
+						Thread.sleep(1000);					// attende che sia chiuso il tabellone prima di giocare
 					
 					Platform.runLater(new Runnable() {  	// per poter interagire con la GUI devo richiamare il main thread (application)
 						@Override
@@ -141,17 +145,8 @@ public abstract class Board implements Initializable {
 					e.printStackTrace();
 				}
 			});
-			botThread.start(); 							// avviando il thread, il bot esegue le operazioni
+			botThread.start(); 		// avviando il thread, il bot esegue le operazioni
 		}
-	}
-	
-	@FXML
-	public void infoBoardDisplay(ActionEvent event) {
-		Alert info = new Alert(AlertType.INFORMATION);
-		info.setTitle("Tabellone HP");
-		info.setHeaderText(game.printPlayers());		// giocatori in partita
-		info.setContentText(game.printEliminated());	// giocatori eliminati
-		info.showAndWait();
 	}
 	
 	@FXML
@@ -190,7 +185,18 @@ public abstract class Board implements Initializable {
 	}
 	
 	@FXML
-	public void saveAndExit(ActionEvent e) throws IOException {
+	public void infoBoardDisplay(ActionEvent event) {
+		infoBoard=true;
+		Alert info = new Alert(AlertType.INFORMATION);
+		info.setTitle("Tabellone HP");
+		info.setHeaderText(game.printPlayers());			// giocatori in partita
+		info.setContentText(game.printEliminated());		// giocatori eliminati
+		info.showAndWait();
+		infoBoard=false;
+	}
+	
+	@FXML
+	public void saveAndExit(ActionEvent event) throws IOException {
 		exited=true;
 		game.save();
 		stage = (Stage)(saveAndExitButton.getScene().getWindow());
@@ -201,14 +207,13 @@ public abstract class Board implements Initializable {
 		  stage.show();
 	}
 	
-	
 	private void initializeWinner() {
 		playCardButton.setText("FINE");
 		infoLabel.setTextFill(Color.LIGHTGREEN);
 		infoLabel.setText("HAI VINTO!");
 		nextPlayerTitle.setText("Vincitore:");
 		nextPlayerTitle.setTextFill(Color.LIGHTGREEN);
-		nextPlayer.setText(current.getUsername());							// label next player (mostra il vincitore)
+		nextPlayer.setText(current.getUsername());			// label next player (mostra il vincitore)
 		nextPlayer.setTextFill(Color.LIGHTGREEN);
 		
 		if(current.getHealthPoints()<=0) {
@@ -226,7 +231,7 @@ public abstract class Board implements Initializable {
 	}
 	
 	private void initializeEliminated() {
-		nextPlayer.setText(nextAlive.getUsername());						// label next player (mostra il prossimo giocatore vivo)
+		nextPlayer.setText(nextAlive.getUsername());		// label next player (mostra il prossimo giocatore vivo)
 		isOut = true;
 		healthPoints.setText("0  HP");
 		healthBar.setProgress(0.0);
@@ -236,7 +241,7 @@ public abstract class Board implements Initializable {
 	}
 	
 	private void initializeNormal() {
-		nextPlayer.setText(nextAlive.getUsername());						// label next player (mostra il prossimo giocatore vivo)
+		nextPlayer.setText(nextAlive.getUsername());		// label next player (mostra il prossimo giocatore vivo)
 		healthPoints.setText(current.getHealthPoints() + "  HP");
 		healthBar.setProgress((double)current.getHealthPoints()/current.MAXHP);
 		hand = current.getHand();
