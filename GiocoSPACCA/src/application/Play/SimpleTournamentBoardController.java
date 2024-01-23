@@ -15,7 +15,7 @@ public class SimpleTournamentBoardController extends Board {
 	public SimpleTournamentBoardController(SimpleTournament tournament, Game game) {
 		this.tournament = tournament;
 		this.game = game;
-		System.out.println("Controller istanziato");		// stampa di prova
+		
 	}
 
 	@Override

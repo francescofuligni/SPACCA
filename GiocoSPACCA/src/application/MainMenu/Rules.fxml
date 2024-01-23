@@ -199,7 +199,7 @@
                         <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#0000007c" height="650.0" layoutX="40.0" layoutY="30.0" stroke="#ffffff8c" strokeType="INSIDE" width="1120.0" />
                         <ImageView fitHeight="560.0" fitWidth="910.0" layoutX="150.0" layoutY="140.0" pickOnBounds="true" preserveRatio="true">
                            <image>
-                              <Image url="@../../../Images/Cards/19.png" />
+                              <Image url="@../../../Images/Cards/17.png" />
                            </image>
                         </ImageView>
                         <Label layoutX="467.0" layoutY="80.0" text="OPPORTUNITA'" textFill="WHITE">

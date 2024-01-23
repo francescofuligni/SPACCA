@@ -7,7 +7,6 @@
 	</classpathentry>
 	<classpathentry excluding="Libraries/" kind="src" path="GiocoSPACCA/src"/>
 	<classpathentry kind="src" path="GiocoSPACCA/Images"/>
-	<classpathentry kind="src" path="GiocoSPACCA/Informazioni_Partite"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/JavaFX21">
 		<attributes>
 			<attribute name="module" value="true"/>
