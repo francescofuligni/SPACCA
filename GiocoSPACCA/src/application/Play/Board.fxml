@@ -42,7 +42,7 @@
                </cursor></ListView>
             <Pane prefHeight="200.0" prefWidth="340.0">
                <children>
-                  <Label fx:id="nextPlayerTitle" alignment="CENTER" contentDisplay="CENTER" layoutX="4.0" layoutY="114.0" prefHeight="19.0" prefWidth="340.0" text="Prossimo giocatore:" textAlignment="CENTER" textFill="#ff0000bf">
+                  <Label fx:id="nextPlayerTitle" alignment="CENTER" contentDisplay="CENTER" layoutY="114.0" prefHeight="19.0" prefWidth="340.0" text="Prossimo giocatore:" textAlignment="CENTER" textFill="#ff0000bf">
                      <font>
                         <Font name="Times New Roman Italic" size="24.0" />
                      </font>
@@ -52,15 +52,23 @@
                         <Font name="Times New Roman Bold" size="24.0" />
                      </font>
                   </Label>
+                  <Button fx:id="playCardButton" layoutX="69.0" layoutY="-73.0" mnemonicParsing="false" onAction="#playCard" prefHeight="65.0" prefWidth="211.0" text="GIOCA CARTA">
+                     <font>
+                        <Font name="Times New Roman Bold" size="24.0" />
+                     </font>
+                     <effect>
+                        <InnerShadow />
+                     </effect>
+                  </Button>
                </children>
             </Pane>
          </children>
       </HBox>
-      <ProgressBar fx:id="healthBar" layoutX="309.0" layoutY="480.0" prefHeight="18.0" prefWidth="310.0" progress="0.0">
+      <ProgressBar fx:id="healthBar" layoutX="319.0" layoutY="472.0" prefHeight="18.0" prefWidth="310.0" progress="0.0">
          <effect>
             <InnerShadow />
          </effect></ProgressBar>
-      <Label fx:id="healthPoints" layoutX="629.0" layoutY="475.0" prefHeight="28.0" prefWidth="86.0" text="xx HP" textAlignment="CENTER" textFill="WHITE">
+      <Label fx:id="healthPoints" layoutX="647.0" layoutY="466.0" prefHeight="28.0" prefWidth="86.0" text="xx HP" textAlignment="CENTER" textFill="WHITE">
          <font>
             <Font name="Times New Roman Bold" size="24.0" />
          </font>
@@ -68,14 +76,6 @@
       <Button fx:id="saveAndExitButton" contentDisplay="CENTER" layoutX="1446.0" layoutY="38.0" mnemonicParsing="false" onAction="#saveAndExit" prefHeight="35.0" prefWidth="110.0" text="Salva ed esci" textAlignment="CENTER">
          <font>
             <Font name="Times New Roman Bold" size="14.0" />
-         </font>
-         <effect>
-            <InnerShadow />
-         </effect>
-      </Button>
-      <Button fx:id="playCardButton" layoutX="1350.0" layoutY="448.0" mnemonicParsing="false" onAction="#playCard" prefHeight="65.0" prefWidth="211.0" text="GIOCA CARTA">
-         <font>
-            <Font name="Times New Roman Bold" size="24.0" />
          </font>
          <effect>
             <InnerShadow />
