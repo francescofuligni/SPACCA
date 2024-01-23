@@ -41,6 +41,9 @@ public class GameScoreBoardController implements Initializable {
 	
 	@FXML
 	private Label gameCodeLabel;
+
+	@FXML
+	private Label mailLabel;
 	
     @FXML
     private Button menuButton;
@@ -131,9 +134,10 @@ public class GameScoreBoardController implements Initializable {
     @FXML
     public void sendMail() throws Exception {
     	
+    	mailLabel.setTextFill(Color.GREEN);
+    	mailLabel.setText("Mail inviata correttamente"); 
     	String to = emailField.getText().trim().toLowerCase(); //tanto tutte mail in minuscolo
     	EmailSender.sendMail(to,getMessage());
-    	
     	
     }
     
@@ -154,11 +158,12 @@ public class GameScoreBoardController implements Initializable {
     public void setColorGrey(MouseEvent event) {
     	generalScoreBoardLabel.setTextFill(Color.GREY);
     }
+    
     @FXML
     public void setColorWhite(MouseEvent event) {
     	generalScoreBoardLabel.setTextFill(Color.WHITE);
     }
-    
+      
     
     private void updateScores() {								// aggiorna il punteggio totale dei giocatori nella classifica generale
 		Path pathToFile = Paths.get("./GiocoSPACCA/Informazioni_Partite/PLAYERS_REGISTER.csv");
