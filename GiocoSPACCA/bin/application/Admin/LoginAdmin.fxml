@@ -29,7 +29,7 @@
       </ImageView>
       <Button fx:id="returnToMainMenuButton" layoutX="1069.0" layoutY="736.0" mnemonicParsing="false" onAction="#returnToMainMenu" text=" Indietro ">
          <font>
-            <Font name="Bodoni MT" size="18.0" />
+            <Font name="Times New Roman" size="18.0" />
          </font>
          <effect>
             <InnerShadow />
@@ -49,14 +49,14 @@
             </PasswordField>
             <Text fx:id="loginStatusText" fill="WHITE" fontSmoothingType="LCD" strokeType="OUTSIDE" strokeWidth="0.0" text="Inserire nome utente e password" textAlignment="CENTER" wrappingWidth="517.0666870117188">
                <font>
-                  <Font name="Bodoni MT" size="24.0" />
+                  <Font name="Times New Roman" size="23.0" />
                </font>
             </Text>
          </children>
       </VBox>
       <Button fx:id="confirmLogin" layoutX="515.0" layoutY="400.0" mnemonicParsing="false" onAction="#login" prefHeight="49.0" prefWidth="171.0" text="Login">
          <font>
-            <Font name="Bodoni MT" size="24.0" />
+            <Font name="Times New Roman" size="24.0" />
          </font>
          <effect>
             <InnerShadow />
@@ -64,7 +64,7 @@
       </Button>
       <Label alignment="CENTER" layoutX="354.0" layoutY="181.0" prefHeight="74.0" prefWidth="494.0" text="LOGIN ADMIN" textAlignment="CENTER" textFill="WHITE" textOverrun="CENTER_ELLIPSIS">
          <font>
-            <Font name="Bodoni MT" size="50.0" />
+            <Font name="Times New Roman" size="50.0" />
          </font>
          <effect>
             <DropShadow />

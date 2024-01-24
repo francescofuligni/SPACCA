@@ -39,12 +39,12 @@
       </Rectangle>
       <Text fill="WHITE" layoutX="213.0" layoutY="103.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Gestione partite" textAlignment="CENTER">
          <font>
-            <Font name="Bodoni MT" size="36.0" />
+            <Font name="Times New Roman" size="36.0" />
          </font>
       </Text>
       <Button fx:id="createTournamentButton" layoutX="219.0" layoutY="275.0" mnemonicParsing="false" onAction="#createTournament" prefHeight="50.0" prefWidth="230.0" text="Crea torneo" textAlignment="CENTER">
          <font>
-            <Font name="Bodoni MT" size="24.0" />
+            <Font name="Times New Roman" size="24.0" />
          </font>
          <effect>
             <InnerShadow />
@@ -52,7 +52,7 @@
       </Button>
       <Button fx:id="createSingleGameButton" layoutX="219.0" layoutY="182.0" mnemonicParsing="false" onAction="#createSingleGame" prefHeight="50.0" prefWidth="230.0" text="Crea partita singola" textAlignment="CENTER">
          <font>
-            <Font name="Bodoni MT" size="24.0" />
+            <Font name="Times New Roman" size="24.0" />
          </font>
          <effect>
             <InnerShadow />
@@ -60,7 +60,7 @@
       </Button>
       <Button fx:id="deleteGameButton" layoutX="218.0" layoutY="367.0" mnemonicParsing="false" onAction="#deleteGame" prefHeight="50.0" prefWidth="230.0" text="Elimina partita" textAlignment="CENTER">
          <font>
-            <Font name="Bodoni MT" size="24.0" />
+            <Font name="Times New Roman" size="24.0" />
          </font>
          <effect>
             <InnerShadow />
@@ -68,7 +68,7 @@
       </Button>
       <Button fx:id="backButton" layoutX="586.0" layoutY="560.0" mnemonicParsing="false" onAction="#back" text="Indietro">
          <font>
-            <Font name="Bodoni MT" size="14.0" />
+            <Font name="Times New Roman" size="14.0" />
          </font>
          <effect>
             <InnerShadow />

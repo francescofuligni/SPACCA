@@ -16,7 +16,7 @@
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="668.0" stylesheets="@../style.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.Admin.DeleteGameController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="668.0" stylesheets="@../style.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.Admin.DeleteGameController">
    <children>
       <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="668.0">
          <children>
@@ -55,17 +55,17 @@
             </Rectangle>
             <Label alignment="CENTER" layoutX="183.0" layoutY="174.0" prefHeight="38.0" prefWidth="316.0" text="Elimina partita" textFill="WHITE">
                <font>
-                  <Font name="Bodoni MT" size="30.0" />
+                  <Font name="Times New Roman" size="30.0" />
                </font>
             </Label>
             <TextField fx:id="codeField" layoutX="189.0" layoutY="235.0" prefHeight="51.0" prefWidth="300.0" promptText="Codice">
                <font>
-                  <Font name="Bodoni MT" size="26.0" />
+                  <Font name="Georgia" size="26.0" />
                </font>
             </TextField>
             <Button fx:id="deleteButton" layoutX="283.0" layoutY="360.0" mnemonicParsing="false" onAction="#deleteGame" prefHeight="51.0" prefWidth="113.0" text="Elimina">
                <font>
-                  <Font name="Bodoni MT" size="24.0" />
+                  <Font name="Times New Roman" size="24.0" />
                </font>
                <effect>
                   <InnerShadow />
@@ -73,7 +73,7 @@
             </Button>
             <Button fx:id="endButton" layoutX="300.0" layoutY="463.0" mnemonicParsing="false" onAction="#back" prefHeight="33.0" prefWidth="78.0" text="Fine">
                <font>
-                  <Font name="Bodoni MT" size="18.0" />
+                  <Font name="Times New Roman" size="18.0" />
                </font>
                <effect>
                   <InnerShadow />
@@ -81,7 +81,7 @@
             </Button>
             <Label fx:id="message" alignment="CENTER" layoutX="41.0" layoutY="300.0" prefHeight="30.0" prefWidth="601.0" text="Inserire il codice della partita da eliminare" textFill="WHITE">
                <font>
-                  <Font name="Bodoni MT" size="24.0" />
+                  <Font name="Times New Roman" size="24.0" />
                </font>
             </Label>
          </children>
