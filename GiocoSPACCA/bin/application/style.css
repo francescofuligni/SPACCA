@@ -1,0 +1,74 @@
+/* COME COLORE PRIMARIO HO MESSO ROSSO SCURO COME NEI MENU SE NON VI PIACE CAMBIATE (il colore primario è lo sfondo della tab pane )*/
+* {   
+	-fx-primary-color: #212321;
+	-fx-secondary-color: #3B0000;
+
+	-fx-focus-color: -fx-secondary-color;
+}
+
+/*bottoni*/
+.button{
+	  -fx-background-color: lightgray;
+	  -fx-text-fill:-fx-secondary-color; 	 
+	 -fx-background-radius: 15;
+
+  }
+  
+  .button:hover{
+	  -fx-background-color: -fx-secondary-color;
+	  -fx-text-fill:white; 	 
+	-fx-background-radius: 15;
+  }
+
+/*listview */
+.list-view{
+	-fx-background-color:transparent;
+}
+
+.list-cell{
+	 -fx-background-color: transparent;
+    -fx-font-size:22;
+    -fx-text-alignement:CENTER;
+}
+.list-cell:filled:selected:focused{
+    -fx-background-color: red;
+    -fx-font-weight: bold;
+   
+}
+
+/*tabpane*/
+.tab-header-area .tab-header-background {
+ 	-fx-background-color: -fx-primary-color;
+}
+.tab-pane .tab:selected {
+	-fx-background-color: -fx-secondary-color;
+	-fx-background-insets: 0 0 0 0;
+	-fx-background-radius: 0 0 0 0;
+}
+.tab .tab-label { 
+ 	-fx-alignment: CENTER;
+	-fx-text-fill: white;
+	-fx-font-family:"Times New Roman";
+	-fx-font-weight: bold;
+	-fx-padding: 0 10 0 10;
+}
+.tab-pane:top *.tab-header-area {
+	-fx-padding: 0 0 0 30;
+	
+	/* NO SPACE LEFT OF FIRST TAB */
+	/* -fx-padding: 0 0 0 30; */
+}
+.tab-pane {
+	-fx-background-color: transparent;
+	-fx-tab-min-width: 130px;
+	-fx-tab-min-height: 30px;
+	-fx-tab-max-height: 30px;
+}
+.tab-pane .tab {
+	-fx-background-color: transparent;
+}
+.tab-pane:focused .tab-header-area .headers-region .tab:selected .focus-indicator {
+ 	-fx-border-width: 0;
+	-fx-border-insets: 0 0 0 0;
+	-fx-border-radius: 0;
+}

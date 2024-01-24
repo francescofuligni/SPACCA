@@ -42,7 +42,7 @@ public class DeleteGameController {
     private Label message;
 
     @FXML
-    public void deleteGame(ActionEvent event) throws IOException { 
+    public void deleteGame(ActionEvent event) { 
     	// elimina la partita con il codice inserito
     	code = codeField.getText().toUpperCase();
     	
@@ -168,7 +168,11 @@ public class DeleteGameController {
 			}
 			scan.close();
 		} catch (FileNotFoundException e) {
-			e.printStackTrace();
+			Alert exceptionAlert = new Alert(AlertType.ERROR);
+			exceptionAlert.setTitle("ERRORE");
+			exceptionAlert.setHeaderText("File non trovato");
+			exceptionAlert.setContentText(e.getClass().getSimpleName());
+			exceptionAlert.showAndWait();
 		}
     }
 }

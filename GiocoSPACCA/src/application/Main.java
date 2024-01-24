@@ -56,6 +56,14 @@ public class Main extends Application {
 			exceptionAlert.setContentText(e.getClass().getSimpleName());
 			exceptionAlert.showAndWait();
 			message = false;
+		} catch(Exception e) {
+			message = true;
+			Alert exceptionAlert = new Alert(AlertType.ERROR);
+			exceptionAlert.setTitle("ERRORE GENERICO");
+			exceptionAlert.setHeaderText("Errore generico");
+			exceptionAlert.setContentText(e.getClass().getSimpleName());
+			exceptionAlert.showAndWait();
+			message = false;
 		}
 	}
 	

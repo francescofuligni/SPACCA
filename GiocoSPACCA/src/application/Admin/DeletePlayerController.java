@@ -43,7 +43,7 @@ public class DeletePlayerController {
     }
 	
 	@FXML
-	public void deletePlayer(ActionEvent event) throws IOException {
+	public void deletePlayer(ActionEvent event) {
 		// elimina il giocatore inserito
     	String username = usernameField.getText().trim();
     	

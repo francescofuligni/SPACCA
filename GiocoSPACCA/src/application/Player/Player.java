@@ -106,7 +106,7 @@ public class Player {		// superclasse di PlayerInGame
 		Path pathToFile = Paths.get("./GiocoSPACCA/Informazioni_Partite/PLAYERS_REGISTER.csv");
 		File f=new File(pathToFile.toString());
 		
-		// no controllo esistenza file	--> questo metodo viene richiamato dopo exist()
+		// no controllo esistenza file	--> questo metodo viene richiamato dopo exists()
 		
 		try {
 			Scanner scan = new Scanner(f);
@@ -140,7 +140,7 @@ public class Player {		// superclasse di PlayerInGame
 		Path pathToFile = Paths.get("./GiocoSPACCA/Informazioni_Partite/PLAYERS_REGISTER.csv");
 		File f=new File(pathToFile.toString());
 		
-		// no controllo esistenza file	--> questo metodo viene richiamato dopo exist()
+		// no controllo esistenza file	--> questo metodo viene richiamato dopo exists()
 		
 		try {
 			Scanner scan = new Scanner(f);
@@ -176,10 +176,7 @@ public class Player {		// superclasse di PlayerInGame
 		Path pathToFile = Paths.get("./GiocoSPACCA/Informazioni_Partite/PLAYERS_REGISTER.csv");
 		File f=new File(pathToFile.toString());
 		
-		if(!f.exists()) {
-			Main.fileCheck();		// se il file non esiste, lo crea
-			return false;			// se il file non esiste, non c'è nulla da controllare
-		}
+		// no controllo esistenza file	--> questo metodo viene richiamato dopo exists()
 		
 		try {
 			Scanner scan = new Scanner(f);
