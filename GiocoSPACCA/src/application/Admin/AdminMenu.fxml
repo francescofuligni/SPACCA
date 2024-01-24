@@ -39,7 +39,7 @@
       </Rectangle>
       <Button fx:id="manageGamesButton" layoutX="234.0" layoutY="215.0" mnemonicParsing="false" onAction="#manageGames" prefHeight="51.0" prefWidth="213.0" text="Gestione partite" textAlignment="CENTER">
          <font>
-            <Font name="Bodoni MT" size="24.0" />
+            <Font name="Times New Roman" size="24.0" />
          </font>
          <effect>
             <InnerShadow />
@@ -47,7 +47,7 @@
       </Button>
       <Button fx:id="managePlayersButton" layoutX="233.0" layoutY="305.0" mnemonicParsing="false" onAction="#managePlayers" prefHeight="51.0" prefWidth="213.0" text="Gestione giocatori" textAlignment="CENTER">
          <font>
-            <Font name="Bodoni MT" size="24.0" />
+            <Font name="Times New Roman" size="24.0" />
          </font>
          <effect>
             <InnerShadow />
@@ -55,7 +55,7 @@
       </Button>
       <Button fx:id="logoutButton" layoutX="593.0" layoutY="559.0" mnemonicParsing="false" onAction="#logout" text="Logout">
          <font>
-            <Font name="Bodoni MT" size="14.0" />
+            <Font name="Times New Roman" size="14.0" />
          </font>
          <effect>
             <InnerShadow />
@@ -63,7 +63,7 @@
       </Button>
       <Text fill="WHITE" layoutX="188.0" layoutY="114.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Menù Admin" textAlignment="CENTER" wrappingWidth="303.423828125">
          <font>
-            <Font name="Bodoni MT" size="36.0" />
+            <Font name="Times New Roman" size="36.0" />
          </font>
       </Text>
    </children>

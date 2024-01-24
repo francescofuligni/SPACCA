@@ -52,7 +52,7 @@
       </Rectangle>
       <Text fill="WHITE" layoutX="200.0" layoutY="115.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Crea PARTITA SINGOLA" textAlignment="CENTER">
          <font>
-            <Font name="Bodoni MT" size="24.0" />
+            <Font name="Times New Roman" size="24.0" />
          </font>
       </Text>
       <Rectangle arcHeight="5.0" arcWidth="5.0" height="150.0" layoutX="125.0" layoutY="184.0" stroke="WHITE" strokeLineCap="ROUND" strokeType="INSIDE" width="450.0">
@@ -79,16 +79,16 @@
          </font>
       </Text>
       <Button fx:id="button2" layoutX="436.0" layoutY="198.0" mnemonicParsing="false" onAction="#set2Players" prefHeight="24.0" prefWidth="120.0" text="2 giocatori">
-         <font>
-            <Font name="Bodoni MT" size="18.0" />
-         </font>
          <effect>
             <InnerShadow />
          </effect>
+         <font>
+            <Font name="Times New Roman" size="18.0" />
+         </font>
       </Button>
       <Button fx:id="button3" layoutX="436.0" layoutY="243.0" mnemonicParsing="false" onAction="#set3Players" prefHeight="0.0" prefWidth="120.0" text="3 giocatori">
          <font>
-            <Font name="Bodoni MT" size="18.0" />
+            <Font name="Times New Roman" size="18.0" />
          </font>
          <effect>
             <InnerShadow />
@@ -96,19 +96,19 @@
       </Button>
       <Button fx:id="button4" layoutX="436.0" layoutY="288.0" mnemonicParsing="false" onAction="#set4Players" prefHeight="24.0" prefWidth="120.0" text="4 giocatori">
          <font>
-            <Font name="Bodoni MT" size="18.0" />
+            <Font name="Times New Roman" size="18.0" />
          </font>
          <effect>
             <InnerShadow />
          </effect>
       </Button>
-      <Button fx:id="backButton" layoutX="586.0" layoutY="560.0" mnemonicParsing="false" onAction="#back" text="Indietro">
-         <font>
-            <Font name="Bodoni MT" size="14.0" />
-         </font>
+      <Button fx:id="backButton" layoutX="575.0" layoutY="560.0" mnemonicParsing="false" onAction="#back" text="Indietro">
          <effect>
             <InnerShadow />
          </effect>
+         <font>
+            <Font name="Times New Roman" size="18.0" />
+         </font>
       </Button>
    </children>
 </AnchorPane>

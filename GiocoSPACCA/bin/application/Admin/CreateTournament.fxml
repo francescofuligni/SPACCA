@@ -54,7 +54,7 @@
       </Rectangle>
       <Text fill="WHITE" layoutX="195.0" layoutY="93.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Crea TORNEO" textAlignment="CENTER" wrappingWidth="277.66131591796875">
          <font>
-            <Font name="Bodoni MT" size="24.0" />
+            <Font name="Times New Roman" size="30.0" />
          </font>
       </Text>
       <Rectangle arcHeight="5.0" arcWidth="5.0" height="52.0" layoutX="187.0" layoutY="233.0" stroke="WHITE" strokeLineCap="ROUND" strokeType="INSIDE" width="294.0">
@@ -78,7 +78,7 @@
       <ChoiceBox fx:id="chooseDifficulty" layoutX="345.0" layoutY="245.0" prefHeight="26.0" prefWidth="124.0" />
       <Text fill="WHITE" layoutX="202.0" layoutY="264.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Difficoltà BOT" textAlignment="CENTER" wrappingWidth="123.7320556640625">
          <font>
-            <Font name="Bodoni MT" size="18.0" />
+            <Font name="Times New Roman" size="18.0" />
          </font>
       </Text>
       <Rectangle arcHeight="5.0" arcWidth="5.0" height="52.0" layoutX="151.0" layoutY="388.0" stroke="WHITE" strokeLineCap="ROUND" strokeType="INSIDE" width="368.0">
@@ -101,7 +101,7 @@
       </Rectangle>
       <Text fill="WHITE" layoutX="171.0" layoutY="419.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Scegli fino a 4 giocatori" textAlignment="CENTER" wrappingWidth="175.39999999999986">
          <font>
-            <Font name="Bodoni MT" size="18.0" />
+            <Font name="Times New Roman" size="18.0" />
          </font>
       </Text>
       <Rectangle arcHeight="5.0" arcWidth="5.0" height="52.0" layoutX="187.0" layoutY="309.0" stroke="WHITE" strokeLineCap="ROUND" strokeType="INSIDE" width="294.0">
@@ -125,7 +125,7 @@
       <ChoiceBox fx:id="tournamentMode" layoutX="345.0" layoutY="321.0" prefHeight="26.0" prefWidth="124.0" />
       <Text fill="WHITE" layoutX="193.0" layoutY="340.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Modalità Torneo" textAlignment="CENTER" wrappingWidth="141.0">
          <font>
-            <Font name="Bodoni MT" size="18.0" />
+            <Font name="Times New Roman" size="18.0" />
          </font>
       </Text>
       <Button fx:id="play" layoutX="267.0" layoutY="525.0" mnemonicParsing="false" onAction="#play" prefHeight="52.0" prefWidth="141.0" text="CREA">
@@ -156,7 +156,7 @@
       </Rectangle>
       <Text fill="WHITE" layoutX="202.0" layoutY="193.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Numero BOT" textAlignment="CENTER" wrappingWidth="123.7320556640625">
          <font>
-            <Font name="Bodoni MT" size="18.0" />
+            <Font name="Times New Roman" size="18.0" />
          </font>
       </Text>
       <Text fx:id="botNumber" fill="WHITE" layoutX="337.0" layoutY="194.0" strokeType="OUTSIDE" strokeWidth="0.0" text="NUMBER" textAlignment="CENTER" wrappingWidth="123.7320556640625">
