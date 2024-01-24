@@ -23,7 +23,7 @@ import javafx.scene.control.ChoiceBox;
 public class CreateTournamentController extends GamesCreation {
 	
 	private GAMEMODE[] mode = {GAMEMODE.SEMPLICE, GAMEMODE.LASTMANSTANDING};
-	private Path pathToGame;
+	private Path pathToGame;		// path alla directory partita o al file partita
 	
     @FXML
     private ChoiceBox<GAMEMODE> tournamentMode;
@@ -42,50 +42,62 @@ public class CreateTournamentController extends GamesCreation {
 	}
     
     @Override @FXML
-    public void play(ActionEvent event) throws IOException {		// INCOMPLETO
+    public void play(ActionEvent event) throws IOException {
+    	// crea il codice e i file della partita
     	
-    	if(((MAXPLAYERS-playersCounter>0) && chooseDifficulty.getValue()==null) || tournamentMode.getValue()==null) {
+    	if(((MAXPLAYERS-playersCounter>0) && chooseDifficulty.getValue()==null) || tournamentMode.getValue()==null) {		// bisogna inserire la difficoltà dei bot (se sono presenti bot) e la modalità del torneo
 	    	Alert selectionAlert = new Alert(AlertType.ERROR);
     		selectionAlert.setTitle("ERRORE");
     		selectionAlert.setHeaderText("Selezionare difficoltà bot e/o modalità torneo");
     		selectionAlert.showAndWait();
 	    	
 	    } else {
-	    	
-	    	if(tournamentMode.getValue().equals(GAMEMODE.SEMPLICE)) {
-	    		// TORNEO SEMPLICE
-			    do {
-			    	code = "T";
-				    for(int i=0;i<CODELENGTH;i++) {					// genera il codice partita
-				    	Random rand = new Random();
-				    	code = code + rand.nextInt(10);
-				    }
-				    pathToGame = Paths.get("./GiocoSPACCA/Informazioni_Partite/" + code);		// directory del torneo, contenente i file delle singole partite
-			    } while(Files.exists(pathToGame));					// se esiste già il codice, genera un codice diverso
-			    Files.createDirectory(pathToGame);
-	    	} else {
-	    		// TORNEO LAST MAN STANDING
-	    		do {
-			    	code = "L";
-				    for(int i=0;i<CODELENGTH;i++) {					// genera il codice torneo LMS
-				    	Random rand = new Random();
-				    	code = code + rand.nextInt(10);
-				    }
-				    pathToGame = Paths.get("./GiocoSPACCA/Informazioni_Partite/" + code + ".csv");
-			    } while(Files.exists(pathToGame));					// se esiste già il codice, genera un codice diverso
-	    		Files.createFile(pathToGame);
+	    	try {
+		    	if(tournamentMode.getValue().equals(GAMEMODE.SEMPLICE)) {
+		    		// TORNEO SEMPLICE --> directory
+		    		// genera il codice partita
+				    do {
+				    	code = "T";
+					    for(int i=0;i<CODELENGTH;i++) {
+					    	Random rand = new Random();
+					    	code = code + rand.nextInt(10);
+					    }
+					    pathToGame = Paths.get("./GiocoSPACCA/Informazioni_Partite/" + code);		// directory del torneo, contenente i file delle singole partite
+				    } while(Files.exists(pathToGame));					// se esiste già il codice, genera un codice diverso
+				    Files.createDirectory(pathToGame);					// crea la directory
+				    
+		    	} else {
+		    		// TORNEO LAST MAN STANDING --> file singolo
+		    		// genera il codice partita
+		    		do {
+				    	code = "L";
+					    for(int i=0;i<CODELENGTH;i++) {
+					    	Random rand = new Random();
+					    	code = code + rand.nextInt(10);
+					    }
+					    pathToGame = Paths.get("./GiocoSPACCA/Informazioni_Partite/" + code + ".csv");
+				    } while(Files.exists(pathToGame));					// se esiste già il codice, genera un codice diverso
+		    		Files.createFile(pathToGame);						// crea il file
+		    	}
+		    	
+		    	fillPlayersInGame();				// popola l'ArrayList playersInGame
+			    fillGameFile(); 					// popola i file della partita
+			    
+			    Alert codeInfo = new Alert(AlertType.INFORMATION);		// mostra il codice generato
+			    codeInfo.setTitle("CODICE GENERATO");
+			    codeInfo.setContentText("Codice della partita creata");
+			    codeInfo.setHeaderText(code);
+			    codeInfo.showAndWait();
+			    
+	    	} catch(IOException e) {
+	    		Alert exceptionAlert = new Alert(AlertType.ERROR);
+				exceptionAlert.setTitle("ERRORE");
+				exceptionAlert.setHeaderText("Errore nella creazione dei file o della directory");
+				exceptionAlert.setContentText(e.getClass().getSimpleName());
+				exceptionAlert.showAndWait();
 	    	}
 	    	
-		    fillPlayersInGame();				// popola l'ArrayList playersInGame
-		    fillGameFile(); 					// popola il file della partita
-		    
-		    Alert codeInfo = new Alert(AlertType.INFORMATION);					// mostra il codice generato
-		    codeInfo.setTitle("CODICE GENERATO");
-		    codeInfo.setContentText("Codice della partita creata");
-		    codeInfo.setHeaderText(code);
-		    codeInfo.showAndWait();
-	    	
-		    returnToAdminMenu();
+		    returnToAdminMenu();	// throws IOException
 	    }
     }
     
@@ -95,11 +107,11 @@ public class CreateTournamentController extends GamesCreation {
     		Collections.shuffle(playersInGame);			// mescola i giocatori
         	Random rand = new Random();
     		
-        	if(chooseDifficulty.getValue()==null)		// se non è stato specificato un livello, viene settato il livello facile di default
+        	if(chooseDifficulty.getValue()==null)		// se non è stato specificato un livello (non sono presenti bot), imposta livello facile di default
         		chooseDifficulty.setValue(BOTDIFF.FACILE);
         	
 	    	if(tournamentMode.getValue()==GAMEMODE.SEMPLICE) { 
-	    		// TORNEO SEMPLICE
+	    		// TORNEO SEMPLICE --> 3 file (3 partite singole) nella directory creata
 	    		
 	    		// file partita singola semifinale 1
 		    	File semi1=new File("./GiocoSPACCA/Informazioni_Partite/" + code + "/semifinale1.csv");
@@ -127,13 +139,12 @@ public class CreateTournamentController extends GamesCreation {
 				fwfin.close();
 		    
 			} else {
-				// TORNEO LAST MAN STANDING
+				// TORNEO LAST MAN STANDING --> 1 file
 				
-		    	// file parita singola iniziale
+		    	// file parita singola (round iniziale)
 		    	File gameFile=new File("./GiocoSPACCA/Informazioni_Partite/" + code + ".csv");
 		    	FileWriter fw = new FileWriter(gameFile);
 		    	Iterator<PlayerInGame> iter = playersInGame.iterator();
-		        
 		        fw.write(tournamentMode.getValue() + "," + chooseDifficulty.getValue() + "," + rand.nextInt(playersInGame.size()) + "\n");
 				while(iter.hasNext())
 					fw.write("in," + iter.next() + "\n");
@@ -142,7 +153,11 @@ public class CreateTournamentController extends GamesCreation {
 				fw.close();
 		    }
     	} catch(IOException e) {
-    		 e.printStackTrace();
+    		Alert exceptionAlert = new Alert(AlertType.ERROR);
+			exceptionAlert.setTitle("ERRORE");
+			exceptionAlert.setHeaderText("Errore nell'accesso al file");
+			exceptionAlert.setContentText(e.getClass().getSimpleName());
+			exceptionAlert.showAndWait();
     	}
 	}
 }

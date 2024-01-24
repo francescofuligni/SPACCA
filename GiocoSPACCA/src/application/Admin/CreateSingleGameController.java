@@ -37,7 +37,9 @@ public class CreateSingleGameController extends GamesCreation {
     
 	@Override @FXML
 	public void play(ActionEvent event) throws IOException {
-	    if((MAXPLAYERS-playersCounter>0) && chooseDifficulty.getValue()==null) {						// non crea la partita se non è stata inserita una difficoltà per i bot
+		// crea il codice e il file della partita
+		
+	    if((MAXPLAYERS-playersCounter>0) && chooseDifficulty.getValue()==null) {	// se sono presenti bot, bisogna inserire la difficoltà dei bot
 	    	Alert selectionAlert = new Alert(AlertType.ERROR);
     		selectionAlert.setTitle("ERRORE");
     		selectionAlert.setHeaderText("Selezionare difficoltà bot");
@@ -53,41 +55,55 @@ public class CreateSingleGameController extends GamesCreation {
 			    }
 			    Path pathToFile = Paths.get("./GiocoSPACCA/Informazioni_Partite/" + code + ".csv");
 				gameFile=new File(pathToFile.toString());
-		    } while(gameFile.exists());								// se esiste già un file con lo stesso codice, genera un codice diverso
+		    } while(gameFile.exists());				// se esiste già un file con lo stesso codice, genera un codice diverso
 		    
-		    gameFile.createNewFile();				// crea il file per il codice generato
-		    fillPlayersInGame();					// popola l'ArrayList playersInGame
-		    fillGameFile(); 						// popola il file della partita
-		    
-		    Alert codeInfo = new Alert(AlertType.INFORMATION);					// mostra il codice generato
-		    codeInfo.setTitle("CODICE GENERATO");
-		    codeInfo.setContentText("Codice della partita creata");
-		    codeInfo.setHeaderText(code);
-		    codeInfo.showAndWait();
+		    try {
+				gameFile.createNewFile();				// crea il file per il codice generato
+			    fillPlayersInGame();					// popola l'ArrayList playersInGame
+			    fillGameFile(); 						// popola il file della partita
+			    
+			    Alert codeInfo = new Alert(AlertType.INFORMATION);						// mostra il codice generato
+			    codeInfo.setTitle("CODICE GENERATO");
+			    codeInfo.setContentText("Codice della partita creata");
+			    codeInfo.setHeaderText(code);
+			    codeInfo.showAndWait();
+			} catch (IOException e) {
+				Alert exceptionAlert = new Alert(AlertType.ERROR);
+				exceptionAlert.setTitle("ERRORE");
+				exceptionAlert.setHeaderText("Errore nella creazione del file");
+				exceptionAlert.setContentText(e.getClass().getSimpleName());
+				exceptionAlert.showAndWait();
+			}
 
-		    returnToAdminMenu();
+		    returnToAdminMenu();		// throws IOException
 	    }
 	}
 	
 	@Override
 	protected void fillGameFile() {
+		// popola il file della partita con le informazioni necessarie (modalità, difficoltà, turno, giocatori)
+		
 		try {
-			if(chooseDifficulty.getValue()==null)		// se non è stato specificato un livello, viene settato il livello facile di default
+			if(chooseDifficulty.getValue()==null)			// se non è stato specificato un livello (non sono presenti bot), imposta livello facile di default
 	    		chooseDifficulty.setValue(BOTDIFF.FACILE);
 			
 	        FileWriter fw = new FileWriter(gameFile.getAbsolutePath(),true);
 	        Iterator<PlayerInGame> iter = playersInGame.iterator();
 	        Random rand=new Random();
 	        
-	        fw.write("SingleGame," + chooseDifficulty.getValue() + ","+rand.nextInt(playersInGame.size())+"\n");
-	        Collections.shuffle(playersInGame);			// mescola i giocatori
+	        fw.write("SingleGame," + chooseDifficulty.getValue() + "," + rand.nextInt(playersInGame.size()) + "\n");		// intestazione (prima riga) --> modalità , difficoltà , turno sorteggiato
+	        Collections.shuffle(playersInGame);				// mescola i giocatori
 			while(iter.hasNext())
 				fw.write("in," + iter.next() + "\n");
 			
 			fw.flush();
 			fw.close();
 		} catch (IOException e) {
-			e.printStackTrace();
+			Alert exceptionAlert = new Alert(AlertType.ERROR);
+			exceptionAlert.setTitle("ERRORE");
+			exceptionAlert.setHeaderText("Errore nell'accesso al file");
+			exceptionAlert.setContentText(e.getClass().getSimpleName());
+			exceptionAlert.showAndWait();
 		}
 	}
 }

@@ -19,6 +19,7 @@ import javafx.stage.Stage;
 
 public class LoginAdminController {
 	
+	// credenziali admin (non modificabili)
 	public final static String adminPassword = "admin1234";
 	public final static String adminName = "admin";
 	
@@ -38,19 +39,19 @@ public class LoginAdminController {
 	private Text loginStatusText;
 	
 	public void login() throws IOException{
-		if(adminNameField.getText().equals(adminName) &&
-			adminPasswordField.getText().equals(adminPassword)) {
+		// effettua l'accesso all'AdminMenu
+		if(adminNameField.getText().equals(adminName) && adminPasswordField.getText().equals(adminPassword)) {	// controllo credenziali
 				
-			//Se le credenziali sono giuste entra in AdminMenu
+			// lancia l'AdminMenu
 			stage = (Stage)(confirmLogin.getScene().getWindow());
 			  FXMLLoader Loader=new FXMLLoader(AdminMenuController.class.getResource("/application/Admin/AdminMenu.fxml"));
 			  root = (Parent) Loader.load();
 			  scene = new Scene(root);
 			  stage.setScene(scene);
 			  stage.show();	
-		}
-		
-		else {
+			  
+		} else {
+			// errore credenziali errate
 			Alert loginError = new Alert(AlertType.ERROR);
 			loginError.setTitle("ERRORE!");
 			loginError.setContentText("Nome admin o password errati: riprovare.");
@@ -58,15 +59,15 @@ public class LoginAdminController {
 			loginStatusText.setFill(Color.RED);
 			loginError.showAndWait();
 			
-			adminNameField.clear();
-			adminPasswordField.clear();
+			adminNameField.clear();			// reset field nome utente
+			adminPasswordField.clear();		// reset field password
 		}	
 	}
 
     @FXML
     public void returnToMainMenu(ActionEvent event) throws IOException {
+    	// torna alla schermata iniziale (lancia MainMenu)
     	stage = (Stage)(returnToMainMenuButton.getScene().getWindow());
-		 
 		  FXMLLoader Loader=new FXMLLoader(MainMenuController.class.getResource("/application/MainMenu/MainMenu.fxml"));
 		  root = (Parent) Loader.load();
 		  scene = new Scene(root);

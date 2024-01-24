@@ -42,20 +42,22 @@ public class DeleteGameController {
     private Label message;
 
     @FXML
-    public void deleteGame(ActionEvent event) throws IOException { 
+    public void deleteGame(ActionEvent event) { 
     	// elimina la partita con il codice inserito
     	code = codeField.getText().toUpperCase();
     	
     	if(code.startsWith("T")) {
+    		// TORNEO SEMPLICE
     		toDelete = new File(Paths.get("./GiocoSPACCA//Informazioni_Partite/" + code).toString());
-    		if(toDelete.exists()) {
+    		
+    		if(toDelete.exists()) {		// controlla esistenza torneo inserito
     			Alert alert = new Alert(AlertType.CONFIRMATION);
    				alert.setTitle("Elimina partita");
    				alert.setHeaderText("OPERAZIONE IRREVERSIBILE");
    				alert.setContentText("Sei sicuro di voler eliminare la partita \"" + code + "\"?");
    				
-   				if(alert.showAndWait().get() == ButtonType.OK) {
-   					// prima di eliminare la directory del torneo bisogna eliminare i file all'interno di essa
+   				if(alert.showAndWait().get() == ButtonType.OK) {		// conferma eliminazione
+   					// svuota la directory
    					
    					toDelete = new File(Paths.get("./GiocoSPACCA/Informazioni_Partite/" + code + "/finale.csv").toString());
    		    		if(toDelete.exists()) {
@@ -76,7 +78,7 @@ public class DeleteGameController {
    		    			toDelete.delete();
    		    		}	
    		    		
-   		    		// eliminazione della directory
+   		    		// elimina la directory
    		    		toDelete = new File(Paths.get("./GiocoSPACCA/Informazioni_Partite/" + code).toString());
    		    		toDelete.delete();
    		    		
@@ -91,6 +93,7 @@ public class DeleteGameController {
 	    	}
     	
 	    } else if(code.startsWith("L") || code.startsWith("S")) {
+	    	// LAST MAN STANDING O PARTITA SINGOLA
 	    	toDelete = new File(Paths.get("./GiocoSPACCA/Informazioni_Partite/" + code + ".csv").toString());
 	    	
     		if(toDelete.exists()) {
@@ -100,7 +103,7 @@ public class DeleteGameController {
    				alert.setContentText("Sei sicuro di voler eliminare la partita \"" + code + "\"?");
    				
    				if(alert.showAndWait().get() == ButtonType.OK) {
-   					// eliminazione del file partita
+   					// elimina il file partita
    					
    					getPlayers(toDelete);
    					toDelete.delete();
@@ -118,7 +121,7 @@ public class DeleteGameController {
 	    } else {
 	    	gameNotFound();
 	    }
-    	subtractPlayersGames();
+    	subtractPlayersGames();			// decrementa di uno il contatore delle partite dei giocatori nella partita eliminata
     }
 
     @FXML
@@ -147,7 +150,7 @@ public class DeleteGameController {
     	// decrementa di uno il contatore delle partite dei giocatori
     	if(players.size()!=0)
     		for(Player p : players)
-        		p.subtractGame();
+        		p.subtractGame();			// decrementa di uno il contatore delle partite del giocatore
     }
     
     private void getPlayers(File f) {
@@ -165,7 +168,11 @@ public class DeleteGameController {
 			}
 			scan.close();
 		} catch (FileNotFoundException e) {
-			e.printStackTrace();
+			Alert exceptionAlert = new Alert(AlertType.ERROR);
+			exceptionAlert.setTitle("ERRORE");
+			exceptionAlert.setHeaderText("File non trovato");
+			exceptionAlert.setContentText(e.getClass().getSimpleName());
+			exceptionAlert.showAndWait();
 		}
     }
 }

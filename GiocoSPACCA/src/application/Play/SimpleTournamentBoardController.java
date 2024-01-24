@@ -15,14 +15,14 @@ public class SimpleTournamentBoardController extends Board {
 	public SimpleTournamentBoardController(SimpleTournament tournament, Game game) {
 		this.tournament = tournament;
 		this.game = game;
-		
 	}
 
 	@Override
 	protected void nextPlayerBoard() throws IOException {
-		game.nextTurn();
+		game.nextTurn();					// avanza al turno successivo
 		game.eliminationManagement();		// controllo per eliminazioni multiple/contemporanee
 		
+		// carica la schermata del prossimo giocatore
 		stage = (Stage)(playCardButton.getScene().getWindow());
 		FXMLLoader Loader=new FXMLLoader(SimpleTournamentBoardController.class.getResource("Board.fxml"));
 		Loader.setController(this);
@@ -34,7 +34,7 @@ public class SimpleTournamentBoardController extends Board {
 
 	@Override
 	protected void endGame() throws IOException {
-		game.save();
+		game.save();		// salvataggio partita
 		
 		if(!game.gameFile.getName().split("\\.")[0].equals("finale")) {		// se è una semifinale
 			tournament.updateFinal();										// scrive il vincitore della semifinale nel file della finale
@@ -48,10 +48,8 @@ public class SimpleTournamentBoardController extends Board {
 	    	stage.centerOnScreen();
 	    	stage.show();
 			  
-		} else {					// se è la finale
-			game.save();
-			
-			// carica la classifica del torneo (TODO)
+		} else {			// se è la finale
+			// carica la classifica del torneo
 			stage = (Stage)(saveAndExitButton.getScene().getWindow());
 	    	FXMLLoader Loader=new FXMLLoader(GameScoreBoardController.class.getResource("GameScoreBoard.fxml"));
 	    	root = (Parent) Loader.load();
@@ -63,6 +61,7 @@ public class SimpleTournamentBoardController extends Board {
 
 	@Override
 	protected void setTitle() {
+		// imposta il label gameTitle (in alto nell'fxml)
 		if(game.code.endsWith("1"))
 			gameTitle.setText("SEMIFINALE 1");
 		else if(game.code.endsWith("2"))
