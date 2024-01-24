@@ -27,8 +27,7 @@ public class Player {		// superclasse di PlayerInGame
 		Path pathToFile = Paths.get("./GiocoSPACCA/Informazioni_Partite/PLAYERS_REGISTER.csv");
 		File f=new File(pathToFile.toString());
 		
-		if(!f.exists())
-			Main.fileCheck();
+		Main.fileCheck();			// se il file non esiste, lo crea
 	        	
 		try {
 	        FileWriter fw = new FileWriter(f.getAbsolutePath(), true);
@@ -46,10 +45,8 @@ public class Player {		// superclasse di PlayerInGame
 		Path pathToFile = Paths.get("./GiocoSPACCA/Informazioni_Partite/PLAYERS_REGISTER.csv");
 		File f=new File(pathToFile.toString());
 		
-		if(!f.exists()) {
-			Main.fileCheck();
-			return false;
-		}
+		if(!Main.fileCheck())
+			return false;			// se il file non esiste, anche il giocatore non è memorizzato
 		
 		try {
 			Scanner scan = new Scanner(f);
@@ -72,30 +69,29 @@ public class Player {		// superclasse di PlayerInGame
 		Path pathToFile = Paths.get("./GiocoSPACCA/Informazioni_Partite/PLAYERS_REGISTER.csv");
 		File f=new File(pathToFile.toString());
 		
-		if(!f.exists())
-			Main.fileCheck();
-		
-		try {
-			Scanner scan = new Scanner(f);
-			scan.reset();
-			String memory="";
-			
-			while(scan.hasNextLine()) {
-				String line=scan.nextLine();
-				String[] tokens = line.split(",");
-				if(!tokens[0].equals(this.username)) {
-					memory=memory+line + "\n";
-				}
-			}
-			scan.close();	
+		if(Main.fileCheck()) {		// se il file non esiste, non c'è nulla da eliminare
+			try {
+				Scanner scan = new Scanner(f);
+				scan.reset();
+				String memory="";
 				
-			FileWriter fw = new FileWriter(f.getAbsolutePath(), false);
-			fw.write(memory);
-			fw.flush();
-			fw.close();
-			
-		} catch(IOException e) {
-			e.printStackTrace();
+				while(scan.hasNextLine()) {
+					String line=scan.nextLine();
+					String[] tokens = line.split(",");
+					if(!tokens[0].equals(this.username)) {
+						memory=memory+line + "\n";
+					}
+				}
+				scan.close();	
+					
+				FileWriter fw = new FileWriter(f.getAbsolutePath(), false);
+				fw.write(memory);
+				fw.flush();
+				fw.close();
+				
+			} catch(IOException e) {
+				e.printStackTrace();
+			}
 		}
 	}
 	
@@ -105,8 +101,7 @@ public class Player {		// superclasse di PlayerInGame
 		Path pathToFile = Paths.get("./GiocoSPACCA/Informazioni_Partite/PLAYERS_REGISTER.csv");
 		File f=new File(pathToFile.toString());
 		
-		if(!f.exists())
-			Main.fileCheck();
+		// no controllo esistenza file	--> questo metodo viene richiamato dopo exist()
 		
 		try {
 			Scanner scan = new Scanner(f);
@@ -140,8 +135,7 @@ public class Player {		// superclasse di PlayerInGame
 		Path pathToFile = Paths.get("./GiocoSPACCA/Informazioni_Partite/PLAYERS_REGISTER.csv");
 		File f=new File(pathToFile.toString());
 		
-		if(!f.exists())
-			Main.fileCheck();
+		// no controllo esistenza file	--> questo metodo viene richiamato dopo exist()
 		
 		try {
 			Scanner scan = new Scanner(f);
@@ -177,10 +171,8 @@ public class Player {		// superclasse di PlayerInGame
 		Path pathToFile = Paths.get("./GiocoSPACCA/Informazioni_Partite/PLAYERS_REGISTER.csv");
 		File f=new File(pathToFile.toString());
 		
-		if(!f.exists()) {
-			Main.fileCheck();
-			return false;
-		}
+		if(!Main.fileCheck())
+			return false;			// se il file non esiste, non c'è nulla da controllare
 		
 		try {
 			Scanner scan = new Scanner(f);
