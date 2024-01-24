@@ -56,8 +56,8 @@ public class InsertCodeController {
     		// lancia SIMPLE TOURNAMENT
     		pathToGame = Paths.get("./GiocoSPACCA/Informazioni_Partite/" + code); 
     		
-    		if(Files.exists(pathToGame)) {		// controllo esistenza directory torneo
-    			startGame();
+    		if(Files.exists(pathToGame)) {	// controllo esistenza directory torneo
+    			startGame();				// throws IOException
     		} else {
     			enterStatusText.setText("Codice inserito non riconosciuto, riprovare");
          		enterStatusText.setFill(Color.RED);
@@ -71,8 +71,8 @@ public class InsertCodeController {
     		// lancia SINGLE GAME o LAST MAN STANDING
 	    	pathToGame = Paths.get("./GiocoSPACCA/Informazioni_Partite/" + code + ".csv"); 
 	    	
-	    	if(Files.exists(pathToGame)) {		// controllo esistenza file partita
-	    		startGame();
+	    	if(Files.exists(pathToGame)) {	// controllo esistenza file partita
+	    		startGame();				// throws IOException
 	    	 } else {
 	    		enterStatusText.setText("Codice inserito non riconosciuto, riprovare");
 			    enterStatusText.setFill(Color.RED);

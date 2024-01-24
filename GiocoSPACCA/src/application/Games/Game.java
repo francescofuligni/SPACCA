@@ -10,6 +10,8 @@ import application.Admin.BOTDIFF;
 import application.Card.Card;
 import application.Card.Deck;
 import application.Player.*;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 
 public abstract class Game {	// superclasse di SingleGame e LastManStanding
 	
@@ -66,7 +68,11 @@ public abstract class Game {	// superclasse di SingleGame e LastManStanding
 			scan.close();
 			
 		} catch (FileNotFoundException e) {
-			e.printStackTrace();
+			Alert exceptionAlert = new Alert(AlertType.ERROR);
+			exceptionAlert.setTitle("ERRORE");
+			exceptionAlert.setHeaderText("File non trovato");
+			exceptionAlert.setContentText(e.getClass().getSimpleName());
+			exceptionAlert.showAndWait();
 		}
 	}
 	

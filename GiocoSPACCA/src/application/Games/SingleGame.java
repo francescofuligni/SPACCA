@@ -7,6 +7,8 @@ import java.util.ArrayList;
 
 import application.Card.Card;
 import application.Player.PlayerInGame;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 
 public class SingleGame extends Game{
 	
@@ -50,7 +52,11 @@ public class SingleGame extends Game{
 			fw.flush();
 			fw.close();
 		} catch (IOException e) {
-			e.printStackTrace();
+			Alert exceptionAlert = new Alert(AlertType.ERROR);
+			exceptionAlert.setTitle("ERRORE");
+			exceptionAlert.setHeaderText("Errore nell'accesso al file");
+			exceptionAlert.setContentText(e.getClass().getSimpleName());
+			exceptionAlert.showAndWait();
 		}
 	}
 	

@@ -46,8 +46,8 @@ public abstract class Board implements Initializable {		// superclasse dei contr
 	private Thread botThread;
 	
 	// flag per bot
-	private boolean exited = false;			// true se si esce salvando la partita
-	private boolean infoBoard = false;		// true se si apre il tabellone HP
+	private boolean exited = false;				// true se si esce salvando la partita
+	private boolean messageOpen = false;		// true se si apre un messaggio
 	
 	@FXML
 	protected AnchorPane anchorPane;
@@ -126,21 +126,33 @@ public abstract class Board implements Initializable {		// superclasse dei contr
 						Thread.sleep(1500); 				// pausa di 1s e mezzo prima di chiamare il metodo fire del bottone
 					}
 					
-					while(infoBoard || Main.message)		// attende la chiusura di un eventuale messaggio aperto prima di continuare
+					while(messageOpen || Main.message)		// attende la chiusura di un eventuale messaggio aperto prima di continuare
 						Thread.sleep(1000);
 					
 					Platform.runLater(new Runnable() {  	// per poter interagire con la GUI, richiamo il main thread (application)
 						@Override
 						public void run() {
 							try {
-								playCard(new ActionEvent());
+								playCard(new ActionEvent());		// throws IOException
 							} catch (IOException e) {
-								e.printStackTrace();
+								messageOpen = true;
+								Alert exceptionAlert = new Alert(AlertType.ERROR);
+								exceptionAlert.setTitle("ERRORE");
+								exceptionAlert.setHeaderText("Errore nel caricamento della schermata");
+								exceptionAlert.setContentText(e.getClass().getSimpleName());
+								exceptionAlert.showAndWait();
+								messageOpen = false;
 							}
 						}
 					});
 				} catch (InterruptedException e) {
-					e.printStackTrace();
+					messageOpen = true;
+					Alert exceptionAlert = new Alert(AlertType.ERROR);
+					exceptionAlert.setTitle("ERRORE");
+					exceptionAlert.setHeaderText("BOT interrotto durante l'esecuzione");
+					exceptionAlert.setContentText(e.getClass().getSimpleName());
+					exceptionAlert.showAndWait();
+					messageOpen = false;
 				}
 			});
 			botThread.start(); 		// avvio del thread	--> il bot esegue le operazioni
@@ -151,7 +163,7 @@ public abstract class Board implements Initializable {		// superclasse dei contr
 	public void playCard(ActionEvent event) throws IOException {
 		// azione bottone gioca carta
 		
-		if(!exited) {	// (per il bot) controlla se l'utente è uscito dalla partita	--> il botThread termina
+		if(!exited) {	// (per il bot) controlla se l'utente è uscito dalla partita	--> il botThread termina senza lanciare la schermata successiva
 			if(current.equals(nextAlive)) {
 				// caso vittoria
 				endGame();					// termina la partita
@@ -159,7 +171,7 @@ public abstract class Board implements Initializable {		// superclasse dei contr
 			} else if(isOut) {	
 				// caso eliminazione
 				game.removePlayer();		// giocatore corrente abbandona
-				nextPlayerBoard();			// passa al giocatore successivo
+				nextPlayerBoard();			// passa al giocatore successivo (throws IOException)
 				
 			} else {
 				// caso normale
@@ -182,7 +194,7 @@ public abstract class Board implements Initializable {		// superclasse dei contr
 				} else {
 					Card c = current.getCard(images.indexOf(selectedImage));	// rimuove la carta dalla mano del giocatore
 					c.effect(game);			// gioca la carta	--> chiama l'effetto della carta
-					nextPlayerBoard();		// passa al giocatore successivo
+					nextPlayerBoard();		// passa al giocatore successivo (throws IOException)
 				}
 			}
 		}
@@ -191,13 +203,13 @@ public abstract class Board implements Initializable {		// superclasse dei contr
 	@FXML
 	public void infoBoardDisplay(ActionEvent event) {
 		// mostra il tabellone
-		infoBoard=true;
+		messageOpen=true;
 		Alert info = new Alert(AlertType.INFORMATION);
 		info.setTitle("Tabellone HP");
 		info.setHeaderText(game.printPlayers());			// giocatori in partita
 		info.setContentText(game.printEliminated());		// giocatori eliminati
 		info.showAndWait();
-		infoBoard=false;
+		messageOpen=false;
 	}
 	
 	@FXML
