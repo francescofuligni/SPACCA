@@ -52,11 +52,11 @@ public class Main extends Application {
 		}
 	}
 	
-	public static void fileCheck() {
+	public static boolean fileCheck() {
 		// se non esiste il registro giocatori, lo crea
 		Path pathToFile = Paths.get("./GiocoSPACCA/Informazioni_Partite/PLAYERS_REGISTER.csv");
 		File f=new File(pathToFile.toString());
-		if(!f.exists())
+		if(!f.exists()) {
 	        try {
 	            Files.createDirectories(pathToFile.getParent());
 	            Files.createFile(pathToFile);
@@ -70,7 +70,9 @@ public class Main extends Application {
 	        } catch (IOException e) {
 	            System.out.println(e);
 	        }
-		
+	        return false;
+		}
+		return true;
 	}
 	
 	private void closeApp(Stage s) {
