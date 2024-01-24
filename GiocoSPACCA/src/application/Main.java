@@ -1,11 +1,13 @@
 package application;
 
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.Scanner;
 
 import javafx.application.Application;
 import javafx.event.EventHandler;
@@ -53,10 +55,11 @@ public class Main extends Application {
 	}
 	
 	public static boolean fileCheck() {
-		// se non esiste il registro giocatori, lo crea
+		// controllo esistenza file Players Register
 		Path pathToFile = Paths.get("./GiocoSPACCA/Informazioni_Partite/PLAYERS_REGISTER.csv");
 		File f=new File(pathToFile.toString());
 		if(!f.exists()) {
+			// se non esiste, lo crea
 	        try {
 	            Files.createDirectories(pathToFile.getParent());
 	            Files.createFile(pathToFile);
@@ -71,8 +74,29 @@ public class Main extends Application {
 	            System.out.println(e);
 	        }
 	        return false;
+		} else {
+			// se esiste, controlla che sia presente l'utente ADMIN
+			try {
+				boolean foundAdmin = false;
+				Scanner scan = new Scanner(f);
+				while(scan.hasNextLine() && !foundAdmin) {	// cerca l'utente ADMIN
+					if(scan.nextLine().split(",")[0].equals("ADMIN"))
+						foundAdmin = true;
+				}
+				scan.close();
+				
+				if(!foundAdmin) {
+					// se ADMIN non è presente, lo aggiunge
+					FileWriter fw = new FileWriter(f.getAbsolutePath(), true);
+					fw.write("ADMIN,0,0\n");
+					fw.flush();
+					fw.close();
+				}
+			} catch (IOException e) {						// FileNotFoundException is a IOException
+				e.printStackTrace();
+			}
+			return true;
 		}
-		return true;
 	}
 	
 	private void closeApp(Stage s) {
