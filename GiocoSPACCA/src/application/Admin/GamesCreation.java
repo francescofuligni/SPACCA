@@ -9,7 +9,6 @@ import java.util.ArrayList;
 import java.util.ResourceBundle;
 import java.util.Scanner;
 
-import application.Player.Bot;
 import application.Player.Player;
 import application.Player.PlayerInGame;
 import javafx.event.ActionEvent;

@@ -22,7 +22,6 @@ public abstract class Game {
 	public Deck deck;			// scope public per i metodi effect delle carte
 	
 	public Game(Path path) {
-		
 		this.gameFile = new File(path.toString());
 		this.code = gameFile.getName().split("\\.")[0];
 		

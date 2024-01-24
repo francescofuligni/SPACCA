@@ -12,7 +12,6 @@ public class LastManStandingBoardController extends Board {
 
 	public LastManStandingBoardController(Game game) {
 		this.game = game;
-		
 	}
 	
 	@Override

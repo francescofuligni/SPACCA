@@ -11,7 +11,6 @@ public class SingleGameBoardController extends Board {
 	
 	public SingleGameBoardController(Game game) {
 		this.game = game;
-		
 	}
 	
 	@Override

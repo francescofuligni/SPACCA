@@ -23,8 +23,8 @@ public class EmailSender {
         properties.put("mail.smtp.starttls.enable", "true");
 		
 		
-		final String senderEmail= "notifica.spacca.the.game@gmail.com";
-		final String senderPsw="gtgx pnqy mjgm uaea";
+		final String senderEmail = "notifica.spacca.the.game@gmail.com";
+		final String senderPsw = "gtgx pnqy mjgm uaea";
 		
 		Session session = Session.getInstance(properties, new Authenticator() {
 			@Override
@@ -45,7 +45,6 @@ public class EmailSender {
 			message.setRecipient(Message.RecipientType.TO, new InternetAddress(to));
 			message.setSubject("Risultati Partita SPACCA: " + InsertCodeController.code);
 			message.setText(messageText);
-			System.out.println("Mail sent succsesfully");			// STAMPA DI PROVA
 			return message;
 		} catch(Exception e) {
 			Logger.getLogger(EmailSender.class.getName()). log(Level.SEVERE, null, e);

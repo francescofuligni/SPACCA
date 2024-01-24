@@ -91,7 +91,7 @@ public class Main extends Application {
 			s.close();
 		message = false;
 	}
-
+	
 	public static void main(String[] args) {
 		launch(args);
 	}
