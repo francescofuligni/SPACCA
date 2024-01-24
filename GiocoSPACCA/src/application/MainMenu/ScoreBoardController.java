@@ -33,43 +33,38 @@ public class ScoreBoardController implements Initializable {
 	
     @FXML
     private ListView<String> scoreBoard;
-    
     @FXML
     private Button menuButton;
-    
-    @FXML
-    void returnToMainMenu(ActionEvent e) throws IOException {
-    	stage = (Stage)(menuButton.getScene().getWindow());
-		  //IMPORTANTE RICORDA IL ../ nell'URL DEL FXML
-		  FXMLLoader Loader=new FXMLLoader(ScoreBoardController.class.getResource("/application/MainMenu/MainMenu.fxml"));
-		  root = (Parent) Loader.load();
-		  scene = new Scene(root);
-		  stage.setScene(scene);
-		  stage.show();
-    }
     
     @Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
     	Path pathToFile = Paths.get("./GiocoSPACCA/Informazioni_Partite/PLAYERS_REGISTER.csv");
 		File f=new File(pathToFile.toString());
-    
 		try {
 			Scanner scan=new Scanner(f);
-			
-			while(scan.hasNextLine()){
-					String line=scan.nextLine();
-					String[] tokens = line.split(",");
-					this.players.put(tokens[0], Integer.parseInt(tokens[1]));
-					}
+			while(scan.hasNextLine()){					// estrae i giocatori e i loro punteggi dal registro giocatori
+				String line=scan.nextLine();
+				String[] tokens = line.split(",");
+				this.players.put(tokens[0], Integer.parseInt(tokens[1]));
+			}
 			List<Entry<String,Integer>> list= new ArrayList<>(this.players.entrySet());
-			list.sort(Entry.comparingByValue());		// ordinamento
+			list.sort(Entry.comparingByValue());		// ordinamento (decrescente) dei giocatori in base al punteggio
 			for(int i=list.size()-1;i>=0;i--)
-			scoreBoard.getItems().add("["+list.get(i).getValue()+"] - " + list.get(i).getKey() );
-		
+			scoreBoard.getItems().add("["+list.get(i).getValue()+"] - " + list.get(i).getKey() );		// inizializza la classifica
 			scan.close();
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
 		}
     }
 
+    @FXML
+    public void returnToMainMenu(ActionEvent e) throws IOException {
+    	// torna al MainMenu
+    	stage = (Stage)(menuButton.getScene().getWindow());
+		  FXMLLoader Loader=new FXMLLoader(ScoreBoardController.class.getResource("/application/MainMenu/MainMenu.fxml"));
+		  root = (Parent) Loader.load();
+		  scene = new Scene(root);
+		  stage.setScene(scene);
+		  stage.show();
+    }
 }

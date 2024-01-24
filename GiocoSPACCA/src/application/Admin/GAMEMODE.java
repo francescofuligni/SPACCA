@@ -1,6 +1,6 @@
 package application.Admin;
 
-public enum GAMEMODE {
+public enum GAMEMODE {		// enumeration modalità torneo
 	LASTMANSTANDING,
 	SEMPLICE;
 }

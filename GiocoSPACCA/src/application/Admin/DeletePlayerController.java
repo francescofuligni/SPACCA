@@ -44,29 +44,29 @@ public class DeletePlayerController {
 	
 	@FXML
 	public void deletePlayer(ActionEvent event) throws IOException {
-		
+		// elimina il giocatore inserito
     	String username = usernameField.getText().trim();
     	
-    	if(username==null || username.equals("")) {				
+    	if(username==null || username.equals("")) {					// controlla nomi accettabili
 			eliminationError("Non esistono giocatori con nome vuoto");
     	
-    	} else if (username.toUpperCase().equals("ADMIN")) {
+    	} else if (username.toUpperCase().equals("ADMIN")) {		// il giocatore ADMIN non è removibile
 			eliminationError("Non puoi rimuovere l'account amministratore");
 		
     	} else {
 			Player toDelete=new Player(username);
 			
-			if(!toDelete.exists()) {
+			if(!toDelete.exists()) {								// controlla esistenza giocatore da eliminare
 				eliminationError("Giocatore non trovato");
-			} else if(toDelete.isInGame()) {
-				eliminationError("Il giocatore ha una partita in corso");			// impedisce di rimuovere giocatori in partita
+			} else if(toDelete.isInGame()) {						// controlla che il giocatore non abbia partite in corso
+				eliminationError("Il giocatore ha una partita in corso");
 			} else {
 				Alert alert = new Alert(AlertType.CONFIRMATION);
 				alert.setTitle("Elimina giocatore");
 				alert.setHeaderText("Stai per eliminare un giocatore");
 				alert.setContentText("Sei sicuro di voler eliminare il giocatore \"" + username + "\"?");
 				
-				if(alert.showAndWait().get() == ButtonType.OK) {
+				if(alert.showAndWait().get() == ButtonType.OK) {	// conferma eliminazione
 					toDelete.delete();
 					message.setTextFill(Color.GREEN);
 					message.setText("Giocatore \"" + username + "\" eliminato correttamente");
@@ -76,10 +76,11 @@ public class DeletePlayerController {
 				}
 			}
 		}
-    	usernameField.setText(null);
+    	usernameField.clear();		// reset field nome giocatore
 	}
 	
 	private void eliminationError(String text) {
+		// errore di eliminazione (testo impostato a seconda della casistica)
 		Alert alert = new Alert(AlertType.ERROR);
 		alert.setTitle("Errore");
 		alert.setHeaderText("Eliminazione fallita");

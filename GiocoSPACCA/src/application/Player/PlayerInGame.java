@@ -4,10 +4,10 @@ import java.util.ArrayList;
 
 import application.Card.*;
 
-public class PlayerInGame extends Player {
+public class PlayerInGame extends Player {		// superclasse di Bot
 	
 	protected int healthPoints;
-	protected ArrayList<Card> hand;				// scope protected per permetterne la visibilità nella sottoclasse Bot
+	protected ArrayList<Card> hand;
 	public final int MAXHP = 20;				// valore massimo di punti salute
 	
 	public PlayerInGame(String username) {
@@ -27,13 +27,16 @@ public class PlayerInGame extends Player {
 	}
 	
 	public Card getCard(int i) {
+		// restituisce la carta in posizione i e la rimuove dalla mano
 		return hand.remove(i);
 	}
 	public void addCard(Card c) {
+		// aggiunge una carta alla mano, nella prima posizione
 		hand.add(0,c);
 	}
 	
 	public boolean hasImprevisti() {
+		// controlla se il giocatore ha imprevisti in mano
 		for(Card c: hand)
 			if(c.getCode()<=16 && c.getCode()>=13)
 				return true;
@@ -60,8 +63,10 @@ public class PlayerInGame extends Player {
 	
 	@Override
 	public String toString() {
-		String s =  super.toString() + "," + healthPoints;
+		// restituisce una stringa con le informazioni del giocatore
+		// --> coerente con il formato (.csv per il salvataggio su file)
 		
+		String s =  super.toString() + "," + healthPoints;
 		for(int i=0; i<hand.size(); i++)
 			if(hand.get(i)!=null)
 				s+=("," + hand.get(i));

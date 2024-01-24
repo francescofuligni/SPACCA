@@ -15,16 +15,15 @@ public class Bot extends PlayerInGame {
 	}
 
 	public int botCard(BOTDIFF difficulty) {
-		// metodo per la giocata del BOT
+		// metodo per la giocata del BOT	--> diverso a seconda della difficoltà
 		
-		if(this.hasImprevisti())				// se ha imprevisti, gioca il primo imprevisto che ha in mano
+		if(this.hasImprevisti())	// se ha imprevisti, gioca il primo imprevisto che ha in mano
 			for(Card c: hand)
 				if(c.getCode()<=16 && c.getCode()>=13)
 					return hand.indexOf(c);
 		
 		if(difficulty.equals(BOTDIFF.DIFFICILE)) {
-			// BOT DIFFICILE	-->	gioca prima le special card, poi le carte che infliggono più danno
-			
+			// BOT DIFFICILE	-->	gioca prima le special card, poi le carte con più danno o cura a seconda dei propri HP
 			int imax = -1;
 			int imin = -1;
 			boolean first = true;

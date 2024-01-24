@@ -14,12 +14,13 @@ public class LastManStanding extends Game {
 	public LastManStanding(Path path)  {
 		super(path);
 		
-		if(!newGame())
-			eliminationManagement();
+		if(!newGame())					// se è una nuova partita, distribuisce le carte
+			eliminationManagement();	// se non è una nuova partita, gestisce eventuali eliminazioni
 	}
 	
 	@Override
 	public void removePlayer() {
+		// rimuove il giocatore corrente nel caso in cui sia stato eliminato
 		eliminated.add(0, players.remove(turn));
 		eliminated.get(0).setHand(new ArrayList<Card>());
 		eliminated.get(0).setHealthPoints(0);
@@ -36,8 +37,9 @@ public class LastManStanding extends Game {
 
 	@Override
 	public void save() {
+		// salva la partita su file
 		try {
-	        FileWriter fw = new FileWriter(gameFile.getAbsolutePath());			// sovrascrive il file
+	        FileWriter fw = new FileWriter(gameFile.getAbsolutePath());			// sovrascrive il file precedente
 	        fw.write("LASTMANSTANDING," + difficulty + "," +  turn +  "\n");
 	        
 	        // giocatori in partita
@@ -59,10 +61,10 @@ public class LastManStanding extends Game {
 	
 	@Override
 	public void eliminationManagement() {
-		// --> se trova un giocatore morto, setta il turno in modo che sia il turno del giocatore morto
-		// --> in questo modo, appena un giocatore muore è costretto ad abbandonare e la partita viene ricaricata
+		// se trova un giocatore eliminato, setta il turno in modo che sia il turno del giocatore eliminato
+		// --> in questo modo, appena un giocatore viene eliminato è costretto ad abbandonare e la partita viene ricaricata
 		
-		// se ci sono più giocatori eliminati contemporaneamente, viene eliminato quello con minori punti salute minori
+		// se ci sono più giocatori eliminati, viene eliminato quello con punti salute minori
 		int cont=0, i=turn, iLowest=-1;
 		boolean first = true;
 		
@@ -91,6 +93,7 @@ public class LastManStanding extends Game {
 	
 	
 	private void restartGame() {
+		// reimposta la partita
 		for(PlayerInGame p : players) {
 			p.setHealthPoints(p.MAXHP);			// reinizializza i punti salute
 			p.setHand(new ArrayList<>());		// rimuove le vecchie carte

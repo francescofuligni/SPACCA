@@ -38,27 +38,22 @@ public class GameScoreBoardController implements Initializable {
 	
 	@FXML
 	private Label generalScoreBoardLabel;
-	
 	@FXML
 	private Label gameCodeLabel;
-
 	@FXML
 	private Label mailLabel;
-	
     @FXML
     private Button menuButton;
-
     @FXML
     private ListView<String> scoreBoard;
-    
     @FXML
     private TextField emailField;
-    
     @FXML
     private Button sendEmailButton;
 
     @FXML
     public void returnToMainMenu(ActionEvent event) throws IOException {
+    	// azione bottone esci	--> torna al MainMenu
     	stage = (Stage)(menuButton.getScene().getWindow());
 		  FXMLLoader Loader=new FXMLLoader(MainMenuController.class.getResource("/application/MainMenu/MainMenu.fxml"));
 		  root = (Parent) Loader.load();
@@ -69,9 +64,10 @@ public class GameScoreBoardController implements Initializable {
     
     @Override
     public void initialize(URL arg0, ResourceBundle arg1) {
-    	
     	gameCodeLabel.setText("Classifica " + code);
+    	
     	try {
+    		// estrae i giocatori dai file partita
     		Scanner scan;
     		File f;
 			if(code.startsWith("T")) {
@@ -119,11 +115,11 @@ public class GameScoreBoardController implements Initializable {
 				f.delete();						// elimina il file della partita
 			}
 			
-			givePoints();						// assegna i punti
+			givePoints();						// assegna i punti ai giocatori
 			for(String username : players.keySet()) {
 				scoreBoard.getItems().add("[ +" + players.get(username) + " ] - " + username);
 			}
-			updateScores();						// aggiorna il punteggio totale dei giocatori nella classifica generale
+			updateScores();						// aggiorna il punteggio totale dei giocatori nella classifica generale (Players Register)
 			
 		} catch (IOException e) {				// FileNotFoundException is a IOException
 			e.printStackTrace();
@@ -133,43 +129,43 @@ public class GameScoreBoardController implements Initializable {
     
     @FXML
     public void sendMail() throws Exception {
-    	String to = emailField.getText().trim().toLowerCase(); //tanto tutte mail in minuscolo
-    	if( to!=null && !to.equals("") && to.contains("@") && to.contains(".") ) {
+    	// azione bottone invia	--> invia email all'indirizzo inserito
+    	String to = emailField.getText().trim().toLowerCase(); 						// mail in minuscolo
+    	
+    	if( to!=null && !to.equals("") && to.contains("@") && to.contains(".") ) {	// controllo correttezza indirizzo inserito
     		mailLabel.setTextFill(Color.GREEN);
-        	mailLabel.setText("Mail inviata correttamente"); 
-        	EmailSender.sendMail(to,getMessage());
-    	}
-    	else {
+        	EmailSender.sendMail(to,getMessage());				// invia email
+        	mailLabel.setText("Mail inviata correttamente");	// messaggio di conferma invio
+    	
+    	} else {
     		mailLabel.setTextFill(Color.RED);
-        	mailLabel.setText("Indirizzo Email non valido."); 
+        	mailLabel.setText("Indirizzo email non valido"); 	// messaggio di invio email non riuscito
     	}
     }
     
-    
-    
     @FXML
     public void generalScoreBoard(MouseEvent event) throws IOException {
+    	// lancia la classifica generale
     	stage = (Stage)(menuButton.getScene().getWindow());
-		 
 		  FXMLLoader Loader=new FXMLLoader(ScoreBoardController.class.getResource("ScoreBoard.fxml"));
 		  root = (Parent) Loader.load();
 		  scene = new Scene(root);
 		  stage.setScene(scene);
 		  stage.show();
     }
-
+    
     @FXML
     public void setColorGrey(MouseEvent event) {
     	generalScoreBoardLabel.setTextFill(Color.GREY);
     }
-    
     @FXML
     public void setColorWhite(MouseEvent event) {
     	generalScoreBoardLabel.setTextFill(Color.WHITE);
     }
-      
     
-    private void updateScores() {								// aggiorna il punteggio totale dei giocatori nella classifica generale
+    
+    private void updateScores() {
+    	// aggiorna il punteggio totale dei giocatori nella classifica generale
 		Path pathToFile = Paths.get("./GiocoSPACCA/Informazioni_Partite/PLAYERS_REGISTER.csv");
 		File f=new File(pathToFile.toString());
 		
@@ -181,6 +177,7 @@ public class GameScoreBoardController implements Initializable {
 			while(scan.hasNextLine() ) {
 				String line = scan.nextLine();
 				String[] tokens = line.split(",");
+				
 				if(players.keySet().contains(tokens[0]))		// salva su file il nuovo punteggio e decrementa di 1 il contatore delle partite del giocatore
 					memory = memory + tokens[0] + "," + (players.get(tokens[0]) + Integer.parseInt(tokens[1])) + "," + (Integer.parseInt(tokens[2])-1) + "\n";
 				else
@@ -196,10 +193,12 @@ public class GameScoreBoardController implements Initializable {
 		}
 	}
     
-    private void givePoints() {									// assegna i punti in base alla partita e all'ordine di classifica
+    private void givePoints() {
+    	// assegna i punti in base alla partita e all'ordine di classifica
+    	
     	int pos=0;
     	if(code.startsWith("T")) {
-    		// punteggi torneo
+    		// punteggi SIMPLE TOURNAMENT
     		for(String username : players.keySet()) {
     			if(pos>=players.size()-2)
     				players.putIfAbsent(username, 2);												// ultimo e penultimo classificato
@@ -208,13 +207,13 @@ public class GameScoreBoardController implements Initializable {
     			pos++;
     		}
     	} else if(code.startsWith("L")) {
-    		// punteggi last man standing
+    		// punteggi LAST MAN STANDING
     		for(String username : players.keySet()) {
     			players.putIfAbsent(username, (int)(Math.pow(2, players.size()-pos)*1.25));
     			pos++;
     		}
     	} else {
-    		// punteggi single game
+    		// punteggi SINGLE GAME
         	for(String username : players.keySet()) {
         		players.putIfAbsent(username, (int)Math.pow(2, players.size()-pos));
         		pos++;
@@ -223,6 +222,7 @@ public class GameScoreBoardController implements Initializable {
     }
     
     private String getMessage() {
+    	// restituisce il messaggio email contenente la classifica
     	String message="-- CLASSIFICA " + code + " -- \n\n";
     	int cont=1;
     	for(String p: players.keySet()) {

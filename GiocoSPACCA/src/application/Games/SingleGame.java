@@ -13,13 +13,14 @@ public class SingleGame extends Game{
 	public SingleGame(Path path)  {
 		super(path);
 		
-		if(!newGame())
-			eliminationManagement();
+		if(!newGame())					// se è una nuova partita, distribuisce le carte
+			eliminationManagement();	// se non è una nuova partita, gestisce eventuali eliminazioni
 	}
 	
 	
 	@Override
 	public void removePlayer() {
+		// rimuove il giocatore corrente nel caso in cui sia stato eliminato
 		eliminated.add(0, players.remove(turn));
 		eliminated.get(0).setHand(new ArrayList<Card>());
 		eliminated.get(0).setHealthPoints(0);
@@ -31,6 +32,7 @@ public class SingleGame extends Game{
 
 	@Override
 	public void save() {
+		// salva la partita su file
 		try {
 	        FileWriter fw = new FileWriter(gameFile.getAbsolutePath());			// sovrascrive il file
 	        fw.write("SingleGame," + difficulty + "," +  turn +  "\n");
@@ -54,16 +56,17 @@ public class SingleGame extends Game{
 	
 	@Override
 	public void eliminationManagement() {
+		// gestisce eliminazioni multiple/contemporanee
 		boolean allDead = true;
 		
-		for(PlayerInGame p : players) {			// scorre i giocatori in partita e controlla se sono tutti morti
+		for(PlayerInGame p : players) {					// scorre i giocatori in partita e controlla se sono tutti eliminati
 			if(p.getHealthPoints()>0) {
 				allDead=false;
 				break;
 			}
 		}
 		
-		if(allDead) {							// nel caso in cui i giocatori sono eliminati tutti contemporaneamente, il vincitore è chi ha maggiori punti salute
+		if(allDead) {									// nel caso in cui tutti i giocatori sono eliminati, il vincitore è chi ha maggiori punti salute
 			int iHighest = -1, cont=0, i=turn;
 			while(cont<players.size()) {
 				if(i>=players.size())
@@ -74,7 +77,7 @@ public class SingleGame extends Game{
 				cont++;
 				i++;
 			}
-			players.get(iHighest).setHealthPoints(1);
+			players.get(iHighest).setHealthPoints(1);	// riporta in partita il giocatore con maggiori punti salute
 		}
 	}
 }

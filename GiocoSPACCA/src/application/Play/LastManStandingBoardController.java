@@ -17,9 +17,9 @@ public class LastManStandingBoardController extends Board {
 	@Override
 	protected void nextPlayerBoard() throws IOException {
 		if(isOut && game.getPlayers().size()>1) {
-			game.save();
+			game.save();		// salvataggio partita
 			
-			// ricarica la schermata di inizio partita
+			// se viene eliminato un giocaore (non in caso di vittoria), inizia il round successivo	--> ricarica la schermata di inizio partita
 			stage = (Stage)(playCardButton.getScene().getWindow());
 	    	FXMLLoader Loader=new FXMLLoader(LastManStandingBoardController.class.getResource("StartScreen.fxml"));
 	    	root = (Parent) Loader.load();
@@ -28,7 +28,7 @@ public class LastManStandingBoardController extends Board {
 	    	stage.centerOnScreen();
 	    	stage.show();
 		} else {
-			game.nextTurn();
+			game.nextTurn();					// avanza al turno successivo
 			game.eliminationManagement();		// controllo per eliminazioni multiple/contemporanee
 			
 			// carica la schermata del prossimo giocatore
@@ -45,7 +45,9 @@ public class LastManStandingBoardController extends Board {
 
 	@Override
 	protected void endGame() throws IOException {
-		game.save();
+		game.save();		// salvataggio partita
+		
+		// carica la classifica
 		stage = (Stage)(saveAndExitButton.getScene().getWindow());
     	FXMLLoader Loader=new FXMLLoader(GameScoreBoardController.class.getResource("GameScoreBoard.fxml"));
     	root = (Parent) Loader.load();
@@ -56,6 +58,7 @@ public class LastManStandingBoardController extends Board {
 
 	@Override
 	protected void setTitle() {
+		// imposta il label gameTitle (in alto nell'fxml)
 		int round = 5-game.getPlayers().size();
 		if(round > 3)
 			round = 3;

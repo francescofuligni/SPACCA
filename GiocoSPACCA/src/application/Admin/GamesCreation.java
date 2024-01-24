@@ -27,14 +27,14 @@ import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
-public abstract class GamesCreation implements Initializable {
+public abstract class GamesCreation implements Initializable {		// superclasse CreateSingleGameController e CreateTournamentController
 	
 	protected Stage stage;
 	protected Scene scene;
 	protected Parent root;
 	
-	public int MAXPLAYERS;
-	protected final int CODELENGTH = 4;
+	public int MAXPLAYERS;					// numero massimo di giocatori inseribili in partita
+	protected final int CODELENGTH = 4;		// numero di cifre numeriche del codice partita
 	protected Player[] selectedPlayers;
 	protected ArrayList<PlayerInGame> playersInGame = new ArrayList<>();
 	protected ArrayList<Player> allPlayers = new ArrayList<>();
@@ -71,6 +71,8 @@ public abstract class GamesCreation implements Initializable {
 	
 	@FXML
     public void undoAction(MouseEvent event) {
+		// annulla l'ultimo giocatore selezionato
+		
     	if(playersCounter>0) {
     		playersCounter--;
         	playersChoiceBox.getItems().add(selectedPlayers[playersCounter]);
@@ -97,6 +99,7 @@ public abstract class GamesCreation implements Initializable {
     @FXML
     public void returnToAdminMenu() throws IOException {
     	// ritorna all'AdminMenu
+    	
     	stage = (Stage)(backButton.getScene().getWindow());
 		  FXMLLoader Loader=new FXMLLoader(AdminMenuController.class.getResource("/application/Admin/AdminMenu.fxml"));
 		  root = (Parent) Loader.load();
@@ -107,13 +110,14 @@ public abstract class GamesCreation implements Initializable {
     
     
 	protected void fillPlayersInGame() {
+		// popola l'array di giocatori in modalità partita (PlayerInGame)
 		int botCounter = 0;
 	    
 	    for(int i=0; i<MAXPLAYERS; i++) {											
 	    	if(selectedPlayers[i] != null) {									// converte ogni giocatore selezionato in PlayerInGame
 	    		PlayerInGame p = new PlayerInGame(selectedPlayers[i].getUsername());
 	    		playersInGame.add(p);
-	    		p.addGame();			// aggiunge una partita al giocatore nel Players Register
+	    		p.addGame();			// incrementa di uno il contatore delle partite del giocatore
 	    	} else {															// inserisce i bot nella partita
 	    		botCounter++;
 	    		playersInGame.add(new PlayerInGame("BOT" + botCounter));
@@ -121,7 +125,8 @@ public abstract class GamesCreation implements Initializable {
 	    }
 	}
 	
-	protected void getPlayersFromFile() {				// popola l'ArrayList allPlayers con i giocatori memorizzati su file
+	protected void getPlayersFromFile() {
+		// estrae tutti memorizzati su file (per la selezione dei giocatori)
 		Path pathToFile = Paths.get("./GiocoSPACCA/Informazioni_Partite/PLAYERS_REGISTER.csv");
 		File f=new File(pathToFile.toString());
 			
@@ -149,15 +154,16 @@ public abstract class GamesCreation implements Initializable {
 	}
 	
 	protected void playerSelection(ActionEvent event) {
+		// selezione dei giocatori in partita
     	Player player = playersChoiceBox.getValue();
     	
-    	if(playersCounter >= MAXPLAYERS && playersChoiceBox.getItems().size()!=0){
+    	if(playersCounter >= MAXPLAYERS && playersChoiceBox.getItems().size()!=0) {		// controlla il massimo di giocatori inseribili
     		Alert selectionAlert = new Alert(AlertType.ERROR);
     		selectionAlert.setTitle("ERRORE!");
     		selectionAlert.setContentText("Numero massimo di giocatori inseribili raggiunto");
     		selectionAlert.showAndWait();
     	}
-    	if(playersCounter < MAXPLAYERS && player!=null){
+    	if(playersCounter < MAXPLAYERS && player!=null) {								// aggiunge il giocatore ai giocatori selezionati
     		selectedPlayers[playersCounter] = player;
 			playersCounter++;
 
@@ -168,7 +174,7 @@ public abstract class GamesCreation implements Initializable {
     }
     
 	
-	// metodi astratti
+	// metodi astratti	--> diversi a seconda della competizione
 	@Override
 	public abstract void initialize(URL arg0, ResourceBundle arg1);
 	
