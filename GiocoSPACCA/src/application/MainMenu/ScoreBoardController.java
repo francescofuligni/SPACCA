@@ -20,8 +20,10 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ListView;
+import javafx.scene.control.Alert.AlertType;
 import javafx.stage.Stage;
 
 public class ScoreBoardController implements Initializable {
@@ -40,6 +42,7 @@ public class ScoreBoardController implements Initializable {
 	public void initialize(URL arg0, ResourceBundle arg1) {
     	Path pathToFile = Paths.get("./GiocoSPACCA/Informazioni_Partite/PLAYERS_REGISTER.csv");
 		File f=new File(pathToFile.toString());
+		
 		try {
 			Scanner scan=new Scanner(f);
 			while(scan.hasNextLine()){					// estrae i giocatori e i loro punteggi dal registro giocatori
@@ -52,8 +55,13 @@ public class ScoreBoardController implements Initializable {
 			for(int i=list.size()-1;i>=0;i--)
 			scoreBoard.getItems().add("["+list.get(i).getValue()+"] - " + list.get(i).getKey() );		// inizializza la classifica
 			scan.close();
+			
 		} catch (FileNotFoundException e) {
-			e.printStackTrace();
+			Alert exceptionAlert = new Alert(AlertType.ERROR);
+			exceptionAlert.setTitle("ERRORE");
+			exceptionAlert.setHeaderText("File non trovato");
+			exceptionAlert.setContentText(e.getClass().getSimpleName());
+			exceptionAlert.showAndWait();
 		}
     }
 

@@ -1,8 +1,6 @@
 package application.Play;
 
 import java.util.Properties;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 import javax.mail.Authenticator;
 import javax.mail.Message;
@@ -11,7 +9,10 @@ import javax.mail.PasswordAuthentication;
 import javax.mail.Session;
 import javax.mail.Transport;
 import javax.mail.internet.InternetAddress;
-import javax.mail.internet.MimeMessage; 
+import javax.mail.internet.MimeMessage;
+
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType; 
 
 public class EmailSender {
 	
@@ -26,8 +27,8 @@ public class EmailSender {
         properties.put("mail.smtp.auth", "true");
         properties.put("mail.smtp.starttls.enable", "true");
         
-		final String senderEmail = "notifica.spacca.the.game@gmail.com";
-		final String senderPsw = "gtgx pnqy mjgm uaea";
+		final String senderEmail = "notifica.spacca.the.game@gmail.com";	// indirizzo da cui viene inviata l'email
+		final String senderPsw = "gtgx pnqy mjgm uaea";						// application password creata da gmail
 		
 		Session session = Session.getInstance(properties, new Authenticator() {
 			@Override
@@ -35,26 +36,25 @@ public class EmailSender {
 				return new PasswordAuthentication(senderEmail,senderPsw);
 			}
 		});
-		Message message = prepareMessage (session, senderEmail, to, messageText);
 		try {
+			Message message = prepareMessage (session, senderEmail, to, messageText);
 			Transport.send(message);
 		} catch (MessagingException e) {
-			e.printStackTrace();
+			Alert exceptionAlert = new Alert(AlertType.ERROR);
+			exceptionAlert.setTitle("ERRORE");
+			exceptionAlert.setHeaderText("Errore nell'invio dell'email");
+			exceptionAlert.setContentText(e.getClass().getSimpleName());
+			exceptionAlert.showAndWait();
 		}
 	}
 	
-	private static Message prepareMessage(Session session, String senderEmail, String to, String messageText) {
+	private static Message prepareMessage(Session session, String senderEmail, String to, String messageText) throws MessagingException {
 		// costruisce il messaggio email
-		try {
-			Message message=new MimeMessage(session);
-			message.setFrom(new InternetAddress(senderEmail));
-			message.setRecipient(Message.RecipientType.TO, new InternetAddress(to));
-			message.setSubject("Risultati Partita SPACCA: " + InsertCodeController.code);
-			message.setText(messageText);
-			return message;
-		} catch(Exception e) {
-			Logger.getLogger(EmailSender.class.getName()). log(Level.SEVERE, null, e);
-		}
-		return null;
+		Message message=new MimeMessage(session);
+		message.setFrom(new InternetAddress(senderEmail));
+		message.setRecipient(Message.RecipientType.TO, new InternetAddress(to));
+		message.setSubject("Risultati Partita SPACCA: " + InsertCodeController.code);
+		message.setText(messageText);
+		return message;
 	}
 }

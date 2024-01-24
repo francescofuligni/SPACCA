@@ -19,10 +19,12 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
@@ -122,13 +124,16 @@ public class GameScoreBoardController implements Initializable {
 			updateScores();						// aggiorna il punteggio totale dei giocatori nella classifica generale (Players Register)
 			
 		} catch (IOException e) {				// FileNotFoundException is a IOException
-			e.printStackTrace();
+			Alert exceptionAlert = new Alert(AlertType.ERROR);
+			exceptionAlert.setTitle("ERRORE");
+			exceptionAlert.setHeaderText("Errore nell'accesso al file");
+			exceptionAlert.setContentText(e.getClass().getSimpleName());
+			exceptionAlert.showAndWait();
 		}
     }
     
-    
     @FXML
-    public void sendMail() throws Exception {
+    public void sendMail() {
     	// azione bottone invia	--> invia email all'indirizzo inserito
     	String to = emailField.getText().trim().toLowerCase(); 						// mail in minuscolo
     	
@@ -189,7 +194,11 @@ public class GameScoreBoardController implements Initializable {
 			fw.close();
 			
 		} catch(IOException e) {
-			e.printStackTrace();
+			Alert exceptionAlert = new Alert(AlertType.ERROR);
+			exceptionAlert.setTitle("ERRORE");
+			exceptionAlert.setHeaderText("Errore nell'accesso al file");
+			exceptionAlert.setContentText(e.getClass().getSimpleName());
+			exceptionAlert.showAndWait();
 		}
 	}
     
@@ -223,7 +232,7 @@ public class GameScoreBoardController implements Initializable {
     
     private String getMessage() {
     	// restituisce il messaggio email contenente la classifica
-    	String message="-- CLASSIFICA " + code + " -- \n\n";
+    	String message="--  CLASSIFICA " + code + "  --\n\n";
     	int cont=1;
     	for(String p: players.keySet()) {
     		message+=(cont + "°  --  [ +"+players.get(p)+ " ]  "+ p+"\n");

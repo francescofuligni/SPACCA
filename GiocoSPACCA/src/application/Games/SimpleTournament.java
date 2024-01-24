@@ -10,6 +10,8 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 import application.Player.PlayerInGame;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 
 public class SimpleTournament {
 	
@@ -44,7 +46,11 @@ public class SimpleTournament {
 			scan.close();
 			
 		} catch (FileNotFoundException e) {
-			e.printStackTrace();
+			Alert exceptionAlert = new Alert(AlertType.ERROR);
+			exceptionAlert.setTitle("ERRORE");
+			exceptionAlert.setHeaderText("File non trovato");
+			exceptionAlert.setContentText(e.getClass().getSimpleName());
+			exceptionAlert.showAndWait();e.printStackTrace();
 		}
 	}
 	
@@ -64,8 +70,11 @@ public class SimpleTournament {
 			fw.flush();
 			fw.close();
 		} catch (IOException e) {
-			e.printStackTrace();
+			Alert exceptionAlert = new Alert(AlertType.ERROR);
+			exceptionAlert.setTitle("ERRORE");
+			exceptionAlert.setHeaderText("Errore nell'accesso al file");
+			exceptionAlert.setContentText(e.getClass().getSimpleName());
+			exceptionAlert.showAndWait();
 		}
-		
 	}
 }

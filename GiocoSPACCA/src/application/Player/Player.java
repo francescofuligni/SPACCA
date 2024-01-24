@@ -9,6 +9,8 @@ import java.nio.file.Paths;
 import java.util.Scanner;
 
 import application.Main;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 
 public class Player {		// superclasse di PlayerInGame
 	
@@ -36,7 +38,11 @@ public class Player {		// superclasse di PlayerInGame
 			fw.flush();
 			fw.close();
 		} catch (IOException e) {
-			e.printStackTrace();
+			Alert exceptionAlert = new Alert(AlertType.ERROR);
+			exceptionAlert.setTitle("ERRORE");
+			exceptionAlert.setHeaderText("Errore nell'accesso al file");
+			exceptionAlert.setContentText(e.getClass().getSimpleName());
+			exceptionAlert.showAndWait();
 		}
 	}
 	
@@ -61,7 +67,11 @@ public class Player {		// superclasse di PlayerInGame
 			}
 			scan.close();
 		} catch (FileNotFoundException e) {
-			e.printStackTrace();
+			Alert exceptionAlert = new Alert(AlertType.ERROR);
+			exceptionAlert.setTitle("ERRORE");
+			exceptionAlert.setHeaderText("File non trovato");
+			exceptionAlert.setContentText(e.getClass().getSimpleName());
+			exceptionAlert.showAndWait();
 		}
 		return false;
 	}
@@ -93,7 +103,11 @@ public class Player {		// superclasse di PlayerInGame
 				fw.close();
 				
 			} catch(IOException e) {
-				e.printStackTrace();
+				Alert exceptionAlert = new Alert(AlertType.ERROR);
+				exceptionAlert.setTitle("ERRORE");
+				exceptionAlert.setHeaderText("Errore nell'accesso al file");
+				exceptionAlert.setContentText(e.getClass().getSimpleName());
+				exceptionAlert.showAndWait();
 			}
 		} else {
 			Main.fileCheck();	// se il file non esiste, lo crea (è certo che il giocatore non ci sia)
@@ -130,7 +144,11 @@ public class Player {		// superclasse di PlayerInGame
 			fw.flush();
 			fw.close();
 		} catch(IOException e) {
-			e.printStackTrace();
+			Alert exceptionAlert = new Alert(AlertType.ERROR);
+			exceptionAlert.setTitle("ERRORE");
+			exceptionAlert.setHeaderText("Errore nell'accesso al file");
+			exceptionAlert.setContentText(e.getClass().getSimpleName());
+			exceptionAlert.showAndWait();
 		}
 	}
 	
@@ -166,7 +184,11 @@ public class Player {		// superclasse di PlayerInGame
 			fw.flush();
 			fw.close();
 		} catch(IOException e) {
-			e.printStackTrace();
+			Alert exceptionAlert = new Alert(AlertType.ERROR);
+			exceptionAlert.setTitle("ERRORE");
+			exceptionAlert.setHeaderText("Errore nell'accesso al file");
+			exceptionAlert.setContentText(e.getClass().getSimpleName());
+			exceptionAlert.showAndWait();
 		}
 	}
 	
@@ -198,7 +220,11 @@ public class Player {		// superclasse di PlayerInGame
 			}
 			scan.close();
 		} catch(IOException e) {
-			e.printStackTrace();
+			Alert exceptionAlert = new Alert(AlertType.ERROR);
+			exceptionAlert.setTitle("ERRORE");
+			exceptionAlert.setHeaderText("Errore nell'accesso al file");
+			exceptionAlert.setContentText(e.getClass().getSimpleName());
+			exceptionAlert.showAndWait();
 		}
 		return false;		// se non trova il giocatore, ritorna false
 	}
