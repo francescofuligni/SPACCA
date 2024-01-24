@@ -1,7 +1,6 @@
 package application;
 
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.nio.file.Files;
@@ -49,15 +48,22 @@ public class Main extends Application {
 				}
 			});
 			
-		} catch(Exception e) {
-			e.printStackTrace();
+		} catch(IOException e) {
+			message = true;
+			Alert exceptionAlert = new Alert(AlertType.ERROR);
+			exceptionAlert.setTitle("ERRORE");
+			exceptionAlert.setHeaderText("Errore nel caricamento della schermata");
+			exceptionAlert.setContentText(e.getClass().getSimpleName());
+			exceptionAlert.showAndWait();
+			message = false;
 		}
 	}
 	
-	public static boolean fileCheck() {
+	public static void fileCheck() {
 		// controllo esistenza file Players Register
 		Path pathToFile = Paths.get("./GiocoSPACCA/Informazioni_Partite/PLAYERS_REGISTER.csv");
 		File f=new File(pathToFile.toString());
+		
 		if(!f.exists()) {
 			// se non esiste, lo crea
 	        try {
@@ -71,9 +77,15 @@ public class Main extends Application {
 				fw.flush();
 				fw.close();
 	        } catch (IOException e) {
-	            System.out.println(e);
+	        	message = true;
+	        	Alert exceptionAlert = new Alert(AlertType.ERROR);
+				exceptionAlert.setTitle("ERRORE");
+				exceptionAlert.setHeaderText("Errore nell'accesso al file");
+				exceptionAlert.setContentText(e.getClass().getSimpleName());
+				exceptionAlert.showAndWait();
+				message = false;
 	        }
-	        return false;
+	        
 		} else {
 			// se esiste, controlla che sia presente l'utente ADMIN
 			try {
@@ -93,9 +105,14 @@ public class Main extends Application {
 					fw.close();
 				}
 			} catch (IOException e) {						// FileNotFoundException is a IOException
-				e.printStackTrace();
+				message = true;
+	        	Alert exceptionAlert = new Alert(AlertType.ERROR);
+				exceptionAlert.setTitle("ERRORE");
+				exceptionAlert.setHeaderText("Errore nell'accesso al file");
+				exceptionAlert.setContentText(e.getClass().getSimpleName());
+				exceptionAlert.showAndWait();
+				message = false;
 			}
-			return true;
 		}
 	}
 	
