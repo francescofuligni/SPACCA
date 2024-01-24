@@ -9,7 +9,6 @@ import java.util.ArrayList;
 import java.util.ResourceBundle;
 import java.util.Scanner;
 
-import application.Player.Bot;
 import application.Player.Player;
 import application.Player.PlayerInGame;
 import javafx.event.ActionEvent;
@@ -117,7 +116,7 @@ public abstract class GamesCreation implements Initializable {
 	    		p.addGame();			// aggiunge una partita al giocatore nel Players Register
 	    	} else {															// inserisce i bot nella partita
 	    		botCounter++;
-	    		playersInGame.add(new Bot("BOT" + botCounter));
+	    		playersInGame.add(new PlayerInGame("BOT" + botCounter));
 	    	}
 	    }
 	}
