@@ -51,7 +51,7 @@ public class MainMenuController {
 	
 	@FXML
 	public void switchToCredits(ActionEvent event) throws IOException {
-		 // lancia la schermata dei credits
+		 // lancia la schermata dei crediti
 		 stage = (Stage)(createGameButton.getScene().getWindow());
 		  FXMLLoader Loader=new FXMLLoader(MainMenuController.class.getResource("/application/MainMenu/Crediti.fxml"));
 		  root = (Parent) Loader.load();
