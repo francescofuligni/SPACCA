@@ -1,6 +1,7 @@
 package application.Admin;
 
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.net.URL;
 import java.nio.file.Path;
@@ -144,12 +145,12 @@ public abstract class GamesCreation implements Initializable {		// superclasse C
 			
 			scan.close();	
 			
-		} catch(IOException e) {
-			Alert alert = new Alert(AlertType.INFORMATION);
-			alert.setTitle("ATTENZIONE");
-			alert.setHeaderText("Non è stato ancora creato alcun giocatore");
-			alert.setContentText("Sarà solamente possibile creare una partita tra Bot");
-			e.printStackTrace();
+		} catch(FileNotFoundException e) {
+			Alert exceptionAlert = new Alert(AlertType.ERROR);
+			exceptionAlert.setTitle("ERRORE");
+			exceptionAlert.setHeaderText("File non trovato");
+			exceptionAlert.setContentText(e.getClass().getSimpleName());
+			exceptionAlert.showAndWait();
 		}	
 	}
 	
@@ -179,7 +180,7 @@ public abstract class GamesCreation implements Initializable {		// superclasse C
 	public abstract void initialize(URL arg0, ResourceBundle arg1);
 	
 	@FXML
-	public abstract void play(ActionEvent event) throws IOException;
+	public abstract void play(ActionEvent event) throws IOException;	// rilancia l'eccezione del metodo returnToAdminMenu()
 	
 	protected abstract void fillGameFile();
 }

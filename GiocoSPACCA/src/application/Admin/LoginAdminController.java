@@ -39,7 +39,7 @@ public class LoginAdminController {
 	private Text loginStatusText;
 	
 	public void login() throws IOException{
-		// effettua l'accesso al menù admin
+		// effettua l'accesso all'AdminMenu
 		if(adminNameField.getText().equals(adminName) && adminPasswordField.getText().equals(adminPassword)) {	// controllo credenziali
 				
 			// lancia l'AdminMenu

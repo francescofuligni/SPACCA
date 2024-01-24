@@ -52,44 +52,52 @@ public class CreateTournamentController extends GamesCreation {
     		selectionAlert.showAndWait();
 	    	
 	    } else {
-	    	
-	    	if(tournamentMode.getValue().equals(GAMEMODE.SEMPLICE)) {
-	    		// TORNEO SEMPLICE --> directory
-	    		// genera il codice partita
-			    do {
-			    	code = "T";
-				    for(int i=0;i<CODELENGTH;i++) {
-				    	Random rand = new Random();
-				    	code = code + rand.nextInt(10);
-				    }
-				    pathToGame = Paths.get("./GiocoSPACCA/Informazioni_Partite/" + code);		// directory del torneo, contenente i file delle singole partite
-			    } while(Files.exists(pathToGame));					// se esiste già il codice, genera un codice diverso
-			    Files.createDirectory(pathToGame);					// crea la directory
+	    	try {
+		    	if(tournamentMode.getValue().equals(GAMEMODE.SEMPLICE)) {
+		    		// TORNEO SEMPLICE --> directory
+		    		// genera il codice partita
+				    do {
+				    	code = "T";
+					    for(int i=0;i<CODELENGTH;i++) {
+					    	Random rand = new Random();
+					    	code = code + rand.nextInt(10);
+					    }
+					    pathToGame = Paths.get("./GiocoSPACCA/Informazioni_Partite/" + code);		// directory del torneo, contenente i file delle singole partite
+				    } while(Files.exists(pathToGame));					// se esiste già il codice, genera un codice diverso
+				    Files.createDirectory(pathToGame);					// crea la directory
+				    
+		    	} else {
+		    		// TORNEO LAST MAN STANDING --> file singolo
+		    		// genera il codice partita
+		    		do {
+				    	code = "L";
+					    for(int i=0;i<CODELENGTH;i++) {
+					    	Random rand = new Random();
+					    	code = code + rand.nextInt(10);
+					    }
+					    pathToGame = Paths.get("./GiocoSPACCA/Informazioni_Partite/" + code + ".csv");
+				    } while(Files.exists(pathToGame));					// se esiste già il codice, genera un codice diverso
+		    		Files.createFile(pathToGame);						// crea il file
+		    	}
+		    	
+		    	fillPlayersInGame();				// popola l'ArrayList playersInGame
+			    fillGameFile(); 					// popola i file della partita
 			    
-	    	} else {
-	    		// TORNEO LAST MAN STANDING --> file singolo
-	    		// genera il codice partita
-	    		do {
-			    	code = "L";
-				    for(int i=0;i<CODELENGTH;i++) {
-				    	Random rand = new Random();
-				    	code = code + rand.nextInt(10);
-				    }
-				    pathToGame = Paths.get("./GiocoSPACCA/Informazioni_Partite/" + code + ".csv");
-			    } while(Files.exists(pathToGame));					// se esiste già il codice, genera un codice diverso
-	    		Files.createFile(pathToGame);						// crea il file
+			    Alert codeInfo = new Alert(AlertType.INFORMATION);		// mostra il codice generato
+			    codeInfo.setTitle("CODICE GENERATO");
+			    codeInfo.setContentText("Codice della partita creata");
+			    codeInfo.setHeaderText(code);
+			    codeInfo.showAndWait();
+			    
+	    	} catch(IOException e) {
+	    		Alert exceptionAlert = new Alert(AlertType.ERROR);
+				exceptionAlert.setTitle("ERRORE");
+				exceptionAlert.setHeaderText("Errore nella creazione dei file o della directory");
+				exceptionAlert.setContentText(e.getClass().getSimpleName());
+				exceptionAlert.showAndWait();
 	    	}
 	    	
-		    fillPlayersInGame();				// popola l'ArrayList playersInGame
-		    fillGameFile(); 					// popola i file della partita
-		    
-		    Alert codeInfo = new Alert(AlertType.INFORMATION);		// mostra il codice generato
-		    codeInfo.setTitle("CODICE GENERATO");
-		    codeInfo.setContentText("Codice della partita creata");
-		    codeInfo.setHeaderText(code);
-		    codeInfo.showAndWait();
-	    	
-		    returnToAdminMenu();
+		    returnToAdminMenu();	// throws IOException
 	    }
     }
     
@@ -145,7 +153,11 @@ public class CreateTournamentController extends GamesCreation {
 				fw.close();
 		    }
     	} catch(IOException e) {
-    		 e.printStackTrace();
+    		Alert exceptionAlert = new Alert(AlertType.ERROR);
+			exceptionAlert.setTitle("ERRORE");
+			exceptionAlert.setHeaderText("Errore nell'accesso al file");
+			exceptionAlert.setContentText(e.getClass().getSimpleName());
+			exceptionAlert.showAndWait();
     	}
 	}
 }

@@ -44,7 +44,7 @@ public class CreatePlayerController {
     }
 	
 	@FXML
-	public void createPlayer(ActionEvent event) throws IOException {
+	public void createPlayer(ActionEvent event) {
 		// crea un nuovo giocatore
 		String username = usernameField.getText().trim();
 		
