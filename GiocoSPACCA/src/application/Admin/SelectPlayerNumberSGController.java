@@ -61,6 +61,7 @@ public class SelectPlayerNumberSGController {
     }
     
     private void launchCreateSingleGame(ActionEvent event) throws IOException {
+    	// lancia la schermata di creazione partita singola con il numero di giocatori selezionato
 		  FXMLLoader Loader=new FXMLLoader(CreateSingleGameController.class.getResource("/application/Admin/CreateSingleGame.fxml"));
 		  root = (Parent) Loader.load();
 		  scene = new Scene(root);

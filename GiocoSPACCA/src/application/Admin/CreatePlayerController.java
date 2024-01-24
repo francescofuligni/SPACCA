@@ -45,9 +45,10 @@ public class CreatePlayerController {
 	
 	@FXML
 	public void createPlayer(ActionEvent event) throws IOException {
+		// crea un nuovo giocatore
 		String username = usernameField.getText().trim();
 		
-		if(username==null || username.equals("") || username.toUpperCase().equals("ADMIN") || username.toUpperCase().startsWith("BOT")) {
+		if(username==null || username.equals("") || username.toUpperCase().equals("ADMIN") || username.toUpperCase().startsWith("BOT")) {		// controllo accettabilità nome inserito
 			Alert alert = new Alert(AlertType.ERROR);
 			alert.setTitle("Errore");
 			alert.setHeaderText("Errore nella creazione del giocatore");
@@ -62,9 +63,10 @@ public class CreatePlayerController {
 			alert.setHeaderText("Stai per creare un nuovo giocatore");
 			alert.setContentText("Sei sicuro di voler creare il giocatore \"" + username + "\"?");
 			
-			if(alert.showAndWait().get() == ButtonType.OK) {
+			if(alert.showAndWait().get() == ButtonType.OK) {		// conferma creazione
 				Player player = new Player(username);
-				if(player.exists()) {
+				
+				if(player.exists()) {								// controllo che il giocatore non sia già presente
 					Alert alert2 = new Alert(AlertType.ERROR);
 					alert2.setTitle("Errore");
 					alert2.setHeaderText("Errore nella creazione del giocatore");
@@ -83,6 +85,6 @@ public class CreatePlayerController {
 				message.setText("Giocatore non aggiunto");
 			}
 		}
-		usernameField.setText(null);
+		usernameField.clear();		// reset field nome giocatore
     }
 }

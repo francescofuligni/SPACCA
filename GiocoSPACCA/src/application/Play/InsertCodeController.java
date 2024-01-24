@@ -49,38 +49,36 @@ public class InsertCodeController {
     
     @FXML
     public void enterGame(ActionEvent event) throws IOException {
-    	code = codeField.getText().trim().toUpperCase();
+    	// azione bottone entra	--> entra in partita
+    	code = codeField.getText().trim().toUpperCase();	// correzione codice inserito
     	
     	if(code.startsWith("T")) {
-    		// SIMPLE TOURNAMENT
+    		// lancia SIMPLE TOURNAMENT
     		pathToGame = Paths.get("./GiocoSPACCA/Informazioni_Partite/" + code); 
     		
-    		if(Files.exists(pathToGame)) {
-    			start();
+    		if(Files.exists(pathToGame)) {		// controllo esistenza directory torneo
+    			startGame();
     		} else {
+    			enterStatusText.setText("Codice inserito non riconosciuto, riprovare");
+         		enterStatusText.setFill(Color.RED);
     			Alert selectionAlert = new Alert(AlertType.ERROR);
          		selectionAlert.setTitle("ERRORE!");
          		selectionAlert.setHeaderText("Codice non riconosciuto");
          		selectionAlert.showAndWait();
-         		
-         		enterStatusText.setText("Codice inserito non riconosciuto, riprovare");
-         		enterStatusText.setFill(Color.RED);
     		}
     		
     	} else {
-    		// SINGLE GAME O LAST MAN STANDING
+    		// lancia SINGLE GAME o LAST MAN STANDING
 	    	pathToGame = Paths.get("./GiocoSPACCA/Informazioni_Partite/" + code + ".csv"); 
 	    	
-	    	if(Files.exists(pathToGame)) {
-		    	start();
+	    	if(Files.exists(pathToGame)) {		// controllo esistenza file partita
+	    		startGame();
 	    	 } else {
 	    		enterStatusText.setText("Codice inserito non riconosciuto, riprovare");
-		     	enterStatusText.setFill(Color.RED);
-		     	
+			    enterStatusText.setFill(Color.RED);
 	    		Alert selectionAlert = new Alert(AlertType.ERROR);
 	     		selectionAlert.setTitle("ERRORE");
 	     		selectionAlert.setHeaderText("Codice non riconosciuto");
-	     		
 	     		selectionAlert.showAndWait();
 	    	 }
     	}
@@ -88,7 +86,7 @@ public class InsertCodeController {
 
     @FXML
     public void returnToMainMenu(ActionEvent event) throws IOException {
-    	// ritorna alla schermata home
+    	// torna al MainMenu
     	stage = (Stage)(returnToMainMenuButton.getScene().getWindow());
 		  FXMLLoader Loader=new FXMLLoader(MainMenuController.class.getResource("/application/MainMenu/MainMenu.fxml"));
 		  root = (Parent) Loader.load();
@@ -118,14 +116,14 @@ public class InsertCodeController {
     }
     
     
-    private void start() throws IOException {
+    private void startGame() throws IOException {
     	// lancia la schermata di inizio partita
     	stage = (Stage)(returnToMainMenuButton.getScene().getWindow());
-    	FXMLLoader Loader=new FXMLLoader(StartScreenController.class.getResource("/application/Play/StartScreen.fxml"));
-    	root = (Parent) Loader.load();
-    	scene = new Scene(root);
-    	stage.setScene(scene);
-    	stage.centerOnScreen();
-    	stage.show();
+    	  FXMLLoader Loader=new FXMLLoader(StartScreenController.class.getResource("/application/Play/StartScreen.fxml"));
+    	  root = (Parent) Loader.load();
+    	  scene = new Scene(root);
+    	  stage.setScene(scene);
+    	  stage.centerOnScreen();
+    	  stage.show();
     }
 }

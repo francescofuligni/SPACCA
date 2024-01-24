@@ -16,10 +16,11 @@ public class SpecialCard extends Card {
 	}
 
 	@Override
-	public void effect(Game g) {
+	public void effect(Game g) {		// effetto della carta
 		this.current=g.currentPlayer();
 		this.next=g.nextPlayerAlive();
 		
+		// effetto diverso carta per carta
 		switch(this.getCode()) {
 		case 11:
 			effect1(g);
@@ -105,7 +106,7 @@ public class SpecialCard extends Card {
 	private void effect7(Game g) {
 		int damage = 3;
 		for(PlayerInGame p : g.getPlayers()) {
-			if(p.getHealthPoints()>0)				// controllo per evitare resurrezione di giocatori eliminati
+			if(p.getHealthPoints()>0)				// controllo per evitare ritorno in partita di giocatori eliminati (gli effetti valgono solo su giocatori in partita)
 				p.setHealthPoints(p.getHealthPoints() + damage);
 		}
 		current.setHealthPoints(current.getHealthPoints() + damage);

@@ -21,13 +21,12 @@ public class RulesController {
 
     @FXML
     public void returnToMainMenu(ActionEvent event) throws IOException {
+    	// torna al MainMenu
     	stage = (Stage)(returnToMainMenuButton.getScene().getWindow());
-		 
 		  FXMLLoader Loader=new FXMLLoader(MainMenuController.class.getResource("/application/MainMenu/MainMenu.fxml"));
 		  root = (Parent) Loader.load();
 		  scene = new Scene(root);
 		  stage.setScene(scene);
 		  stage.show();
     }
-
 }

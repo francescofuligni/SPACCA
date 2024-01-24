@@ -10,10 +10,10 @@ public class NormalCard extends Card {
 
 	public NormalCard(int code) { 
 		super(code);
-		if(code<6) 						// figure con danno positivo --> danno al prossimo
-			damage=code;
-		else   							// figure con danno negativo --> cura a te stesso
-			damage= 5-code ;
+		if(code<6) 						// figure con danno positivo --> danno al giocatore successivo
+			damage = code;
+		else   							// figure con danno negativo --> cura al giocatore corrente
+			damage = 5-code ;
 	}
 	
 	public int getDamage() {
@@ -21,7 +21,7 @@ public class NormalCard extends Card {
 	}
 
 	@Override
-	public void effect(Game g) {
+	public void effect(Game g) {		// effetto della carta
 		this.current=g.currentPlayer();
 		this.next=g.nextPlayerAlive();
 		

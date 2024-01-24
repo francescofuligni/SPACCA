@@ -30,7 +30,7 @@ import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import javafx.application.Platform;
 
-public abstract class Board implements Initializable {
+public abstract class Board implements Initializable {		// superclasse dei controller delle diverse modalità di competizione
 	
 	protected Stage stage;
 	protected Scene scene;
@@ -78,22 +78,21 @@ public abstract class Board implements Initializable {
 
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
-		
 		current = game.currentPlayer();
 		nextAlive = game.nextPlayerAlive();
 		currentPlayer.setText(current.getUsername());
 		healthBar.setStyle("-fx-accent: green;");		// barra salute verde
 		
 		if(current.equals(nextAlive)) {
-			// CASO 1	-->	il giocatore attuale è il vincitore (partita terminata)
+			// CASO 1	-->	il giocatore attuale è il vincitore
 			initializeWinner();
 			
 		} else if(current.getHealthPoints()<=0) {
-			// CASO 2	-->	il giocatore attuale è stato eliminato (abbandona la partita)
+			// CASO 2	-->	il giocatore attuale è stato eliminato
 			initializeEliminated();
 		
 		} else {
-			// CASO 3	--> il giocatore attuale è in partita (partita in corso)
+			// CASO 3	--> il giocatore attuale è in partita
 			initializeNormal();
 			
 			cards.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<ImageView>() {
@@ -107,15 +106,13 @@ public abstract class Board implements Initializable {
 		
 		setTitle();
 		
-		if(current.getUsername().startsWith("BOT")) {		// il giocatore è un bot (username unovoco)
+		if(current.getUsername().startsWith("BOT")) {	// controlla se il giocatore corrente è un bot (username unovoco)
 			
-			// disabilita le interazioni dell'utente con gli elementi della GUI
-			cards.setMouseTransparent(true);	// disabilita click listview
+			cards.setMouseTransparent(true);	// disabilita click su listview
 		    cards.setFocusTraversable(false);	// disabilita interazioni tastiera con listview
-		    // disabilita i bottoni
-		    playCardButton.setDisable(true);
+		    playCardButton.setDisable(true);	// disabilita bottone gioca carta
 			
-			// crea un thread per far selezionare la carta al bot
+			// crea un thread per le azioni del bot
 			botThread = new Thread(() -> {
 				try {
 					Thread.sleep(1000); 					// pausa di 1s prima di selezionare la carta
@@ -126,12 +123,13 @@ public abstract class Board implements Initializable {
 						selectedImage = images.get(index);
 						cards.getSelectionModel().select(selectedImage); 
 						showSelectedCard.setImage(selectedImage.getImage()); 		// imposto la carta selezionata nell'ImageView
-						Thread.sleep(1500); 				// pausa di 1s e mezzo prima di chiamare il metodo fire
+						Thread.sleep(1500); 				// pausa di 1s e mezzo prima di chiamare il metodo fire del bottone
 					}
-					while(infoBoard || Main.message)
-						Thread.sleep(1000);					// attende che sia chiuso il tabellone prima di giocare
 					
-					Platform.runLater(new Runnable() {  	// per poter interagire con la GUI devo richiamare il main thread (application)
+					while(infoBoard || Main.message)		// attende la chiusura di un eventuale messaggio aperto prima di continuare
+						Thread.sleep(1000);
+					
+					Platform.runLater(new Runnable() {  	// per poter interagire con la GUI, richiamo il main thread (application)
 						@Override
 						public void run() {
 							try {
@@ -145,28 +143,34 @@ public abstract class Board implements Initializable {
 					e.printStackTrace();
 				}
 			});
-			botThread.start(); 		// avviando il thread, il bot esegue le operazioni
+			botThread.start(); 		// avvio del thread	--> il bot esegue le operazioni
 		}
 	}
 	
 	@FXML
 	public void playCard(ActionEvent event) throws IOException {
-		if(!exited) {
+		// azione bottone gioca carta
+		
+		if(!exited) {	// (per il bot) controlla se l'utente è uscito dalla partita	--> il botThread termina
 			if(current.equals(nextAlive)) {
-				endGame();
+				// caso vittoria
+				endGame();					// termina la partita
+				
 			} else if(isOut) {	
-				game.removePlayer();
-				nextPlayerBoard();
+				// caso eliminazione
+				game.removePlayer();		// giocatore corrente abbandona
+				nextPlayerBoard();			// passa al giocatore successivo
 				
 			} else {
-				if(selectedImage == null) {
+				// caso normale
+				if(selectedImage == null) {	// controlla se è stata selezionata una carta
 					Alert noCardSelected = new Alert(AlertType.ERROR);
 					noCardSelected.setTitle("ERRORE!");
 					noCardSelected.setHeaderText("SELEZIONA UNA CARTA");
 					noCardSelected.setContentText("Prima di giocare devi selezionare una carta");
 					noCardSelected.showAndWait();
 					
-				} else if(current.hasImprevisti() && (hand.get(images.indexOf(selectedImage)).getCode()>16 || hand.get(images.indexOf(selectedImage)).getCode()<13) ){
+				} else if(current.hasImprevisti() && (hand.get(images.indexOf(selectedImage)).getCode()>16 || hand.get(images.indexOf(selectedImage)).getCode()<13) ){		// controlla se il giocatore ha degli imprevisti e non li sta giocando
 					infoLabel.setTextFill(Color.VIOLET);
 					infoLabel.setText("Controlla le tue carte:  se hai un imprevisto sei costretto a giocarlo");
 					Alert playImprevisto = new Alert(AlertType.ERROR);
@@ -176,9 +180,9 @@ public abstract class Board implements Initializable {
 					playImprevisto.showAndWait();
 					
 				} else {
-					Card c = current.getCard(images.indexOf(selectedImage));
-					c.effect(game);
-					nextPlayerBoard();
+					Card c = current.getCard(images.indexOf(selectedImage));	// rimuove la carta dalla mano del giocatore
+					c.effect(game);			// gioca la carta	--> chiama l'effetto della carta
+					nextPlayerBoard();		// passa al giocatore successivo
 				}
 			}
 		}
@@ -186,6 +190,7 @@ public abstract class Board implements Initializable {
 	
 	@FXML
 	public void infoBoardDisplay(ActionEvent event) {
+		// mostra il tabellone
 		infoBoard=true;
 		Alert info = new Alert(AlertType.INFORMATION);
 		info.setTitle("Tabellone HP");
@@ -208,7 +213,8 @@ public abstract class Board implements Initializable {
 	}
 	
 	private void initializeWinner() {
-		playCardButton.setText("FINE");
+		// il giocatore attuale è il vincitore	--> partita terminata
+		playCardButton.setText("FINE");						// bottone playCard --> bottone per terminare la partita
 		infoLabel.setTextFill(Color.LIGHTGREEN);
 		infoLabel.setText("HAI VINTO!");
 		nextPlayerTitle.setText("Vincitore:");
@@ -231,16 +237,18 @@ public abstract class Board implements Initializable {
 	}
 	
 	private void initializeEliminated() {
+		// il giocatore attuale è stato eliminato	--> abbandona la partita
 		nextPlayer.setText(nextAlive.getUsername());		// label next player (mostra il prossimo giocatore vivo)
 		isOut = true;
 		healthPoints.setText("0  HP");
 		healthBar.setProgress(0.0);
-		playCardButton.setText("ABBANDONA");
+		playCardButton.setText("ABBANDONA");				// bottone playCard --> bottone per abbandonare
 		infoLabel.setTextFill(Color.RED);
 		infoLabel.setText("Sei stato eliminato:  clicca su ABBANDONA per uscire dalla partita");
 	}
 	
 	private void initializeNormal() {
+		// il giocatore attuale è in partita	--> partita in corso
 		nextPlayer.setText(nextAlive.getUsername());		// label next player (mostra il prossimo giocatore vivo)
 		healthPoints.setText(current.getHealthPoints() + "  HP");
 		healthBar.setProgress((double)current.getHealthPoints()/current.MAXHP);
@@ -257,7 +265,7 @@ public abstract class Board implements Initializable {
 	}
 	
 	
-	// metodi astratti (ridefiniti dai costruttori specifici, a seconda del tipo di partita)
+	// metodi astratti	--> diversi a seconda del tipo di competizione
 	protected abstract void nextPlayerBoard() throws IOException;
 	
 	protected abstract void endGame() throws IOException;

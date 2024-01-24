@@ -14,10 +14,11 @@ public class SingleGameBoardController extends Board {
 	}
 	
 	@Override
-	protected void nextPlayerBoard() throws IOException {			// carica la schermata del prossimo giocatore (e salva la partita)
-		game.nextTurn();
+	protected void nextPlayerBoard() throws IOException {
+		game.nextTurn();					// avanza al turno successivo
 		game.eliminationManagement();		// controllo per eliminazioni multiple/contemporanee
 		
+		// carica la schermata del prossimo giocatore
 		stage = (Stage)(playCardButton.getScene().getWindow());
 		FXMLLoader Loader=new FXMLLoader(SingleGameBoardController.class.getResource("Board.fxml"));
 		Loader.setController(this);
@@ -29,8 +30,10 @@ public class SingleGameBoardController extends Board {
 	}
 	
 	@Override
-	protected void endGame() throws IOException {					// carica la classifica della partita
-		game.save();
+	protected void endGame() throws IOException {
+		game.save();	// salvataggio partita
+		
+		// carica la classifica della partita
 		stage = (Stage)(saveAndExitButton.getScene().getWindow());
     	FXMLLoader Loader=new FXMLLoader(GameScoreBoardController.class.getResource("GameScoreBoard.fxml"));
     	root = (Parent) Loader.load();
@@ -41,6 +44,7 @@ public class SingleGameBoardController extends Board {
 
 	@Override
 	protected void setTitle() {
+		// imposta il label gameTitle (in alto nell'fxml)
 		gameTitle.setText(game.code.toUpperCase());
 	}
 }
