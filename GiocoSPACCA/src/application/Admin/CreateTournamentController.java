@@ -109,6 +109,7 @@ public class CreateTournamentController extends GamesCreation {
     		
         	if(chooseDifficulty.getValue()==null)		// se non è stato specificato un livello (non sono presenti bot), imposta livello facile di default
         		chooseDifficulty.setValue(BOTDIFF.FACILE);
+        	       	
         	
 	    	if(tournamentMode.getValue()==GAMEMODE.SEMPLICE) { 
 	    		// TORNEO SEMPLICE --> 3 file (3 partite singole) nella directory creata
@@ -116,7 +117,7 @@ public class CreateTournamentController extends GamesCreation {
 	    		// file partita singola semifinale 1
 		    	File semi1=new File("./GiocoSPACCA/Informazioni_Partite/" + code + "/semifinale1.csv");
 		    	FileWriter fw1 = new FileWriter(semi1);
-		    	fw1.write("SingleGame,"+tournamentMode.getValue()+"," + rand.nextInt(2) + "\n");
+		    	fw1.write("SingleGame,"+chooseDifficulty.getValue()+"," + rand.nextInt(2) + "\n");
 		    	fw1.write("in," + playersInGame.remove(rand.nextInt(playersInGame.size())) + "\n");
 		    	fw1.write("in," + playersInGame.remove(rand.nextInt(playersInGame.size())) + "\n");
 		    	fw1.flush();
@@ -145,7 +146,7 @@ public class CreateTournamentController extends GamesCreation {
 		    	File gameFile=new File("./GiocoSPACCA/Informazioni_Partite/" + code + ".csv");
 		    	FileWriter fw = new FileWriter(gameFile);
 		    	Iterator<PlayerInGame> iter = playersInGame.iterator();
-		        fw.write(tournamentMode.getValue() + "," + chooseDifficulty.getValue() + "," + rand.nextInt(playersInGame.size()) + "\n");
+		        fw.write(tournamentMode.getValue() + "," + chooseDifficulty.getValue() + "," + rand.nextInt(MAXPLAYERS) + "\n");
 				while(iter.hasNext())
 					fw.write("in," + iter.next() + "\n");
 		    	
