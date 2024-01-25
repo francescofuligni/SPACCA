@@ -97,6 +97,8 @@ public abstract class Board implements Initializable {		// superclasse dei contr
 				public void changed(ObservableValue<? extends ImageView> arg0, ImageView arg1, ImageView arg2) {
 					selectedImage = cards.getSelectionModel().getSelectedItem();
 					showSelectedCard.setImage(selectedImage.getImage());
+					showSelectedCard.setFitWidth(500);
+					showSelectedCard.setPreserveRatio(true);
 				}
 			});
 		}

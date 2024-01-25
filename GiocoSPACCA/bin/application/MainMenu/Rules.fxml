@@ -74,7 +74,7 @@
                               <DropShadow height="130.0" radius="64.5" spread="0.9" width="130.0" />
                            </effect>
                         </Label>
-                        <Text fill="WHITE" layoutX="228.0" layoutY="235.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Le modalità di gioco sono 2: &quot;Partita singola&quot; e &quot;Torneo&quot;. Il Torneo è disponibile in due ulteriori versioni: Semplice e Last Man Standing." wrappingWidth="763.9970703125">
+                        <Text fill="WHITE" layoutX="228.0" layoutY="235.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Le modalità di gioco sono 2: Partita Singola e Torneo. Il Torneo è disponibile in due ulteriori versioni: Semplice e Last Man Standing." wrappingWidth="763.9970703125">
                            <font>
                               <Font name="Times New Roman" size="22.0" />
                            </font>
@@ -84,12 +84,12 @@
                               <Font name="Times New Roman" size="22.0" />
                            </font>
                         </Text>
-                        <Text fill="WHITE" layoutX="228.0" layoutY="407.0" strokeType="OUTSIDE" strokeWidth="0.0" text="TORNEO &quot;SEMPLICE&quot;: è un torneo a eliminazione diretta tra 4 giocatori/BOT consistente in due serie di partite singole 1 contro 1: due semifinali e una finale." wrappingWidth="763.9970703125">
+                        <Text fill="WHITE" layoutX="228.0" layoutY="407.0" strokeType="OUTSIDE" strokeWidth="0.0" text="TORNEO SEMPLICE: è un torneo a eliminazione diretta tra 4 giocatori/BOT consistente in due serie di partite singole 1 contro 1: due semifinali e una finale." wrappingWidth="763.9970703125">
                            <font>
                               <Font name="Times New Roman" size="22.0" />
                            </font>
                         </Text>
-                        <Text fill="WHITE" layoutX="228.0" layoutY="496.0" strokeType="OUTSIDE" strokeWidth="0.0" text="TORNEO &quot;LAST MAN STANDING&quot;: è un torneo tra 4 giocatori/BOT composto da una serie di 3 round. Ogni round consiste in una partita singola che termina nel momento in cui un giocatore viene eliminato. Il round successivo si disputerà tra i giocatori della partita precedente, escluso quello eliminato." wrappingWidth="763.9970703125">
+                        <Text fill="WHITE" layoutX="228.0" layoutY="496.0" strokeType="OUTSIDE" strokeWidth="0.0" text="TORNEO LAST MAN STANDING: è un torneo tra 4 giocatori/BOT composto da una serie di 3 round. Ogni round consiste in una partita singola che termina nel momento in cui un giocatore viene eliminato. Il round successivo si disputerà tra i giocatori della partita precedente, escluso quello eliminato." wrappingWidth="763.9970703125">
                            <font>
                               <Font name="Times New Roman" size="22.0" />
                            </font>
@@ -146,12 +146,12 @@
                               <Font name="Times New Roman" size="22.0" />
                            </font>
                         </Text>
-                        <Text fill="WHITE" layoutX="602.0" layoutY="348.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Carte DANNO: le figure con il simbolo della bomba infliggono danni al giocatore successivo." wrappingWidth="468.9970703125">
+                        <Text fill="WHITE" layoutX="602.0" layoutY="348.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Carte Danno: le figure con il simbolo della bomba infliggono danni al giocatore successivo." wrappingWidth="468.9970703125">
                            <font>
                               <Font name="Times New Roman" size="22.0" />
                            </font>
                         </Text>
-                        <Text fill="WHITE" layoutX="602.0" layoutY="430.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Carte CURA: le figure con il simbolo del cuore curano il giocatore che le gioca." wrappingWidth="468.9970703125">
+                        <Text fill="WHITE" layoutX="602.0" layoutY="430.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Carte Cura: le figure con il simbolo del cuore curano il giocatore che le gioca." wrappingWidth="468.9970703125">
                            <font>
                               <Font name="Times New Roman" size="22.0" />
                            </font>
@@ -215,7 +215,7 @@
                               <Font name="Times New Roman" size="22.0" />
                            </font>
                         </Text>
-                        <Text fill="WHITE" layoutX="600.0" layoutY="388.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Le Carte Opportunità possono essere conservate e hanno effetti diversi, spesso con una componente di fortuna. Usale con cautela!" wrappingWidth="468.9970703125">
+                        <Text fill="WHITE" layoutX="600.0" layoutY="388.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Le Opportunità possono essere conservate e hanno effetti diversi, spesso con una componente di fortuna. Usale con cautela!" wrappingWidth="468.9970703125">
                            <font>
                               <Font name="Times New Roman" size="22.0" />
                            </font>
