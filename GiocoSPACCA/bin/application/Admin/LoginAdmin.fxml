@@ -27,7 +27,7 @@
             <Image url="@../../../Images/stonetexture.jpg" />
          </image>
       </ImageView>
-      <Button fx:id="returnToMainMenuButton" layoutX="1069.0" layoutY="736.0" mnemonicParsing="false" onAction="#returnToMainMenu" text=" Indietro ">
+      <Button fx:id="returnToMainMenuButton" layoutX="1096.0" layoutY="754.0" mnemonicParsing="false" onAction="#returnToMainMenu" text=" Indietro ">
          <font>
             <Font name="Times New Roman" size="18.0" />
          </font>
@@ -56,7 +56,7 @@
       </VBox>
       <Button fx:id="confirmLogin" layoutX="515.0" layoutY="400.0" mnemonicParsing="false" onAction="#login" prefHeight="49.0" prefWidth="171.0" text="Login">
          <font>
-            <Font name="Times New Roman" size="24.0" />
+            <Font name="Times New Roman Bold" size="24.0" />
          </font>
          <effect>
             <InnerShadow />

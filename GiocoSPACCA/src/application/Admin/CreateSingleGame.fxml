@@ -34,7 +34,7 @@
             </Lighting>
          </effect>
       </ImageView>
-      <Rectangle arcHeight="5.0" arcWidth="5.0" height="74.0" layoutX="151.0" layoutY="67.0" stroke="WHITE" strokeLineCap="ROUND" strokeType="INSIDE" width="368.0">
+      <Rectangle arcHeight="5.0" arcWidth="5.0" height="74.0" layoutX="124.0" layoutY="67.0" stroke="WHITE" strokeLineCap="ROUND" strokeType="INSIDE" width="433.0">
          <fill>
             <RadialGradient centerX="0.5" centerY="0.5" radius="0.5">
                <stops>
@@ -52,9 +52,9 @@
             </RadialGradient>
          </fill>
       </Rectangle>
-      <Text fill="WHITE" layoutX="169.0" layoutY="114.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Crea PARTITA SINGOLA">
+      <Text fill="WHITE" layoutX="158.0" layoutY="114.0" strokeType="OUTSIDE" strokeWidth="0.0" text="CREA PARTITA SINGOLA">
          <font>
-            <Font name="Times New Roman" size="30.0" />
+            <Font name="Times New Roman Bold" size="30.0" />
          </font>
       </Text>
       <Rectangle arcHeight="5.0" arcWidth="5.0" height="52.0" layoutX="187.0" layoutY="184.0" stroke="WHITE" strokeLineCap="ROUND" strokeType="INSIDE" width="294.0">
@@ -122,12 +122,12 @@
             <Font name="Times New Roman" size="18.0" />
          </font>
       </Text>
-      <Button fx:id="play" layoutX="253.0" layoutY="465.0" mnemonicParsing="false" onAction="#play" prefHeight="52.0" prefWidth="163.0" text="CREA">
+      <Button fx:id="play" layoutX="259.0" layoutY="467.0" mnemonicParsing="false" onAction="#play" prefHeight="52.0" prefWidth="163.0" text="CREA">
          <effect>
             <InnerShadow />
          </effect>
          <font>
-            <Font name="Times New Roman" size="24.0" />
+            <Font name="Times New Roman Bold" size="24.0" />
          </font>
       </Button>
       <Text fill="WHITE" layoutX="201.0" layoutY="215.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Numero BOT" textAlignment="CENTER" wrappingWidth="123.7320556640625">
@@ -137,7 +137,7 @@
       </Text>
       <Text fx:id="botNumber" fill="WHITE" layoutX="334.0" layoutY="217.0" strokeType="OUTSIDE" strokeWidth="0.0" text="NUMBER" textAlignment="CENTER" wrappingWidth="123.7320556640625">
          <font>
-            <Font name="Times New Roman" size="20.0" />
+            <Font name="Times New Roman Bold" size="20.0" />
          </font>
       </Text>
       <ChoiceBox fx:id="playersChoiceBox" layoutX="345.0" layoutY="334.0" prefHeight="26.0" prefWidth="124.0" />
@@ -145,7 +145,7 @@
          <font>
             <Font name="Times New Roman Italic" size="14.0" />
          </font></Label>
-      <Label fx:id="selectedPlayersLabel" alignment="CENTER" layoutX="1.0" layoutY="408.0" prefHeight="22.0" prefWidth="668.0" textAlignment="CENTER" textFill="WHITE">
+      <Label fx:id="selectedPlayersLabel" alignment="CENTER" layoutX="1.0" layoutY="413.0" prefHeight="22.0" prefWidth="668.0" textAlignment="CENTER" textFill="WHITE">
          <font>
             <Font name="Times New Roman Bold" size="14.0" />
          </font></Label>
@@ -154,7 +154,7 @@
             <Font name="Times New Roman Bold" size="14.0" />
          </font>
       </Label>
-      <Button fx:id="backButton" layoutX="586.0" layoutY="560.0" mnemonicParsing="false" onAction="#back" text="Indietro">
+      <Button fx:id="backButton" layoutX="590.0" layoutY="561.0" mnemonicParsing="false" onAction="#back" text="Indietro">
          <font>
             <Font name="Times New Roman" size="14.0" />
          </font>

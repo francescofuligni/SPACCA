@@ -28,28 +28,28 @@
       </ImageView>
       <Button fx:id="playButton" alignment="CENTER" contentDisplay="CENTER" layoutX="500.0" layoutY="313.0" mnemonicParsing="false" onAction="#enterGame" prefHeight="60.0" prefWidth="200.0" text="GIOCA!" textAlignment="CENTER">
          <font>
-            <Font name="Bodoni MT" size="26.0" />
+            <Font name="Times New Roman Bold" size="26.0" />
          </font>
          <effect>
             <InnerShadow />
          </effect></Button>
       <Button fx:id="createGameButton" alignment="CENTER" contentDisplay="CENTER" layoutX="502.0" layoutY="395.0" mnemonicParsing="false" onAction="#switchToAdminLogin" prefHeight="60.0" prefWidth="200.0" text="Login Admin" textAlignment="CENTER">
          <font>
-            <Font name="Bodoni MT" size="26.0" />
+            <Font name="Times New Roman" size="26.0" />
          </font>
          <effect>
             <InnerShadow />
          </effect></Button>
-      <Button fx:id="creditiButton" alignment="CENTER" contentDisplay="CENTER" layoutX="1042.0" layoutY="739.0" mnemonicParsing="false" onAction="#switchToCredits" prefHeight="29.0" prefWidth="115.0" text="Crediti" textAlignment="CENTER">
+      <Button fx:id="creditiButton" alignment="CENTER" contentDisplay="CENTER" layoutX="1106.0" layoutY="754.0" mnemonicParsing="false" onAction="#switchToCredits" prefHeight="32.0" prefWidth="80.0" text="Crediti" textAlignment="CENTER">
          <font>
-            <Font name="Bodoni MT" size="18.0" />
+            <Font name="Times New Roman" size="18.0" />
          </font>
          <effect>
             <InnerShadow />
          </effect></Button>
       <Button fx:id="rulesButton" layoutX="502.0" layoutY="479.0" minWidth="-Infinity" mnemonicParsing="false" onAction="#switchToRules" prefHeight="60.0" prefWidth="200.0" text="Regole">
          <font>
-            <Font name="Bodoni MT" size="26.0" />
+            <Font name="Times New Roman" size="26.0" />
          </font>
          <effect>
             <InnerShadow />
@@ -77,7 +77,7 @@
       </ImageView>
       <Button fx:id="scoreBoardButton" layoutX="503.0" layoutY="561.0" minWidth="-Infinity" mnemonicParsing="false" onAction="#switchToScoreBoard" prefHeight="60.0" prefWidth="200.0" text="Classifica">
          <font>
-            <Font name="Bodoni MT" size="26.0" />
+            <Font name="Times New Roman" size="26.0" />
          </font>
          <effect>
             <InnerShadow />

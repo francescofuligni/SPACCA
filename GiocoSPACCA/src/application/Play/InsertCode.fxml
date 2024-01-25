@@ -26,9 +26,9 @@
             <Image url="@../../../Images/stonetexture.jpg" />
          </image>
       </ImageView>
-      <Button fx:id="returnToMainMenuButton" layoutX="1080.0" layoutY="741.0" mnemonicParsing="false" onAction="#returnToMainMenu" text=" Indietro ">
+      <Button fx:id="returnToMainMenuButton" layoutX="1096.0" layoutY="754.0" mnemonicParsing="false" onAction="#returnToMainMenu" text=" Indietro ">
          <font>
-            <Font name="Bodoni MT" size="18.0" />
+            <Font name="Times New Roman" size="18.0" />
          </font>
          <effect>
             <InnerShadow />
@@ -43,14 +43,14 @@
             </TextField>
             <Text fx:id="enterStatusText" fill="WHITE" fontSmoothingType="LCD" strokeType="OUTSIDE" strokeWidth="0.0" text="Inserire un codice partita/torneo esistente" textAlignment="CENTER" wrappingWidth="523.0666870117188">
                <font>
-                  <Font name="Bodoni MT" size="24.0" />
+                  <Font name="Times New Roman" size="24.0" />
                </font>
             </Text>
          </children>
       </VBox>
       <Button fx:id="confirmEnter" layoutX="531.0" layoutY="402.0" mnemonicParsing="false" onAction="#enterGame" prefHeight="49.0" prefWidth="139.0" text="Entra">
          <font>
-            <Font name="Bodoni MT" size="24.0" />
+            <Font name="Times New Roman Bold" size="24.0" />
          </font>
          <effect>
             <InnerShadow />
@@ -58,7 +58,7 @@
       </Button>
       <Label alignment="CENTER" layoutX="306.0" layoutY="185.0" prefHeight="74.0" prefWidth="592.0" text="ENTRA IN PARTITA" textAlignment="CENTER" textFill="WHITE" textOverrun="CENTER_ELLIPSIS">
          <font>
-            <Font name="Bodoni MT" size="50.0" />
+            <Font name="Times New Roman" size="50.0" />
          </font>
          <effect>
             <DropShadow />

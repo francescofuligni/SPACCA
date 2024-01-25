@@ -134,7 +134,7 @@ public class Main extends Application {
 			exceptionAlert.setContentText(e.getClass().getSimpleName());
 			exceptionAlert.showAndWait();
 			message = false;
-			e.printStackTrace();
+			e.printStackTrace();		// stampa in console
 		}
 	}
 }

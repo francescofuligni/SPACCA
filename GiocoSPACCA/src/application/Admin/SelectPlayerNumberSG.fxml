@@ -32,7 +32,7 @@
             </Lighting>
          </effect>
       </ImageView>
-      <Rectangle arcHeight="5.0" arcWidth="5.0" height="80.0" layoutX="187.0" layoutY="67.0" stroke="WHITE" strokeLineCap="ROUND" strokeType="INSIDE" width="300.0">
+      <Rectangle arcHeight="5.0" arcWidth="5.0" height="80.0" layoutX="164.0" layoutY="67.0" stroke="WHITE" strokeLineCap="ROUND" strokeType="INSIDE" width="341.0">
          <fill>
             <RadialGradient centerX="0.5" centerY="0.5" radius="0.5">
                <stops>
@@ -50,9 +50,9 @@
             </RadialGradient>
          </fill>
       </Rectangle>
-      <Text fill="WHITE" layoutX="200.0" layoutY="115.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Crea PARTITA SINGOLA" textAlignment="CENTER">
+      <Text fill="WHITE" layoutX="187.0" layoutY="115.0" strokeType="OUTSIDE" strokeWidth="0.0" text="CREA PARTITA SINGOLA" textAlignment="CENTER">
          <font>
-            <Font name="Times New Roman" size="24.0" />
+            <Font name="Times New Roman Bold" size="24.0" />
          </font>
       </Text>
       <Rectangle arcHeight="5.0" arcWidth="5.0" height="150.0" layoutX="125.0" layoutY="184.0" stroke="WHITE" strokeLineCap="ROUND" strokeType="INSIDE" width="450.0">
@@ -73,7 +73,7 @@
             </RadialGradient>
          </fill>
       </Rectangle>
-      <Text fill="WHITE" layoutX="155.0" layoutY="267.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Numero di giocatori" textAlignment="CENTER" wrappingWidth="212.7320556640625">
+      <Text fill="WHITE" layoutX="160.0" layoutY="267.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Numero di giocatori" textAlignment="CENTER" wrappingWidth="212.7320556640625">
          <font>
             <Font name="Bodoni MT" size="24.0" />
          </font>

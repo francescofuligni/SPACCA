@@ -25,7 +25,6 @@ import javafx.scene.control.ListView;
 import javafx.scene.control.ProgressBar;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.AnchorPane;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import javafx.application.Platform;
@@ -49,8 +48,6 @@ public abstract class Board implements Initializable {		// superclasse dei contr
 	private boolean exited = false;				// true se si esce salvando la partita
 	private boolean messageOpen = false;		// true se si apre un messaggio
 	
-	@FXML
-	protected AnchorPane anchorPane;
 	@FXML
 	protected Label currentPlayer;
 	@FXML
