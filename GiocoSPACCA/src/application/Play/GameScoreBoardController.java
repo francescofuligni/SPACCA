@@ -35,8 +35,8 @@ public class GameScoreBoardController implements Initializable {
 	private Stage stage;
 	private Scene scene;
 	private Parent root;
-	private final String code = InsertCodeController.code;
-	private final Path pathToGame = InsertCodeController.pathToGame;
+	private String code = InsertCodeController.code;
+	private Path pathToGame = InsertCodeController.pathToGame;
 	
 	@FXML
 	private Label generalScoreBoardLabel;
@@ -69,51 +69,62 @@ public class GameScoreBoardController implements Initializable {
     	gameCodeLabel.setText("Classifica " + code);
     	
     	try {
-    		// estrae i giocatori dai file partita
-    		Scanner scan;
-    		File f;
+    		// estrae i giocatori dai file partita e elimina le partite
 			if(code.startsWith("T")) {
 				// SIMPLE TOURNAMENT
-				String line="";
 				
 				// file finale
-				f = new File(pathToGame.toString()+"/finale.csv");
-				scan=new Scanner(f);
-				
-				if(scan.hasNextLine()) {
-					scan.nextLine();			// salta la prima riga (intestazione)
-				}
-				while(scan.hasNextLine()){
-					line=scan.nextLine();
+				File fin = new File(pathToGame.toString()+"/finale.csv");
+				Scanner scanfin = new Scanner(fin);
+				if(scanfin.hasNextLine())
+					scanfin.nextLine();			// salta la prima riga (intestazione)
+				while(scanfin.hasNextLine()){	// legge i partecipanti alla finale
+					String line=scanfin.nextLine();
 					this.players.put(line.split(",")[1], null);
 				}
-				f.delete();
-				scan.reset();
+				scanfin.close();
+				fin.delete();
 				
-				// file seminfinali
-				for(int i=2; i>0; i--) {
-					f = new File(pathToGame.toString()+"/semifinale" + i + ".csv");
-					scan = new Scanner(f); 
-					while(scan.hasNextLine())
-						line = scan.nextLine();
+				// file seminfinale 1
+				File semi1 = new File(pathToGame.toString()+"/semifinale1.csv");
+				Scanner scanS1 = new Scanner(semi1);
+				if(scanS1.hasNextLine())
+					scanS1.nextLine();			// salta la prima riga (intestazione)
+				if(scanS1.hasNextLine())
+					scanS1.nextLine();			// salta la riga del vincitore
+				if(scanS1.hasNextLine()) {		// legge il perdente della semifinale 1
+					String line=scanS1.nextLine();
 					this.players.put(line.split(",")[1], null);
-					f.delete();
 				}
+				scanS1.close();
+				semi1.delete();
+				
+				// file semifinale 2
+				File semi2 = new File(pathToGame.toString()+"/semifinale2.csv");
+				Scanner scanS2 = new Scanner(semi2);
+				if(scanS2.hasNextLine())
+					scanS2.nextLine();			// salta la prima riga (intestazione)
+				if(scanS2.hasNextLine())
+					scanS2.nextLine();			// salta la riga del vincitore
+				if(scanS2.hasNextLine()) {		// legge il perdente della semifinale 2
+					String line=scanS2.nextLine();
+					this.players.put(line.split(",")[1], null);
+				}
+				scanS2.close();
+				semi2.delete();
 				
 				Files.delete(pathToGame);		// elimina la directory della partita
 				
 			} else {
 				// SINGLE GAME O LAST MAN STANDING
-				f = new File(pathToGame.toString());
-				scan=new Scanner(f);
-				if(scan.hasNextLine()) {
+				File f = new File(pathToGame.toString());
+				Scanner scan=new Scanner(f);
+				if(scan.hasNextLine())
 					scan.nextLine();			// salta la prima riga (intestazione)
-				}
-				while(scan.hasNextLine()) {
+				while(scan.hasNextLine())
 					this.players.put(scan.nextLine().split(",")[1], null);
-				}
+					
 				scan.close();
-				
 				f.delete();						// elimina il file della partita
 			}
 			
