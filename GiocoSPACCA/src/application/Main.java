@@ -26,45 +26,26 @@ public class Main extends Application {
 	// flag per bot
 	public static boolean message = false;		// true se viene mostrato un messaggio (alert)
 
-	public void start(Stage primaryStage) {
-		try {
-			fileCheck();	// controlla la presenza dei registro giocatori
-			FXMLLoader loader = new FXMLLoader(getClass().getResource("/application/MainMenu/MainMenu.fxml"));
-	        AnchorPane rootLayout = (AnchorPane) loader.load();
-	        primaryStage.setTitle("S.P.A.C.C.A. the GAME");
-	        primaryStage.setResizable(false);
-	        primaryStage.setScene(new Scene (rootLayout));
-	        // imposta icona applicazione e comportamento finestra
-	        Image icon= new Image("file:Images/icona.png");
-	        primaryStage.getIcons().add(icon);
-	        primaryStage.setFullScreen(false);
-			primaryStage.show();
-			
-			primaryStage.setOnCloseRequest(new EventHandler<WindowEvent>() {		// chiusura dell'applicazione
-				@Override
-				public void handle(WindowEvent event) {
-					event.consume();			// chiusura solo in caso di conferma
-					closeApp(primaryStage);		// messaggio di chiusura e chiusura
-				}
-			});
-			
-		} catch(IOException e) {
-			message = true;
-			Alert exceptionAlert = new Alert(AlertType.ERROR);
-			exceptionAlert.setTitle("ERRORE");
-			exceptionAlert.setHeaderText("Errore nel caricamento della schermata");
-			exceptionAlert.setContentText(e.getClass().getSimpleName());
-			exceptionAlert.showAndWait();
-			message = false;
-		} catch(Exception e) {
-			message = true;
-			Alert exceptionAlert = new Alert(AlertType.ERROR);
-			exceptionAlert.setTitle("ERRORE GENERICO");
-			exceptionAlert.setHeaderText("Errore generico");
-			exceptionAlert.setContentText(e.getClass().getSimpleName());
-			exceptionAlert.showAndWait();
-			message = false;
-		}
+	public void start(Stage primaryStage) throws IOException {
+		fileCheck();	// controlla la presenza dei registro giocatori
+		FXMLLoader loader = new FXMLLoader(getClass().getResource("/application/MainMenu/MainMenu.fxml"));
+        AnchorPane rootLayout = (AnchorPane) loader.load();
+        primaryStage.setTitle("S.P.A.C.C.A. the GAME");
+        primaryStage.setResizable(false);
+        primaryStage.setScene(new Scene (rootLayout));
+        // imposta icona applicazione e comportamento finestra
+        Image icon= new Image("file:Images/icona.png");
+        primaryStage.getIcons().add(icon);
+        primaryStage.setFullScreen(false);
+		primaryStage.show();
+		
+		primaryStage.setOnCloseRequest(new EventHandler<WindowEvent>() {		// chiusura dell'applicazione
+			@Override
+			public void handle(WindowEvent event) {
+				event.consume();			// chiusura solo in caso di conferma
+				closeApp(primaryStage);		// messaggio di chiusura e chiusura
+			}
+		});
 	}
 	
 	public static void fileCheck() {
@@ -143,6 +124,17 @@ public class Main extends Application {
 	}
 	
 	public static void main(String[] args) {
-		launch(args);
+		try {
+			launch(args);
+		} catch(Exception e) {
+			message = true;
+			Alert exceptionAlert = new Alert(AlertType.ERROR);
+			exceptionAlert.setTitle("ERRORE GENERICO");
+			exceptionAlert.setHeaderText("Errore nel caricamento della schermata");
+			exceptionAlert.setContentText(e.getClass().getSimpleName());
+			exceptionAlert.showAndWait();
+			message = false;
+			e.printStackTrace();		// stampa in console
+		}
 	}
 }

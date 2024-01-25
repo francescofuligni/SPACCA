@@ -30,7 +30,7 @@
       </ImageView>
       <Label alignment="CENTER" layoutX="401.0" layoutY="235.0" prefHeight="81.0" prefWidth="400.0" text="CREDITI" textAlignment="CENTER" textFill="WHITE">
          <font>
-            <Font name="Bodoni MT" size="60.0" />
+            <Font name="Times New Roman Bold" size="60.0" />
          </font>
          <effect>
             <DropShadow height="38.8" radius="16.674999999999997" width="29.9" />
@@ -38,22 +38,22 @@
       </Label>
       <Text fill="WHITE" layoutX="400.0" layoutY="486.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Zanolli Roberto" textAlignment="CENTER" wrappingWidth="400.0">
          <font>
-            <Font name="Bodoni MT" size="30.0" />
+            <Font name="Times New Roman" size="30.0" />
          </font>
       </Text>
       <Text fill="WHITE" layoutX="400.0" layoutY="434.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Fuligni Francesco Maria" textAlignment="CENTER" wrappingWidth="400.0">
          <font>
-            <Font name="Bodoni MT" size="30.0" />
+            <Font name="Times New Roman" size="30.0" />
          </font>
       </Text>
       <Text fill="WHITE" layoutX="400.0" layoutY="383.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Baldari Cristian" textAlignment="CENTER" wrappingWidth="400.0">
          <font>
-            <Font name="Bodoni MT" size="30.0" />
+            <Font name="Times New Roman" size="30.0" />
          </font>
       </Text>
-      <Button fx:id="returnToMainMenuButton" layoutX="538.0" layoutY="560.0" mnemonicParsing="false" onAction="#returnToMainMenu" text=" Indietro ">
+      <Button fx:id="returnToMainMenuButton" layoutX="541.0" layoutY="547.0" mnemonicParsing="false" onAction="#returnToMainMenu" text=" Indietro ">
          <font>
-            <Font name="Bodoni MT" size="24.0" />
+            <Font name="Times New Roman" size="24.0" />
          </font>
          <effect>
             <InnerShadow />

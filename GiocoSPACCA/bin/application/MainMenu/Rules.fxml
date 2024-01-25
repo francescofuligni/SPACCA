@@ -29,19 +29,19 @@
                   <AnchorPane prefHeight="200.0" prefWidth="200.0">
                      <children>
                         <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#0000007c" height="650.0" layoutX="40.0" layoutY="30.0" stroke="#ffffff8c" strokeType="INSIDE" width="1120.0" />
-                        <Text fill="WHITE" layoutX="218.0" layoutY="225.0" strokeType="OUTSIDE" strokeWidth="0.0" text="SPACCA è un gioco di carte che ammette partite da 2 a 4 giocatori. Qualora non fossero presenti abbastanza giocatori, verranno aggiunti BOT, disponibili in due diverse difficoltà (FACILE e DIFFICILE)." wrappingWidth="763.9970703125">
+                        <Text fill="WHITE" layoutX="218.0" layoutY="226.0" strokeType="OUTSIDE" strokeWidth="0.0" text="SPACCA è un gioco di carte che ammette partite da 2 a 4 giocatori. Qualora non fossero presenti abbastanza giocatori, verranno aggiunti BOT, disponibili in due diverse difficoltà (FACILE e DIFFICILE)." wrappingWidth="763.9970703125">
                            <font>
-                              <Font name="Bodoni MT" size="22.0" />
+                              <Font name="Times New Roman" size="22.0" />
                            </font>
                         </Text>
                         <Text fill="WHITE" layoutX="218.0" layoutY="345.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Nel mazzo di carte sono presenti 12 diverse tipologie di Figure, 4 tipologie di carte Opportunità e 4 tipologie di carte Imprevisto. Il mazzo è infinito e tutte le carte hanno la stessa probabilità di essere pescate ogni turno. " wrappingWidth="763.9970703125">
                            <font>
-                              <Font name="Bodoni MT" size="22.0" />
+                              <Font name="Times New Roman" size="22.0" />
                            </font>
                         </Text>
-                        <Text fill="WHITE" layoutX="218.0" layoutY="465.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Le condizioni di vittoria variano a seconda della modalità di gioco. In base alla modalità scelta, verrà anche assegnato un punteggio ad ogni giocatore al termine della partita. I punteggi guadagnati in ogni partita si sommano per andare a comporre il punteggio del giocatore nella Classifica Generale, visualizzabile dalla schermata iniziale." wrappingWidth="763.9970703125">
+                        <Text fill="WHITE" layoutX="218.0" layoutY="464.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Le condizioni di vittoria variano a seconda della modalità di gioco. In base alla modalità scelta, verrà anche assegnato un punteggio ad ogni giocatore al termine della partita. I punteggi guadagnati in ogni partita si sommano per andare a comporre il punteggio del giocatore nella Classifica Generale, visualizzabile dalla schermata iniziale." wrappingWidth="763.9970703125">
                            <font>
-                              <Font name="Bodoni MT" size="22.0" />
+                              <Font name="Times New Roman" size="22.0" />
                            </font>
                         </Text>
                         <Text fill="WHITE" layoutX="218.0" layoutY="651.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="763.9970703125">
@@ -49,9 +49,9 @@
                               <Font name="Bodoni MT" size="22.0" />
                            </font>
                         </Text>
-                        <Label layoutX="427.0" layoutY="80.0" text="REGOLE GENERALI" textFill="WHITE">
+                        <Label layoutX="427.0" layoutY="79.0" text="REGOLE GENERALI" textFill="WHITE">
                            <font>
-                              <Font name="Bodoni MT" size="35.0" />
+                              <Font name="Times New Roman Bold" size="35.0" />
                            </font>
                            <effect>
                               <DropShadow height="130.0" radius="64.5" spread="0.9" width="130.0" />
@@ -66,9 +66,9 @@
                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                      <children>
                         <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#0000007c" height="650.0" layoutX="40.0" layoutY="30.0" stroke="#ffffff8c" strokeType="INSIDE" width="1120.0" />
-                        <Label layoutX="417.0" layoutY="80.0" text="MODALITA' DI GIOCO" textFill="WHITE">
+                        <Label layoutX="418.0" layoutY="80.0" text="MODALITA' DI GIOCO" textFill="WHITE">
                            <font>
-                              <Font name="Bodoni MT" size="35.0" />
+                              <Font name="Times New Roman Bold" size="35.0" />
                            </font>
                            <effect>
                               <DropShadow height="130.0" radius="64.5" spread="0.9" width="130.0" />
@@ -76,22 +76,22 @@
                         </Label>
                         <Text fill="WHITE" layoutX="228.0" layoutY="235.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Le modalità di gioco sono 2: &quot;Partita singola&quot; e &quot;Torneo&quot;. Il Torneo è disponibile in due ulteriori versioni: Semplice e Last Man Standing." wrappingWidth="763.9970703125">
                            <font>
-                              <Font name="Bodoni MT" size="22.0" />
+                              <Font name="Times New Roman" size="22.0" />
                            </font>
                         </Text>
                         <Text fill="WHITE" layoutX="228.0" layoutY="317.0" strokeType="OUTSIDE" strokeWidth="0.0" text="PARTITA SINGOLA: è composta da un minimo di 2 fino a un massimo di 4 giocatori, BOT inclusi. La partita termina quando rimane solo un giocatore in vita." wrappingWidth="763.9970703125">
                            <font>
-                              <Font name="Bodoni MT" size="22.0" />
+                              <Font name="Times New Roman" size="22.0" />
                            </font>
                         </Text>
                         <Text fill="WHITE" layoutX="228.0" layoutY="407.0" strokeType="OUTSIDE" strokeWidth="0.0" text="TORNEO &quot;SEMPLICE&quot;: è un torneo a eliminazione diretta tra 4 giocatori/BOT consistente in due serie di partite singole 1 contro 1: due semifinali e una finale." wrappingWidth="763.9970703125">
                            <font>
-                              <Font name="Bodoni MT" size="22.0" />
+                              <Font name="Times New Roman" size="22.0" />
                            </font>
                         </Text>
                         <Text fill="WHITE" layoutX="228.0" layoutY="496.0" strokeType="OUTSIDE" strokeWidth="0.0" text="TORNEO &quot;LAST MAN STANDING&quot;: è un torneo tra 4 giocatori/BOT composto da una serie di 3 round. Ogni round consiste in una partita singola che termina nel momento in cui un giocatore viene eliminato. Il round successivo si disputerà tra i giocatori della partita precedente, escluso quello eliminato." wrappingWidth="763.9970703125">
                            <font>
-                              <Font name="Bodoni MT" size="22.0" />
+                              <Font name="Times New Roman" size="22.0" />
                            </font>
                         </Text>
                      </children>
@@ -103,9 +103,9 @@
                   <AnchorPane prefHeight="200.0" prefWidth="1200.0">
                      <children>
                         <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#0000007c" height="650.0" layoutX="40.0" layoutY="30.0" stroke="#ffffff8c" strokeType="INSIDE" width="1120.0" />
-                        <Label layoutX="530.0" layoutY="80.0" text="FIGURE" textFill="WHITE">
+                        <Label layoutX="532.0" layoutY="78.0" text="FIGURE" textFill="WHITE">
                            <font>
-                              <Font name="Bodoni MT" size="36.0" />
+                              <Font name="Times New Roman Bold" size="36.0" />
                            </font>
                            <effect>
                               <DropShadow height="130.0" radius="64.5" spread="0.9" width="130.0" />
@@ -143,17 +143,17 @@
                         </TabPane>
                         <Text fill="WHITE" layoutX="602.0" layoutY="241.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Le figure sono riconoscibili da uno sfondo in areanaria con un titolo bianco. Sono di 2 tipologie: Danno e Cura." wrappingWidth="468.9970703125">
                            <font>
-                              <Font name="Bodoni MT" size="22.0" />
+                              <Font name="Times New Roman" size="22.0" />
                            </font>
                         </Text>
                         <Text fill="WHITE" layoutX="602.0" layoutY="348.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Carte DANNO: le figure con il simbolo della bomba infliggono danni al giocatore successivo." wrappingWidth="468.9970703125">
                            <font>
-                              <Font name="Bodoni MT" size="22.0" />
+                              <Font name="Times New Roman" size="22.0" />
                            </font>
                         </Text>
                         <Text fill="WHITE" layoutX="602.0" layoutY="430.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Carte CURA: le figure con il simbolo del cuore curano il giocatore che le gioca." wrappingWidth="468.9970703125">
                            <font>
-                              <Font name="Bodoni MT" size="22.0" />
+                              <Font name="Times New Roman" size="22.0" />
                            </font>
                         </Text>
                      </children>
@@ -170,22 +170,22 @@
                               <Image url="@../../../Images/Cards/13.png" />
                            </image>
                         </ImageView>
-                        <Label layoutX="493.0" layoutY="80.0" text="IMPREVISTI" textFill="WHITE">
+                        <Label layoutX="495.0" layoutY="80.0" text="IMPREVISTI" textFill="WHITE">
                            <font>
-                              <Font name="Bodoni MT" size="35.0" />
+                              <Font name="Times New Roman Bold" size="35.0" />
                            </font>
                            <effect>
                               <DropShadow height="130.0" radius="64.5" spread="0.9" width="130.0" />
                            </effect>
                         </Label>
-                        <Text fill="WHITE" layoutX="597.0" layoutY="280.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Le Carte Imprevisto sono riconoscibili dallo sfondo in ossidiana con il titolo avvolto da un'aura viola." wrappingWidth="468.9970703125">
+                        <Text fill="WHITE" layoutX="601.0" layoutY="281.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Le Carte Imprevisto sono riconoscibili dallo sfondo in ossidiana con il titolo avvolto da un'aura viola." wrappingWidth="468.9970703125">
                            <font>
-                              <Font name="Bodoni MT" size="22.0" />
+                              <Font name="Times New Roman" size="22.0" />
                            </font>
                         </Text>
-                        <Text fill="WHITE" layoutX="601.0" layoutY="368.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Gli Imprevisti hanno la particolarità di dover essere giocati nel momento in cui vengono pescati. Comportano un malus per colui che le pesca o per tutti i giocatori in partita." wrappingWidth="468.9970703125">
+                        <Text fill="WHITE" layoutX="601.0" layoutY="365.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Gli Imprevisti hanno la particolarità di dover essere giocati nel momento in cui vengono pescati. Comportano un malus per colui che le pesca o per tutti i giocatori in partita." wrappingWidth="468.9970703125">
                            <font>
-                              <Font name="Bodoni MT" size="22.0" />
+                              <Font name="Times New Roman" size="22.0" />
                            </font>
                         </Text>
                      </children>
@@ -202,22 +202,22 @@
                               <Image url="@../../../Images/Cards/17.png" />
                            </image>
                         </ImageView>
-                        <Label layoutX="467.0" layoutY="80.0" text="OPPORTUNITA'" textFill="WHITE">
+                        <Label layoutX="466.0" layoutY="79.0" text="OPPORTUNITA'" textFill="WHITE">
                            <font>
-                              <Font name="Bodoni MT" size="35.0" />
+                              <Font name="Times New Roman Bold" size="35.0" />
                            </font>
                            <effect>
                               <DropShadow height="130.0" radius="64.5" spread="0.9" width="130.0" />
                            </effect>
                         </Label>
-                        <Text fill="WHITE" layoutX="600.0" layoutY="286.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Le Carte Opportunità sono riconoscibili dallo sfondo in ossidiana con il titolo avvolto da un'aura verde." wrappingWidth="468.9970703125">
+                        <Text fill="WHITE" layoutX="600.0" layoutY="299.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Le Carte Opportunità sono riconoscibili dallo sfondo in ossidiana con il titolo avvolto da un'aura verde." wrappingWidth="468.9970703125">
                            <font>
-                              <Font name="Bodoni MT" size="22.0" />
+                              <Font name="Times New Roman" size="22.0" />
                            </font>
                         </Text>
-                        <Text fill="WHITE" layoutX="600.0" layoutY="400.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Le Carte Opportunità possono essere conservate e hanno effetti diversi, spesso con una componente di fortuna. Usale con cautela!" wrappingWidth="468.9970703125">
+                        <Text fill="WHITE" layoutX="600.0" layoutY="388.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Le Carte Opportunità possono essere conservate e hanno effetti diversi, spesso con una componente di fortuna. Usale con cautela!" wrappingWidth="468.9970703125">
                            <font>
-                              <Font name="Bodoni MT" size="22.0" />
+                              <Font name="Times New Roman" size="22.0" />
                            </font>
                         </Text>
                      </children>
@@ -229,9 +229,9 @@
             <Cursor fx:constant="HAND" />
          </cursor>
       </TabPane>
-      <Button fx:id="returnToMainMenuButton" layoutX="1091.0" layoutY="752.0" mnemonicParsing="false" onAction="#returnToMainMenu" text=" Indietro ">
+      <Button fx:id="returnToMainMenuButton" layoutX="1096.0" layoutY="754.0" mnemonicParsing="false" onAction="#returnToMainMenu" text=" Indietro ">
          <font>
-            <Font name="Bodoni MT" size="18.0" />
+            <Font name="Times New Roman" size="18.0" />
          </font>
          <effect>
             <InnerShadow />

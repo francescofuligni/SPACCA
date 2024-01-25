@@ -63,7 +63,7 @@
       </Button>
       <Text fill="WHITE" layoutX="188.0" layoutY="114.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Gestione giocatori" textAlignment="CENTER" wrappingWidth="303.423828125">
          <font>
-            <Font name="Times New Roman" size="36.0" />
+            <Font name="Times New Roman Bold" size="36.0" />
          </font>
       </Text>
    </children>

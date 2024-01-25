@@ -40,7 +40,7 @@ public class LoginAdminController {
 	
 	public void login() throws IOException{
 		// effettua l'accesso all'AdminMenu
-		if(adminNameField.getText().equals(adminName) && adminPasswordField.getText().equals(adminPassword)) {	// controllo credenziali
+		if(adminNameField.getText().equals(adminName) && adminPasswordField.getText().equals(adminPassword)) {		// controllo credenziali
 				
 			// lancia l'AdminMenu
 			stage = (Stage)(confirmLogin.getScene().getWindow());

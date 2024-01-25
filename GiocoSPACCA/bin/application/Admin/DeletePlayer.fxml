@@ -55,7 +55,7 @@
             </Rectangle>
             <Label alignment="CENTER" layoutX="207.0" layoutY="171.0" prefHeight="44.0" prefWidth="268.0" text="Elimina giocatore" textFill="WHITE">
                <font>
-                  <Font name="Times New Roman" size="30.0" />
+                  <Font name="Times New Roman Bold" size="30.0" />
                </font>
             </Label>
             <TextField fx:id="usernameField" layoutX="189.0" layoutY="235.0" prefHeight="50.0" prefWidth="300.0" promptText="Username">
@@ -63,9 +63,9 @@
                   <Font name="Georgia" size="26.0" />
                </font>
             </TextField>
-            <Button fx:id="deleteButton" alignment="CENTER" layoutX="259.0" layoutY="368.0" mnemonicParsing="false" onAction="#deletePlayer" prefHeight="60.0" prefWidth="150.0" text="Elimina" textAlignment="CENTER">
+            <Button fx:id="deleteButton" alignment="CENTER" layoutX="260.0" layoutY="368.0" mnemonicParsing="false" onAction="#deletePlayer" prefHeight="50.0" prefWidth="150.0" text="Elimina" textAlignment="CENTER">
                <font>
-                  <Font name="Times New Roman" size="24.0" />
+                  <Font name="Times New Roman Bold" size="24.0" />
                </font>
                <effect>
                   <InnerShadow />
