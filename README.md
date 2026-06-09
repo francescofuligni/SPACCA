@@ -1,42 +1,37 @@
-# Gioco di carte S.P.A.C.C.A.
+# S.P.A.C.C.A. Card Game
 
-Credenziali admin (non modificabili):
+Admin credentials (not editable):
 - Username: admin
 - Password: admin1234
 
-PROCEDURA PER GIOCARE: 
+## How to Play
 
-1) Una volta avviata l'applicazione si visualizza la schermata iniziale, composta da quattro bottoni principali:
-   - il bottone "GIOCA" permette di accedere ad una partita, inserendone il codice;
-   - il bottone "Login Admin" porta al menù amministratore per la gestione di partite e giocatori, cui è possibile accedere tramite le credenziali di admin;
-   - il bottone "Regole" visualizza la schermata in cui sono contenute le regole del gioco;
-   - il bottone "Classifica" mostra la classifica generale dei giocatori salvati, in base ai punti accumulati da ognuno nelle partite.
+1. Once the application starts, the home screen is displayed with four main buttons:
+   - the **GIOCA** button lets you join a match by entering its code;
+   - the **Login Admin** button opens the admin menu for managing matches and players, accessible with the admin credentials;
+   - the **Regole** button shows the screen containing the game rules;
+   - the **Classifica** button shows the overall ranking of saved players, ordered by the points each player has earned in matches.
 
-2) Se non si è in possesso di alcun codice per entrare in una partita già creata, accedere alla schermata di login admin ed entrare in "Gestione partite" per creare una nuova competizione.
-   Se non sono presenti giocatori, dal menù admin è possibile crearli entrando nella sezione "Gestione giocatori".
+2. If you do not have a code to join an already created match, go to the admin login screen and enter **Gestione partite** to create a new competition.
+   If there are no players, you can create them from the admin menu by entering the **Gestione giocatori** section.
 
-3) In fase di creazione di una partita/torneo è possibile selezionare le impostazioni della competizione, quali i giocatori che la compongono, la difficoltà dei BOT ed eventualmente la modalità.
+3. When creating a match/tournament, you can select the competition settings, such as the participating players, BOT difficulty, and optionally the game mode.
 
-4) Una volta creata una partita/torneo verrà restituito un codice univoco. Per giocare, eseguire logout dall'account amministratore (dalla sezione menù admin) e inserire il codice generato cliccando su "GIOCA".
+4. Once a match/tournament has been created, a unique code will be returned. To play, log out of the admin account from the admin menu section and enter the generated code by clicking **GIOCA**.
 
-5) Una volta entrati in partita verrà visualizzata la schermata di inizio partita, con i giocatori che ne fanno parte. Cliccando un punto qualsiasi dello schermo si dà inizio alla partita.
+5. After joining the match, the start screen will be displayed, showing the players taking part. Click anywhere on the screen to start the match.
 
-6) Al termine della partita verrà visualizzata la classifica con i punti attribuiti ad ogni giocatore. Selezionando "Esci" si verrà reindirizzati alla schermata iniziale.
+6. At the end of the match, the ranking will be displayed with the points assigned to each player. By selecting **Esci**, you will be redirected to the home screen.
 
+## Notes
 
-NOTE:
-- Gli username dei giocatori identificano univocamente un utente giocatore. Non possono esistere utenti con nomi uguali, con nomi che iniziano per BOT o con il nome ADMIN. Il giocatore ADMIN non è modificabile.
-- I BOT sono disponibili in due modalità, selezionabili in fase di creazione della competizione: FACILE e DIFFICILE. Il BOT in difficoltà FACILE gioca casualmente una carta dalla sua mano. Il BOT in difficoltà DIFFICILE gioca la prima carta opportunità che ha in mano. Se non ne possiede, gioca la carta con maggior danno o cura a seconda del suo livello di punti salute. Come per i giocatori umani, anche i BOT sono costretti a giocare gli imprevisti se ne possiedono.
-- Ogni competizione è identificata da un codice alfanumerico univoco, del tipo "A0000". La lettera iniziale sarà "S" nel caso di Partite Singole, "T" nel caso di Tornei Semplici e "L" nel caso di Tornei Last Man Standing. Le successive quattro cifre numeriche sono casuali e univoche per la competizione.
-- Ogni carta contiene una sezione nella quale è riportato l'effetto associato alla carta.
+- Player usernames uniquely identify each player. Users cannot have duplicate names, names starting with `BOT`, or the name `ADMIN`. The `ADMIN` player cannot be edited.
+- BOTs are available in two modes, selectable when creating the competition: **EASY** and **HARD**. In **EASY** difficulty, the BOT randomly plays a card from its hand. In **HARD** difficulty, the BOT plays the first opportunity card it has in hand. If it has none, it plays the card with the highest damage or healing value depending on its health points. Like human players, BOTs are also forced to play unexpected event cards if they have any.
+- Each competition is identified by a unique alphanumeric code, such as `A0000`. The initial letter is `S` for Single Matches, `T` for Simple Tournaments, and `L` for Last Man Standing Tournaments. The following four numeric digits are random and unique for each competition.
+- Each card contains a section showing the effect associated with the card.
 
+To read the complete game rules, click the **Regole** button on the home screen.
 
-Per consultare le regole complete del gioco, cliccare sul bottone “Regole” nella schermata iniziale.
+Have fun from the **Refactoring Knights**!
 
-
-Buon divertimento dai "Refactoring Knights"!
 Baldari Cristian, Fuligni Francesco Maria, Zanolli Roberto.
-
-	
-	
-   
